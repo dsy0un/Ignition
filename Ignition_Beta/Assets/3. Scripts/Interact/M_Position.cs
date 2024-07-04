@@ -25,7 +25,6 @@ public class M_Position : MonoBehaviour
         }
         else if (!position[0].isOn && !position[1].isOn)
         {
-            Debug.Log("체크 안되어 있음");
             checkBox = false;
         }
         
