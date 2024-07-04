@@ -8,9 +8,14 @@ public class Deleteplz : MonoBehaviour
     public Image _image;
     public float _fadeTime = 1.5f;
     public AnimationCurve _fadeCurve;
+
+    private Camera mainCamera;
     private void Start()
     {
+        mainCamera = GetComponentInParent<Camera>();
         StartFadeOut();
+        mainCamera.cullingMask = 0;
+        mainCamera.cullingMask = 1 << LayerMask.NameToLayer("Fade");
     }
     public void StartFadeIn()
     {

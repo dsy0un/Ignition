@@ -17,13 +17,11 @@ public class M_Position : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (position[0].isOn && !checkBox || 
-            position[1].isOn && !checkBox)
+        if (position[0].isOn && !checkBox)
         {
-            Debug.Log(1);
             checkBox = true;
         }
-        else if (!position[0].isOn && !position[1].isOn)
+        else if (!position[0].isOn || position[1].isOn)
         {
             checkBox = false;
         }

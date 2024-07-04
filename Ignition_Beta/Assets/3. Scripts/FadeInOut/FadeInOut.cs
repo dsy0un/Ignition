@@ -8,6 +8,7 @@ public class FadeInOut : MonoBehaviour
     public Image _image;
     public float _fadeTime = 1.5f;
     public AnimationCurve _fadeCurve;
+
     private void Start()
     {
         StartFadeIn();
@@ -37,6 +38,7 @@ public class FadeInOut : MonoBehaviour
             _image.color = color;
 
             yield return null;
+
         }
     }
 }
