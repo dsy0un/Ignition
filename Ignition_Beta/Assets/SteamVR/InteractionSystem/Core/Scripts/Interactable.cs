@@ -367,5 +367,10 @@ namespace Valve.VR.InteractionSystem
             if (highlightHolder != null)
                 Destroy(highlightHolder);
         }
+
+        public void DetachFromHand()
+        {
+            OnDetachedFromHand(attachedToHand);
+        }
     }
 }
