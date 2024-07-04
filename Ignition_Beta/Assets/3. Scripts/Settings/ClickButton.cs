@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ClickButton : MonoBehaviour
 {
     [SerializeField]
-    Button general, audioBtn, graphic, control, gameplay, back;
+    GameObject general, audioBtn, graphic, control, gameplay;
 
     void Start()
     {
