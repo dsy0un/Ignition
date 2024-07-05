@@ -4,21 +4,24 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using Valve.VR;
 
-public class Lamp : MonoBehaviour
+namespace EW
 {
-    public GameObject pointLight;
-
-    private void OnCollisionEnter(Collision collision)
+    public class Lamp : MonoBehaviour
     {
-        if (collision.collider.tag == "interact" && collision.collider.name != "Pen")
+        public GameObject pointLight;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            if (pointLight.activeSelf == false)
+            if (collision.collider.tag == "interact" && collision.collider.name != "Pen")
             {
-                pointLight.SetActive(true);
-            }
-            else
-            {
-                pointLight.SetActive(false);
+                if (pointLight.activeSelf == false)
+                {
+                    pointLight.SetActive(true);
+                }
+                else
+                {
+                    pointLight.SetActive(false);
+                }
             }
         }
     }

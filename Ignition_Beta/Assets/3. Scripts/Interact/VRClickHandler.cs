@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-public class VRClickHandler : MonoBehaviour
+namespace EW
 {
-    public SteamVR_Action_Boolean triggerClickAction;
-    public SteamVR_Input_Sources handType;
-
-    private void Update()
+    public class VRClickHandler : MonoBehaviour
     {
-    //    if (triggerClickAction.GetStateDown(handType))
-    //    {
-    //        Ray ray = new Ray(transform.position, transform.forward);
-    //        RaycastHit hit;
-    //        Debug.DrawRay(transform.position, transform.forward, Color.red);
-    //        Debug.Log("눌림");
-            
+        public SteamVR_Action_Boolean triggerClickAction;
+        public SteamVR_Input_Sources handType;
 
-    //        if (Physics.Raycast(ray, out hit))
-    //        {
-    //            Document clickable = hit.transform.GetComponent<Document>();
-    //            if (clickable != null)
-    //            {
-    //                clickable.Complete();
-    //            }
-    //        }
-    //    }
+        private void Update()
+        {
+            //    if (triggerClickAction.GetStateDown(handType))
+            //    {
+            //        Ray ray = new Ray(transform.position, transform.forward);
+            //        RaycastHit hit;
+            //        Debug.DrawRay(transform.position, transform.forward, Color.red);
+            //        Debug.Log("눌림");
+
+
+            //        if (Physics.Raycast(ray, out hit))
+            //        {
+            //            Document clickable = hit.transform.GetComponent<Document>();
+            //            if (clickable != null)
+            //            {
+            //                clickable.Complete();
+            //            }
+            //        }
+            //    }
+        }
     }
+
 }
