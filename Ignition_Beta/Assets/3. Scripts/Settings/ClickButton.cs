@@ -35,7 +35,7 @@ namespace DSY
 
         void Update()
         {
-
+            
         }
 
         public void ClickGeneralButton()
