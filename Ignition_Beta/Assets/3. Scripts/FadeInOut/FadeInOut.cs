@@ -16,24 +16,28 @@ public class FadeInOut : MonoBehaviour
     [SerializeField] private UnityEvent onStartEvent;
 
     private Camera mainCamera;
-    private bool fadeIn = false;
-    private bool fadeOut = false;
+    private bool fadeIn;
+    private bool fadeOut;
     private void Start()
     {
         mainCamera = GetComponentInParent<Camera>();
         if (onStartEvent != null)
         {
+            fadeIn = false;
+            fadeOut = false; 
             onStartEvent.Invoke();
         }
     }
     public void StartFadeIn()
     {
         StartCoroutine(Fade(1, 0));
+        fadeIn = true;
     }
         
     public void StartFadeOut()
     {
         StartCoroutine(Fade(0, 1));
+        fadeOut = true;
     }
 
     private IEnumerator Fade(float start, float end)
@@ -45,10 +49,26 @@ public class FadeInOut : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             percent = currentTime / _fadeTime;
+            if (fadeIn)
+            {
+                fadeIn = false;
+                if (_fadeCurve.Evaluate(percent) >= 0.01)
+                {
+                    mainCamera.cullingMask = 1;
+                }
+            }
+            else if (fadeOut)
+            {
+                fadeOut = false;
+                if (_fadeCurve.Evaluate(percent) >= 1)
+                {
+                    mainCamera.cullingMask = 0;
+                    mainCamera.cullingMask = 1 << LayerMask.NameToLayer("Fade");
+                }
+            }
             Color color = _image.color;
             color.a = Mathf.Lerp(start, end, _fadeCurve.Evaluate(percent));
             _image.color = color;
-
             yield return null;
 
         }
