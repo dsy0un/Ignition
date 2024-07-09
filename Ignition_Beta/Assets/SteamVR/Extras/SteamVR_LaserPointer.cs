@@ -1,6 +1,7 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 using UnityEngine;
 using System.Collections;
+using Valve.VR.InteractionSystem;
 
 namespace Valve.VR.Extras
 {
@@ -10,6 +11,9 @@ namespace Valve.VR.Extras
 
         //public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.__actions_default_in_InteractUI;
         public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.GetBooleanAction("InteractUI");
+
+        public SteamVR_Action_Boolean grabPinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
+        public SteamVR_Action_Boolean grabGripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
 
         public bool active = true;
         public Color color;
@@ -24,11 +28,22 @@ namespace Valve.VR.Extras
         public event PointerEventHandler PointerOut;
         public event PointerEventHandler PointerClick;
 
-        Transform previousContact = null;
+        public Transform previousContact = null;
+        public RaycastHit hit;
+
+        public Hand hand;
+
+        Hand.AttachmentFlags defaultAttachmentFlags = Hand.AttachmentFlags.ParentToHand |
+                                                              Hand.AttachmentFlags.DetachOthers |
+                                                              Hand.AttachmentFlags.DetachFromOtherHand |
+                                                                Hand.AttachmentFlags.TurnOnKinematic;
+        public SteamVR_LaserPointer otherHandLaser;
 
 
         private void Start()
         {
+            if (hand == null)
+                hand = this.GetComponent<Hand>();
             if (pose == null)
                 pose = this.GetComponent<SteamVR_Behaviour_Pose>();
             if (pose == null)
@@ -37,9 +52,14 @@ namespace Valve.VR.Extras
             if (interactWithUI == null)
                 Debug.LogError("No ui interaction action has been set on this component.", this);
 
+            otherHandLaser = hand.otherHand.GetComponent<SteamVR_LaserPointer>();
+
+            grabPinchAction.AddOnChangeListener(OnPlantActionChange, hand.handType);
+
+            grabGripAction.AddOnChangeListener(OnActivateActionChange, hand.handType);
 
             holder = new GameObject();
-            holder.transform.parent = this.transform;
+            holder.transform.parent = hand.trackedObject.transform;
             holder.transform.localPosition = Vector3.zero;
             holder.transform.localRotation = Quaternion.identity;
 
@@ -62,12 +82,81 @@ namespace Valve.VR.Extras
             {
                 if (collider)
                 {
-                    Object.Destroy(collider);
+                    Destroy(collider);
                 }
             }
             Material newMaterial = new Material(Shader.Find("Unlit/Color"));
             newMaterial.SetColor("_Color", color);
             pointer.GetComponent<MeshRenderer>().material = newMaterial;
+        }
+
+        private void OnActivateActionChange(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState)
+        {
+            if (newState)
+            {
+                isActive = !isActive;
+
+                holder.SetActive(isActive);
+                if (!isActive && previousContact != null)
+                {
+                    previousContact.gameObject.SendMessage("OnHandHoverEnd", hand, SendMessageOptions.DontRequireReceiver);
+                    if (hand.currentAttachedObject != null && hand.currentAttachedObject == previousContact.gameObject)
+                    {
+                        hand.DetachObject(previousContact.gameObject);
+                    }
+                    if (otherHandLaser.previousContact != null && otherHandLaser.previousContact == previousContact)
+                    {
+                        otherHandLaser.previousContact.gameObject.SendMessage("OnHandHoverBegin", hand.otherHand, SendMessageOptions.DontRequireReceiver);
+                    }
+                    previousContact = null;
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (grabPinchAction != null)
+                grabPinchAction.RemoveOnChangeListener(OnPlantActionChange, hand.handType);
+
+            if (grabGripAction != null)
+                grabGripAction.RemoveOnChangeListener(OnPlantActionChange, hand.handType);
+        }
+
+        private void OnPlantActionChange(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSource, bool newValue)
+        {
+            if (newValue)
+            {
+                if (previousContact)
+                {
+                    if (previousContact.gameObject.layer == LayerMask.NameToLayer("UI"))
+                    {
+                        previousContact.gameObject.SendMessage("HandHoverUpdate", hand, SendMessageOptions.DontRequireReceiver);
+                    }
+                    else
+                    {
+                        Interactable interactable = previousContact.gameObject.GetComponent<Interactable>();
+
+                        hand.AttachObjectWithGrabPoint(previousContact.gameObject, hit.point, hand.GetBestGrabbingType(GrabTypes.None), defaultAttachmentFlags);
+
+                        interactable.onDetachedFromHand += OnDetachedFromHand;
+                    }
+                    if (previousContact == otherHandLaser.previousContact)
+                    {
+                        previousContact.gameObject.SendMessage("OnHandHoverEnd", hand, SendMessageOptions.DontRequireReceiver);
+                    }
+                }
+            }
+        }
+
+        private void OnDetachedFromHand(Hand hand)
+        {
+
+            if (previousContact == otherHandLaser.previousContact)
+            {
+                otherHandLaser.previousContact = null;
+            }
+
+            previousContact = null;
         }
 
         public virtual void OnPointerIn(PointerEventArgs e)
@@ -99,7 +188,7 @@ namespace Valve.VR.Extras
 
             float dist = 100f;
 
-            Ray raycast = new Ray(transform.position, transform.forward);
+            Ray raycast = new Ray(hand.trackedObject.transform.position, hand.trackedObject.transform.forward);
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
 
@@ -111,9 +200,16 @@ namespace Valve.VR.Extras
                 args.flags = 0;
                 args.target = previousContact;
                 OnPointerOut(args);
+
+                previousContact.gameObject.SendMessage("OnHandHoverEnd", hand, SendMessageOptions.DontRequireReceiver);
+                if (otherHandLaser.previousContact != null && otherHandLaser.previousContact == previousContact)
+                {
+                    otherHandLaser.previousContact.gameObject.SendMessage("OnHandHoverBegin", hand.otherHand, SendMessageOptions.DontRequireReceiver);
+                }
+
                 previousContact = null;
             }
-            if (bHit && previousContact != hit.transform)
+            if (bHit && previousContact != hit.transform && hit.transform.gameObject.GetComponent<Interactable>() != null)
             {
                 PointerEventArgs argsIn = new PointerEventArgs();
                 argsIn.fromInputSource = pose.inputSource;
@@ -122,6 +218,11 @@ namespace Valve.VR.Extras
                 argsIn.target = hit.transform;
                 OnPointerIn(argsIn);
                 previousContact = hit.transform;
+
+                if (otherHandLaser.previousContact != previousContact)
+                {
+                    previousContact.gameObject.SendMessage("OnHandHoverBegin", hand, SendMessageOptions.DontRequireReceiver);
+                }
             }
             if (!bHit)
             {
@@ -130,6 +231,17 @@ namespace Valve.VR.Extras
             if (bHit && hit.distance < 100f)
             {
                 dist = hit.distance;
+            }
+
+            if (grabPinchAction.GetState(pose.inputSource))
+            {
+                pointer.transform.localScale = new Vector3(thickness * 5f, thickness * 5f, dist);
+                pointer.GetComponent<MeshRenderer>().material.color = clickColor;
+            }
+            else
+            {
+                pointer.transform.localScale = new Vector3(thickness, thickness, dist);
+                pointer.GetComponent<MeshRenderer>().material.color = color;
             }
 
             if (bHit && interactWithUI.GetStateUp(pose.inputSource))
