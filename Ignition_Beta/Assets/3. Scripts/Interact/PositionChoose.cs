@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PositionChoose : MonoBehaviour
+namespace EW
 {
-    private void OnCollisionEnter(Collision collision)
+
+    public class PositionChoose : MonoBehaviour
     {
-        if (collision.collider.tag == "interact")
+        private void OnCollisionEnter(Collision collision)
         {
-            Toggle toggle;
-            toggle = transform.parent.GetComponent<Toggle>();
-            toggle.isOn = true;
+            if (collision.collider.tag == "interact")
+            {
+                Toggle toggle;
+                toggle = transform.parent.GetComponent<Toggle>();
+                toggle.isOn = true;
+            }
         }
     }
+
 }

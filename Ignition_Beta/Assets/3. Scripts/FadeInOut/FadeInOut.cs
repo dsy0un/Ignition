@@ -1,23 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
 
 public class FadeInOut : MonoBehaviour
 {
     public Image _image;
     public float _fadeTime = 1.5f;
+    [Tooltip ("FadeIn 사용시 0.01로 올라가는 순간에 오브젝트가 보임")]
     public AnimationCurve _fadeCurve;
+
+    [Tooltip ("스크립트 들어있는 오브젝트 추가후 StartFadeIn || StartFadeOut 선택")]
+    [SerializeField]
+    private UnityEvent onStartEvent;
 
     private void Start()
     {
-        StartFadeIn();
+        if (onStartEvent != null)
+        {
+            onStartEvent.Invoke();
+        }
     }
     public void StartFadeIn()
     {
         StartCoroutine(Fade(1, 0));
     }
-
+        
     public void StartFadeOut()
     {
         StartCoroutine(Fade(0, 1));
@@ -32,13 +41,10 @@ public class FadeInOut : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             percent = currentTime / _fadeTime;
-
             Color color = _image.color;
             color.a = Mathf.Lerp(start, end, _fadeCurve.Evaluate(percent));
             _image.color = color;
-
             yield return null;
-
         }
     }
 }
