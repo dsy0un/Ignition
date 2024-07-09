@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+using UnityEngine.SceneManagement;
 
 namespace EW
 {
@@ -16,11 +17,10 @@ namespace EW
 
         public GameObject file;
 
-        public GameObject deleteplz;
-
         private Animator thisAnimator;
         private bool documentOpen = false;
         private string callSign;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -31,20 +31,6 @@ namespace EW
 
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-        //public void Complete()
-        //{
-        //    Debug.Log("¼­·ù ºÀÅõ");
-        //    if (open.textInput && position.checkBox)
-        //    {
-        //        animator.SetTrigger("File");
-        //        callSign = open.callSign;
-        //    }
-        //}
         public void File()
         {
             file.SetActive(true);
@@ -61,9 +47,7 @@ namespace EW
             }
             else if (grab == GrabTypes.Pinch && !isgrab && documentOpen && position.checkBox && open.textInput)
             {
-                //fadeInOut.StartFadeOut();
-                deleteplz.SetActive(true);
-                //Time.timeScale = 0f;
+                SceneManager.LoadScene("Logo");
             }
         }
 
