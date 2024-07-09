@@ -21,9 +21,11 @@ public class Gun : MonoBehaviour
     public SteamVR_Action_Boolean ejectMagazine;
     public SteamVR_Action_Boolean changeFireMode;
     public GameObject bulletPref;
+    private Rigidbody rb;
 
     public float bulletLifeTime = 30f;
     public float shootingSpeed = 1f;
+    public float recoil = 5;
     private int fireMode = 1;
     private float currentTime;
     public bool changeMagazine;

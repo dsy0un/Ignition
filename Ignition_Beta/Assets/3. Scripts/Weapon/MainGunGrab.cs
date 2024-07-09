@@ -19,12 +19,12 @@ public class MainGunGrab : MonoBehaviour
     private void LateUpdate()
     {
         // 서브 손잡이를 잡고 있는 상태에서 메인 손잡이를 놨을 때
-        if (!interactable.attachedToHand && subInter.attachedToHand)
-        {
-            subInter.attachedToHand.HoverUnlock(subInter);
-            subInter.attachedToHand.DetachObject(subInter.gameObject);
-            subInter.DetachFromHand();
-        }
+        //if (!interactable.attachedToHand && subInter.attachedToHand)
+        //{
+        //    subInter.attachedToHand.HoverUnlock(subInter);
+        //    subInter.attachedToHand.DetachObject(subInter.gameObject);
+        //    subInter.DetachFromHand();
+        //}
 
         // check if grabbed
         if (interactable.attachedToHand != null)
