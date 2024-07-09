@@ -8,7 +8,6 @@ public class FadeInOut : MonoBehaviour
 {
     public Image _image;
     public float _fadeTime = 1.5f;
-    [Tooltip ("FadeIn 사용시 0.01로 올라가는 순간에 오브젝트가 보임")]
     public AnimationCurve _fadeCurve;
 
     [Tooltip ("스크립트 들어있는 오브젝트 추가후 StartFadeIn || StartFadeOut 선택")]
