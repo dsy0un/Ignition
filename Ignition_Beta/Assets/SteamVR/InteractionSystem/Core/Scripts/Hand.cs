@@ -888,10 +888,12 @@ namespace Valve.VR.InteractionSystem
                 trackedObject = this.gameObject.GetComponent<SteamVR_Behaviour_Pose>();
 
                 if (trackedObject != null)
+                {
                     trackedObject.onTransformUpdatedEvent += OnTransformUpdated;
-            }
+                    trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
+                }
 
-            trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
+            }
         }
 
         protected virtual void OnDestroy()
@@ -899,9 +901,8 @@ namespace Valve.VR.InteractionSystem
             if (trackedObject != null)
             {
                 trackedObject.onTransformUpdatedEvent -= OnTransformUpdated;
+                trackedObject.onTransformUpdatedEvent -= TwoHandGrabbingUpdate;
             }
-
-            trackedObject.onTransformUpdatedEvent -= TwoHandGrabbingUpdate;
         }
 
         protected virtual void OnTransformUpdated(SteamVR_Behaviour_Pose updatedPose, SteamVR_Input_Sources updatedSource)
