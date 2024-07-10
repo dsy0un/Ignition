@@ -23,7 +23,7 @@ namespace Valve.VR.InteractionSystem
         Vector3 initialHandPosition1; // first hand position
         Vector3 initialHandPosition2; // second hand position
         Quaternion initialObjectRotation; // grabbed object rotation
-        Vector3 initialObjectScale; // grabbed object scale
+        // Vector3 initialObjectScale; // grabbed object scale
         Vector3 initialObjectDirection; // direction of object to midpoint of both hands
         AttachmentFlags initialAttachmentFlags; // initial AttachmentFlags 
         public bool twoHandGrab = false; // bool, so you know when grabbed with 2 hands
@@ -380,10 +380,10 @@ namespace Valve.VR.InteractionSystem
                 float p = (currentGrabDistance / initialGrabDistance); // percentage based on the distance of the initial positions and the new positions
 
 
-                Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y, p * initialObjectScale.z); // calculate new object scale with p
+                // Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y, p * initialObjectScale.z); // calculate new object scale with p
 
                 attachedObject.transform.rotation = handRot * initialObjectRotation; // add rotation
-                attachedObject.transform.localScale = newScale; // set new scale
+                // attachedObject.transform.localScale = newScale; // set new scale
                                                                 // set the position of the object to the center of both hands based on the original object direction relative to the new scale and rotation
                 attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) + (handRot * (initialObjectDirection * p));
 
@@ -431,7 +431,7 @@ namespace Valve.VR.InteractionSystem
                 initialHandPosition1 = trackedObject.transform.position;
                 initialHandPosition2 = otherHand.trackedObject.transform.position;
                 initialObjectRotation = objectToAttach.transform.rotation;
-                initialObjectScale = objectToAttach.transform.localScale;
+                // initialObjectScale = objectToAttach.transform.localScale;
                 initialAttachmentFlags = attachedObject.attachmentFlags;
                 initialObjectDirection = objectToAttach.transform.position - (initialHandPosition1 + initialHandPosition2) * 0.5f;
 
