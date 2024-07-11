@@ -22,6 +22,14 @@ public class Gun : MonoBehaviour
     public SteamVR_Action_Boolean changeFireMode;
     public GameObject bulletPref;
     private Rigidbody rb;
+    public Transform gunTransform; // 총기의 Transform
+    public float recoilAmount = 2f; // 반동의 세기
+    public float recoilSpeed = 5f; // 반동이 원위치로 돌아오는 속도
+
+    private Vector3 originalPosition;
+    private Quaternion originalRotation;
+    private Vector3 recoilOffset;
+    private Quaternion recoilRotation;
 
     public float bulletLifeTime = 30f;
     public float shootingSpeed = 1f;
@@ -39,6 +47,8 @@ public class Gun : MonoBehaviour
         socket = transform.Find("Body").Find("Socket").gameObject;
         currentTime = fireTime;
         changeMagazine = false;
+        originalPosition = gunTransform.localPosition;
+        originalRotation = gunTransform.localRotation;
     }
     private void Update()
     {
@@ -62,6 +72,7 @@ public class Gun : MonoBehaviour
                     if (fireAction[source].stateDown)
                     {
                         Fire();
+                        ApplyRecoil();
                     }
                 }
                 else
@@ -72,6 +83,7 @@ public class Gun : MonoBehaviour
                         {
                             Fire();
                             currentTime = 0;
+                            ApplyRecoil();
                         }
                     }
                     else
@@ -88,6 +100,10 @@ public class Gun : MonoBehaviour
                 changeMagazine = true;
             }
         }
+        gunTransform.localPosition = 
+            Vector3.Lerp(gunTransform.localPosition, originalPosition + recoilOffset, Time.deltaTime * recoilSpeed);
+        gunTransform.localRotation = 
+            Quaternion.Slerp(gunTransform.localRotation, originalRotation * recoilRotation, Time.deltaTime * recoilSpeed);
     }
     void Fire()
     {   
@@ -103,5 +119,12 @@ public class Gun : MonoBehaviour
     void HideLight()
     {
         muzzleLight.SetActive(false);
+    }
+
+    void ApplyRecoil()
+    {
+        // 랜덤한 반동 적용 (위쪽과 좌우로)
+        recoilOffset = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(0.1f, 0.2f), 0) * recoilAmount;
+        recoilRotation = Quaternion.Euler(new Vector3(-Random.Range(2f, 5f), Random.Range(-1f, 1f), 0) * recoilAmount);
     }
 }
