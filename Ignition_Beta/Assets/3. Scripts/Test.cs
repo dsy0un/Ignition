@@ -13,9 +13,10 @@ public class Test : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+            this.transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x * -1.5f, transform.rotation.y, transform.rotation.z));
+            rb.AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
         }
     }
 }
