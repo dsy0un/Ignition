@@ -21,7 +21,7 @@ public class TempTutoButton : MonoBehaviour
     {
         if (collision.collider.tag == "interact")
         {
-            SceneManager.LoadScene("Loading");
+            LoadingSceneManager.LoadScene("Game");
         }
     }
 }
