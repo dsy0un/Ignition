@@ -18,8 +18,11 @@ public class LogoInit : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Logo" && !logo)
         {
-            logo = true;
-            Destroy(gameObject);
+            if (SceneManager.GetActiveScene().isLoaded)
+            {
+                logo = true;
+                Destroy(gameObject);
+            }
         }
     }
 }
