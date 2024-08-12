@@ -16,14 +16,14 @@ public class SubGunGrab : MonoBehaviour
     }
 
     // 부모의 조건이 맞지 않으면 강제로(자식을 잡고 있는 손) 떼내기 위한 함수
-    public void ForceDetach()
-    {
-        if (interactable.attachedToHand)
-        {
-            interactable.attachedToHand.HoverUnlock(interactable);
-            interactable.attachedToHand.DetachObject(gameObject);
-        }
-    }
+    //public void ForceDetach()
+    //{
+    //    if (interactable.attachedToHand)
+    //    {
+    //        interactable.attachedToHand.HoverUnlock(interactable);
+    //        interactable.attachedToHand.DetachObject(gameObject);
+    //    }
+    //}
 
     // 부모의 장착 지점과 자식의 장착 지점을 계산하여 Quaternion값을 반환
     private Quaternion GetTargetRotation()
