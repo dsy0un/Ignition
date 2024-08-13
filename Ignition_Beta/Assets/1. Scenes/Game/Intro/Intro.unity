@@ -7010,7 +7010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 835656396}
   m_Layer: 0
-  m_Name: GmaeManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19945,8 +19945,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 328741010111778872, guid: 01e32efd818c25042b8f1e5eca02ba33,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4882955265684603940}
   m_SourcePrefab: {fileID: 100100000, guid: 01e32efd818c25042b8f1e5eca02ba33, type: 3}
+--- !u!1 &4882955265684603939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 328741010111778872, guid: 01e32efd818c25042b8f1e5eca02ba33,
+    type: 3}
+  m_PrefabInstance: {fileID: 4882955265684603938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4882955265684603940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882955265684603939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1824b25dfe7e4194ba08e4496d1d0619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

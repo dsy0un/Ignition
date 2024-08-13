@@ -7,6 +7,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -185,6 +186,7 @@ namespace Valve.VR.InteractionSystem
                     }
                 }
 				return null;
+				
 			}
 		}
 
@@ -256,9 +258,13 @@ namespace Valve.VR.InteractionSystem
 			{
 				trackingOriginTransform = this.transform;
 			}
+   //         if (null != _instance)
+			//{
+   //             Destroy(this.gameObject);
+   //         }
 
 #if OPENVR_XR_API && UNITY_LEGACY_INPUT_HELPERS
-			if (hmdTransforms != null)
+                if (hmdTransforms != null)
 			{
 				foreach (var hmd in hmdTransforms)
 				{
