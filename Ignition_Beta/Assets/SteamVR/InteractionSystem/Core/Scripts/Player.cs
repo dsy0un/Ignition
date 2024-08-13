@@ -258,9 +258,13 @@ namespace Valve.VR.InteractionSystem
 			{
 				trackingOriginTransform = this.transform;
 			}
+   //         if (null != _instance)
+			//{
+   //             Destroy(this.gameObject);
+   //         }
 
 #if OPENVR_XR_API && UNITY_LEGACY_INPUT_HELPERS
-			if (hmdTransforms != null)
+                if (hmdTransforms != null)
 			{
 				foreach (var hmd in hmdTransforms)
 				{
