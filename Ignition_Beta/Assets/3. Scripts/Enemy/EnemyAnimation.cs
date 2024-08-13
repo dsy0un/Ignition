@@ -14,6 +14,6 @@ public class EnemyAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb.velocity.magnitude);
+        Debug.Log(rb.velocity.x);
     }
 }
