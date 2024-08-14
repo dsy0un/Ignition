@@ -1,17 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LoadingSceneManager : MonoBehaviour
 {
     public static string nextScene;
-    [SerializeField] Image progressBar;
 
     private void Start()
     {
         StartCoroutine(LoadScene());
+        if (nextScene == null)
+        {
+            nextScene = "Base";
+        }
     }
 
     public static void LoadScene(string sceneName)
@@ -32,16 +33,11 @@ public class LoadingSceneManager : MonoBehaviour
             timer += Time.deltaTime;
             if (op.progress < 0.9f)
             {
-                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, op.progress, timer);
-                if (progressBar.fillAmount >= op.progress)
-                {
-                    timer = 0f;
-                }
+                
             }
             else
             {
-                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 1f, timer);
-                if (progressBar.fillAmount == 1.0f)
+                if (timer > 13f)
                 {
                     op.allowSceneActivation = true;
                     yield break;
