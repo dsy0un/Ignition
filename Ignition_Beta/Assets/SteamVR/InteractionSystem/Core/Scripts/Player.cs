@@ -52,9 +52,10 @@ namespace Valve.VR.InteractionSystem
 		{
 			get
 			{
-				if ( _instance == null )
+				if ( _instance != null )
 				{
-					_instance = FindObjectOfType<Player>();
+					// _instance = FindObjectOfType<Player>();
+					Destroy( _instance );
 				}
 				return _instance;
 			}
@@ -258,13 +259,13 @@ namespace Valve.VR.InteractionSystem
 			{
 				trackingOriginTransform = this.transform;
 			}
-   //         if (null != _instance)
+			//if (null == _instance)
 			//{
-   //             Destroy(this.gameObject);
-   //         }
+			//	Destroy(this.gameObject);
+			//}
 
 #if OPENVR_XR_API && UNITY_LEGACY_INPUT_HELPERS
-                if (hmdTransforms != null)
+			if (hmdTransforms != null)
 			{
 				foreach (var hmd in hmdTransforms)
 				{
