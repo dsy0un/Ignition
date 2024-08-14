@@ -19,7 +19,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void Hit(float dmg)
     {
@@ -33,6 +33,5 @@ public class EnemyState : MonoBehaviour, IHitAble
     public void Die()
     {
         enemyAnim.isDie(true);
-        Destroy(gameObject);
     }
 }
