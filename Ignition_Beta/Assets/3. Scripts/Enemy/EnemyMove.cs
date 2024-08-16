@@ -10,19 +10,20 @@ public class EnemyMove : MonoBehaviour
     public NavMeshSurface nms;
     public GameObject target;
 
+    private Vector3 speedtovelo;
     private NavMeshAgent nma;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         nma = GetComponent<NavMeshAgent>();
-        nms.BuildNavMesh();
+        
     }
 
     void Update()
     {
         nma.SetDestination(target.transform.position);
-        Vector3 speedX = new Vector3(nma.speed, 0, 0);
-
+        speedtovelo = new Vector3(nma.velocity.x, 0, nma.velocity.z);
+        rb.velocity = speedtovelo;
     }
 }
