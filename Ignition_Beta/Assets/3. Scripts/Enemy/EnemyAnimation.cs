@@ -7,8 +7,8 @@ public class EnemyAnimation : MonoBehaviour
 {
     Rigidbody rb;
     Animator anim;
-    private float xVel = 0.7f;
-    private float zVel = 0.7f;
+    public float xVel = 0.7f;
+    public float zVel = 0.7f;
     private bool isDead;
     // Start is called before the first frame update
     void Start()
