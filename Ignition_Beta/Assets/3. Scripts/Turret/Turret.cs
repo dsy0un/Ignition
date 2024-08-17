@@ -22,6 +22,7 @@ public class Turret : MonoBehaviour
         if (colliders.Length == 1)
         {
             look_enemy = colliders[0];
+            Debug.Log(1);
         }
         else if (colliders.Length > 0)
         {
@@ -37,8 +38,12 @@ public class Turret : MonoBehaviour
             }
 
         }
+        StartCoroutine("LookUp");
+    }
 
-        if (look_enemy != null) 
+    IEnumerator LookUp()
+    {
+        if (look_enemy != null)
         {
             Vector3 vector = look_enemy.transform.position - transform.position;
 
@@ -49,7 +54,7 @@ public class Turret : MonoBehaviour
             transform.rotation = turret_Y;
             turretHead.transform.rotation = turret_X;
         }
-
+        yield return null;
     }
 
     private void OnDrawGizmos() // 테스트 후 지워도 됨
