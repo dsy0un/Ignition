@@ -10,38 +10,39 @@ public class Cooldown : MonoBehaviour
     Image img;
     [SerializeField]
     TextMeshProUGUI text;
+    [SerializeField]
+    float cooltime;
+
+    float currentTime;
+
+    private void Awake()
+    {
+        currentTime = cooltime;
+    }
 
     private void Start()
     {
-        Quaternion r = transform.rotation;
-        r.y = Quaternion.Euler(new Vector3(0, 0, 0)).normalized.y;
-
-    }
-
-    private void Update()
-    {
-        
+        StartCoroutine(CoolDown());
     }
 
     IEnumerator CoolDown()
     {
-        yield return null;
-
-        if (starTime > 0)
+        while (currentTime > 0)
         {
-            starTime -= Time.deltaTime;
+            currentTime -= Time.deltaTime;
 
-            if (starTime < 0)
-            {
-                starTime = 0;
-                isUseSkill = false;
-                hideImg.SetActive(false);
-                starTime = coolTime;
+            int sec = (int)(currentTime % 60);
+            int min = (int)(currentTime / 60);
+            int hour = (int)(currentTime / 3600);
 
-            }
-            float time = starTime / coolTime;
-            hideImgFill = time;
+            img.fillAmount = currentTime / cooltime;
 
+            if (min >= 60) text.text = $"{hour}:{min}:{sec}";
+            else if (sec >= 60) text.text = $"{min}:{sec}";
+            else text.text = $"{min:00}:{currentTime:00.00}";
+            
+
+            yield return new WaitForFixedUpdate();
         }
     }
 }
