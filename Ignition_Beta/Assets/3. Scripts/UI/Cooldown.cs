@@ -12,6 +12,8 @@ public class Cooldown : MonoBehaviour
     TextMeshProUGUI text;
     [SerializeField]
     float cooltime;
+    [SerializeField]
+    GameObject playerHead;
 
     float currentTime;
 
@@ -25,21 +27,26 @@ public class Cooldown : MonoBehaviour
         StartCoroutine(CoolDown());
     }
 
+    private void Update()
+    {
+        transform.LookAt(-playerHead.transform.position);
+    }
+
     IEnumerator CoolDown()
     {
         while (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
 
-            int sec = (int)(currentTime % 60);
-            int min = (int)(currentTime / 60);
-            int hour = (int)(currentTime / 3600);
+            int sec = (int)currentTime % 60;
+            int min = (int)currentTime / 60 % 60;
+            int hour = (int)currentTime / 3600 % 60;
 
-            img.fillAmount = currentTime / cooltime;
+            img.fillAmount = 1 - (currentTime / cooltime);
 
-            if (min >= 60) text.text = $"{hour}:{min}:{sec}";
-            else if (sec >= 60) text.text = $"{min}:{sec}";
-            else text.text = $"{min:00}:{currentTime:00.00}";
+            if (currentTime >= 3600) text.text = $"{hour:D2}:{min:D2}:{sec:D2}";
+            else if (currentTime >= 60) text.text = $"{hour:D2}:{min:D2}:{sec:D2}";
+            else text.text = $"{hour:D2}:{min:D2}:{currentTime:00.00}";
             
 
             yield return new WaitForFixedUpdate();
