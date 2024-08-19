@@ -5,7 +5,7 @@ using UnityEngine;
 public class Backpack : MonoBehaviour
 {
     [SerializeField]
-    private 
+    private GameObject[] item;
     // Start is called before the first frame update
     void Start()
     {
