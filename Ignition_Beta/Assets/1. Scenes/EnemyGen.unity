@@ -373,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 807980978}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: 1.5, z: 0}
+  m_LocalPosition: {x: 200, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -398,7 +398,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 1, z: 50}
+  m_Size: {x: 50, y: 0, z: 100}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &861083405
 GameObject:
@@ -445,9 +445,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genObj: {fileID: 807980980}
-  genCooldown: 0.1
-  genMaxCount: 100
-  enemyPrefab: {fileID: 110476, guid: b0e4a4b46066f314b9ba544ee09a673a, type: 3}
+  genCooldown: 0.5
+  genMaxCount: 30
+  enemyPrefab: {fileID: 4157623414301245334, guid: f329804f29d28b2479eba768998f0987,
+    type: 3}
 --- !u!1 &1019839858
 GameObject:
   m_ObjectHideFlags: 0

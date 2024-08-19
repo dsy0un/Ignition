@@ -14,8 +14,16 @@ public class EnemyGenerate : MonoBehaviour
     [SerializeField]
     private GameObject enemyPrefab; // Enemy Prefab, NO UNPACK ENEMY GAMEOBJECT
 
+    private List<GameObject> pools = new(); // NO MODIFICATION
+
     private void Start()
     {
+        for (int i = 0; i < genMaxCount; i++)
+        {
+            GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity);
+            spawn.SetActive(false);
+            pools.Add(spawn);
+        }
         StartCoroutine(RandomRespawn());
     }
 
@@ -62,11 +70,10 @@ public class EnemyGenerate : MonoBehaviour
 
     private IEnumerator RandomRespawn()
     {
-        while (genMaxCount > 0)
+        for (int i = 0; i < pools.Count; i++)
         {
+            if (!pools[i].activeInHierarchy) pools[i].SetActive(true);
             yield return new WaitForSeconds(genCooldown);
-            GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity);
-            genMaxCount--;
         }
     }
 }
