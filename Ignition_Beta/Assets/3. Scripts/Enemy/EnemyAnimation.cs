@@ -46,6 +46,16 @@ public class EnemyAnimation : MonoBehaviour
             }
         }
     }
+
+    public void AttackAnim(string trgName)
+    {
+        anim.SetTrigger(trgName);
+    }
+    public void ResetTrigger(string trgName)
+    {
+        anim.ResetTrigger(trgName);
+    }
+
     public void isDie(bool die)
     {
         isDead = die;
