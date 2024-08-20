@@ -51,10 +51,6 @@ public class EnemyAnimation : MonoBehaviour
     {
         anim.SetTrigger(trgName);
     }
-    public void ResetTrigger(string trgName)
-    {
-        anim.ResetTrigger(trgName);
-    }
 
     public void isDie(bool die)
     {

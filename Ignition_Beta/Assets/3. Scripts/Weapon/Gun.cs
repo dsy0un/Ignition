@@ -60,9 +60,17 @@ public class Gun : MonoBehaviour
             SteamVR_Input_Sources source = interactable.attachedToHand.handType;
 
             if (this.gameObject.tag == "Pistol")
-                fireMode = 1;
-            else if (this.gameObject.tag != "Pistol" && changeFireMode[source].stateDown)
-                fireMode = 4 - fireMode;
+            {
+                Bullet.Damage = 20;
+            }
+            else if (this.gameObject.tag == "Rifle")
+            {
+                Bullet.Damage = 30;
+                if (changeFireMode[source].stateDown)
+                {
+                    fireMode = 4 - fireMode;
+                }
+            }
 
             if (GetComponentInChildren<MagazineSystem>() != null && GetComponentInChildren<MagazineSystem>().BulletCount > 0)
             {

@@ -18,7 +18,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     private EnemyMove enemyMove;
     private float attackDelay = 2.5f;
     private float currentTime;
-    private float attackDistance = 4.3f;
+    private float attackDistance = 4.5f;
     private bool isDead;
 
     // Start is called before the first frame update
@@ -54,8 +54,6 @@ public class EnemyState : MonoBehaviour, IHitAble
 
             float distance = Vector3.Distance(enemyMove.target.transform.position, this.transform.position);
 
-            print(enemyMove.target.layer == lookOutLayer);
-
             if (distance <= attackDistance)
             {
                 state = State.Attack;
@@ -80,12 +78,10 @@ public class EnemyState : MonoBehaviour, IHitAble
                         if (enemyMove.target.layer == playerLayer)
                         {
                             enemyAnim.AttackAnim("Bite");
-                            print(1);
                         }
                         else if (enemyMove.target.layer == lookOutLayer)
                         {
                             enemyAnim.AttackAnim("stinger");
-                            print(2);
                         }
                         currentTime = 0;
                     }
@@ -95,8 +91,10 @@ public class EnemyState : MonoBehaviour, IHitAble
         }
     }
 
-    public void Hit(float dmg)
+    public void Hit(float dmg, string coliName)
     {
+        if (coliName == "WeakPoint")
+            dmg = 100;
         currentHP -= dmg;
         if (currentHP <= 0)
         {
