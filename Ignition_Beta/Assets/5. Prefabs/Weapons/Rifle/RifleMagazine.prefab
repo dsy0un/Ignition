@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6908982440513888463}
   - component: {fileID: 7251461428146460111}
   - component: {fileID: 7870592312734341362}
-  - component: {fileID: 7695157968100700765}
+  - component: {fileID: 2369429597921136157}
   m_Layer: 9
   m_Name: WPN_SynTaxP40_Magazine_LOD2
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7695157968100700765
-MeshCollider:
+--- !u!65 &2369429597921136157
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,10 +102,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300018, guid: d79e2981122a7484d90905336842e5be, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.041008852, y: 0.120563835, z: 0.12123686}
+  m_Center: {x: 0.000027845614, y: -0.000070270165, z: 0.000067537665}
 --- !u!1 &6984834146100624597
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +346,7 @@ GameObject:
   - component: {fileID: 2189141663904161086}
   - component: {fileID: 7311411749235159796}
   - component: {fileID: 150501317843515255}
-  - component: {fileID: 7760658059962087987}
+  - component: {fileID: 890335783040702165}
   m_Layer: 9
   m_Name: WPN_SynTaxP40_Magazine_LOD0
   m_TagString: Untagged
@@ -420,8 +419,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7760658059962087987
-MeshCollider:
+--- !u!65 &890335783040702165
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -438,10 +437,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300018, guid: d79e2981122a7484d90905336842e5be, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.0406402, y: 0.12024809, z: 0.12093425}
+  m_Center: {x: 0, y: 0.000000003725291, z: 0.000000022351747}
 --- !u!1 &8101946575795373513
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +451,7 @@ GameObject:
   - component: {fileID: 7462783683040629403}
   - component: {fileID: 5835706360271099999}
   - component: {fileID: 7429879090986782425}
-  - component: {fileID: 3627098295177649179}
+  - component: {fileID: 2234274188706913506}
   m_Layer: 9
   m_Name: WPN_SynTaxP40_Magazine_LOD1
   m_TagString: Untagged
@@ -526,8 +524,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3627098295177649179
-MeshCollider:
+--- !u!65 &2234274188706913506
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -544,7 +542,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300018, guid: d79e2981122a7484d90905336842e5be, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.040722497, y: 0.120276794, z: 0.12078339}
+  m_Center: {x: -0.000017390586, y: -0.000008704143, z: 0.00008278342}
