@@ -20,6 +20,9 @@ public class Turret : MonoBehaviour
     public Collider[] colliders; //나중에 private으로 변경하기
     public Collider look_enemy; // ''
 
+    [SerializeField]
+
+
     void Update()
     {
         LookEnemy();
@@ -55,7 +58,7 @@ public class Turret : MonoBehaviour
         {
             look_enemy = colliders[0];
 
-            Vector3 enemyPosition = new Vector3(look_enemy.transform.position.x, look_enemy.transform.position.y - 1, look_enemy.transform.position.z);
+            Vector3 enemyPosition = new Vector3(look_enemy.transform.position.x, look_enemy.transform.position.y - .75f, look_enemy.transform.position.z);
 
             Vector3 vector = enemyPosition - transform.position;
 
@@ -74,7 +77,7 @@ public class Turret : MonoBehaviour
         {
             RaycastHit hit;
             float maxDistance = 10f;
-            Vector3 dir = new Vector3(colliders[0].transform.position.x, colliders[0].transform.position.y - 1f, colliders[0].transform.position.z);
+            Vector3 dir = new Vector3(colliders[0].transform.position.x, colliders[0].transform.position.y - .75f, colliders[0].transform.position.z);
 
             Debug.DrawRay(gunPointR.position, dir * maxDistance, Color.red);
             if (Physics.Raycast(gunPointR.position, dir, out hit, maxDistance, layer))
