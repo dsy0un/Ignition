@@ -47,7 +47,7 @@ public class EnemyAnimation : MonoBehaviour
         }
     }
 
-    public void AttackAnim(string trgName)
+    public void SetTrigger(string trgName)
     {
         anim.SetTrigger(trgName);
     }
