@@ -45,6 +45,7 @@ public class EnemyMove : MonoBehaviour
         {
             nma.ResetPath();
             nma.velocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.FreezePosition;
         }
     }
 
