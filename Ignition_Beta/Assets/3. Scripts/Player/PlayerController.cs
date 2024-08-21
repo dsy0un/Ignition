@@ -43,4 +43,8 @@ public class PlayerController : MonoBehaviour, IHitAble
     {
         
     }
+    public void Respawn()
+    {
+
+    }
 }
