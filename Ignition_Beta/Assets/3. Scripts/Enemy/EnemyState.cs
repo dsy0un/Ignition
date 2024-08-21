@@ -16,14 +16,17 @@ public class EnemyState : MonoBehaviour, IHitAble
 
     public enum State{Idle, Attack, AttackWait}
     public State state = State.Idle;
-
-    private float attackDelay = 2.5f;
     private float currentTime;
-    private float attackDistance = 4.5f;
+    private float attackDelay = 2.5f;
+    private float attackDistance = 5f;
     private float distance;
     private bool isDead;
-    private bool isAttacking;
+    private bool inDistance;
+
     public bool IsDead {  get { return isDead; } }
+    public bool IsStuned { get; set; }
+    public bool IsAttack { get; set; }
+    public bool InDistance { get { return inDistance; } }
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         currentHP = maxHP;
         currentTime = attackDelay;
         isDead = false;
+        IsStuned = false;
 
         playerLayer = LayerMask.NameToLayer("Player");
         lookOutLayer = LayerMask.NameToLayer("LookOut");
@@ -61,10 +65,13 @@ public class EnemyState : MonoBehaviour, IHitAble
             if (distance <= attackDistance)
             {
                 state = State.Attack;
+                inDistance = true;
             }
             else
             {
                 state = State.Idle;
+                inDistance = false;
+                currentTime = attackDelay;
             }
         }
     }
@@ -88,7 +95,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     {
         if (currentTime >= attackDelay)
         {
-            isAttacking = true;
+            IsAttack = true;
             if (enemyMove.target.layer == playerLayer)
             {
                 enemyAnim.SetTrigger("Bite");
@@ -118,7 +125,7 @@ public class EnemyState : MonoBehaviour, IHitAble
             enemyAnim.SetTrigger("getHit");
         }
         currentHP -= dmg;
-        print(currentHP);
+        IsStuned = true;
         if (currentHP <= 0)
         {
             Die();
