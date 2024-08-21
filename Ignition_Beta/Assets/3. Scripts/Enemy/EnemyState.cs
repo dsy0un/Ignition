@@ -5,9 +5,11 @@ using UnityEngine;
 public class EnemyState : MonoBehaviour, IHitAble
 {
     EnemyAnimation enemyAnim;
+    EnemyMove enemyMove;
+
     private float maxHP = 100;
     private float currentHP;
-    private float atk = 10;
+    private float dmg = 10;
 
     private int playerLayer;
     private int lookOutLayer;
@@ -15,12 +17,13 @@ public class EnemyState : MonoBehaviour, IHitAble
     public enum State{Idle, Attack, AttackWait}
     public State state = State.Idle;
 
-    private EnemyMove enemyMove;
     private float attackDelay = 2.5f;
     private float currentTime;
     private float attackDistance = 4.5f;
+    private float distance;
     private bool isDead;
     private bool isAttacking;
+    public bool IsDead {  get { return isDead; } }
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +56,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         {
             yield return new WaitForSeconds(0.2f);
 
-            float distance = Vector3.Distance(enemyMove.target.transform.position, this.transform.position);
+            distance = Vector3.Distance(enemyMove.target.transform.position, this.transform.position);
 
             if (distance <= attackDistance)
             {
@@ -74,23 +77,32 @@ public class EnemyState : MonoBehaviour, IHitAble
                 case State.Idle:
                     break;
                 case State.Attack:
-                    if (currentTime >= attackDelay)
-                    {
-                        if (enemyMove.target.layer == playerLayer)
-                        {
-                            enemyAnim.AnimTrigger("Bite");
-                            isAttacking = true;
-                        }
-                        else if (enemyMove.target.layer == lookOutLayer)
-                        {
-                            enemyAnim.AnimTrigger("stinger");
-                            isAttacking = true;
-                        }
-                        currentTime = 0;
-                    }
+                    Attack();
                     break;
             }
             yield return null;
+        }
+    }
+
+    private void Attack()
+    {
+        if (currentTime >= attackDelay)
+        {
+            isAttacking = true;
+            if (enemyMove.target.layer == playerLayer)
+            {
+                enemyAnim.SetTrigger("Bite");
+                if (distance <= attackDistance)
+                {
+                    if (enemyMove.target.transform.TryGetComponent<IHitAble>(out var h))
+                        h.Hit(dmg,"");
+                }
+            }
+            else if (enemyMove.target.layer == lookOutLayer)
+            {
+                enemyAnim.SetTrigger("stinger");
+            }
+            currentTime = 0;
         }
     }
 
@@ -99,11 +111,11 @@ public class EnemyState : MonoBehaviour, IHitAble
         if (coliName == "WeakPoint")
         {
             dmg = 100;
-            enemyAnim.AnimTrigger("getHitHead");
+            enemyAnim.SetTrigger("getHitHead");
         }
         else
         {
-            enemyAnim.AnimTrigger("getHit");
+            enemyAnim.SetTrigger("getHit");
         }
         currentHP -= dmg;
         print(currentHP);

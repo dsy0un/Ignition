@@ -5,17 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float destructionDelay = 30f;
-    private float damage;
 
     private void Start()
     {
         Destroy(this.gameObject, destructionDelay);
-    }
-
-    private void FixedUpdate()
-    {
-        damage = Gun.Damage;
-        print(damage);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,7 +20,7 @@ public class Bullet : MonoBehaviour
             string coliName = collision.gameObject.name;
             if (collision.transform.root.TryGetComponent<IHitAble>(out var h))
             {
-                h.Hit(damage, coliName);
+                h.Hit(Gun.Damage, coliName);
                 Destroy(this.gameObject);
             }
         }

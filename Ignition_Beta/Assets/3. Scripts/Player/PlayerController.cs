@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHitAble
 {
     public SteamVR_Action_Vector2 input;
     public float speed = 1;
@@ -33,5 +33,14 @@ public class PlayerController : MonoBehaviour
         {
             ChangeLayerRecursively(child.gameObject, layer);
         }
+    }
+
+    public void Hit(float dmg, string coliName)
+    {
+
+    }
+    public void Die()
+    {
+        
     }
 }

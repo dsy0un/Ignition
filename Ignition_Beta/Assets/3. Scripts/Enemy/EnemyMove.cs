@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class EnemyMove : MonoBehaviour
 {
     Rigidbody rb;
+    EnemyState enemyState;
     public NavMeshSurface nms;
     public GameObject target;
 
@@ -17,13 +18,21 @@ public class EnemyMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         nma = GetComponent<NavMeshAgent>();
-        
+        enemyState = GetComponent<EnemyState>();
     }
 
     void Update()
     {
-        nma.SetDestination(target.transform.position);
-        speedtovelo = new Vector3(nma.velocity.x, 0, nma.velocity.z);
-        rb.velocity = speedtovelo;
+        if (!enemyState.IsDead)
+        {
+            nma.SetDestination(target.transform.position);
+            speedtovelo = new Vector3(nma.velocity.x, 0, nma.velocity.z);
+            rb.velocity = speedtovelo;
+        }
+        else
+        {
+            nma.ResetPath();
+            rb.velocity = Vector3.zero;
+        }
     }
 }
