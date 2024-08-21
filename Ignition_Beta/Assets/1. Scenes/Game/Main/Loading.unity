@@ -171,7 +171,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeSpeed: 2
   shakeAmount: 0.2
+  vibrate: 1
   port: {fileID: 2137173765}
+  hapticAction:
+    actionPath: /actions/default/out/Haptic
+    needsReinit: 0
 --- !u!1 &390682782
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,17 +1001,17 @@ PrefabInstance:
     - target: {fileID: 6586739952974585778, guid: df6f456cf4e4eb143ba324fbf940e281,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.49913
+      value: 0.49999997
       objectReference: {fileID: 0}
     - target: {fileID: 6586739952974585778, guid: df6f456cf4e4eb143ba324fbf940e281,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.49913
+      value: 0.49999997
       objectReference: {fileID: 0}
     - target: {fileID: 6586739952974585778, guid: df6f456cf4e4eb143ba324fbf940e281,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.49913
+      value: 0.49999997
       objectReference: {fileID: 0}
     - target: {fileID: 6586739952974585778, guid: df6f456cf4e4eb143ba324fbf940e281,
         type: 3}
@@ -1058,6 +1062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586739952974585778, guid: df6f456cf4e4eb143ba324fbf940e281,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6889574784561385529, guid: df6f456cf4e4eb143ba324fbf940e281,
         type: 3}
@@ -1282,7 +1291,7 @@ PrefabInstance:
     - target: {fileID: 2603879544590673428, guid: 01e32efd818c25042b8f1e5eca02ba33,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.07
+      value: 1.985
       objectReference: {fileID: 0}
     - target: {fileID: 2603879544590673428, guid: 01e32efd818c25042b8f1e5eca02ba33,
         type: 3}
