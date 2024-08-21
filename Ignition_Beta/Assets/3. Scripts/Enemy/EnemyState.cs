@@ -21,7 +21,6 @@ public class EnemyState : MonoBehaviour, IHitAble
     private float attackDelay = 2.5f;
     private float attackDistance = 5f;
     private float distance;
-    private float RayDistance = 8;
     private bool isDead;
     private bool inDistance;
 
@@ -50,7 +49,6 @@ public class EnemyState : MonoBehaviour, IHitAble
     // Update is called once per frame
     void FixedUpdate()
     {
-        print(currentHP);
         if (currentTime <= attackDelay)
         {
             currentTime += Time.deltaTime;
@@ -59,8 +57,6 @@ public class EnemyState : MonoBehaviour, IHitAble
 
     IEnumerator CheckState()
     {
-        RaycastHit hit;
-
         while (!isDead)
         {
             yield return new WaitForSeconds(0.2f);
@@ -69,12 +65,8 @@ public class EnemyState : MonoBehaviour, IHitAble
 
             if (distance <= attackDistance)
             {
-                Debug.DrawRay(transform.position, transform.forward * RayDistance, Color.red, 0.3f);
-                if (Physics.Raycast(new Vector3(0, 1, 0), transform.forward, out hit, RayDistance, enemyMove.target.layer))
-                {
-                    state = State.Attack;
-                    inDistance = true;
-                }
+                state = State.Attack;
+                inDistance = true;
             }
             else
             {
@@ -145,5 +137,15 @@ public class EnemyState : MonoBehaviour, IHitAble
     {
         isDead = true;
         enemyAnim.isDie(true);
+        currentHP = maxHP;
+    }
+
+    public void Respawn()
+    {
+        isDead = false;
+        enemyAnim.isDie(false);
+        gameObject.SetActive(true);
+        StartCoroutine(this.CheckState());
+        StartCoroutine(this.StateForAction());
     }
 }

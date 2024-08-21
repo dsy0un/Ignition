@@ -18,6 +18,7 @@ public class EnemyMove : MonoBehaviour
     private float atkTime = 1f;
     private float curStunTime;
     private float curAtkTime;
+    private float hideBody = 4;
 
     void Start()
     {
@@ -43,9 +44,7 @@ public class EnemyMove : MonoBehaviour
         }
         else
         {
-            nma.ResetPath();
-            nma.velocity = Vector3.zero;
-            rb.constraints = RigidbodyConstraints.FreezePosition;
+            StartCoroutine(Die());
         }
     }
 
@@ -71,5 +70,15 @@ public class EnemyMove : MonoBehaviour
             enemyState.IsAttack = false;
             curAtkTime = 0;
         }
+    }
+
+    IEnumerator Die()
+    {
+        nma.ResetPath();
+        nma.velocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        yield return new WaitForSeconds(hideBody);
+        gameObject.SetActive(false);
+        rb.constraints = RigidbodyConstraints.None;
     }
 }
