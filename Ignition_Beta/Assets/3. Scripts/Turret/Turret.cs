@@ -13,26 +13,32 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private Transform turretHead;
     [SerializeField]
-    private Transform gunPointR;
+    private Transform turretHeadPivot;
     [SerializeField]
     private Transform gunPointL;
+    [SerializeField]
+    private Transform gunPointR;
+    [SerializeField]
+    private List<Transform> points;
 
     public Collider[] colliders; //나중에 private으로 변경하기
     public Collider look_enemy; // ''
 
-    [SerializeField]
+    private float lookDelay = 3f;
 
+    private void Start()
+    {
+        StartCoroutine(GunFire());
+    }
 
     void Update()
     {
         LookEnemy();
-        GunFire();
 
         colliders = Physics.OverlapSphere(transform.position, radius, layer);
 
         if (colliders.Length == 1)
             look_enemy = colliders[0];
-
         else if (colliders.Length > 0)
         {
             foreach (Collider col in colliders)
@@ -58,38 +64,60 @@ public class Turret : MonoBehaviour
         {
             look_enemy = colliders[0];
 
-            Vector3 enemyPosition = new Vector3(look_enemy.transform.position.x, look_enemy.transform.position.y - .75f, look_enemy.transform.position.z);
+            Vector3 enemyPosition = look_enemy.transform.position;
 
-            Vector3 vector = enemyPosition - transform.position;
+            Vector3 vector = enemyPosition - turretHeadPivot.position;
 
             Quaternion turret_Y = transform.rotation;
             Quaternion turret_X = transform.rotation;
             turret_Y.y = Quaternion.LookRotation(vector).normalized.y;
             turret_X.x = Quaternion.LookRotation(vector).normalized.x;
-            transform.rotation = turret_Y;
-            turretHead.transform.rotation = turret_X;
+            transform.rotation = Quaternion.Lerp(transform.rotation, turret_Y, Time.deltaTime * lookDelay);
+            turretHead.rotation = Quaternion.Lerp(turretHead.rotation, turret_X, Time.deltaTime * lookDelay);
+            Quaternion headRotation = turretHead.rotation;
+            headRotation.x = Mathf.Clamp(turretHead.rotation.x, -45f, 45f);
         }
     }
 
-    void GunFire()
+    IEnumerator GunFire()
     {
-        if (colliders.Length > 0)
+        while (true)
         {
-            RaycastHit hit;
-            float maxDistance = 10f;
-            Vector3 dir = new Vector3(colliders[0].transform.position.x, colliders[0].transform.position.y - .75f, colliders[0].transform.position.z);
-
-            Debug.DrawRay(gunPointR.position, dir * maxDistance, Color.red);
-            if (Physics.Raycast(gunPointR.position, dir, out hit, maxDistance, layer))
+            if (look_enemy != null && colliders.Length > 0)
             {
-                Debug.Log("충돌");
+                look_enemy = colliders[0];
+
+                RaycastHit hit;
+                float maxDistance = 10f;
+                Vector3 forward = turretHead.forward;
+                Vector3 dir = new Vector3(look_enemy.transform.position.x, look_enemy.transform.position.y - .75f, look_enemy.transform.position.z);
+
+                for (int i = 0; i < points.Count; i++)
+                {
+                    if (points[i].name == "gunpoint_L" || points[i].name == "Trail") continue;
+                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
+                    if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
+                    {
+                        Debug.Log("충돌");
+                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(10f * Time.deltaTime * points[i].forward);
+                        yield return new WaitForSeconds(5f);
+                    }
+                }
+
+                for (int i = 0; i < points.Count; i++)
+                {
+                    if (points[i].name == "gunpoint_R" || points[i].name == "Trail") continue;
+                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
+                    if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
+                    {
+                        Debug.Log("충돌");
+                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(10f * Time.deltaTime * points[i].forward);
+                        yield return new WaitForSeconds(5f);
+                    }
+                }
             }
 
-            Debug.DrawRay(gunPointL.position, dir * maxDistance, Color.red);
-            if (Physics.Raycast(gunPointL.position, dir, out hit, maxDistance, layer))
-            {
-                Debug.Log("충돌");
-            }
+            yield return null;
         }
     }
 
