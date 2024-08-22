@@ -19,13 +19,13 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private Transform gunPointR;
     [SerializeField]
-    private List<Transform> points;
+    private Transform[] points;
 
     public Collider[] colliders; //나중에 private으로 변경하기
     public Collider look_enemy; // ''
 
     private float lookDelay = 3f;
-    private float shotSpeed = 50f;
+    private float shotSpeed = 1f;
 
     private void Start()
     {
@@ -88,48 +88,92 @@ public class Turret : MonoBehaviour
             {
                 look_enemy = colliders[0];
 
-                RaycastHit hit;
-                float maxDistance = 10f;
+                RaycastHit[] hits;
+                float maxDistance = radius;
                 Vector3 forward = turretHead.forward;
-                Vector3 dir = new Vector3(look_enemy.transform.position.x, look_enemy.transform.position.y - .75f, look_enemy.transform.position.z);
+                int layers = (1 << LayerMask.NameToLayer("EnemyCollision")) + (1 << LayerMask.NameToLayer("Ground"));
 
-                for (int i = 0; i < points.Count; i++)
+                for (int i = 0; i < points.Length; i++) 
                 {
-                    if (points[i].name == "gunpoint_L" || points[i].name == "Trail") continue;
-                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
-                    if (Physics.Raycast(points[i].position, forward, out hit, maxDistance))
+                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.green);
+                    hits = Physics.RaycastAll(points[i].position, forward, maxDistance, layers);
+                    foreach (RaycastHit hit in hits)
                     {
-                        Debug.Log("충돌");
-                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
-                        if (hit.transform.gameObject.layer == LayerMask.NameToLayer("EnemyCollision"))
-                        {
-                            print(1);
-                            if (hit.transform.root.TryGetComponent<IHitAble>(out var h))
-                            {
-                                float disSec = Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed * Time.deltaTime;
-                                print(disSec);
-
-                            }
-                        }
-                        // yield return new WaitForSeconds(1f);
+                        float hitTime = Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed;
+                        StartCoroutine(GiveDamage(hit, hitTime));
                     }
                 }
 
-                for (int i = 0; i < points.Count; i++)
-                {
-                    if (points[i].name == "gunpoint_R" || points[i].name == "Trail") continue;
-                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
-                    if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
-                    {
-                        Debug.Log("충돌");
-                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
-                        // yield return new WaitForSeconds(5f);
-                    }
-                }
             }
+
             yield return null;
         }
     }
+
+    IEnumerator GiveDamage(RaycastHit hit, float hitTime)
+    {
+        yield return new WaitForSeconds(hitTime);
+        if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy") && hit.transform.TryGetComponent<IHitAble>(out var h))
+        {
+            h.Die();
+        }
+        else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+
+        }
+
+    }
+
+    //IEnumerator GunFire()
+    //{
+    //    while (true)
+    //    {
+    //        if (look_enemy != null && colliders.Length > 0)
+    //        {
+    //            look_enemy = colliders[0];
+
+    //            RaycastHit hit;
+    //            float maxDistance = 10f;
+    //            Vector3 forward = turretHead.forward;
+    //            Vector3 dir = new Vector3(look_enemy.transform.position.x, look_enemy.transform.position.y - .75f, look_enemy.transform.position.z);
+
+    //            for (int i = 0; i < points.Count; i++)
+    //            {
+    //                if (points[i].name == "gunpoint_L" || points[i].name == "Trail") continue;
+    //                Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
+    //                if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
+    //                {
+    //                    Debug.Log("충돌");
+    //                    points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
+    //                    print(hit.transform.gameObject.layer + " " + LayerMask.NameToLayer("EnemyCollision"));
+    //                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("EnemyCollision"))
+    //                    {
+    //                        if (hit.transform.root.TryGetComponent<IHitAble>(out var h))
+    //                        {
+    //                            float disSec = Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed * Time.deltaTime;
+    //                            print(disSec);
+
+    //                        }
+    //                    }
+    //                    // yield return new WaitForSeconds(1f);
+    //                }
+    //            }
+
+    //            for (int i = 0; i < points.Count; i++)
+    //            {
+    //                if (points[i].name == "gunpoint_R" || points[i].name == "Trail") continue;
+    //                Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
+    //                if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
+    //                {
+    //                    Debug.Log("충돌");
+    //                    points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
+    //                    // yield return new WaitForSeconds(5f);
+    //                }
+    //            }
+    //        }
+    //        yield return null;
+    //    }
+    //}
 
     private void OnDrawGizmos() // 테스트 후 지워도 됨
     {
