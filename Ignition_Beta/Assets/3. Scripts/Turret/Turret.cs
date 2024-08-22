@@ -99,8 +99,15 @@ public class Turret : MonoBehaviour
                     if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
                     {
                         Debug.Log("충돌");
-                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(10f * Time.deltaTime * points[i].forward);
-                        yield return new WaitForSeconds(5f);
+                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * 50f * Time.deltaTime);
+                        if (hit.transform.CompareTag("Enemy"))
+                        {
+                            if (hit.transform.TryGetComponent<IHitAble>(out var h))
+                            {
+                                Destroy(hit.transform.gameObject);
+                            }
+                        }
+                        // yield return new WaitForSeconds(1f);
                     }
                 }
 
@@ -111,12 +118,11 @@ public class Turret : MonoBehaviour
                     if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
                     {
                         Debug.Log("충돌");
-                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(10f * Time.deltaTime * points[i].forward);
-                        yield return new WaitForSeconds(5f);
+                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * 50f * Time.deltaTime);
+                        // yield return new WaitForSeconds(5f);
                     }
                 }
             }
-
             yield return null;
         }
     }
