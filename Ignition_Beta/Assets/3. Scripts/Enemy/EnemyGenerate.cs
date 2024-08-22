@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class EnemyGenerate : MonoBehaviour
@@ -13,9 +14,23 @@ public class EnemyGenerate : MonoBehaviour
     private int genMaxCount; // Enemy Max Generate
     [SerializeField]
     private GameObject enemyPrefab; // Enemy Prefab, NO UNPACK ENEMY GAMEOBJECT
+    [SerializeField]
+    private GameObject target;
+    [SerializeField]
+    private NavMeshSurface nms;
+
+    private List<GameObject> pools = new(); // NO MODIFICATION
 
     private void Start()
     {
+        for (int i = 0; i < genMaxCount; i++)
+        {
+            GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity);
+            spawn.GetComponent<EnemyMove>().target = target;
+            spawn.GetComponent<EnemyMove>().nms = nms;
+            spawn.SetActive(false);
+            pools.Add(spawn);
+        }
         StartCoroutine(RandomRespawn());
     }
 
@@ -62,11 +77,10 @@ public class EnemyGenerate : MonoBehaviour
 
     private IEnumerator RandomRespawn()
     {
-        while (genMaxCount > 0)
+        for (int i = 0; i < pools.Count; i++)
         {
+            if (!pools[i].activeInHierarchy) pools[i].SetActive(true);
             yield return new WaitForSeconds(genCooldown);
-            GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity);
-            genMaxCount--;
         }
     }
 }
