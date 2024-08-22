@@ -680,6 +680,7 @@ GameObject:
   - component: {fileID: 3210093280868171472}
   - component: {fileID: 2846828607191718150}
   - component: {fileID: 3749236222634720084}
+  - component: {fileID: -2266733937934499967}
   m_Layer: 10
   m_Name: Enemy(capsule&AI)+
   m_TagString: Untagged
@@ -794,6 +795,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!205 &-2266733937934499967
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566799274152111449}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.00013059378, y: 0.8949862, z: -0.053195477}
+  m_Size: 1.6
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.01
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8520014964923526738}
+    - renderer: {fileID: 1626625106595084783}
+    - renderer: {fileID: 204269926276048773}
+  m_Enabled: 1
 --- !u!1 &1791862374429863551
 GameObject:
   m_ObjectHideFlags: 0
