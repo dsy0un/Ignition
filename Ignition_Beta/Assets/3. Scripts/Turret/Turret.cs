@@ -25,6 +25,7 @@ public class Turret : MonoBehaviour
     public Collider look_enemy; // ''
 
     private float lookDelay = 3f;
+    private float shotSpeed = 50f;
 
     private void Start()
     {
@@ -96,15 +97,18 @@ public class Turret : MonoBehaviour
                 {
                     if (points[i].name == "gunpoint_L" || points[i].name == "Trail") continue;
                     Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
-                    if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
+                    if (Physics.Raycast(points[i].position, forward, out hit, maxDistance))
                     {
                         Debug.Log("충돌");
-                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * 50f * Time.deltaTime);
-                        if (hit.transform.CompareTag("Enemy"))
+                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
+                        if (hit.transform.gameObject.layer == LayerMask.NameToLayer("EnemyCollision"))
                         {
-                            if (hit.transform.TryGetComponent<IHitAble>(out var h))
+                            print(1);
+                            if (hit.transform.root.TryGetComponent<IHitAble>(out var h))
                             {
-                                Destroy(hit.transform.gameObject);
+                                float disSec = Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed * Time.deltaTime;
+                                print(disSec);
+
                             }
                         }
                         // yield return new WaitForSeconds(1f);
@@ -118,7 +122,7 @@ public class Turret : MonoBehaviour
                     if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
                     {
                         Debug.Log("충돌");
-                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * 50f * Time.deltaTime);
+                        points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
                         // yield return new WaitForSeconds(5f);
                     }
                 }
