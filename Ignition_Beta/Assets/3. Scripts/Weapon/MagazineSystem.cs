@@ -24,7 +24,7 @@ public class MagazineSystem : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (isLoad)
             rb.useGravity = false;
@@ -67,6 +67,26 @@ public class MagazineSystem : MonoBehaviour
         {
             transform.localPosition = new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
             transform.localEulerAngles = new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (interactable.attachedToHand != null)
+        {
+            if (other.tag == "Socket")
+            {
+                rb.constraints = RigidbodyConstraints.None;
+                transform.GetComponentInParent<Socket>().IsMagazine = false;
+                transform.parent = null;
+                isLoad = false;
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    Transform child = transform.GetChild(i);
+                    Collider childCollider = child.GetComponent<Collider>();
+                    childCollider.isTrigger = false;
+                }
+            }
         }
     }
 
