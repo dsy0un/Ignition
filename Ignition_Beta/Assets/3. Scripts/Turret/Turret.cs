@@ -27,7 +27,8 @@ public class Turret : MonoBehaviour
     private Collider look_enemy;
 
     private float lookDelay = 3f;
-    public static float shotSpeed = 20f;
+    public static float shotSpeed = 70f;
+    public static float hitTime;
 
     private void Start()
     {
@@ -97,6 +98,7 @@ public class Turret : MonoBehaviour
 
     IEnumerator GunFire()
     {
+        yield return new WaitForSeconds(3f);
         while (true)
         {
             if (look_enemy != null && colliders.Length > 0)
@@ -111,18 +113,18 @@ public class Turret : MonoBehaviour
                 {
                     Vector3 forward = turretHeadPivot.forward;
 
-                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.red, 1f);
+                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.black, 1f);
                     hits = Physics.RaycastAll(points[i].position, forward, maxDistance, layers);
-                    
+
+                    Instantiate(turretBullet, points[i].position, points[i].rotation);
+
                     foreach (RaycastHit hit in hits)
                     {
-                        float hitTime = Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed;
+                        hitTime = (Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed);
                         StartCoroutine(GiveDamage(hit, hitTime));
                     }
 
-                    Instantiate(turretBullet, points[i].position, points[i].rotation, points[i]);
-
-                    yield return new WaitForSeconds(5f);
+                    yield return new WaitForSeconds(0.3f);
                 }
             }
             yield return null;
@@ -131,7 +133,6 @@ public class Turret : MonoBehaviour
 
     IEnumerator GiveDamage(RaycastHit hit, float hitTime)
     {
-        Debug.Log(hitTime);
         yield return new WaitForSeconds(hitTime);
         if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy") && hit.transform.TryGetComponent<IHitAble>(out var h))
         {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2261066655072972703}
   - component: {fileID: 8850796306419858978}
   - component: {fileID: -1232474005328265803}
+  - component: {fileID: 726001112624975931}
   m_Layer: 0
   m_Name: TurretBullet
   m_TagString: Untagged
@@ -75,7 +76,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -85,7 +86,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.34074402
+        value: 0.3
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -94,7 +95,7 @@ TrailRenderer:
         outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 0.37036896
+        value: 0.3
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -158,3 +159,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdbc34ade9eea684894a0a066c3aa4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Speed: 0
+--- !u!54 &726001112624975931
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864875331787277910}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
