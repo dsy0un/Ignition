@@ -20,12 +20,14 @@ public class Turret : MonoBehaviour
     private Transform gunPointR;
     [SerializeField]
     private Transform[] points;
+    [SerializeField]
+    private GameObject turretBullet;
 
-    public Collider[] colliders; //나중에 private으로 변경하기
-    public Collider look_enemy; // ''
+    private Collider[] colliders;
+    private Collider look_enemy;
 
     private float lookDelay = 3f;
-    private float shotSpeed = 1f;
+    public static float shotSpeed = 20f;
 
     private void Start()
     {
@@ -69,14 +71,27 @@ public class Turret : MonoBehaviour
 
             Vector3 vector = enemyPosition - turretHeadPivot.position;
 
-            Quaternion turret_Y = transform.rotation;
-            Quaternion turret_X = transform.rotation;
-            turret_Y.y = Quaternion.LookRotation(vector).normalized.y;
-            turret_X.x = Quaternion.LookRotation(vector).normalized.x;
-            transform.rotation = Quaternion.Lerp(transform.rotation, turret_Y, Time.deltaTime * lookDelay);
-            turretHead.rotation = Quaternion.Lerp(turretHead.rotation, turret_X, Time.deltaTime * lookDelay);
-            Quaternion headRotation = turretHead.rotation;
-            headRotation.x = Mathf.Clamp(turretHead.rotation.x, -45f, 45f);
+            Quaternion currentRotation = transform.rotation;
+            Quaternion targetRotation = Quaternion.LookRotation(vector);
+            Quaternion turret_Y = Quaternion.Euler(currentRotation.eulerAngles.x, targetRotation.eulerAngles.y, currentRotation.eulerAngles.z);
+            Quaternion turret_X = Quaternion.Euler(targetRotation.eulerAngles.x, currentRotation.eulerAngles.y, currentRotation.eulerAngles.z);
+            transform.rotation = Quaternion.Lerp(transform.rotation, turret_Y, lookDelay * Time.deltaTime);
+            turretHead.rotation = Quaternion.Lerp(turretHead.rotation, turret_X, lookDelay * Time.deltaTime);
+
+            //float turret_Y = transform.rotation.y;
+            //Quaternion rot_Y = transform.rotation;
+            //turret_Y = Quaternion.LookRotation(vector).normalized.y;
+            //rot_Y.eulerAngles = new Vector3(0,Mathf.Lerp(transform.rotation.y, turret_Y, lookDelay * Time.deltaTime),0);
+
+
+            //Quaternion turret_Y = transform.rotation;
+            //Quaternion turret_X = transform.rotation;
+            //turret_Y.y = Quaternion.LookRotation(vector).normalized.y;
+            //turret_X.x = Quaternion.LookRotation(vector).normalized.x;
+            //transform.rotation = Quaternion.Lerp(transform.rotation, turret_Y, Time.deltaTime * lookDelay);
+            //turretHead.rotation = Quaternion.Lerp(turretHead.rotation, turret_X, Time.deltaTime * lookDelay);
+            //Quaternion headRotation = turretHead.rotation;
+            //headRotation.x = Mathf.Clamp(turretHead.rotation.x, -45f, 45f);
         }
     }
 
@@ -90,32 +105,38 @@ public class Turret : MonoBehaviour
 
                 RaycastHit[] hits;
                 float maxDistance = radius;
-                Vector3 forward = turretHead.forward;
                 int layers = (1 << LayerMask.NameToLayer("EnemyCollision")) + (1 << LayerMask.NameToLayer("Ground"));
 
                 for (int i = 0; i < points.Length; i++) 
                 {
-                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.green);
+                    Vector3 forward = turretHeadPivot.forward;
+
+                    Debug.DrawRay(points[i].position, forward * maxDistance, Color.red, 1f);
                     hits = Physics.RaycastAll(points[i].position, forward, maxDistance, layers);
+                    
                     foreach (RaycastHit hit in hits)
                     {
                         float hitTime = Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed;
                         StartCoroutine(GiveDamage(hit, hitTime));
                     }
+
+                    Instantiate(turretBullet, points[i].position, points[i].rotation, points[i]);
+
+                    yield return new WaitForSeconds(5f);
                 }
-
             }
-
             yield return null;
         }
     }
 
     IEnumerator GiveDamage(RaycastHit hit, float hitTime)
     {
+        Debug.Log(hitTime);
         yield return new WaitForSeconds(hitTime);
         if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy") && hit.transform.TryGetComponent<IHitAble>(out var h))
         {
             h.Die();
+            hit.transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
