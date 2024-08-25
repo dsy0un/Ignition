@@ -27,8 +27,14 @@ public class MagazineSystem : MonoBehaviour
     private void FixedUpdate()
     {
         if (isLoad)
+        {
             rb.useGravity = false;
-        else if(!isLoad)
+            transform.localPosition = 
+                new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
+            transform.localEulerAngles = 
+                new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
+        }
+        else if (!isLoad)
             rb.useGravity = true;
         gunObject = transform.root.gameObject;
         if (gunObject.GetComponent<Gun>() != null && gunObject.GetComponent<Gun>().changeMagazine)
@@ -46,27 +52,20 @@ public class MagazineSystem : MonoBehaviour
             {
                 magazinePoint = other.transform.GetChild(0);
                 isLoad = true;
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    Transform child = transform.GetChild(i);
-                    Collider childCollider = child.GetComponent<Collider>();
-                    childCollider.isTrigger = true;
-                }
+                //for (int i = 0; i < transform.childCount; i++)
+                //{
+                //    Transform child = transform.GetChild(i);
+                //    Collider childCollider = child.GetComponent<Collider>();
+                //    childCollider.isTrigger = true;
+                //}
                 other.GetComponent<Socket>().IsMagazine = true;
                 transform.parent = magazinePoint;
-                transform.localPosition = new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
+                transform.localPosition = 
+                    new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
                 if (interactable.attachedToHand != null)
                     interactable.attachedToHand.DetachObject(gameObject);
+                interactable.enabled = false;
             }
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Socket" && isLoad)
-        {
-            transform.localPosition = new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
-            transform.localEulerAngles = new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
         }
     }
 
@@ -76,16 +75,7 @@ public class MagazineSystem : MonoBehaviour
         {
             if (other.tag == "Socket")
             {
-                rb.constraints = RigidbodyConstraints.None;
-                transform.GetComponentInParent<Socket>().IsMagazine = false;
-                transform.parent = null;
-                isLoad = false;
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    Transform child = transform.GetChild(i);
-                    Collider childCollider = child.GetComponent<Collider>();
-                    childCollider.isTrigger = false;
-                }
+                ChangeMagazine();
             }
         }
     }
@@ -94,17 +84,19 @@ public class MagazineSystem : MonoBehaviour
     {
         if (isLoad)
         {
+            interactable.enabled = true;
             rb.AddForce(-transform.forward * 100);
             rb.constraints = RigidbodyConstraints.None;
             transform.GetComponentInParent<Socket>().IsMagazine = false;
             transform.parent = null;
             isLoad = false;
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                Transform child = transform.GetChild(i);
-                Collider childCollider = child.GetComponent<Collider>();
-                childCollider.isTrigger = false;
-            }
+            transform.localScale = Vector3.one;
+            //for (int i = 0; i < transform.childCount; i++)
+            //{
+            //    Transform child = transform.GetChild(i);
+            //    Collider childCollider = child.GetComponent<Collider>();
+            //    childCollider.isTrigger = false;
+            //}
         }
     }
 }

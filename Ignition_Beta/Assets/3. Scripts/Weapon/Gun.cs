@@ -30,7 +30,6 @@ public class Gun : MonoBehaviour
     private Vector3 recoilOffset;
     private Quaternion recoilRotation;
 
-    public float bulletLifeTime = 30f;
     public float shootingSpeed = 1f;
     public float recoil = 5;
     private int fireMode = 1;
