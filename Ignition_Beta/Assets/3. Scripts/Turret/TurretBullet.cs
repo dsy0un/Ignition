@@ -9,7 +9,7 @@ public class TurretBullet : MonoBehaviour
     void Update()
     {
         destroyTime += Time.deltaTime;
-        if (destroyTime >= 10) Destroy(gameObject);
+        if (destroyTime >= 7) Destroy(gameObject);
         else transform.Translate((transform.forward * Turret.shotSpeed) * Time.deltaTime, Space.World);
 
     }
