@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using Valve.VR.InteractionSystem;
+using UnityEngine.UI;
 
 public class MagazineSystem : MonoBehaviour
 {
-    [SerializeField] private int bulletCount = 20;
-    public int BulletCount
+    [SerializeField] private float maxBullet = 20;
+    private float bulletCount;
+    public float BulletCount
     {
         get => bulletCount;
         set => bulletCount = value;
@@ -18,15 +20,17 @@ public class MagazineSystem : MonoBehaviour
     private Transform magazinePoint;
     private bool isLoad;
     private GameObject gunObject;
+    public Image[] bulletImage;
 
     private void Start()
     {
+        bulletCount = maxBullet;
         interactable = GetComponent<Interactable>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (isLoad)
         {
@@ -35,6 +39,8 @@ public class MagazineSystem : MonoBehaviour
                 new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
             transform.localEulerAngles = 
                 new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
+            if (interactable.attachedToHand != null)
+                interactable.attachedToHand.DetachObject(gameObject);
         }
         else if (!isLoad)
             rb.useGravity = true;
@@ -44,6 +50,8 @@ public class MagazineSystem : MonoBehaviour
             gunObject.GetComponent<Gun>().changeMagazine = false;
             ChangeMagazine();
         }
+        bulletImage[0].fillAmount = bulletCount / maxBullet;
+        bulletImage[1].fillAmount = bulletCount / maxBullet;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,6 +60,7 @@ public class MagazineSystem : MonoBehaviour
         {
             if (other.tag == "Socket" && !isLoad && other.GetComponent<Socket>().IsMagazine == false)
             {
+                rb.useGravity = false;
                 magazinePoint = other.transform.GetChild(0);
                 isLoad = true;
                 col.isTrigger = true;
@@ -67,18 +76,6 @@ public class MagazineSystem : MonoBehaviour
                     new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
                 if (interactable.attachedToHand != null)
                     interactable.attachedToHand.DetachObject(gameObject);
-                interactable.enabled = false;
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (interactable.attachedToHand != null)
-        {
-            if (other.tag == "Socket")
-            {
-                ChangeMagazine();
             }
         }
     }
@@ -87,7 +84,7 @@ public class MagazineSystem : MonoBehaviour
     {
         if (isLoad)
         {
-            interactable.enabled = true;
+            rb.useGravity = true;
             rb.AddForce(-transform.forward * 100);
             rb.constraints = RigidbodyConstraints.None;
             transform.GetComponentInParent<Socket>().IsMagazine = false;
