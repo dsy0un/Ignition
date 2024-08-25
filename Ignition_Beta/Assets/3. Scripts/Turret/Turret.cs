@@ -23,11 +23,11 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private GameObject turretBullet;
 
-    private Collider[] colliders;
-    private Collider look_enemy;
+    public Collider[] colliders;
+    public Collider look_enemy;
 
     private float lookDelay = 3f;
-    public static float shotSpeed = 70f;
+    public static float shotSpeed = 100f;
     public static float hitTime;
 
     private void Start()
@@ -38,7 +38,11 @@ public class Turret : MonoBehaviour
     void Update()
     {
         LookEnemy();
+        StartCoroutine(DetectEnemy());
+    }
 
+    IEnumerator DetectEnemy()
+    {
         colliders = Physics.OverlapSphere(transform.position, radius, layer);
 
         if (colliders.Length == 1)
@@ -55,11 +59,14 @@ public class Turret : MonoBehaviour
                         {
                             colliders[i] = colliders[0];
                             colliders[0] = col;
+                            look_enemy = colliders[0];
                         }
                     }
                 }
             }
         }
+
+        yield return null;
     }
 
     void LookEnemy()
@@ -124,7 +131,7 @@ public class Turret : MonoBehaviour
                         StartCoroutine(GiveDamage(hit, hitTime));
                     }
 
-                    yield return new WaitForSeconds(0.3f);
+                    yield return new WaitForSeconds(0.1f);
                 }
             }
             yield return null;
@@ -137,7 +144,6 @@ public class Turret : MonoBehaviour
         if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy") && hit.transform.TryGetComponent<IHitAble>(out var h))
         {
             h.Die();
-            hit.transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
