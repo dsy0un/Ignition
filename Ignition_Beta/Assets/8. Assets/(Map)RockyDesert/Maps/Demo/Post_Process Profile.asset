@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   type:
     m_OverrideState: 1
     m_Value: 0
@@ -132,12 +132,12 @@ MonoBehaviour:
     m_Value: 52
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.97659975, b: 0.9575472, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: -2
   saturation:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 12
 --- !u!114 &-3020831812767619094
 MonoBehaviour:
@@ -151,10 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfbdbb87d3286943a057f7791b43141, type: 3}
   m_Name: ChannelMixer
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   redOutRedIn:
     m_OverrideState: 1
-    m_Value: 113
+    m_Value: 105
   redOutGreenIn:
     m_OverrideState: 0
     m_Value: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   - {fileID: -8768754383790645601}
   - {fileID: -5976856443563039091}
   - {fileID: -3020831812767619094}
+  - {fileID: 3845274864560426299}
 --- !u!114 &1892257915317109778
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -231,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
     m_Value: {x: 0.9859224, y: 1, z: 0.96429956, w: 0}
@@ -253,6 +254,28 @@ MonoBehaviour:
   highlightsEnd:
     m_OverrideState: 0
     m_Value: 1
+--- !u!114 &3845274864560426299
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70afe9e12c7a7ed47911bb608a23a8ff, type: 3}
+  m_Name: SplitToning
+  m_EditorClassIdentifier: 
+  active: 0
+  shadows:
+    m_OverrideState: 1
+    m_Value: {r: 0.84276724, g: 0.84276724, b: 0.84276724, a: 1}
+  highlights:
+    m_OverrideState: 1
+    m_Value: {r: 0.32704395, g: 0.32704395, b: 0.32704395, a: 1}
+  balance:
+    m_OverrideState: 1
+    m_Value: 8
 --- !u!114 &8353085594877383452
 MonoBehaviour:
   m_ObjectHideFlags: 3

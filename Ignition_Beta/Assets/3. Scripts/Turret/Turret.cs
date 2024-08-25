@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
@@ -15,16 +16,14 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private Transform turretHeadPivot;
     [SerializeField]
-    private Transform gunPointL;
-    [SerializeField]
-    private Transform gunPointR;
-    [SerializeField]
     private Transform[] points;
     [SerializeField]
     private GameObject turretBullet;
+    [SerializeField]
+    private GameObject groundEffect;
 
-    public Collider[] colliders;
-    public Collider look_enemy;
+    private Collider[] colliders;
+    private Collider look_enemy;
 
     private float lookDelay = 3f;
     public static float shotSpeed = 100f;
@@ -127,7 +126,7 @@ public class Turret : MonoBehaviour
 
                     foreach (RaycastHit hit in hits)
                     {
-                        hitTime = (Vector3.Distance(hit.transform.position, points[i].position) / shotSpeed);
+                        hitTime = (Vector3.Distance(hit.point, points[i].position) / shotSpeed);
                         StartCoroutine(GiveDamage(hit, hitTime));
                     }
 
@@ -143,11 +142,13 @@ public class Turret : MonoBehaviour
         yield return new WaitForSeconds(hitTime);
         if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy") && hit.transform.TryGetComponent<IHitAble>(out var h))
         {
+            //Debug.Log(hitTime + "아 적이요");
             h.Die();
         }
         else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-
+            //Debug.Log(hitTime + "아 땅이요");
+            Instantiate(groundEffect, hit.point, Quaternion.identity); 
         }
 
     }

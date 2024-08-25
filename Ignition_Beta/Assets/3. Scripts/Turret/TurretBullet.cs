@@ -9,7 +9,7 @@ public class TurretBullet : MonoBehaviour
     void Update()
     {
         destroyTime += Time.deltaTime;
-        if (destroyTime >= 7) Destroy(gameObject);
+        if (destroyTime >= 5) Destroy(gameObject);
         else transform.Translate((transform.forward * Turret.shotSpeed) * Time.deltaTime, Space.World);
 
     }
@@ -20,8 +20,8 @@ public class TurretBullet : MonoBehaviour
     void FixedUpdate()
     {
         m_Speed = GetSpeed();
-        Debug.Log(string.Format("{0:00.00} m/s", m_Speed));
-        Debug.Log(string.Format("{0:00.00} km/h", m_Speed * 3.6f));
+        //Debug.Log(string.Format("{0:00.00} m/s", m_Speed));
+        //Debug.Log(string.Format("{0:00.00} km/h", m_Speed * 3.6f));
     }
 
     float GetSpeed()
