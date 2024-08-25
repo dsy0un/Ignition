@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 201144516}
   - component: {fileID: 201144515}
   - component: {fileID: 201144514}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1715,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 7708338876918823597, guid: d04f51fb3a23ffa4aa500efa5059de8c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.8800015
+      value: -12.6
       objectReference: {fileID: 0}
     - target: {fileID: 7708338876918823597, guid: d04f51fb3a23ffa4aa500efa5059de8c,
         type: 3}
@@ -1725,7 +1725,7 @@ PrefabInstance:
     - target: {fileID: 7708338876918823597, guid: d04f51fb3a23ffa4aa500efa5059de8c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34
+      value: -54.89
       objectReference: {fileID: 0}
     - target: {fileID: 7708338876918823597, guid: d04f51fb3a23ffa4aa500efa5059de8c,
         type: 3}
@@ -6462,7 +6462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2089355090}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6937,6 +6937,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5143975123810497747, guid: eb7aa9835be39b0418dffdd56d92b86f,
+        type: 3}
+      propertyPath: radius
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143975123810497747, guid: eb7aa9835be39b0418dffdd56d92b86f,
+        type: 3}
+      propertyPath: groundEffect
+      value: 
+      objectReference: {fileID: 2187313005297981232, guid: 9f3b33347bd2c694d8dde57629e88431,
+        type: 3}
     - target: {fileID: 8611064879751073157, guid: eb7aa9835be39b0418dffdd56d92b86f,
         type: 3}
       propertyPath: m_Name
