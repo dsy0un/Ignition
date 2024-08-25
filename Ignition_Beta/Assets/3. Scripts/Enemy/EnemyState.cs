@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class EnemyState : MonoBehaviour, IHitAble
@@ -147,6 +145,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         enemyAnim.isDie(false);
         gameObject.SetActive(true);
         transform.GetChild(0).gameObject.SetActive(true);
+        transform.position = GetComponentInParent<EnemyGenerate>().GenEnemy();
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());
     }

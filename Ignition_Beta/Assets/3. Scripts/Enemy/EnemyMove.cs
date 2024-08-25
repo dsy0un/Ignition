@@ -80,5 +80,6 @@ public class EnemyMove : MonoBehaviour
         yield return new WaitForSeconds(hideBody);
         gameObject.SetActive(false);
         rb.constraints = RigidbodyConstraints.None;
+        enemyState.Respawn();
     }
 }
