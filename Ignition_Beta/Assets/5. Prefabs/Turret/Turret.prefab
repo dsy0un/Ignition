@@ -540,14 +540,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1daf5105975edd04f95a3a107f34373e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
+  radius: 200
   layer:
     serializedVersion: 2
     m_Bits: 4096
   turretHead: {fileID: 8523750827936612369}
   turretHeadPivot: {fileID: 2640237159953552709}
-  gunPointL: {fileID: 1217484609475660777}
-  gunPointR: {fileID: 3666165166218767092}
   points:
   - {fileID: 7001735472923552176}
   - {fileID: 6998534044312353688}
@@ -555,5 +553,5 @@ MonoBehaviour:
   - {fileID: 889714637080196951}
   turretBullet: {fileID: 4864875331787277910, guid: 10c93938f4a6d9c43a017a3d405e84b3,
     type: 3}
-  colliders: []
-  look_enemy: {fileID: 0}
+  groundEffect: {fileID: 2187313005297981232, guid: 9f3b33347bd2c694d8dde57629e88431,
+    type: 3}

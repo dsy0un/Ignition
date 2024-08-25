@@ -31,7 +31,7 @@ public class Turret : MonoBehaviour
 
     private void Start()
     {
-        // StartCoroutine(GunFire());
+        StartCoroutine(GunFire());
     }
 
     void Update()
