@@ -137,6 +137,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     {
         isDead = true;
         enemyAnim.isDie(true);
+        transform.GetChild(0).gameObject.SetActive(false);
         currentHP = maxHP;
     }
 
@@ -145,6 +146,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         isDead = false;
         enemyAnim.isDie(false);
         gameObject.SetActive(true);
+        transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());
     }
