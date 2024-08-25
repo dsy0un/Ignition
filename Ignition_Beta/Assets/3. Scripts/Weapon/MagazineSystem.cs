@@ -14,6 +14,7 @@ public class MagazineSystem : MonoBehaviour
     }
     private Interactable interactable;
     private Rigidbody rb;
+    private Collider col;
     private Transform magazinePoint;
     private bool isLoad;
     private GameObject gunObject;
@@ -22,6 +23,7 @@ public class MagazineSystem : MonoBehaviour
     {
         interactable = GetComponent<Interactable>();
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
     }
 
     private void FixedUpdate()
@@ -52,6 +54,7 @@ public class MagazineSystem : MonoBehaviour
             {
                 magazinePoint = other.transform.GetChild(0);
                 isLoad = true;
+                col.isTrigger = true;
                 //for (int i = 0; i < transform.childCount; i++)
                 //{
                 //    Transform child = transform.GetChild(i);
@@ -90,6 +93,7 @@ public class MagazineSystem : MonoBehaviour
             transform.GetComponentInParent<Socket>().IsMagazine = false;
             transform.parent = null;
             isLoad = false;
+            col.isTrigger = false;
             transform.localScale = Vector3.one;
             //for (int i = 0; i < transform.childCount; i++)
             //{
