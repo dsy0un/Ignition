@@ -52,10 +52,9 @@ namespace Valve.VR.InteractionSystem
 		{
 			get
 			{
-				if ( _instance != null )
+				if ( _instance == null )
 				{
-					// _instance = FindObjectOfType<Player>();
-					Destroy( _instance );
+					_instance = FindObjectOfType<Player>();
 				}
 				return _instance;
 			}
