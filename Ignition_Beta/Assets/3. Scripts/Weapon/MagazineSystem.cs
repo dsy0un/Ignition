@@ -19,7 +19,6 @@ public class MagazineSystem : MonoBehaviour
     private Collider col;
     private Transform magazinePoint;
     private bool isLoad;
-    private GameObject gunObject;
     public Image[] bulletImage;
 
     private void Start()
