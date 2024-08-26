@@ -50,8 +50,10 @@ public class MagazineSystem : MonoBehaviour
             gunObject.GetComponent<Gun>().changeMagazine = false;
             ChangeMagazine();
         }
-        bulletImage[0].fillAmount = bulletCount / maxBullet;
-        bulletImage[1].fillAmount = bulletCount / maxBullet;
+        foreach (Image i in bulletImage)
+        {
+            i.fillAmount = bulletCount / maxBullet;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
