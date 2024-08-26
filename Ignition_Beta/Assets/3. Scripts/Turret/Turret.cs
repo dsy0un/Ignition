@@ -21,7 +21,7 @@ public class Turret : MonoBehaviour
     private Collider[] colliders;
     private Collider look_enemy;
 
-    private float lookDelay = 3f;
+    readonly float lookDelay = 3f;
     public static float shotSpeed = 100f;
     public static float hitTime;
 

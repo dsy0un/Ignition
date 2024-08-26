@@ -11,7 +11,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     private float dmg = 10;
 
     private int playerLayer;
-    private int lookOutLayer;
+    private int barrierLayer;
 
     public enum State{Idle, Attack, AttackWait}
     public State state = State.Idle;
@@ -38,7 +38,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         IsStuned = false;
 
         playerLayer = LayerMask.NameToLayer("Player");
-        lookOutLayer = LayerMask.NameToLayer("Barrier");
+        barrierLayer = LayerMask.NameToLayer("Barrier");
 
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());
@@ -74,6 +74,7 @@ public class EnemyState : MonoBehaviour, IHitAble
             }
         }
     }
+
     IEnumerator StateForAction()
     {
         while (!isDead)
@@ -104,9 +105,14 @@ public class EnemyState : MonoBehaviour, IHitAble
                         h.Hit(dmg,"");
                 }
             }
-            else if (enemyMove.target.layer == lookOutLayer)
+            else if (enemyMove.target.layer == barrierLayer)
             {
                 enemyAnim.SetTrigger("stinger");
+                if (distance <= attackDistance)
+                {
+                    if (GameManager.Instance.barrier.transform.TryGetComponent<IHitAble>(out var h))
+                        h.Hit(dmg, "");
+                }
             }
             currentTime = 0;
         }

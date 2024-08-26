@@ -1,3 +1,4 @@
+using UnityEditorInternal;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    GameObject gameClearObject;
+    public Barrier barrier;
 
     private void Awake()
     {
