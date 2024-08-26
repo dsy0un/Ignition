@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+
+    GameObject gameClearObject;
+
     private void Awake()
     {
         if (instance == null)
@@ -23,5 +26,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
+    }
+
+    public void ClearEnemy()
+    {
+
     }
 }

@@ -38,7 +38,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         IsStuned = false;
 
         playerLayer = LayerMask.NameToLayer("Player");
-        lookOutLayer = LayerMask.NameToLayer("LookOut");
+        lookOutLayer = LayerMask.NameToLayer("Barrier");
 
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());

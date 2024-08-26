@@ -28,7 +28,8 @@ public class Cooldown : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(-playerHead.transform.position);
+        Vector3 l_vector = playerHead.transform.position - transform.position;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(-l_vector).normalized, 3 * Time.deltaTime);
     }
 
     IEnumerator CoolDown()
@@ -48,7 +49,7 @@ public class Cooldown : MonoBehaviour
             else text.text = $"{hour:D2}:{min:D2}:{currentTime:00.00}";
             
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 }
