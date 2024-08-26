@@ -31,7 +31,6 @@ public class Gun : MonoBehaviour
     public float recoil = 5;
     private int fireMode = 1;
     private float currentTime;
-    public bool changeMagazine;
 
     private Interactable interactable;
     private GameObject socket;
@@ -43,7 +42,6 @@ public class Gun : MonoBehaviour
         interactable = GetComponent<Interactable>();
         socket = transform.Find("Body").Find("Socket").gameObject;
         currentTime = fireTime;
-        changeMagazine = false;
         //originalPosition = gunTransform.localPosition;
         //originalRotation = gunTransform.localRotation;
     }
@@ -110,15 +108,14 @@ public class Gun : MonoBehaviour
                     else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
                         currentTime = fireTime;
                 }
+                if (ejectMagazine[source].stateDown) // 탄창 분리
+                {
+                    GetComponentInChildren<MagazineSystem>().ChangeMagazine();
+                }
             }
             else if (fireAction[source].stateDown) // 탄창이 없거나 총알을 모두 소진했을 경우 사운드 재생
             {
                 audioSource.PlayOneShot(emptyShotSound);
-            }
-
-            if (ejectMagazine[source].stateDown) // 탄창 분리
-            {
-                changeMagazine = true;
             }
         }
         //gunTransform.localPosition = 

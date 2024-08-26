@@ -44,12 +44,6 @@ public class MagazineSystem : MonoBehaviour
         }
         else if (!isLoad)
             rb.useGravity = true;
-        gunObject = transform.root.gameObject;
-        if (gunObject.GetComponent<Gun>() != null && gunObject.GetComponent<Gun>().changeMagazine)
-        {
-            gunObject.GetComponent<Gun>().changeMagazine = false;
-            ChangeMagazine();
-        }
         foreach (Image i in bulletImage)
         {
             i.fillAmount = bulletCount / maxBullet;
@@ -66,12 +60,6 @@ public class MagazineSystem : MonoBehaviour
                 magazinePoint = other.transform.GetChild(0);
                 isLoad = true;
                 col.isTrigger = true;
-                //for (int i = 0; i < transform.childCount; i++)
-                //{
-                //    Transform child = transform.GetChild(i);
-                //    Collider childCollider = child.GetComponent<Collider>();
-                //    childCollider.isTrigger = true;
-                //}
                 other.GetComponent<Socket>().IsMagazine = true;
                 transform.parent = magazinePoint;
                 transform.localPosition = 
@@ -82,7 +70,7 @@ public class MagazineSystem : MonoBehaviour
         }
     }
 
-    private void ChangeMagazine()
+    public void ChangeMagazine()
     {
         if (isLoad)
         {
@@ -94,12 +82,6 @@ public class MagazineSystem : MonoBehaviour
             isLoad = false;
             col.isTrigger = false;
             transform.localScale = Vector3.one;
-            //for (int i = 0; i < transform.childCount; i++)
-            //{
-            //    Transform child = transform.GetChild(i);
-            //    Collider childCollider = child.GetComponent<Collider>();
-            //    childCollider.isTrigger = false;
-            //}
         }
     }
 }
