@@ -13,17 +13,18 @@ public class Barrier : MonoBehaviour, IHitAble
 
     void Awake()
     {
-        GameManager.Instance.barrier = gameObject.GetComponent<Barrier>();
+        
     }
 
     private void Start()
     {
+        GameManager.Instance.barrier = gameObject.GetComponent<Barrier>();
+
         currentHP = maxHP;
     }
 
     void Update()
     {
-        Debug.Log(currentHP / maxHP);
         image.fillAmount = currentHP / maxHP;
     }
 
