@@ -59,7 +59,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         {
             yield return new WaitForSeconds(0.2f);
 
-            if (enemyMove.target.transform.TryGetComponent<Collider>(out Collider col))
+            if (enemyMove.target.transform.TryGetComponent(out Collider col))
                 distance = Vector3.Distance(col.ClosestPoint(transform.position), transform.position);
             else 
                 distance = Vector3.Distance(enemyMove.target.transform.position, this.transform.position);
