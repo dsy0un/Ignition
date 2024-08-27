@@ -74,12 +74,12 @@ public class MagazineSystem : MonoBehaviour
         if (isLoad)
         {
             rb.useGravity = true;
-            rb.AddForce(-transform.forward * 100);
             rb.constraints = RigidbodyConstraints.None;
             transform.GetComponentInParent<Socket>().IsMagazine = false;
             transform.parent = null;
             isLoad = false;
             col.isTrigger = false;
+            rb.AddForce(-transform.up * 100);
             transform.localScale = Vector3.one;
         }
     }

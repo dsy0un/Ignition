@@ -49,7 +49,7 @@ public class Rifle : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (currentTime <= fireTime)
+        if (currentTime <= fireTime && fireMode == 3)
             currentTime += Time.deltaTime;
         // 총을 잡고 있을 때 실행
         if (interactable.attachedToHand != null)
@@ -64,38 +64,20 @@ public class Rifle : MonoBehaviour
             // 탄창 결합여부와 총알 개수 확인
             if (GetComponentInChildren<MagazineSystem>() != null && GetComponentInChildren<MagazineSystem>().BulletCount > 0)
             {
-                if (fireAction[source].lastState != fireAction[source].stateDown)
+                if(fireAction[source].lastState != fireAction[source].stateDown) // 연발
                 {
-
-                }
-                // 발사모드별 발사 방식
-                if (fireMode == 1) // 단발
-                {
-                    if (fireAction[source].stateDown) // 트리거를 눌렀는지 확인
+                    if (currentTime >= fireTime) // 발사 지연시간
                     {
                         Fire();
+                        currentTime = 0;
                         //ApplyRecoil();
                     }
                 }
-                else // 연발
-                {
-                    if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거가 눌려있는지 확인
-                    {
-                        if (currentTime >= fireTime) // 발사 지연시간
-                        {
-                            Fire();
-                            currentTime = 0;
-                            //ApplyRecoil();
-                        }
-                    }
-                    else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
-                        currentTime = fireTime;
-                }
-                
+                else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
+                    currentTime = fireTime;
             }
             else if (fireAction[source].stateDown) // 탄창이 없거나 총알을 모두 소진했을 경우 사운드 재생
                 audioSource.PlayOneShot(emptyShotSound);
-
             if (ejectMagazine[source].stateDown) // 탄창 분리
                 GetComponentInChildren<MagazineSystem>().ChangeMagazine();
         }
@@ -104,6 +86,7 @@ public class Rifle : MonoBehaviour
         //gunTransform.localRotation = 
         //    Quaternion.Slerp(gunTransform.localRotation, originalRotation * recoilRotation, Time.deltaTime * recoilSpeed);
     }
+    
     void Fire()
     {
         // 총알 생성
