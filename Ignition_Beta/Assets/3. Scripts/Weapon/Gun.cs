@@ -12,6 +12,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioClip shotSound;
     [SerializeField] private AudioClip emptyShotSound;
     [SerializeField] private float fireTime;
+    [SerializeField] private bool ableAutomaticFire;
 
     public SteamVR_Action_Boolean fireAction;
     public SteamVR_Action_Boolean ejectMagazine;
@@ -29,8 +30,8 @@ public class Gun : MonoBehaviour
 
     public float shootingSpeed = 1f;
     public float recoil = 5;
-    private int fireMode = 1;
     private float currentTime;
+    private int fireMode = 1;
 
     private Interactable interactable;
     private GameObject socket;
@@ -47,76 +48,38 @@ public class Gun : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (this.gameObject.tag == "Pistol")
-        {
-            Damage = 20;
-        }
-        else if (this.gameObject.tag == "Rifle")
-        {
-            Damage = 30;
-            //if (changeFireMode[source].stateDown)
-            //{
-            //    fireMode = 4 - fireMode;
-            //}
-        } // 삭제 필요
-
-        if (currentTime <= fireTime)
-        {
+        if (currentTime <= fireTime && fireMode == 3)
             currentTime += Time.deltaTime;
-        }
         // 총을 잡고 있을 때 실행
         if (interactable.attachedToHand != null)
         {
             SteamVR_Input_Sources source = interactable.attachedToHand.handType;
+            Damage = 30;
 
-            if (this.gameObject.tag == "Pistol")
-            {
-                Damage = 20;
-            }
-            else if (this.gameObject.tag == "Rifle")
-            {
-                Damage = 30;
-                if (changeFireMode[source].stateDown)
-                {
-                    fireMode = 4 - fireMode;
-                }
-            }
+            // 발사 모드 변경
+            if (changeFireMode[source].stateDown && ableAutomaticFire)
+                fireMode = 4 - fireMode;
+
+            if (ejectMagazine[source].stateDown) // 탄창 분리
+                GetComponentInChildren<MagazineSystem>().ChangeMagazine();
 
             // 탄창 결합여부와 총알 개수 확인
             if (GetComponentInChildren<MagazineSystem>() != null && GetComponentInChildren<MagazineSystem>().BulletCount > 0)
             {
-                // 발사모드별 발사 방식
-                if (fireMode == 1) // 단발
+                if (fireAction[source].lastState != fireAction[source].stateDown) // 연발
                 {
-                    if (fireAction[source].stateDown) // 트리거를 눌렀는지 확인
+                    if (currentTime >= fireTime) // 발사 지연시간
                     {
                         Fire();
+                        currentTime = 0;
                         //ApplyRecoil();
                     }
                 }
-                else // 연발
-                {
-                    if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거가 눌려있는지 확인
-                    {
-                        if (currentTime >= fireTime) // 발사 지연시간
-                        {
-                            Fire();
-                            currentTime = 0;
-                            //ApplyRecoil();
-                        }
-                    }
-                    else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
-                        currentTime = fireTime;
-                }
-                if (ejectMagazine[source].stateDown) // 탄창 분리
-                {
-                    GetComponentInChildren<MagazineSystem>().ChangeMagazine();
-                }
+                else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
+                    currentTime = fireTime;
             }
             else if (fireAction[source].stateDown) // 탄창이 없거나 총알을 모두 소진했을 경우 사운드 재생
-            {
                 audioSource.PlayOneShot(emptyShotSound);
-            }
         }
         //gunTransform.localPosition = 
         //    Vector3.Lerp(gunTransform.localPosition, originalPosition + recoilOffset, Time.deltaTime * recoilSpeed);
