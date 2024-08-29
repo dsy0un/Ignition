@@ -42,7 +42,8 @@ public class TakeItem : MonoBehaviour
                         break;
                     case "Shotgun":
                         break;
-                    default: break;
+                    default: 
+                        break;
                 }
                 spawn.GetComponent<Rigidbody>().isKinematic = true;
             }
