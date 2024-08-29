@@ -35,16 +35,29 @@ public class Bolt : MonoBehaviour
             //SteamVR_Input_Sources source = interactable.attachedToHand.handType;
             joint.spring = jointValue;
             transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
-            if (transform.localPosition.z <= originPosition.z - endPositionValue)
-            {
-                transform.localPosition = new Vector3
-                    (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
-            }
         }
         else
         {
             joint.spring = 0;
             transform.localPosition = originPosition;
+        }
+        if (transform.localPosition.z <= originPosition.z - endPositionValue)
+        {
+            transform.localPosition = new Vector3
+                (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
+            boltRetraction = true;
+        }
+        if (boltRetraction)
+        {
+            if (transform.localPosition == originPosition)
+            {
+                Round.SetActive(false);
+                redyToShot = true;
+            }
+            else
+            {
+                Round.SetActive(true)   ;
+            }
         }
     }
 }
