@@ -23,30 +23,41 @@ public class TakeItem : MonoBehaviour
     {
         if (other.CompareTag("Hand"))
         {
+            Debug.Log(0);
+            Debug.Log(leftHand.currentAttachedObject);
+            Debug.Log(rightHand.currentAttachedObject);
             if (leftHand.currentAttachedObject == null && rightHand.currentAttachedObject == null) return;
             if (leftHand.currentAttachedObject != null && rightHand.currentAttachedObject != null) return;
 
-            if (other.CompareTag("Hand"))
-            {
-                if (leftHand.currentAttachedObject != null)
-                    currentObject = leftHand.currentAttachedObject;
-                else if (rightHand.currentAttachedObject != null)
-                    currentObject = rightHand.currentAttachedObject;
+            
 
-                switch (currentObject.tag)
-                {
-                    case "Pistol":
-                        break;
-                    case "Rifle":
-                        spawn = Instantiate(itemPrefab[1], other.transform.position, Quaternion.identity, other.transform);
-                        break;
-                    case "Shotgun":
-                        break;
-                    default: 
-                        break;
-                }
-                spawn.GetComponent<Rigidbody>().isKinematic = true;
+            if (leftHand.currentAttachedObject != null)
+            {
+                Debug.Log(1);
+                currentObject = leftHand.currentAttachedObject;
             }
+                
+            else if (rightHand.currentAttachedObject != null)
+            {
+                Debug.Log(2);
+                currentObject = rightHand.currentAttachedObject;
+            }
+                
+
+            switch (currentObject.tag)
+            {
+                case "Pistol":
+                    break;
+                case "Rifle":
+                    Debug.Log(3);
+                    spawn = Instantiate(itemPrefab[1], other.transform.position, Quaternion.identity, other.transform);
+                    break;
+                case "Shotgun":
+                    break;
+                default: 
+                    break;
+            }
+            spawn.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
