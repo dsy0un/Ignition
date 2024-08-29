@@ -36,11 +36,12 @@ public class Bolt : MonoBehaviour
             joint.spring = jointValue;
             transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
         }
-        else
+        else if (interactable.attachedToHand == null || transform.localPosition.z >= originPosition.z)
         {
             joint.spring = 0;
             transform.localPosition = originPosition;
         }
+
         if (transform.localPosition.z <= originPosition.z - endPositionValue)
         {
             transform.localPosition = new Vector3
@@ -56,7 +57,7 @@ public class Bolt : MonoBehaviour
             }
             else
             {
-                Round.SetActive(true)   ;
+                Round.SetActive(true);
             }
         }
     }

@@ -326,8 +326,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.04, y: 0.14815259, z: 0.04}
-  m_Center: {x: 0, y: -0.004076302, z: 0}
+  m_Size: {x: 0.04, y: 0.14581841, z: 0.04}
+  m_Center: {x: 0, y: -0.005243391, z: 0}
 --- !u!4 &5992459
 Transform:
   m_ObjectHideFlags: 0
@@ -337,11 +337,11 @@ Transform:
   m_GameObject: {fileID: 5992452}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.3511422, y: 1.0022, z: -8.0687}
+  m_LocalPosition: {x: 0, y: 0.005600035, z: 0.33071327}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1158789689308275698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!138 &5992460
 FixedJoint:
@@ -1102,7 +1102,6 @@ GameObject:
   - component: {fileID: 311617133}
   - component: {fileID: 311617132}
   - component: {fileID: 311617131}
-  - component: {fileID: 311617130}
   m_Layer: 0
   m_Name: Interactable Sphere
   m_TagString: Untagged
@@ -1110,18 +1109,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &311617130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311617129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4ced169af26cd547beaa2782133a645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &311617131
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6017,6 +6004,7 @@ Transform:
   - {fileID: 590736800588759663}
   - {fileID: 8473535282555477272}
   - {fileID: 8520345751723704156}
+  - {fileID: 5992459}
   - {fileID: 4612468320518460302}
   - {fileID: 6579840280179848954}
   - {fileID: 6551451773627459333}
@@ -11228,6 +11216,7 @@ MonoBehaviour:
     type: 3}
   shootingSpeed: 700
   recoil: 5
+  magazineSystem: {fileID: 0}
 --- !u!114 &4527692604274043222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11507,6 +11496,7 @@ MonoBehaviour:
     type: 3}
   shootingSpeed: 700
   recoil: 5
+  magazineSystem: {fileID: 0}
 --- !u!23 &4556501251080321503
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11942,6 +11932,7 @@ MonoBehaviour:
     type: 3}
   shootingSpeed: 400
   recoil: 5
+  magazineSystem: {fileID: 0}
 --- !u!33 &4817172160622428247
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18535,4 +18526,3 @@ SceneRoots:
   - {fileID: 3159037816132271263}
   - {fileID: 3910530693058671389}
   - {fileID: 7098152079600384969}
-  - {fileID: 5992459}
