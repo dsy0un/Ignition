@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 4573477747421045126, guid: 01e32efd818c25042b8f1e5eca02ba33,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 28567
+      value: 28599
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -554,7 +554,30 @@ MonoBehaviour:
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 0
-  blendingBehaviours: []
+  blendingBehaviours:
+  - name: New Behaviour
+    enabled: 1
+    influence: 1
+    pose: 0
+    value: 0
+    action_single:
+      actionPath: /actions/default/in/Squeeze
+      needsReinit: 0
+    action_bool:
+      actionPath: 
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 1
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!1 &559249788 stripped
 GameObject:
@@ -727,6 +750,116 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980918071734549669, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendEditorExpanded
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].name
+      value: New Behaviour
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].influence
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.palm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.ring
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.index
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.pinky
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.thumb
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.middle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].previewEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.values.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].action_single.actionPath
+      value: /actions/default/in/Squeeze
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.values.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.values.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.values.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.values.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.values.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129627486233870555, guid: 899c9ae641bea3c4bab527731b4bd567,
+        type: 3}
+      propertyPath: blendingBehaviours.Array.data[0].mask.values.Array.data[5]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8019657766264390909, guid: 899c9ae641bea3c4bab527731b4bd567,
         type: 3}
@@ -1112,7 +1245,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9999999, y: 0.7549664, z: 1}
+  m_Size: {x: 1, y: 0.7549664, z: 1}
   m_Center: {x: 0, y: -0.12251681, z: 0}
 --- !u!23 &1167054619
 MeshRenderer:
