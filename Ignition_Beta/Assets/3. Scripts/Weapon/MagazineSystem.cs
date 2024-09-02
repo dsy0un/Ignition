@@ -21,7 +21,7 @@ public class MagazineSystem : MonoBehaviour
     private bool isLoad;
     public Image[] bulletImage;
 
-    private void Start()
+    private void Awake()
     {
         bulletCount = maxBullet;
         interactable = GetComponent<Interactable>();
@@ -29,23 +29,32 @@ public class MagazineSystem : MonoBehaviour
         col = GetComponent<Collider>();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (isLoad)
+        StartCoroutine("MagazineWork");
+    }
+
+    IEnumerator MagazineWork()
+    {
+        while (true)
         {
-            rb.useGravity = false;
-            transform.localPosition = 
-                new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
-            transform.localEulerAngles = 
-                new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
-            if (interactable.attachedToHand != null)
-                interactable.attachedToHand.DetachObject(gameObject);
-        }
-        else if (!isLoad)
-            rb.useGravity = true;
-        foreach (Image i in bulletImage)
-        {
-            i.fillAmount = bulletCount / maxBullet;
+            if (isLoad)
+            {
+                rb.useGravity = false;
+                transform.localPosition =
+                    new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
+                transform.localEulerAngles =
+                    new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
+                if (interactable.attachedToHand != null)
+                    interactable.attachedToHand.DetachObject(gameObject);
+            }
+            else if (!isLoad)
+                rb.useGravity = true;
+            foreach (Image i in bulletImage)
+            {
+                i.fillAmount = bulletCount / maxBullet;
+            }
+            yield return null;
         }
     }
 

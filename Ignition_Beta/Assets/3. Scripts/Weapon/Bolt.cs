@@ -8,14 +8,19 @@ public class Bolt : MonoBehaviour
 {
     private Interactable interactable;
     private SpringJoint joint;
+    public Socket socket;
 
-    public GameObject Round;
+    public GameObject round;
+    public GameObject cartridge;
+    public GameObject ejectPoint;
     private Vector3 originPosition;
     private Quaternion originRotation;
     public float endPositionValue;
     public int jointValue;
     public bool redyToShot;
     public bool boltRetraction;
+
+    public SteamVR_Action_Boolean grab;
 
 
     private void Awake()
@@ -26,39 +31,50 @@ public class Bolt : MonoBehaviour
         originRotation = transform.localRotation;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        transform.localRotation = originRotation;
-        if (interactable.attachedToHand != null)
-        {
-            //SteamVR_Input_Sources source = interactable.attachedToHand.handType;
-            joint.spring = jointValue;
-            transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
-        }
-        else if (interactable.attachedToHand == null || transform.localPosition.z >= originPosition.z)
-        {
-            joint.spring = 0;
-            transform.localPosition = originPosition;
-        }
+        StartCoroutine("BoltAction");
+    }
 
-        if (transform.localPosition.z <= originPosition.z - endPositionValue)
+    IEnumerator BoltAction()
+    {
+        while (true)
         {
-            transform.localPosition = new Vector3
-                (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
-            boltRetraction = true;
-        }
-        if (boltRetraction)
-        {
-            if (transform.localPosition == originPosition)
+            transform.localRotation = originRotation;
+            transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
+            joint.spring = jointValue;
+            if (interactable.attachedToHand != null)
             {
-                Round.SetActive(false);
-                redyToShot = true;
+               joint.spring = 0;
             }
-            else
+            if (transform.localPosition.z >= originPosition.z - 0.01f)
             {
-                Round.SetActive(true);
+                joint.spring = 0;
+                transform.localPosition = originPosition;
+                if (boltRetraction)
+                {
+                    redyToShot = true;
+                }
             }
+            if (transform.localPosition.z <= originPosition.z - endPositionValue)
+            {
+                transform.localPosition = new Vector3
+                    (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
+                boltRetraction = true;
+            }
+            else if (boltRetraction && socket.IsMagazine)
+            {
+                round.SetActive(true);
+            }
+            yield return null;
         }
+    }
+
+    public void Shot()
+    {
+        round.SetActive(false);
+        cartridge.SetActive(true);
+        boltRetraction = false;
+        redyToShot = false;
     }
 }

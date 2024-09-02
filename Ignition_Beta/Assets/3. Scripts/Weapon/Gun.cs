@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 using Valve.VR;
@@ -5,7 +6,6 @@ using Valve.VR.InteractionSystem;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private Transform firePoint;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private VisualEffect muzzelFlash;
     [SerializeField] private GameObject muzzleLight;
@@ -34,58 +34,21 @@ public class Gun : MonoBehaviour
     private int fireMode = 1;
 
     public MagazineSystem magazineSystem;
-    private Interactable interactable;
-    private Socket socket;
-    private Bolt bolt;
+    public Interactable interactable;
+    public Socket socket;
+    public Bolt bolt;
 
     public static float Damage { get; set; }
 
     private void Start()
     {
-        interactable = GetComponent<Interactable>();
-        //socket = transform.Find("Body").Find("Socket").gameObject;
-        socket = GetComponentInChildren<Socket>();
-        bolt = GetComponentInChildren<Bolt>();
         currentTime = fireTime;
         //originalPosition = gunTransform.localPosition;
         //originalRotation = gunTransform.localRotation;
     }
     private void FixedUpdate()
     {
-        if (socket.IsMagazine)
-            magazineSystem = GetComponentInChildren<MagazineSystem>();
-        if (currentTime <= fireTime && fireMode == 3)
-            currentTime += Time.deltaTime;
-        // 총을 잡고 있을 때 실행
-        if (interactable.attachedToHand != null)
-        {
-            SteamVR_Input_Sources source = interactable.attachedToHand.handType;
-            Damage = 30;
-
-            // 발사 모드 변경
-            if (changeFireMode[source].stateDown && ableAutomaticFire)
-                fireMode = 4 - fireMode;
-
-            // 탄창 결합여부와 총알 개수 확인
-            if (magazineSystem != null && magazineSystem.BulletCount > 0 && bolt.redyToShot)
-            {
-                if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거를 눌렀을 때 작동
-                {
-                    Fire();
-                }
-                else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
-                    currentTime = fireTime;
-
-                if (ejectMagazine[source].stateDown) // 탄창 분리
-                    magazineSystem.ChangeMagazine();
-            }
-            else if (fireAction[source].stateDown) // 탄창이 없거나 총알을 모두 소진했을 경우 사운드 재생
-                audioSource.PlayOneShot(emptyShotSound);
-        }
-        //gunTransform.localPosition = 
-        //    Vector3.Lerp(gunTransform.localPosition, originalPosition + recoilOffset, Time.deltaTime * recoilSpeed);
-        //gunTransform.localRotation = 
-        //    Quaternion.Slerp(gunTransform.localRotation, originalRotation * recoilRotation, Time.deltaTime * recoilSpeed);
+        
     }
     void Fire()
     {
@@ -93,10 +56,12 @@ public class Gun : MonoBehaviour
         if (currentTime >= fireTime)
         {
             // 총알 생성
-            Rigidbody bulletrb = Instantiate(bulletPref, firePoint.position, firePoint.rotation).GetComponent<Rigidbody>();
-            bulletrb.velocity = firePoint.forward * shootingSpeed; // 총알의 발사 방향 및 속도
+            Rigidbody bulletrb = Instantiate
+                (bulletPref, muzzelFlash.transform.position, muzzelFlash.transform.rotation).GetComponent<Rigidbody>();
+            bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // 총알의 발사 방향 및 속도
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
+            bolt.Shot();
             GetComponentInChildren<MagazineSystem>().BulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
             muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
             Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
@@ -107,6 +72,45 @@ public class Gun : MonoBehaviour
     void HideLight()
     {
         muzzleLight.SetActive(false);
+    }
+
+    IEnumerator GunWork()
+    {
+        while (true)
+        {
+            if (socket.IsMagazine)
+                magazineSystem = GetComponentInChildren<MagazineSystem>();
+            else
+                magazineSystem = null;
+            if (currentTime <= fireTime && fireMode == 3)
+                currentTime += Time.deltaTime;
+            // 총을 잡고 있을 때 실행
+            if (interactable.attachedToHand == null) yield return null;
+            SteamVR_Input_Sources source = interactable.attachedToHand.handType;
+
+            // 발사 모드 변경
+            if (changeFireMode[source].stateDown && ableAutomaticFire)
+                fireMode = 4 - fireMode;
+            if (ejectMagazine[source].stateDown) // 탄창 분리
+                magazineSystem.ChangeMagazine();
+            // 탄창 결합여부와 총알 개수 확인
+            if (magazineSystem != null && magazineSystem.BulletCount > 0 && bolt.redyToShot)
+            {
+                if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거를 눌렀을 때 작동
+                {
+                    Fire();
+                }
+                else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
+                    currentTime = fireTime;
+            }
+            else if (fireAction[source].stateDown) // 탄창이 없거나 총알을 모두 소진했을 경우 사운드 재생
+                audioSource.PlayOneShot(emptyShotSound);
+            //gunTransform.localPosition = 
+            //    Vector3.Lerp(gunTransform.localPosition, originalPosition + recoilOffset, Time.deltaTime * recoilSpeed);
+            //gunTransform.localRotation = 
+            //    Quaternion.Slerp(gunTransform.localRotation, originalRotation * recoilRotation, Time.deltaTime * recoilSpeed);
+            yield return null;
+        }
     }
 
     //void ApplyRecoil()
