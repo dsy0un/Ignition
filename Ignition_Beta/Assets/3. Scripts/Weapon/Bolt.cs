@@ -9,8 +9,9 @@ public class Bolt : MonoBehaviour
     private Interactable interactable;
     private SpringJoint joint;
     private Rigidbody rb;
-    public MagazineSystem magazineSystem;
+    private MagazineSystem magazineSystem;
     public Socket socket;
+    public Gun gun;
 
     public GameObject round;
     public GameObject cartridge;
@@ -42,20 +43,14 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            //if (socket.IsMagazine) // 탄창이 있을 경우 스크립트 가져오기
-            //    magazineSystem = GetComponentInChildren<MagazineSystem>();
-            //else // 아닌경우 스크립트 NULL
-            //    magazineSystem = null;
-
+            //magazineSystem = gun.magazineSystem;
             // 노리쇠의 로컬 회전 방향 = 초기 회전 방향
             transform.localRotation = originRotation;
             // 노리쇠의 로컬 위치 = x,y는 초기 위치, z는 본인의 로컬 위치
             transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
             joint.spring = jointValue; // 스프링 조인트 작동
             if (interactable.attachedToHand != null) // 노리쇠를 잡고 있을 때
-            {
-               joint.spring = 0; // 스프링 조인트 끄기
-            }
+                joint.spring = 0; // 스프링 조인트 끄기
             if (transform.localPosition.z >= originPosition.z - 0.01f) // 노리쇠의 로컬 위치가 초기 위치 - 0.01 위치일 때
             {
                 joint.spring = 0; // 스프링 조인트 끄기
@@ -65,13 +60,15 @@ public class Bolt : MonoBehaviour
                     redyToShot = true;
                 }
             }
+            //else
+            //    redyToShot = false;
             if (transform.localPosition.z <= originPosition.z - endPositionValue)
             {
                 transform.localPosition = new Vector3
                     (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
                 boltRetraction = true;
             }
-            //if (magazineSystem.BulletCount <= 0 || magazineSystem == null) yield return null;
+            //if (magazineSystem.BulletCount <= 0 || magazineSystem == null) return;
             if (boltRetraction)
             {
                 //magazineSystem.BulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
@@ -81,7 +78,6 @@ public class Bolt : MonoBehaviour
             yield return null;
         }
     }
-
     public void Shot()
     {
         rb.AddForce(Vector3.back * impulsePower, ForceMode.Impulse);

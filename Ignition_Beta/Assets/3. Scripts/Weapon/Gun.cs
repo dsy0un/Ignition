@@ -34,6 +34,7 @@ public class Gun : MonoBehaviour
     private int fireMode = 1;
 
     public Interactable interactable;
+    public MagazineSystem magazineSystem;
     public Socket socket;
     public Bolt bolt;
 
@@ -73,6 +74,11 @@ public class Gun : MonoBehaviour
     {
         while (true)
         {
+            if (socket.IsMagazine) // 탄창이 있을 경우 스크립트 가져오기
+                magazineSystem = GetComponentInChildren<MagazineSystem>();
+            else // 아닌경우 스크립트 NULL
+                magazineSystem = null;
+
             if (currentTime <= fireTime && fireMode == 3) // 연사 모드일때 발사 지연시간 작동
                 currentTime += Time.deltaTime;
             // 총을 잡고 있을 때 실행
@@ -84,7 +90,7 @@ public class Gun : MonoBehaviour
                 if (changeFireMode[source].stateDown && ableAutomaticFire) // 연사,단발 변경
                     fireMode = 4 - fireMode;
                 if (ejectMagazine[source].stateDown) // 탄창 분리
-                    bolt.magazineSystem.ChangeMagazine();
+                    magazineSystem.ChangeMagazine();
 
                 // 탄창 결합여부와 총알 개수 확인, 약실 확인
                 if (socket.IsMagazine && bolt.redyToShot)
