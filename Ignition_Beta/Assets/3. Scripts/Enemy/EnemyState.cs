@@ -110,7 +110,6 @@ public class EnemyState : MonoBehaviour, IHitAble
             }
             else if (enemyMove.target.layer == barrierLayer)
             {
-                Debug.Log(1);
                 enemyAnim.SetTrigger("stinger");
                 if (distance <= attackDistance)
                 {

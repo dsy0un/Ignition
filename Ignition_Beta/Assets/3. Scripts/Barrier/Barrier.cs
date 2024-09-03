@@ -7,7 +7,7 @@ public class Barrier : MonoBehaviour, IHitAble
 {
     [SerializeField]
     Image image;
-
+    [SerializeField]
     float maxHP = 100;
     float currentHP;
 
