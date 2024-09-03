@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class EnemyGenerate : MonoBehaviour
 {
+
     [SerializeField]
     // private List<Collider> genObj; // Enemy Generate Collider, role : Generate Position
     private Collider genObj; // Enemy Generate Collider, role : Generate Position
@@ -13,6 +15,10 @@ public class EnemyGenerate : MonoBehaviour
     private int genMaxCount; // Enemy Max Generate
     [SerializeField]
     private GameObject enemyPrefab; // Enemy Prefab, NO UNPACK ENEMY GAMEOBJECT
+    [SerializeField]
+    private GameObject target;
+    [SerializeField]
+    private NavMeshSurface nms;
 
     private List<GameObject> pools = new(); // NO MODIFICATION
 
@@ -20,7 +26,9 @@ public class EnemyGenerate : MonoBehaviour
     {
         for (int i = 0; i < genMaxCount; i++)
         {
-            GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity);
+            GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity, gameObject.transform);
+            spawn.GetComponent<EnemyMove>().target = target;
+            spawn.GetComponent<EnemyMove>().nms = nms;
             spawn.SetActive(false);
             pools.Add(spawn);
         }
@@ -40,13 +48,10 @@ public class EnemyGenerate : MonoBehaviour
     //    return dict;
     //}
 
-    private Vector3 GenEnemy()
+    public Vector3 GenEnemy()
     {
         // Dictionary<string, List<Collider>> obj = GetGenObj();
 
-        float x = 0;
-        float z = 0;
-        Vector3 originPosition = Vector3.zero;
         //for (int i = 0; i < genObj.Count; i++) 
         //{
         //    List<Collider> listObj = obj["genObj" + i];
@@ -55,9 +60,9 @@ public class EnemyGenerate : MonoBehaviour
         //    originPosition = listObj[0].transform.position;
         //}
 
-        x = genObj.bounds.size.x;
-        z = genObj.bounds.size.z;
-        originPosition = genObj.transform.position;
+        float x = genObj.bounds.size.x;
+        float z = genObj.bounds.size.z;
+        Vector3 originPosition = genObj.transform.position;
 
         float range_X = Random.Range(-(x / 2), x / 2);
         float range_Z = Random.Range(-(z / 2), z / 2);

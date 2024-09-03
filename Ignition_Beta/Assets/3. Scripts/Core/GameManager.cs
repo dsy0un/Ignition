@@ -1,16 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
-using Valve.VR;
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
+    private static GameManager instance;
+    public static GameManager Instance
     {
-        
+        get
+        {
+            if (instance == null) 
+                return null;
+            return instance;
+        }
     }
 
-    void Update()
+    public Barrier barrier;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
+    }
+
+    public void ClearEnemy()
     {
 
     }

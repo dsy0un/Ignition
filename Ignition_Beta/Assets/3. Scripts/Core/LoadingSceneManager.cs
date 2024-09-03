@@ -6,6 +6,8 @@ public class LoadingSceneManager : MonoBehaviour
 {
     public static string nextScene;
 
+    public bool test; // 테스트 후 삭제 필요
+
     private void Start()
     {
         StartCoroutine(LoadScene());
@@ -37,7 +39,7 @@ public class LoadingSceneManager : MonoBehaviour
             }
             else
             {
-                if (timer > 13f)
+                if (timer > 13f && !test)
                 {
                     op.allowSceneActivation = true;
                     yield break;
