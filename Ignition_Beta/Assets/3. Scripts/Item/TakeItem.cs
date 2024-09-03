@@ -1,7 +1,6 @@
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
-using abc;
 
 public class TakeItem : MonoBehaviour
 {
