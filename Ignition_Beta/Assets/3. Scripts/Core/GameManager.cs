@@ -1,3 +1,5 @@
+using System.Collections;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -14,7 +16,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private Barrier barrier;
+    public Barrier barrier;
     private Cooldown cooldown;
 
     private void Awake()
@@ -28,12 +30,20 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        barrier = FindAnyObjectByType<Barrier>();
-        cooldown = FindAnyObjectByType<Cooldown>();
+        ReGetCom();
         // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
+    }
+    public void ReGetCom()
+    {
+        cooldown = FindObjectOfType<Cooldown>();
+        barrier = FindObjectOfType<Barrier>();
     }
 
     public void ClearEnemy()
+    {
+
+    }
+    public void DefSuccess()
     {
 
     }

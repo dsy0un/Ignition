@@ -28,7 +28,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     public bool InDistance { get { return inDistance; } }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemyAnim = GetComponent<EnemyAnimation>();
         enemyMove = GetComponent<EnemyMove>();

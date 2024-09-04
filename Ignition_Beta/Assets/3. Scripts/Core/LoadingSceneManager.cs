@@ -6,14 +6,16 @@ public class LoadingSceneManager : MonoBehaviour
 {
     public static string nextScene;
 
-    public bool test; // 테스트 후 삭제 필요
+    public string defultScene = "Base";
+
+    public bool test; // 테스트 용 true일 경우 무한 로딩
 
     private void Start()
     {
         StartCoroutine(LoadScene());
         if (nextScene == null)
         {
-            nextScene = "Base";
+            nextScene = defultScene;
         }
     }
 
