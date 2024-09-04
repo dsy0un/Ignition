@@ -3,21 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor;
 
 public class LookOut : MonoBehaviour
 {
     [SerializeField]
     private Cooldown cooldown;
     [SerializeField]
-    private TMP_Text text;
+    private TextMeshProUGUI text;
+    [SerializeField]
+    private EnemyGenerate Egen;
 
-    public void CoolUp()
+    bool cool = false;
+
+    public void StartGen()
     {
+        Egen.StartSpawn();
+    }
+    IEnumerator CoolUpCO()
+    {
+        cool = !cool;
         float time = 0;
-        while (time < cooldown.Cooltime)
+        float count = 0;
+        while (cool)
         {
-            time += Time.deltaTime;
-            text.text = $"{time / 3600 % 60:D2}:{time / 60 % 60:D2}:{time % 60:D2}";
+
+            count += Time.deltaTime;
+            time = Mathf.Lerp(0, cooldown.Cooltime, count / 1.5f);
+            int sec = (int)time % 60;
+            int min = (int)time / 60 % 60;
+            int hour = (int)time / 3600 % 60;
+            Debug.Log(time);
+            text.text = $"{hour:D2}:{min:D2}:{sec:D2}";
+            yield return null;
         }
     }
 }

@@ -25,6 +25,7 @@ public class Cooldown : MonoBehaviour
     private void Start()
     {
         StartCoroutine(CoolDown());
+            Debug.Log(1);
     }
 
     private void Update()
