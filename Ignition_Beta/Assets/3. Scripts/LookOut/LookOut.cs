@@ -13,13 +13,27 @@ public class LookOut : MonoBehaviour
     private TextMeshProUGUI text;
     [SerializeField]
     private EnemyGenerate Egen;
+    [SerializeField]
+    private Animator animator;
 
     bool cool = false;
 
-    public void StartGen()
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public void DefSuccess()
+    {
+        animator.SetTrigger("Success");
+
+    }
+
+    private void StartGen()
     {
         Egen.StartSpawn();
     }
+
     IEnumerator CoolUpCO()
     {
         cool = !cool;
