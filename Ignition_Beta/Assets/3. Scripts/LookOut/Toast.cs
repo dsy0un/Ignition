@@ -42,7 +42,7 @@ public class Toast : MonoBehaviour
 
     private void Start()
     {
-        Show("Woo", 10.0f, new Color(0.56f, 1, 0.43f));
+        Show("æ»≥Á«œººø‰!", 10.0f, new Color(0.56f, 1, 0.43f));
     }
 
     struct TOAST
