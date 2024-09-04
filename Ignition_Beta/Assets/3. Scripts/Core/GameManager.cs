@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEditorInternal;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class GameManager : MonoBehaviour
     }
 
     public Barrier barrier;
+    public Player player;
     private Cooldown cooldown;
+    
 
     private void Awake()
     {
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
     public void ReGetCom()
     {
         cooldown = FindObjectOfType<Cooldown>();
+        player = FindObjectOfType<Player>();
         barrier = FindObjectOfType<Barrier>();
     }
 
@@ -43,8 +47,8 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    public void DefSuccess()
+    public void DefSuccessEvent()
     {
-
+        
     }
 }

@@ -23,7 +23,7 @@ public class LookOut : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void DefSuccess()
+    public void DefSuccessAnimation()
     {
         animator.SetTrigger("Success");
 
