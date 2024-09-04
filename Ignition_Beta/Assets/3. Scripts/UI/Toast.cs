@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using Unity.VisualScripting;
 
 public class Toast : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Toast : MonoBehaviour
     TextMeshProUGUI toastMsg;
     [SerializeField]
     float fadeTime = 0.3f;
+
+    Color color;
 
     bool interrupt;
 
@@ -37,21 +40,28 @@ public class Toast : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Show("Woo", 10.0f, new Color(0.56f, 1, 0.43f));
+    }
+
     struct TOAST
     {
         public string msg;
         public float durationTime;
+        public Color color;
     }
 
     Queue<TOAST> queue = new();
     bool isPopUp;
 
-    public void Show(string msg, float durationTime)
+    public void Show(string msg, float durationTime, Color? color = null)
     {
         TOAST toast;
 
         toast.msg = msg;
         toast.durationTime = durationTime;
+        toast.color = color ?? new Color(1, 1, 1, 0);
 
         queue.Enqueue(toast);
         if (!isPopUp) StartCoroutine(ShowToastQueue());
@@ -64,16 +74,17 @@ public class Toast : MonoBehaviour
         while (queue.Count != 0)
         {
             TOAST toast = queue.Dequeue();
-            yield return StartCoroutine(ShowMessageCoroutine(toast.msg, toast.durationTime));
+            yield return StartCoroutine(ShowMessageCoroutine(toast.msg, toast.durationTime, toast.color));
         }
     }
 
-    IEnumerator ShowMessageCoroutine(string msg, float durationTime)
+    IEnumerator ShowMessageCoroutine(string msg, float durationTime, Color color)
     {
         toastMsg.text = msg;
+        toastMsg.color = color;
         toastMsg.enabled = true;
 
-        yield return FadeInOut(toastMsg, fadeTime, true);
+        yield return FadeInOut(toastMsg, fadeTime, color, true);
 
         float elapsedTime = 0.0f;
         while (elapsedTime < durationTime && !interrupt)
@@ -82,13 +93,13 @@ public class Toast : MonoBehaviour
             yield return null;
         }
 
-        yield return FadeInOut(toastMsg, fadeTime, false);
+        yield return FadeInOut(toastMsg, fadeTime, color, false);
 
         interrupt = false;
         toastMsg.enabled = false;
     }
 
-    IEnumerator FadeInOut(TextMeshProUGUI target, float durationTime, bool inOut) 
+    IEnumerator FadeInOut(TextMeshProUGUI target, float durationTime, Color color, bool inOut) 
     {
         float start, end;
         if (inOut)
@@ -102,7 +113,6 @@ public class Toast : MonoBehaviour
             end = 0.0f;
         }
 
-        Color color = Color.clear;
         float elapsedTime = 0.0f;
 
         while (elapsedTime < durationTime)
