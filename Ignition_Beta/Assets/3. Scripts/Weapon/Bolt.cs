@@ -21,7 +21,7 @@ public class Bolt : MonoBehaviour
     public float endPositionValue;
     public int jointValue;
     public bool redyToShot;
-    public bool boltRetraction;
+    private bool boltRetraction;
 
     public float impulsePower;
 
