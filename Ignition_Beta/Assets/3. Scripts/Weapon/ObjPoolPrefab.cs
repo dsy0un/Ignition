@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class ObjPoolPrefab : MonoBehaviour
 {
-    public Bolt bolt;
+    private Bolt bolt;
     public Rigidbody rb;
     public float ejectPower;
-    void Start()
+    private void Awake()
+    {
+        bolt = GetComponentInParent<Bolt>();
+    }
+    void OnEnable()
     {
         StartCoroutine("DestroyObj");
     }
     IEnumerator DestroyObj()
     {
-        rb.AddForce(Vector3.right * ejectPower, ForceMode.Impulse);
+        Destroy(GetComponent<FixedJoint>());
+        transform.SetParent(null);
+        rb.AddForce(Vector3.right * Random.Range(ejectPower * 0.5f, ejectPower), ForceMode.Impulse);
         yield return new WaitForSeconds(4);
         bolt.ReturnObject(this.gameObject);
     }

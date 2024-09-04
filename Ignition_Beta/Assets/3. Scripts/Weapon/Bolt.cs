@@ -11,11 +11,11 @@ public class Bolt : MonoBehaviour
     private Rigidbody rb;
     private MagazineSystem magazineSystem;
     public Gun gun;
+    public Socket socket;
 
     public GameObject round;
     public GameObject cartridge;
-    public GameObject ejectPoint;
-    private GameObject ejectBullet;
+    public GameObject ejectBullet;
     private Vector3 originPosition;
     private Quaternion originRotation;
     public float endPositionValue;
@@ -45,8 +45,10 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            if (gun.magazineSystem != null)
+            if (socket.IsMagazine)
                 magazineSystem = gun.magazineSystem;
+            else
+                magazineSystem = null;
             // 노리쇠의 로컬 회전 방향 = 초기 회전 방향
             transform.localRotation = originRotation;
             // 노리쇠의 로컬 위치 = x,y는 초기 위치, z는 본인의 로컬 위치
@@ -85,7 +87,7 @@ public class Bolt : MonoBehaviour
         rb.AddForce(Vector3.back * impulsePower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
-        ejectBullet = GetObject();
+        GetObject();
         boltRetraction = false;
         redyToShot = false;
     }
@@ -100,27 +102,25 @@ public class Bolt : MonoBehaviour
 
     private GameObject CreateNewObject()
     {
-        var newObj = Instantiate(cartridge);
+        var newObj = Instantiate(ejectBullet);
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
         return newObj;
     }
 
-    public GameObject GetObject()
+    public void GetObject()
     {
         if (poolingObjectQueue.Count > 0)
         {
             var obj = poolingObjectQueue.Dequeue();
-            obj.transform.SetParent(null);
-            obj.gameObject.SetActive(true);
-            return obj;
+            obj.transform.position = transform.position;
+            obj.SetActive(true);
         }
         else
         {
             var newObj = CreateNewObject();
-            newObj.gameObject.SetActive(true);
-            newObj.transform.SetParent(null);
-            return newObj;
+            newObj.transform.position = transform.position;
+            newObj.SetActive(true);
         }
     }
 
