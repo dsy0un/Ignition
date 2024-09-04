@@ -31,11 +31,13 @@ namespace Michsky.UI.Shift
             }
 
             gameObject.SetActive(false);
+
+            ModalWindowIn();
         }
 
         public void ModalWindowIn()
         {
-            StopCoroutine("DisableWindow");
+            StopCoroutine(nameof(DisableWindow));
             gameObject.SetActive(true);
 
             if (isOn == false)
