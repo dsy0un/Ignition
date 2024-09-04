@@ -18,8 +18,6 @@ public class Barrier : MonoBehaviour, IHitAble
 
     private void Start()
     {
-        GameManager.Instance.barrier = gameObject.GetComponent<Barrier>();
-
         currentHP = maxHP;
     }
 

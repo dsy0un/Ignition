@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Barrier barrier;
+    private Barrier barrier;
+    private Cooldown cooldown;
 
     private void Awake()
     {
@@ -27,7 +28,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        barrier = FindAnyObjectByType<Barrier>();
+        cooldown = FindAnyObjectByType<Cooldown>();
         // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
     }
 

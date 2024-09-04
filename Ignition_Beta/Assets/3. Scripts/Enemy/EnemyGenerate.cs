@@ -14,13 +14,14 @@ public class EnemyGenerate : MonoBehaviour
     [SerializeField]
     private int genMaxCount; // Enemy Max Generate
     [SerializeField]
-    private GameObject enemyPrefab; // Enemy Prefab, NO UNPACK ENEMY GAMEOBJECT
+    private GameObject enemyPrefab; // Enemy Prefab, NO UNPACK ENEMY GAMEOBJECT ¿Ö ¿µ¾î·Î ¾¸?
     [SerializeField]
     private GameObject target;
     [SerializeField]
     private NavMeshSurface nms;
 
     private List<GameObject> pools = new(); // NO MODIFICATION
+    private bool canSpawn = false;
 
     private void Start()
     {
@@ -32,7 +33,13 @@ public class EnemyGenerate : MonoBehaviour
             spawn.SetActive(false);
             pools.Add(spawn);
         }
+        canSpawn = true;
+    }
+    public void StartSpawn()
+    {
+        if(!canSpawn) return;
         StartCoroutine(RandomRespawn());
+
     }
 
     //private Dictionary<string, List<Collider>> GetGenObj()
