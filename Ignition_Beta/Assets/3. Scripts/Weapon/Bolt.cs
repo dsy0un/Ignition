@@ -43,7 +43,8 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            //magazineSystem = gun.magazineSystem;
+            if (socket.IsMagazine)
+                magazineSystem = gun.magazineSystem;
             // 노리쇠의 로컬 회전 방향 = 초기 회전 방향
             transform.localRotation = originRotation;
             // 노리쇠의 로컬 위치 = x,y는 초기 위치, z는 본인의 로컬 위치
@@ -60,20 +61,20 @@ public class Bolt : MonoBehaviour
                     redyToShot = true;
                 }
             }
-            //else
-            //    redyToShot = false;
+            else
+                redyToShot = false;
             if (transform.localPosition.z <= originPosition.z - endPositionValue)
             {
                 transform.localPosition = new Vector3
                     (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
-                boltRetraction = true;
+                cartridge.SetActive(false);
+                if (magazineSystem != null && magazineSystem.BulletCount >= 0)
+                    boltRetraction = true;
             }
             //if (magazineSystem.BulletCount <= 0 || magazineSystem == null) return;
             if (boltRetraction)
             {
-                //magazineSystem.BulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
                 round.SetActive(true);
-                cartridge.SetActive(false);
             }
             yield return null;
         }

@@ -20,6 +20,9 @@ public class MagazineSystem : MonoBehaviour
     private Transform magazinePoint;
     private bool isLoad;
     public Image[] bulletImage;
+    public float followerY;
+    public GameObject rounds;
+    public GameObject follower;
 
     private void Awake()
     {
@@ -50,6 +53,11 @@ public class MagazineSystem : MonoBehaviour
             }
             else if (!isLoad)
                 rb.useGravity = true;
+            if (bulletCount <= 0)
+            {
+                rounds.SetActive(false);
+                follower.transform.localPosition = new Vector3(0, followerY, 0);
+            }
             foreach (Image i in bulletImage)
             {
                 i.fillAmount = bulletCount / maxBullet;
