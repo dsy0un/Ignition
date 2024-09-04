@@ -39,7 +39,9 @@ public class EnemyState : MonoBehaviour, IHitAble
 
         playerLayer = LayerMask.NameToLayer("Player");
         barrierLayer = LayerMask.NameToLayer("Barrier");
-
+    }
+    private void OnEnable()
+    {
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());
     }
@@ -47,6 +49,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (currentTime <= attackDelay)
         {
             currentTime += Time.deltaTime;
@@ -55,6 +58,7 @@ public class EnemyState : MonoBehaviour, IHitAble
 
     IEnumerator CheckState()
     {
+        Debug.Log(isDead);
         while (!isDead)
         {
             yield return new WaitForSeconds(0.2f);
@@ -63,7 +67,6 @@ public class EnemyState : MonoBehaviour, IHitAble
                 distance = Vector3.Distance(col.ClosestPoint(transform.position), transform.position);
             else 
                 distance = Vector3.Distance(enemyMove.target.transform.position, this.transform.position);
-
             if (distance <= attackDistance)
             {
                 state = State.Attack;
@@ -150,6 +153,7 @@ public class EnemyState : MonoBehaviour, IHitAble
 
     public void Respawn()
     {
+        if (!GameManager.Instance.enemyGenerate.canSpawn) return;
         isDead = false;
         enemyAnim.isDie(false);
         gameObject.SetActive(true);

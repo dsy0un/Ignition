@@ -25,7 +25,6 @@ public class Cooldown : MonoBehaviour
     private void Start()
     {
         StartCoroutine(CoolDown());
-            Debug.Log(1);
     }
 
     private void Update()
@@ -53,5 +52,6 @@ public class Cooldown : MonoBehaviour
 
             yield return null;
         }
+        GameManager.Instance.DefSuccessEvent();
     }
 }
