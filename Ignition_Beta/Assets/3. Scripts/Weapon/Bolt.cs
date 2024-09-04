@@ -10,20 +10,21 @@ public class Bolt : MonoBehaviour
     private SpringJoint joint;
     private Rigidbody rb;
     private MagazineSystem magazineSystem;
-    public Socket socket;
     public Gun gun;
+    public Socket socket;
 
     public GameObject round;
     public GameObject cartridge;
-    public GameObject ejectPoint;
+    public GameObject ejectBullet;
     private Vector3 originPosition;
     private Quaternion originRotation;
     public float endPositionValue;
     public int jointValue;
     public bool redyToShot;
-    public bool boltRetraction;
-
+    private bool boltRetraction;
     public float impulsePower;
+
+    Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class Bolt : MonoBehaviour
         joint = GetComponent<SpringJoint>();
         originPosition = transform.localPosition;
         originRotation = transform.localRotation;
+        Initialize(30);
     }
 
     private void Start()
@@ -45,6 +47,8 @@ public class Bolt : MonoBehaviour
         {
             if (socket.IsMagazine)
                 magazineSystem = gun.magazineSystem;
+            else
+                magazineSystem = null;
             // 노리쇠의 로컬 회전 방향 = 초기 회전 방향
             transform.localRotation = originRotation;
             // 노리쇠의 로컬 위치 = x,y는 초기 위치, z는 본인의 로컬 위치
@@ -71,7 +75,6 @@ public class Bolt : MonoBehaviour
                 if (magazineSystem != null && magazineSystem.BulletCount >= 0)
                     boltRetraction = true;
             }
-            //if (magazineSystem.BulletCount <= 0 || magazineSystem == null) return;
             if (boltRetraction)
             {
                 round.SetActive(true);
@@ -84,7 +87,47 @@ public class Bolt : MonoBehaviour
         rb.AddForce(Vector3.back * impulsePower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
+        GetObject();
         boltRetraction = false;
         redyToShot = false;
+    }
+
+    private void Initialize(int initCount)
+    {
+        for (int i = 0; i < initCount; i++)
+        {
+            poolingObjectQueue.Enqueue(CreateNewObject());
+        }
+    }
+
+    private GameObject CreateNewObject()
+    {
+        var newObj = Instantiate(ejectBullet);
+        newObj.gameObject.SetActive(false);
+        newObj.transform.SetParent(transform);
+        return newObj;
+    }
+
+    public void GetObject()
+    {
+        if (poolingObjectQueue.Count > 0)
+        {
+            var obj = poolingObjectQueue.Dequeue();
+            obj.transform.position = transform.position;
+            obj.SetActive(true);
+        }
+        else
+        {
+            var newObj = CreateNewObject();
+            newObj.transform.position = transform.position;
+            newObj.SetActive(true);
+        }
+    }
+
+    public void ReturnObject(GameObject obj)
+    {
+        obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
+        poolingObjectQueue.Enqueue(obj);
     }
 }

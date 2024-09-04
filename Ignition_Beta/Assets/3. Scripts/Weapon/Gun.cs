@@ -94,7 +94,7 @@ public class Gun : MonoBehaviour
                     magazineSystem.ChangeMagazine();
 
                 // 탄창 결합여부와 총알 개수 확인, 약실 확인
-                if (socket.IsMagazine && bolt.redyToShot)
+                if (bolt.redyToShot)
                 {
                     if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거를 눌렀을 때 작동
                     {
