@@ -39,8 +39,7 @@ public class Gun : MonoBehaviour
     void Fire()
     {
         // 발사 지연시간
-        if (currentTime <= fireTime) return;
-        if (bolt.redyToShot) // 노리쇠가 준비 되었을 때
+        if (currentTime >= fireTime)
         {
             // 총알 생성
             Rigidbody bulletrb = Instantiate
@@ -48,14 +47,11 @@ public class Gun : MonoBehaviour
             bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // 총알의 발사 방향 및 속도
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
-            magazineSystem.BulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
             bolt.Shot();
             muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
             Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
             currentTime = 0; // 발사 지연시간 초기화
         }
-        else // 준비되지 않았다면 소리 재생
-            audioSource.PlayOneShot(emptyShotSound);
     }
 
     void HideLight()
@@ -85,12 +81,17 @@ public class Gun : MonoBehaviour
                 if (ejectMagazine[source].stateDown) // 탄창 분리
                     magazineSystem.ChangeMagazine();
 
-                if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거를 눌렀을 때 작동
+                if (bolt.redyToShot) // 노리쇠가 준비 되었을 때
                 {
-                    Fire();
+                    if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거를 눌렀을 때 작동
+                    {
+                        Fire();
+                    }
+                    else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
+                        currentTime = fireTime;
                 }
-                else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
-                    currentTime = fireTime;                    
+                else if (fireAction[source].stateDown) // 준비되지 않았다면 소리 재생
+                    audioSource.PlayOneShot(emptyShotSound);
             }
             else
             {
