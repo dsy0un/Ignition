@@ -1,3 +1,4 @@
+using Microsoft.Win32.SafeHandles;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ public class ObjPoolPrefab : MonoBehaviour
 {
     private Bolt bolt;
     public Rigidbody rb;
-    public GameObject Render;
     public float ejectPower;
     private void Awake()
     {
@@ -25,5 +25,6 @@ public class ObjPoolPrefab : MonoBehaviour
         rb.AddRelativeTorque(Vector3.right * 10, ForceMode.Impulse);
         yield return new WaitForSeconds(4);
         bolt.ReturnObject(this.gameObject);
+        transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 }

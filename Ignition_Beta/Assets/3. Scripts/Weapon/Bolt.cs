@@ -25,7 +25,6 @@ public class Bolt : MonoBehaviour
     private bool boltRetraction;
     Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
 
-    // magazineSystem.BulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
 
     private void Awake()
     {
@@ -59,10 +58,10 @@ public class Bolt : MonoBehaviour
                 joint.spring = 0; // 스프링 조인트 끄기
             if (transform.localPosition.z >= originPosition.z - 0.01f) // 노리쇠의 로컬 위치가 초기 위치 - 0.01 위치일 때
             {
-                joint.spring = 0; // 스프링 조인트 끄기
                 transform.localPosition = originPosition; // 노리쇠 로컬 위치 = 초기 위치
                 if (boltRetraction)
                 {
+                    boltRetraction = false;
                     redyToShot = true;
                 }
             }
@@ -73,8 +72,10 @@ public class Bolt : MonoBehaviour
                 transform.localPosition = new Vector3
                     (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
                 cartridge.SetActive(false);
-                if (magazineSystem != null && magazineSystem.BulletCount >= 0)
+                if (magazineSystem != null && magazineSystem.BulletCount > 0)
+                {
                     boltRetraction = true;
+                }
             }
             if (boltRetraction)
             {
@@ -89,7 +90,6 @@ public class Bolt : MonoBehaviour
         round.SetActive(false);
         cartridge.SetActive(true);
         GetObject();
-        boltRetraction = false;
         redyToShot = false;
     }
 
