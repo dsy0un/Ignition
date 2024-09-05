@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyState : MonoBehaviour, IHitAble
@@ -19,6 +20,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     private float attackDelay = 2.5f;
     private float attackDistance = 5f;
     private float distance;
+    private Vector3 lookPostion;
     private bool isDead;
     private bool inDistance;
 
@@ -54,6 +56,10 @@ public class EnemyState : MonoBehaviour, IHitAble
         {
             currentTime += Time.deltaTime;
         }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    StartCoroutine(enemyMove.BackMove(-lookPostion));
+        //}
     }
 
     IEnumerator CheckState()
@@ -63,7 +69,11 @@ public class EnemyState : MonoBehaviour, IHitAble
             yield return new WaitForSeconds(0.2f);
 
             if (enemyMove.target.transform.TryGetComponent(out Collider col))
+            {
+                lookPostion = col.ClosestPoint(transform.position) - transform.localPosition;
                 distance = Vector3.Distance(col.ClosestPoint(transform.position), transform.position);
+            }
+                
             else 
                 distance = Vector3.Distance(enemyMove.target.transform.position, this.transform.position);
             if (distance <= attackDistance)

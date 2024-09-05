@@ -19,11 +19,16 @@ public class Barrier : MonoBehaviour, IHitAble
     private void Start()
     {
         currentHP = maxHP;
+        StartCoroutine(CoroutineUpdate());
     }
 
-    void Update()
+    IEnumerator CoroutineUpdate()
     {
-        image.fillAmount = currentHP / maxHP;
+        while (true)
+        {
+            image.fillAmount = currentHP / maxHP;
+            yield return null;
+        }
     }
 
     public void Hit(float dmg, string coliName)
