@@ -47,7 +47,6 @@ public class LookOut : MonoBehaviour
             int sec = (int)time % 60;
             int min = (int)time / 60 % 60;
             int hour = (int)time / 3600 % 60;
-            Debug.Log(time);
             text.text = $"{hour:D2}:{min:D2}:{sec:D2}";
             yield return null;
         }

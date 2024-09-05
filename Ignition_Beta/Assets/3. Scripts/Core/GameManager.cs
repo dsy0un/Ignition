@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
 
     public Barrier barrier;
     public Player player;
+    public EnemyGenerate enemyGenerate;
     private Cooldown cooldown;
+    private LookOut lookOut;
     
 
     private void Awake()
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour
         cooldown = FindObjectOfType<Cooldown>();
         player = FindObjectOfType<Player>();
         barrier = FindObjectOfType<Barrier>();
+        lookOut = FindObjectOfType<LookOut>();
+        enemyGenerate = FindObjectOfType<EnemyGenerate>();
     }
 
     public void ClearEnemy()
@@ -49,6 +53,7 @@ public class GameManager : MonoBehaviour
     }
     public void DefSuccessEvent()
     {
-        
+        lookOut.DefSuccessAnimation();  
+        enemyGenerate.canSpawn = false;
     }
 }
