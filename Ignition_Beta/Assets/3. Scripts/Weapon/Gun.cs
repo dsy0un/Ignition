@@ -18,15 +18,6 @@ public class Gun : MonoBehaviour
     public SteamVR_Action_Boolean ejectMagazine;
     public SteamVR_Action_Boolean changeFireMode;
     public GameObject bulletPref;
-    private Rigidbody rb;
-    //public Transform gunTransform; // 총기의 Transform
-    //public float recoilAmount = 2f; // 반동의 세기
-    //public float recoilSpeed = 5f; // 반동이 원위치로 돌아오는 속도
-
-    private Vector3 originalPosition;
-    private Quaternion originalRotation;
-    private Vector3 recoilOffset;
-    private Quaternion recoilRotation;
 
     public float shootingSpeed = 1f;
     public float recoil = 5;
@@ -44,14 +35,11 @@ public class Gun : MonoBehaviour
     {
         StartCoroutine("GunWork");
         currentTime = fireTime; // 발사 지연시간 초기화
-        //originalPosition = gunTransform.localPosition;
-        //originalRotation = gunTransform.localRotation;
     }
     void Fire()
     {
         // 발사 지연시간
-        if (currentTime <= fireTime) return;
-        if (bolt.redyToShot) // 노리쇠가 준비 되었을 때
+        if (currentTime >= fireTime)
         {
             // 총알 생성
             Rigidbody bulletrb = Instantiate
@@ -59,14 +47,11 @@ public class Gun : MonoBehaviour
             bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // 총알의 발사 방향 및 속도
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
-            magazineSystem.BulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
             bolt.Shot();
             muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
             Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
             currentTime = 0; // 발사 지연시간 초기화
         }
-        else // 준비되지 않았다면 소리 재생
-            audioSource.PlayOneShot(emptyShotSound);
     }
 
     void HideLight()
@@ -96,29 +81,23 @@ public class Gun : MonoBehaviour
                 if (ejectMagazine[source].stateDown) // 탄창 분리
                     magazineSystem.ChangeMagazine();
 
-                if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거를 눌렀을 때 작동
+                if (bolt.redyToShot) // 노리쇠가 준비 되었을 때
                 {
-                    Fire();
+                    if (fireAction[source].lastState != fireAction[source].stateDown) // 트리거를 눌렀을 때 작동
+                    {
+                        Fire();
+                    }
+                    else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
+                        currentTime = fireTime;
                 }
-                else // 트리거가 눌려있지 않을 경우 발사 지연시간 초기화
-                    currentTime = fireTime;                    
+                else if (fireAction[source].stateDown) // 준비되지 않았다면 소리 재생
+                    audioSource.PlayOneShot(emptyShotSound);
             }
             else
             {
                 isGrab = false;
             }
-            //gunTransform.localPosition = 
-            //    Vector3.Lerp(gunTransform.localPosition, originalPosition + recoilOffset, Time.deltaTime * recoilSpeed);
-            //gunTransform.localRotation = 
-            //    Quaternion.Slerp(gunTransform.localRotation, originalRotation * recoilRotation, Time.deltaTime * recoilSpeed);
             yield return null;
         }
     }
-
-    //void ApplyRecoil()
-    //{
-    //    // 랜덤한 반동 적용 (위쪽과 좌우로)
-    //    recoilOffset = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(0.1f, 0.2f), 0) * recoilAmount;
-    //    recoilRotation = Quaternion.Euler(new Vector3(-Random.Range(2f, 5f), Random.Range(-1f, 1f), 0) * recoilAmount);
-    //}
 }
