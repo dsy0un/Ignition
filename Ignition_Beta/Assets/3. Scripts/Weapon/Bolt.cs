@@ -19,12 +19,13 @@ public class Bolt : MonoBehaviour
     private Vector3 originPosition;
     private Quaternion originRotation;
     public float endPositionValue;
+    public float impulsePower;
     public int jointValue;
     public bool redyToShot;
     private bool boltRetraction;
-    public float impulsePower;
-
     Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
+
+    // magazineSystem.BulletCount -= 1; // ÃÑ ¹ß»ç½Ã ÅºÃ¢ÀÇ ÃÑ ÃÑ¾Ë °³¼ö -1
 
     private void Awake()
     {
