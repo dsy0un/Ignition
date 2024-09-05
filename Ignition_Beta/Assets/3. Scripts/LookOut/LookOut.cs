@@ -13,7 +13,7 @@ public class LookOut : MonoBehaviour
     private TextMeshProUGUI text;
     [SerializeField]
     private EnemyGenerate Egen;
-    [SerializeField]
+
     private Animator animator;
 
     bool cool = false;
@@ -50,5 +50,9 @@ public class LookOut : MonoBehaviour
             text.text = $"{hour:D2}:{min:D2}:{sec:D2}";
             yield return null;
         }
+    }
+    void Shake(float time)
+    {
+
     }
 }
