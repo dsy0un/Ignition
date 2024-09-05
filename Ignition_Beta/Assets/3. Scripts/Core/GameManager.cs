@@ -1,7 +1,9 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEditorInternal;
 using UnityEngine;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour
@@ -21,7 +23,10 @@ public class GameManager : MonoBehaviour
     public Player player;
     public EnemyGenerate enemyGenerate;
     private LookOut lookOut;
-    
+
+    [SerializeField]
+    private float shakeAmount = 0.2f;
+
 
     private void Awake()
     {
@@ -60,4 +65,29 @@ public class GameManager : MonoBehaviour
         lookOut.DefSuccessAnimation();  
         enemyGenerate.canSpawn = false;
     }
+    /// <summary>
+    /// 플레이어 진동주기 (컨트롤러 포함)
+    /// </summary>
+    /// <returns>Null</returns>
+    IEnumerator Shake()
+    {
+        Vector3 originPosition = player.transform.localPosition;
+        float elapsedTime = 0.0f;
+
+        while (true)
+        {
+            Vector3 randomPoint = originPosition + Random.insideUnitSphere * shakeAmount;
+            //player.transform.localPosition = Vector3.Lerp(player.transform.localPosition, randomPoint, Time.deltaTime * shakeSpeed);
+            yield return null;
+
+            elapsedTime += Time.deltaTime;
+        }
+        //player.transform.localPosition = originPosition;
+    }
+    //private void Pulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
+    //{
+    //    hapticAction.Execute(0, duration, frequency, amplitude, source);
+    //    Debug.Log("Pulse " + source.ToString());
+
+    //}
 }
