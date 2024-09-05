@@ -47,6 +47,7 @@ public class Gun : MonoBehaviour
             bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // 총알의 발사 방향 및 속도
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
+            magazineSystem.BulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
             bolt.Shot();
             muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
             Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
