@@ -1,7 +1,4 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
-using UnityEditorInternal;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
@@ -24,12 +21,17 @@ public class GameManager : MonoBehaviour
     public EnemyGenerate enemyGenerate;
     private LookOut lookOut;
 
+    public SteamVR_Action_Vibration hapticAction;
     [SerializeField]
     private float shakeAmount = 0.2f;
-
+    [SerializeField]
+    private float shakeSpeed = 1.0f;
+    [SerializeField]
+    private float vibrate = 0.1f;
 
     private void Awake()
     {
+        Debug.Log(hapticAction);
         if (instance == null)
         {
             instance = this;
@@ -69,25 +71,37 @@ public class GameManager : MonoBehaviour
     /// 플레이어 진동주기 (컨트롤러 포함)
     /// </summary>
     /// <returns>Null</returns>
-    IEnumerator Shake()
+    public IEnumerator PlayerShake(float time)
     {
         Vector3 originPosition = player.transform.localPosition;
         float elapsedTime = 0.0f;
 
-        while (true)
+        while (elapsedTime <= time)
         {
             Vector3 randomPoint = originPosition + Random.insideUnitSphere * shakeAmount;
-            //player.transform.localPosition = Vector3.Lerp(player.transform.localPosition, randomPoint, Time.deltaTime * shakeSpeed);
+            player.transform.localPosition = Vector3.Lerp(player.transform.localPosition, randomPoint, Time.deltaTime * shakeSpeed);
             yield return null;
 
             elapsedTime += Time.deltaTime;
-        }
-        //player.transform.localPosition = originPosition;
-    }
-    //private void Pulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
-    //{
-    //    hapticAction.Execute(0, duration, frequency, amplitude, source);
-    //    Debug.Log("Pulse " + source.ToString());
 
-    //}
+            int ran = Random.Range(0, 2);
+            print(ran);
+            Pulse(.01f, 150, ran, SteamVR_Input_Sources.LeftHand);
+            Pulse(.01f, 150, ran, SteamVR_Input_Sources.RightHand);
+        }
+        player.transform.localPosition = originPosition;
+    }
+    /// <summary>
+    /// 컨트롤러 진동
+    /// </summary>
+    /// <param name="duration">지속시간</param>
+    /// <param name="frequency">Hz (값 바꿔도 큰 변화 없음)</param>
+    /// <param name="amplitude">진동 강도</param>
+    /// <param name="source">컨트롤러 종류</param>
+    private void Pulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
+    {
+        hapticAction.Execute(0, duration, frequency, amplitude, source);
+        Debug.Log("Pulse " + source.ToString());
+
+    }
 }

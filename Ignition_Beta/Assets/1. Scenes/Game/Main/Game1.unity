@@ -7247,6 +7247,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 325607478}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &333204280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6495106574256648219, guid: cef843f4488a7ad4b834d52d8916bfa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1320768540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &333204284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333204280}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6932622, y: 0.39405617, z: 1.381871}
+  m_Center: {x: -0.049587715, y: 0.20635855, z: -0.040697426}
 --- !u!1001 &341863747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31266,10 +31293,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Box_1 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5076992142780491187, guid: cef843f4488a7ad4b834d52d8916bfa6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6495106574256648219, guid: cef843f4488a7ad4b834d52d8916bfa6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 333204284}
   m_SourcePrefab: {fileID: 100100000, guid: cef843f4488a7ad4b834d52d8916bfa6, type: 3}
 --- !u!1001 &1325092513
 PrefabInstance:
@@ -44859,6 +44891,12 @@ MonoBehaviour:
   barrier: {fileID: 0}
   player: {fileID: 0}
   enemyGenerate: {fileID: 0}
+  hapticAction:
+    actionPath: /actions/default/out/Haptic
+    needsReinit: 0
+  shakeAmount: 1
+  shakeSpeed: 1
+  vibrate: 0.1
 --- !u!1001 &1921302270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51318,6 +51356,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3982508707927149995, guid: 01e32efd818c25042b8f1e5eca02ba33,
+        type: 3}
+      propertyPath: _fadeTime
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4075382318559700964, guid: 01e32efd818c25042b8f1e5eca02ba33,
         type: 3}
       propertyPath: m_Layer
@@ -52251,5 +52294,5 @@ SceneRoots:
   - {fileID: 1054674366512806032}
   - {fileID: 1098011445}
   - {fileID: 1320768540}
-  - {fileID: 1917976335}
   - {fileID: 557442681}
+  - {fileID: 1917976335}

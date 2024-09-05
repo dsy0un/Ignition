@@ -53,6 +53,6 @@ public class LookOut : MonoBehaviour
     }
     void Shake(float time)
     {
-
+        StartCoroutine(GameManager.Instance.PlayerShake(time));
     }
 }
