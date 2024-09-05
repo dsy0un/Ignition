@@ -58,7 +58,6 @@ public class EnemyState : MonoBehaviour, IHitAble
 
     IEnumerator CheckState()
     {
-        Debug.Log(isDead);
         while (!isDead)
         {
             yield return new WaitForSeconds(0.2f);

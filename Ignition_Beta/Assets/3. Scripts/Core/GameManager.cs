@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     public Barrier barrier;
     public Player player;
     public EnemyGenerate enemyGenerate;
-    private Cooldown cooldown;
     private LookOut lookOut;
     
 
@@ -38,9 +37,11 @@ public class GameManager : MonoBehaviour
         ReGetCom();
         // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
     }
+    /// <summary>
+    /// 기본적인 컴퍼넌트 저장
+    /// </summary>
     public void ReGetCom()
     {
-        cooldown = FindObjectOfType<Cooldown>();
         player = FindObjectOfType<Player>();
         barrier = FindObjectOfType<Barrier>();
         lookOut = FindObjectOfType<LookOut>();
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour
     {
 
     }
+    /// <summary>
+    /// 디펜스 성공 이벤트
+    /// </summary>
     public void DefSuccessEvent()
     {
         lookOut.DefSuccessAnimation();  
