@@ -54,7 +54,7 @@ public class Bolt : MonoBehaviour
             // 노리쇠의 로컬 위치 = x,y는 초기 위치, z는 본인의 로컬 위치
             transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
             joint.spring = jointValue; // 스프링 조인트 작동
-            if (interactable.attachedToHand != null) // 노리쇠를 잡고 있을 때
+            if (interactable.attachedToHand != null || !gun.isGrab) // 노리쇠를 잡고 있거나 총을 잡고 있지 않을 때
                 joint.spring = 0; // 스프링 조인트 끄기
             if (transform.localPosition.z >= originPosition.z - 0.01f) // 노리쇠의 로컬 위치가 초기 위치 - 0.01 위치일 때
             {
@@ -84,7 +84,7 @@ public class Bolt : MonoBehaviour
     }
     public void Shot()
     {
-        rb.AddForce(Vector3.back * impulsePower, ForceMode.Impulse);
+        rb.AddRelativeForce(Vector3.back * impulsePower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
         GetObject();
