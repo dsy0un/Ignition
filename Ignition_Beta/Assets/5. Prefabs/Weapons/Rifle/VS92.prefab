@@ -938,7 +938,7 @@ MonoBehaviour:
   socket: {fileID: 9149684897142072417}
   round: {fileID: 6699497327567153674}
   cartridge: {fileID: 7969430309308533093}
-  ejectBullet: {fileID: 1446260476273730530, guid: c71822f76b915cc4aaa6ccd244f1a9e1,
+  ejectBullet: {fileID: 2487994259024837777, guid: c71822f76b915cc4aaa6ccd244f1a9e1,
     type: 3}
   endPositionValue: 0.105
   jointValue: 1000
@@ -1376,7 +1376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4444195592465266019
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,6 +1432,7 @@ MonoBehaviour:
   magazineSystem: {fileID: 0}
   socket: {fileID: 9149684897142072417}
   bolt: {fileID: 843094510943452840}
+  isGrab: 0
 --- !u!82 &8652097761768528862
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1877,7 +1878,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6079739550385137991}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
