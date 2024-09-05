@@ -83,9 +83,7 @@ public class GameManager : MonoBehaviour
             yield return null;
 
             elapsedTime += Time.deltaTime;
-
             int ran = Random.Range(0, 2);
-            print(ran);
             Pulse(.01f, 150, ran, SteamVR_Input_Sources.LeftHand);
             Pulse(.01f, 150, ran, SteamVR_Input_Sources.RightHand);
         }
