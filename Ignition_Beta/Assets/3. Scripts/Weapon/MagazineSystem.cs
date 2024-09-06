@@ -24,8 +24,11 @@ public class MagazineSystem : MonoBehaviour
     public GameObject rounds;
     public GameObject follower;
 
+    private Vector3 magScale;
+
     private void Awake()
     {
+        magScale = transform.localScale;
         bulletCount = maxBullet;
         interactable = GetComponent<Interactable>();
         rb = GetComponent<Rigidbody>();
@@ -98,7 +101,7 @@ public class MagazineSystem : MonoBehaviour
             isLoad = false;
             col.isTrigger = false;
             rb.AddForce(-transform.up * 100);
-            transform.localScale = Vector3.one;
+            transform.localScale = magScale;
         }
     }
 }
