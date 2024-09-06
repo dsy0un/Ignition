@@ -72,8 +72,9 @@ public class MagazineSystem : MonoBehaviour
         {
             if (other.tag == "Socket" && !isLoad && other.GetComponent<Socket>().IsMagazine == false)
             {
-                rb.useGravity = false;
                 magazinePoint = other.transform.GetChild(0);
+                if (gameObject.tag != magazinePoint.gameObject.tag) return;
+                rb.useGravity = false;
                 isLoad = true;
                 col.isTrigger = true;
                 other.GetComponent<Socket>().IsMagazine = true;
