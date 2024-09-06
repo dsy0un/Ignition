@@ -12,8 +12,8 @@ public class Cooldown : MonoBehaviour
     [SerializeField]
     float cooltime;
     public float Cooltime {  get { return cooltime; }}
-    [SerializeField]
-    GameObject playerHead;
+    [SerializeField, Tooltip("이거 자동화")]
+    GameObject playerHead; // 이거 자동화, 하나 더 있음 뭔진 모름
 
     float currentTime;
 
