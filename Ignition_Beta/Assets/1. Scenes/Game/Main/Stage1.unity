@@ -488,6 +488,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f8b20d1c8e5a844a1a8ebce939865b, type: 3}
+--- !u!20 &1178873481 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5117454089817491763, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1178873480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1208649720 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7279669392292658126, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
@@ -864,6 +870,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7520948875351974250, guid: a7aa485d05c17b5458f47a20ba5ee49a,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1178873481}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
