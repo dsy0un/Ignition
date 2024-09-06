@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DefFailureEvent()
     {
-        drone.gameObject.SetActive(true);
+        drone.Animator.Play("DefenceFailure");
         window.gameObject.SetActive(true);
     }
     
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DefEscapeEvent()
     {
-        drone.Animator.SetBool("TimeOut", true);
+        drone.Animator.Play("DefenceEscape");
         window.ModalWindowOut();
     }
 

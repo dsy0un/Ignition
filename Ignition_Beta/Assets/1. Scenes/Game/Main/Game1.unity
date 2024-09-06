@@ -13486,6 +13486,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6532135440777734835, guid: 2128b220857b4614a9d8f4c45a370a2a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 211.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6713873010666850500, guid: 2128b220857b4614a9d8f4c45a370a2a,
         type: 3}
       propertyPath: m_Name
@@ -13494,7 +13499,7 @@ PrefabInstance:
     - target: {fileID: 6713873010666850500, guid: 2128b220857b4614a9d8f4c45a370a2a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6713873010666850501, guid: 2128b220857b4614a9d8f4c45a370a2a,
         type: 3}
@@ -23715,6 +23720,11 @@ PrefabInstance:
       objectReference: {fileID: 234147273}
     - target: {fileID: 114811678967924108, guid: 99dd25f7aec14f24194a7f0eb3c4507c,
         type: 3}
+      propertyPath: useCustomTexts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114811678967924108, guid: 99dd25f7aec14f24194a7f0eb3c4507c,
+        type: 3}
       propertyPath: descriptionText
       value: "\uBCA0\uB9AC\uC5B4\uAC00 \uACE7 \uBD95\uAD34\uB429\uB2C8\uB2E4. \uD0C8\uCD9C\uC744
         \uC900\uBE44\uD558\uC2ED\uC2DC\uC624."
@@ -30462,6 +30472,16 @@ PrefabInstance:
     - target: {fileID: 2137003271403550230, guid: ed56bf579a81a0946958a8e4d5fb50d9,
         type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938665385447801134, guid: ed56bf579a81a0946958a8e4d5fb50d9,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938665385447801134, guid: ed56bf579a81a0946958a8e4d5fb50d9,
+        type: 3}
+      propertyPath: highlightOnHover
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -54998,7 +55018,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0

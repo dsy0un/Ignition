@@ -6,6 +6,8 @@ public class Drone : MonoBehaviour
 {
     [SerializeField]
     Transform[] rotors;
+    [SerializeField]
+    
     
     Animator animator;
     public Animator Animator

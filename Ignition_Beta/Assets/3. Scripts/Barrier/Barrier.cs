@@ -33,14 +33,24 @@ public class Barrier : MonoBehaviour, IHitAble
     {
         while (true)
         {
-            image.fillAmount = currentHP / maxHP;   
-            Debug.Log(2);
+            image.fillAmount = currentHP / maxHP;
+
             if (isEscape)
             {
-                Debug.Log(1);
                 currentTime -= Time.deltaTime;
                 int min = (int)currentTime / 60 % 60;
-                GameManager.Instance.window.windowTimer.text = $"\nºØ±«±îÁö ³²Àº ½Ã°£ {min:D2}:{currentTime:00.00}";
+                switch (currentTime)
+                {
+                    case float n when (n <= 30f && n >= 10f):
+                        GameManager.Instance.window.windowTimer.text = $"ºØ±«±îÁö ³²Àº ½Ã°£ : <color=orange>{min:D2}:{currentTime:00.00}</color>";
+                        break;
+                    case float n when (n <= 10f):
+                        GameManager.Instance.window.windowTimer.text = $"ºØ±«±îÁö ³²Àº ½Ã°£ : <color=red>{min:D2}:{currentTime:00.00}</color>";
+                        break;
+                    default:
+                        GameManager.Instance.window.windowTimer.text = $"ºØ±«±îÁö ³²Àº ½Ã°£ : <color=white>{min:D2}:{currentTime:00.00}</color>";
+                        break;
+                }
             }
 
             yield return null;
@@ -61,7 +71,6 @@ public class Barrier : MonoBehaviour, IHitAble
         GameManager.Instance.DefFailureEvent();
         StartCoroutine(Escape());
         isEscape = true;
-        Debug.Log(isEscape);
     }
 
     IEnumerator Escape()
