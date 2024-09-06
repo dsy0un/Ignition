@@ -23,7 +23,10 @@ public class Bolt : MonoBehaviour
     public int jointValue;
     public bool redyToShot;
     private bool boltRetraction;
+
     Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
+    public GameObject ejectPoint;
+    public int spawnPrefabAmount;
 
 
     private void Awake()
@@ -33,7 +36,7 @@ public class Bolt : MonoBehaviour
         joint = GetComponent<SpringJoint>();
         originPosition = transform.localPosition;
         originRotation = transform.localRotation;
-        Initialize(30);
+        Initialize(spawnPrefabAmount);
     }
 
     private void Start()
@@ -76,6 +79,11 @@ public class Bolt : MonoBehaviour
                 {
                     boltRetraction = true;
                 }
+                else
+                {
+                    round.SetActive(false);
+                    cartridge.SetActive(false);
+                }
             }
             if (boltRetraction)
             {
@@ -114,13 +122,13 @@ public class Bolt : MonoBehaviour
         if (poolingObjectQueue.Count > 0)
         {
             var obj = poolingObjectQueue.Dequeue();
-            obj.transform.position = transform.position;
+            obj.transform.position = ejectPoint.transform.position;
             obj.SetActive(true);
         }
         else
         {
             var newObj = CreateNewObject();
-            newObj.transform.position = transform.position;
+            newObj.transform.position = ejectPoint.transform.position;
             newObj.SetActive(true);
         }
     }

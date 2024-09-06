@@ -108,15 +108,15 @@ public class EnemyState : MonoBehaviour, IHitAble
                         h.Hit(dmg,"");
                 }
             }
-            else if (enemyMove.target.layer == barrierLayer)
-            {
-                enemyAnim.SetTrigger("stinger");
-                if (distance <= attackDistance)
-                {
-                    if (GameManager.Instance.barrier.transform.TryGetComponent<IHitAble>(out var h))
-                        h.Hit(dmg, "");
-                }
-            }
+            //else if (enemyMove.target.layer == barrierLayer)
+            //{
+            //    enemyAnim.SetTrigger("stinger");
+            //    if (distance <= attackDistance)
+            //    {
+            //        if (GameManager.Instance.barrier.transform.TryGetComponent<IHitAble>(out var h))
+            //            h.Hit(dmg, "");
+            //    }
+            //}
             currentTime = 0;
         }
     }
