@@ -19216,11 +19216,12 @@ MonoBehaviour:
   ejectBullet: {fileID: 2487994259024837777, guid: c71822f76b915cc4aaa6ccd244f1a9e1,
     type: 3}
   endPositionValue: 0.105
+  startPositionValue: 0.01
   impulsePower: 15
   jointValue: 1000
   redyToShot: 0
   ejectPoint: {fileID: 1827517989}
-  spawnPrefabAmount: 0
+  spawnPrefabAmount: 30
 --- !u!1 &5884821474007701582
 GameObject:
   m_ObjectHideFlags: 0
@@ -23816,11 +23817,12 @@ MonoBehaviour:
   ejectBullet: {fileID: 2297567553019620808, guid: c95672ed8d5b0a8419ce04f36abb49a5,
     type: 3}
   endPositionValue: 0.044
+  startPositionValue: 0.004
   impulsePower: 5
   jointValue: 1500
   redyToShot: 0
   ejectPoint: {fileID: 1860128075}
-  spawnPrefabAmount: 0
+  spawnPrefabAmount: 10
 --- !u!145 &9086573612202044763
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -23832,7 +23834,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.00014472008, y: 0.032286525, z: 0.06400013}
   serializedVersion: 2
   m_Spring: 1000
   m_Damper: 15
