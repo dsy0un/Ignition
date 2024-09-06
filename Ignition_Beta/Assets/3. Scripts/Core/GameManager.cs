@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
     public void DefEscapeEvent()
     {
         drone.Animator.SetBool("TimeOut", true);
+        window.ModalWindowOut();
     }
 
     /// <summary>

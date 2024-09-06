@@ -10,12 +10,14 @@ namespace Michsky.UI.Shift
         [Header("Resources")]
         public TextMeshProUGUI windowTitle;
         public TextMeshProUGUI windowDescription;
+        public TextMeshProUGUI windowTimer;
 
         [Header("Settings")]
         public bool sharpAnimations = false;
         public bool useCustomTexts = false;
         public string titleText = "Title";
         [TextArea] public string descriptionText = "Description here";
+        public string timerText = "00:00.00";
 
         Animator mWindowAnimator;
         bool isOn = false;
@@ -28,6 +30,7 @@ namespace Michsky.UI.Shift
             {
                 windowTitle.text = titleText;
                 windowDescription.text = descriptionText;
+                windowTimer.text = timerText;
             }
 
             gameObject.SetActive(false);

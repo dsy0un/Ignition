@@ -10,9 +10,11 @@ public class Barrier : MonoBehaviour, IHitAble
     [SerializeField]
     float maxHP = 100;
     float currentHP;
+    [SerializeField]
+    float breakTime;
+    float currentTime;
 
-    float timer;
-    bool isBreakBarrier;
+    bool isEscape;
 
     void Awake()
     {
@@ -21,8 +23,9 @@ public class Barrier : MonoBehaviour, IHitAble
 
     private void Start()
     {
+        isEscape = false;
         currentHP = maxHP;
-        timer = 0;
+        currentTime = breakTime;
         StartCoroutine(CoroutineUpdate());
     }
 
@@ -30,9 +33,15 @@ public class Barrier : MonoBehaviour, IHitAble
     {
         while (true)
         {
-            image.fillAmount = currentHP / maxHP;
-
-            if (isBreakBarrier) timer += 
+            image.fillAmount = currentHP / maxHP;   
+            Debug.Log(2);
+            if (isEscape)
+            {
+                Debug.Log(1);
+                currentTime -= Time.deltaTime;
+                int min = (int)currentTime / 60 % 60;
+                GameManager.Instance.window.windowTimer.text = $"\nºØ±«±îÁö ³²Àº ½Ã°£ {min:D2}:{currentTime:00.00}";
+            }
 
             yield return null;
         }
@@ -40,9 +49,8 @@ public class Barrier : MonoBehaviour, IHitAble
 
     public void Hit(float dmg, string coliName)
     {
-        Debug.Log(currentHP);
         currentHP -= dmg;
-        if (currentHP <= 0)
+        if (currentHP <= 0 && !isEscape)
         {
             Die();
         }
@@ -50,9 +58,17 @@ public class Barrier : MonoBehaviour, IHitAble
 
     public void Die()
     {
-        
         GameManager.Instance.DefFailureEvent();
-        // gameObject.SetActive(false);
+        StartCoroutine(Escape());
+        isEscape = true;
+        Debug.Log(isEscape);
+    }
+
+    IEnumerator Escape()
+    {
+        yield return new WaitForSeconds(breakTime);
+        GameManager.Instance.DefEscapeEvent();
+        gameObject.SetActive(false);
     }
 
     public void Respawn()
