@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 3921931334194705945}
   - component: {fileID: 5555302004658590429}
   - component: {fileID: 3674395994422865160}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: HeadCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,9 +153,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2603879544590673428}
   - component: {fileID: 2751153790580382246}
+  - component: {fileID: 3054067896305616924}
+  - component: {fileID: 913898420891556675}
   m_Layer: 0
   m_Name: Player(Fade)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,8 +172,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.67, y: 0.56, z: 3.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4515750027552458016}
   - {fileID: 8435624336768158052}
@@ -210,6 +212,48 @@ MonoBehaviour:
     actionPath: /actions/default/in/HeadsetOnHead
     needsReinit: 1
   allowToggleTo2D: 1
+--- !u!114 &3054067896305616924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328741010111778872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36df764dbafa9454ca1bbc1f799ede02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input:
+    actionPath: /actions/default/in/TouchPad
+    needsReinit: 0
+  speed: 5
+--- !u!143 &913898420891556675
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328741010111778872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.5
+  m_Radius: 0.25
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!1 &366669504991907549
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2180420657584334785}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: HoverPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +390,7 @@ GameObject:
   - component: {fileID: 3655232414446514436}
   - component: {fileID: 7047897823609361919}
   - component: {fileID: 5786187867752135657}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  twoHandGrab: 0
   otherHand: {fileID: 4561618006155282235}
   handType: 1
   trackedObject: {fileID: 0}
@@ -579,7 +624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5605190241447905527}
   - component: {fileID: 3982508707927149995}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 791982436638497389}
-  _fadeTime: 3.5
+  _fadeTime: 1.7
   _fadeCurve:
     serializedVersion: 2
     m_Curve:
@@ -676,7 +721,7 @@ GameObject:
   - component: {fileID: 4561618006155282235}
   - component: {fileID: 7963727802750414117}
   - component: {fileID: 9056106944154997081}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,6 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  twoHandGrab: 0
   otherHand: {fileID: 3655232414446514436}
   handType: 2
   trackedObject: {fileID: 0}
@@ -815,7 +861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7903307845668822003}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: HoverPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8578769018991462381}
   - component: {fileID: 7060961220160997698}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: ControllerButtonHints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1429036836964257444}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: ObjectAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1341,7 +1387,7 @@ GameObject:
   - component: {fileID: 7629857233250156994}
   - component: {fileID: 5084645283984216452}
   - component: {fileID: 4951007724824643086}
-  m_Layer: 27
+  m_Layer: 0
   m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1436,7 +1482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3173494690399112375}
   - component: {fileID: 3662990393043988890}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: ControllerButtonHints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1602,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 951
+    m_Bits: 28599
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1644,7 +1690,7 @@ GameObject:
   - component: {fileID: 4538066638500966767}
   - component: {fileID: 8568926172945696415}
   - component: {fileID: 2986549987926141675}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1827,7 +1873,7 @@ GameObject:
   - component: {fileID: 2086470092612936185}
   - component: {fileID: 7907693014820247858}
   - component: {fileID: 5509162089071881637}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: FallbackHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1862,6 +1908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  twoHandGrab: 0
   otherHand: {fileID: 0}
   handType: 0
   trackedObject: {fileID: 0}
@@ -2019,7 +2066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1150492246613074506}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: ObjectAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2272,7 +2319,7 @@ GameObject:
   - component: {fileID: 6980745887108269750}
   - component: {fileID: 7277531787440770237}
   - component: {fileID: 3187063632380617851}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3063,7 +3110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4034595379209315562}
   - component: {fileID: 235241832972353762}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3115,7 +3162,7 @@ GameObject:
   - component: {fileID: 7791137345446818022}
   - component: {fileID: 3899400887956827192}
   - component: {fileID: 791982436638497389}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

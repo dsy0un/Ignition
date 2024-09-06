@@ -13,7 +13,7 @@ public class LookOut : MonoBehaviour
     private TextMeshProUGUI text;
     [SerializeField]
     private EnemyGenerate Egen;
-    [SerializeField]
+
     private Animator animator;
 
     bool cool = false;
@@ -23,7 +23,7 @@ public class LookOut : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void DefSuccess()
+    public void DefSuccessAnimation()
     {
         animator.SetTrigger("Success");
 
@@ -47,9 +47,12 @@ public class LookOut : MonoBehaviour
             int sec = (int)time % 60;
             int min = (int)time / 60 % 60;
             int hour = (int)time / 3600 % 60;
-            Debug.Log(time);
             text.text = $"{hour:D2}:{min:D2}:{sec:D2}";
             yield return null;
         }
+    }
+    void Shake(float time)
+    {
+        StartCoroutine(GameManager.Instance.PlayerShake(time));
     }
 }

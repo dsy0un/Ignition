@@ -21,7 +21,7 @@ public class EnemyGenerate : MonoBehaviour
     private NavMeshSurface nms;
 
     private List<GameObject> pools = new(); // NO MODIFICATION
-    private bool canSpawn = false;
+    public bool canSpawn = false;
 
     private void Start()
     {
