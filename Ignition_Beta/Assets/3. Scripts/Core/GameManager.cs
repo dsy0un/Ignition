@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
     public Barrier barrier;
     public Player player;
     public EnemyGenerate enemyGenerate;
-    private LookOut lookOut;
-    private Drone drone;
-    private ModalWindowManager window;
+    public LookOut lookOut;
+    public Drone drone;
+    public ModalWindowManager window;
 
     public SteamVR_Action_Vibration hapticAction;
     [SerializeField]
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         lookOut = FindObjectOfType<LookOut>();
         enemyGenerate = FindObjectOfType<EnemyGenerate>();
         drone = FindObjectOfType<Drone>(true);
-        window = FindObjectOfType<ModalWindowManager>();
+        window = FindObjectOfType<ModalWindowManager>(true);
     }
 
     public void ClearEnemy()
@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DefFailureEvent()
     {
+        drone.gameObject.SetActive(true);
         window.gameObject.SetActive(true);
     }
     
@@ -111,6 +112,7 @@ public class GameManager : MonoBehaviour
         }
         player.transform.localPosition = originPosition;
     }
+
     /// <summary>
     /// 컨트롤러 진동
     /// </summary>

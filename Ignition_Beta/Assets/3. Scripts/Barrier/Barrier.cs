@@ -11,14 +11,18 @@ public class Barrier : MonoBehaviour, IHitAble
     float maxHP = 100;
     float currentHP;
 
+    float timer;
+    bool isBreakBarrier;
+
     void Awake()
     {
-        
+
     }
 
     private void Start()
     {
         currentHP = maxHP;
+        timer = 0;
         StartCoroutine(CoroutineUpdate());
     }
 
@@ -27,12 +31,16 @@ public class Barrier : MonoBehaviour, IHitAble
         while (true)
         {
             image.fillAmount = currentHP / maxHP;
+
+            if (isBreakBarrier) timer += 
+
             yield return null;
         }
     }
 
     public void Hit(float dmg, string coliName)
     {
+        Debug.Log(currentHP);
         currentHP -= dmg;
         if (currentHP <= 0)
         {
@@ -42,7 +50,9 @@ public class Barrier : MonoBehaviour, IHitAble
 
     public void Die()
     {
-        gameObject.SetActive(false);
+        
+        GameManager.Instance.DefFailureEvent();
+        // gameObject.SetActive(false);
     }
 
     public void Respawn()
