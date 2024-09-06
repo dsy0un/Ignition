@@ -19,11 +19,15 @@ public class Bolt : MonoBehaviour
     private Vector3 originPosition;
     private Quaternion originRotation;
     public float endPositionValue;
+    public float startPositionValue;
     public float impulsePower;
     public int jointValue;
     public bool redyToShot;
     private bool boltRetraction;
+
     Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
+    public GameObject ejectPoint;
+    public int spawnPrefabAmount;
 
 
     private void Awake()
@@ -33,7 +37,7 @@ public class Bolt : MonoBehaviour
         joint = GetComponent<SpringJoint>();
         originPosition = transform.localPosition;
         originRotation = transform.localRotation;
-        Initialize(30);
+        Initialize(spawnPrefabAmount);
     }
 
     private void Start()
@@ -56,7 +60,7 @@ public class Bolt : MonoBehaviour
             joint.spring = jointValue; // 스프링 조인트 작동
             if (interactable.attachedToHand != null || !gun.isGrab) // 노리쇠를 잡고 있거나 총을 잡고 있지 않을 때
                 joint.spring = 0; // 스프링 조인트 끄기
-            if (transform.localPosition.z >= originPosition.z - 0.01f) // 노리쇠의 로컬 위치가 초기 위치 - 0.01 위치일 때
+            if (transform.localPosition.z >= originPosition.z - startPositionValue) // 노리쇠의 로컬 위치가 초기 위치 이상일 때
             {
                 transform.localPosition = originPosition; // 노리쇠 로컬 위치 = 초기 위치
                 if (boltRetraction)
@@ -75,6 +79,11 @@ public class Bolt : MonoBehaviour
                 if (magazineSystem != null && magazineSystem.BulletCount > 0)
                 {
                     boltRetraction = true;
+                }
+                else
+                {
+                    round.SetActive(false);
+                    cartridge.SetActive(false);
                 }
             }
             if (boltRetraction)
@@ -114,13 +123,13 @@ public class Bolt : MonoBehaviour
         if (poolingObjectQueue.Count > 0)
         {
             var obj = poolingObjectQueue.Dequeue();
-            obj.transform.position = transform.position;
+            obj.transform.position = ejectPoint.transform.position;
             obj.SetActive(true);
         }
         else
         {
             var newObj = CreateNewObject();
-            newObj.transform.position = transform.position;
+            newObj.transform.position = ejectPoint.transform.position;
             newObj.SetActive(true);
         }
     }
