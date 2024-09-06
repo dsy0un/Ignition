@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
             Pulse(.01f, 150, ran, SteamVR_Input_Sources.LeftHand);
             Pulse(.01f, 150, ran, SteamVR_Input_Sources.RightHand);
         }
-        player.transform.localPosition = originPosition;
+        //player.transform.localPosition = originPosition;
     }
     /// <summary>
     /// 컨트롤러 진동
