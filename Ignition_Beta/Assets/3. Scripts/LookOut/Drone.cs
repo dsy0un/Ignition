@@ -6,8 +6,19 @@ public class Drone : MonoBehaviour
 {
     [SerializeField]
     Transform[] rotors;
+    
+    Animator animator;
+    public Animator Animator
+    {
+        get { return animator; }
+    }
 
     float speed = 1000f;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {

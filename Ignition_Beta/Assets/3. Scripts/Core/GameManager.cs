@@ -1,3 +1,4 @@
+using Michsky.UI.Shift;
 using System.Collections;
 using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEditorInternal;
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     public Player player;
     public EnemyGenerate enemyGenerate;
     private LookOut lookOut;
+    private Drone drone;
+    private ModalWindowManager window;
     
 
     private void Awake()
@@ -44,6 +47,8 @@ public class GameManager : MonoBehaviour
         barrier = FindObjectOfType<Barrier>();
         lookOut = FindObjectOfType<LookOut>();
         enemyGenerate = FindObjectOfType<EnemyGenerate>();
+        drone = FindObjectOfType<Drone>(true);
+        window = FindObjectOfType<ModalWindowManager>();
     }
 
     public void ClearEnemy()
@@ -65,6 +70,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DefFailureEvent()
     {
-
+        window.gameObject.SetActive(true);
+    }
+    
+    /// <summary>
+    /// 방어 실패 후 돌아가는 이벤트 함수
+    /// </summary>
+    public void DefEscapeEvent()
+    {
+        drone.Animator.SetBool("TimeOut", true);
     }
 }
