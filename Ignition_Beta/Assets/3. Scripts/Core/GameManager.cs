@@ -59,6 +59,30 @@ public class GameManager : MonoBehaviour
     {
 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /// <summary>
     /// 디펜스 성공 이벤트
     /// </summary>
