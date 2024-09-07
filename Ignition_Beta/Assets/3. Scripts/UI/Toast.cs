@@ -53,7 +53,6 @@ public class Toast : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(1);
             transform.position = mainCamera.transform.position 
                 + mainCamera.transform.forward * offset.z
                 + mainCamera.transform.up * offset.y
