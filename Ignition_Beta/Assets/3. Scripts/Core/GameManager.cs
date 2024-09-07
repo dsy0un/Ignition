@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     public SteamVR_Action_Vibration hapticAction;
     [SerializeField]
     private float shakeAmount = 0.2f;
+    public float ShakeAmount
+    {
+        get { return shakeAmount; }
+    }
     [SerializeField]
     private float shakeSpeed = 1.0f;
     [SerializeField]
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
         barrier = FindObjectOfType<Barrier>();
         lookOut = FindObjectOfType<LookOut>();
         enemyGenerate = FindObjectOfType<EnemyGenerate>();
-        drone = FindObjectOfType<Drone>(true);
+        drone = FindObjectOfType<Drone>();
         window = FindObjectOfType<ModalWindowManager>(true);
     }
 
@@ -78,8 +82,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DefEscapeEvent()
     {
-        drone.Animator.Play("DefenceEscape");
         window.ModalWindowOut();
+        drone.Animator.Play("DefenceEscape");
+        StartCoroutine(PlayerShake(10, 0));
     }
 
     /// <summary>
@@ -95,14 +100,14 @@ public class GameManager : MonoBehaviour
     /// 플레이어 진동주기 (컨트롤러 포함)
     /// </summary>
     /// <returns>Null</returns>
-    public IEnumerator PlayerShake(float time)
+    public IEnumerator PlayerShake(float time, float amount)
     {
         Vector3 originPosition = player.transform.localPosition;
         float elapsedTime = 0.0f;
 
         while (elapsedTime <= time)
         {
-            Vector3 randomPoint = originPosition + Random.insideUnitSphere * shakeAmount;
+            Vector3 randomPoint = originPosition + Random.insideUnitSphere * amount;
             player.transform.localPosition = Vector3.Lerp(player.transform.localPosition, randomPoint, Time.deltaTime * shakeSpeed);
             yield return null;
 
@@ -111,7 +116,7 @@ public class GameManager : MonoBehaviour
             Pulse(.01f, 150, ran, SteamVR_Input_Sources.LeftHand);
             Pulse(.01f, 150, ran, SteamVR_Input_Sources.RightHand);
         }
-        player.transform.localPosition = originPosition;
+        // player.transform.localPosition = originPosition;
     }
 
     /// <summary>

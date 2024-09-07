@@ -69,13 +69,14 @@ public class Barrier : MonoBehaviour, IHitAble
     public void Die()
     {
         GameManager.Instance.DefFailureEvent();
-        StartCoroutine(Escape());
+        StartCoroutine(Escape(breakTime));
         isEscape = true;
     }
 
-    IEnumerator Escape()
+    public IEnumerator Escape(float time = 0)
     {
-        yield return new WaitForSeconds(breakTime);
+        yield return new WaitForSeconds(time);
+        GameManager.Instance.player.GetComponent<PlayerController>().enabled = false;
         GameManager.Instance.DefEscapeEvent();
         gameObject.SetActive(false);
     }
