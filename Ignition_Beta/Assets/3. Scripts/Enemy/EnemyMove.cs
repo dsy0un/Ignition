@@ -55,6 +55,10 @@ public class EnemyMove : MonoBehaviour
             yield return null;
         }
     }
+    public void Change(int Volume, Transform starget)
+    {
+        nma.SetDestination(starget.position);
+    }
 
     private void StopMove()
     {

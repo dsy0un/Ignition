@@ -31,13 +31,17 @@ public class SoundSignal : MonoBehaviour
         while (true)
         {
             yield return null;
+            if (!audioSource.isPlaying) yield break;
             colliders = Physics.OverlapSphere(followObject.position, audioMaxDistance, layer);
-
+            Debug.Log(1);
             if (colliders.Length > 0)
             {
                 foreach (Collider col in colliders)
                 {
-
+                    if (col.TryGetComponent<EnemyMove>(out var h))
+                    {
+                        h.Change(soundVolume, followObject);
+                    }
                 }
             }
         }
