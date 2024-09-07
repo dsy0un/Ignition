@@ -7,6 +7,9 @@ using Unity.VisualScripting;
 
 public class Toast : MonoBehaviour
 {
+    Vector3 offset = new Vector3(0, 0, 10);
+    Camera mainCamera = Camera.main;
+
     [SerializeField]
     TextMeshProUGUI toastMsg;
     [SerializeField]
@@ -42,7 +45,24 @@ public class Toast : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(FollowCamera());
         Show("æ»≥Á«œººø‰!", 10.0f, new Color(0.56f, 1, 0.43f));
+    }
+
+    IEnumerator FollowCamera()
+    {
+        while (true)
+        {
+            Debug.Log(1);
+            transform.position = mainCamera.transform.position 
+                + mainCamera.transform.forward * offset.z
+                + mainCamera.transform.up * offset.y
+                + mainCamera.transform.right * offset.x;
+
+            transform.LookAt(mainCamera.transform);
+
+            yield return null;
+        }
     }
 
     struct TOAST
