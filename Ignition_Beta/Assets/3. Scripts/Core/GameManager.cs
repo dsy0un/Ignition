@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public LookOut lookOut;
     public Drone drone;
     public ModalWindowManager window;
+    public EnemyMove enemyMove;
 
     public SteamVR_Action_Vibration hapticAction;
     [SerializeField]
@@ -61,8 +62,7 @@ public class GameManager : MonoBehaviour
         enemyGenerate = FindObjectOfType<EnemyGenerate>();
         drone = FindObjectOfType<Drone>();
         window = FindObjectOfType<ModalWindowManager>(true);
-
-        Toast.Instance.mainCamera = Camera.main;
+        enemyMove = FindObjectOfType<EnemyMove>();
     }
 
     public void ClearEnemy()
