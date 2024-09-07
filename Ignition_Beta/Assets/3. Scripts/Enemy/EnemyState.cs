@@ -167,7 +167,7 @@ public class EnemyState : MonoBehaviour, IHitAble
         enemyAnim.isDie(false);
         gameObject.SetActive(true);
         transform.GetChild(0).gameObject.SetActive(true);
-        transform.position = GetComponentInParent<EnemyGenerate>().GenEnemy();
+        transform.position = GameManager.Instance.enemyGenerate.GenEnemy();
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());
     }
