@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float destructionDelay = 30f;
+    [SerializeField] private float damage;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class Bullet : MonoBehaviour
             string coliName = collision.gameObject.name;
             if (collision.transform.root.TryGetComponent<IHitAble>(out var h))
             {
-                h.Hit(Gun.Damage, coliName);
+                h.Hit(damage, coliName);
                 Destroy(this.gameObject);
             }
         }

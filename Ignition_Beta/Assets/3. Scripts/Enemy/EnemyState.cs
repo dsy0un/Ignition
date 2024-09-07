@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyState : MonoBehaviour, IHitAble
@@ -19,6 +20,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     private float attackDelay = 2.5f;
     private float attackDistance = 5f;
     private float distance;
+    private Vector3 lookPostion;
     private bool isDead;
     private bool inDistance;
 
@@ -28,7 +30,7 @@ public class EnemyState : MonoBehaviour, IHitAble
     public bool InDistance { get { return inDistance; } }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemyAnim = GetComponent<EnemyAnimation>();
         enemyMove = GetComponent<EnemyMove>();
@@ -39,7 +41,9 @@ public class EnemyState : MonoBehaviour, IHitAble
 
         playerLayer = LayerMask.NameToLayer("Player");
         barrierLayer = LayerMask.NameToLayer("Barrier");
-
+    }
+    private void OnEnable()
+    {
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());
     }
@@ -47,10 +51,15 @@ public class EnemyState : MonoBehaviour, IHitAble
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (currentTime <= attackDelay)
         {
             currentTime += Time.deltaTime;
         }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    StartCoroutine(enemyMove.BackMove(-lookPostion));
+        //}
     }
 
     IEnumerator CheckState()
@@ -60,10 +69,13 @@ public class EnemyState : MonoBehaviour, IHitAble
             yield return new WaitForSeconds(0.2f);
 
             if (enemyMove.target.transform.TryGetComponent(out Collider col))
+            {
+                lookPostion = col.ClosestPoint(transform.position) - transform.localPosition;
                 distance = Vector3.Distance(col.ClosestPoint(transform.position), transform.position);
+            }
+                
             else 
                 distance = Vector3.Distance(enemyMove.target.transform.position, this.transform.position);
-
             if (distance <= attackDistance)
             {
                 state = State.Attack;
@@ -150,11 +162,12 @@ public class EnemyState : MonoBehaviour, IHitAble
 
     public void Respawn()
     {
+        if (!GameManager.Instance.enemyGenerate.canSpawn) return;
         isDead = false;
         enemyAnim.isDie(false);
         gameObject.SetActive(true);
         transform.GetChild(0).gameObject.SetActive(true);
-        transform.position = GetComponentInParent<EnemyGenerate>().GenEnemy();
+        transform.position = GameManager.Instance.enemyGenerate.GenEnemy();
         StartCoroutine(this.CheckState());
         StartCoroutine(this.StateForAction());
     }
