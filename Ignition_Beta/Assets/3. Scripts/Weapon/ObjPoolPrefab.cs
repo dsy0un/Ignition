@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ObjPoolPrefab : MonoBehaviour
 {
-    private Bolt bolt;
+    private TestBolt bolt;
     public Rigidbody rb;
     public float ejectPower;
     private void Awake()
     {
-        bolt = GetComponentInParent<Bolt>();
+        bolt = GetComponentInParent<TestBolt>();
     }
     void OnEnable()
     {
