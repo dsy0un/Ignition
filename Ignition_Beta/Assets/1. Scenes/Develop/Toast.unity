@@ -168,6 +168,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrier: {fileID: 0}
+  player: {fileID: 0}
+  enemyGenerate: {fileID: 0}
+  lookOut: {fileID: 0}
+  drone: {fileID: 0}
+  window: {fileID: 0}
+  hapticAction:
+    actionPath: 
+    needsReinit: 0
+  shakeAmount: 0.2
+  shakeSpeed: 1
+  vibrate: 0.1
 --- !u!1 &544784634
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,17 +519,17 @@ PrefabInstance:
     - target: {fileID: 5484656255079602970, guid: a7aa485d05c17b5458f47a20ba5ee49a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5484656255079602970, guid: a7aa485d05c17b5458f47a20ba5ee49a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5484656255079602970, guid: a7aa485d05c17b5458f47a20ba5ee49a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5484656255079602970, guid: a7aa485d05c17b5458f47a20ba5ee49a,
         type: 3}
@@ -538,12 +549,12 @@ PrefabInstance:
     - target: {fileID: 5484656255079602970, guid: a7aa485d05c17b5458f47a20ba5ee49a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5484656255079602970, guid: a7aa485d05c17b5458f47a20ba5ee49a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5484656255079602970, guid: a7aa485d05c17b5458f47a20ba5ee49a,
         type: 3}

@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
-using Unity.VisualScripting;
 
 public class Toast : MonoBehaviour
 {
-    Vector3 offset = new Vector3(0, 0, 10);
-    Camera mainCamera = Camera.main;
+    [SerializeField]
+    Vector3 offset = new Vector3(0, 0, 5);
 
     [SerializeField]
     TextMeshProUGUI toastMsg;
     [SerializeField]
     float fadeTime = 0.3f;
-
-    Color color;
 
     bool interrupt;
 
@@ -45,6 +41,7 @@ public class Toast : MonoBehaviour
 
     private void Start()
     {
+
         StartCoroutine(FollowCamera());
         Show("æ»≥Á«œººø‰!", 10.0f, new Color(0.56f, 1, 0.43f));
     }
@@ -53,12 +50,14 @@ public class Toast : MonoBehaviour
     {
         while (true)
         {
-            transform.position = mainCamera.transform.position 
-                + mainCamera.transform.forward * offset.z
-                + mainCamera.transform.up * offset.y
-                + mainCamera.transform.right * offset.x;
+            transform.position = Vector3.Lerp(transform.position, Camera.main.transform.position 
+                + Camera.main.transform.forward * offset.z 
+                + Camera.main.transform.up * offset.y 
+                + Camera.main.transform.right * offset.x, 
+                3 * Time.deltaTime);
 
-            transform.LookAt(mainCamera.transform);
+            Vector3 l_vector = Camera.main.transform.position - transform.position;
+            transform.rotation = Quaternion.LookRotation(-l_vector).normalized;
 
             yield return null;
         }
