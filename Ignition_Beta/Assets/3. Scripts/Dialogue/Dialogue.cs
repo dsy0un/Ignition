@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Dialogue/New Dialogue", menuName = "Text/Dialogue", order = int.MaxValue)]
+[CreateAssetMenu(fileName = "Dialogue\\New Dialogue", menuName = "Text/Dialogue", order = int.MaxValue)]
 public class Dialogue : ScriptableObject
 {
-    [SerializeField, Tooltip("ø©±‚ø° ±€ æ≤∏È µ ")]
+    [SerializeField, Tooltip("Ïó¨Í∏∞Ïóê Í∏Ä Ïì∞Î©¥ Îê®")]
     string[] sentences;
     public string[] Sentences { get { return sentences; } }
 }

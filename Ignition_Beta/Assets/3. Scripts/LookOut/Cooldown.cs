@@ -12,18 +12,19 @@ public class Cooldown : MonoBehaviour
     [SerializeField]
     float cooltime;
     public float Cooltime {  get { return cooltime; }}
-    [SerializeField, Tooltip("이거 자동화")]
-    GameObject playerHead; // 이거 자동화, 하나 더 있음 뭔진 모름
+    [SerializeField]
+    GameObject playerHead;
 
     float currentTime;
 
     private void Awake()
     {
-        currentTime = cooltime;
+        playerHead = GameManager.Instance.playerHead.gameObject;
     }
 
     private void Start()
     {
+        currentTime = cooltime;
         StartCoroutine(CoolDown());
     }
 
