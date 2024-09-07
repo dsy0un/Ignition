@@ -27,7 +27,8 @@ public class Gun : MonoBehaviour
     public Interactable interactable;
     public MagazineSystem magazineSystem;
     public Socket socket;
-    public Bolt bolt;
+    //public Bolt bolt;
+    public TestBolt bolt;
 
     public bool isGrab;
 
