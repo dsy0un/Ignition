@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
         enemyGenerate = FindObjectOfType<EnemyGenerate>();
         drone = FindObjectOfType<Drone>();
         window = FindObjectOfType<ModalWindowManager>(true);
+
+        Toast.Instance.mainCamera = Camera.main;
     }
 
     public void ClearEnemy()
