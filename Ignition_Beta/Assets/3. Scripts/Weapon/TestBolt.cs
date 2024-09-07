@@ -5,22 +5,20 @@ using Valve.VR.InteractionSystem;
 
 public class TestBolt : MonoBehaviour
 {
-    private Interactable interactable;
-    //private SpringJoint joint;
+    public Interactable interactable;
     public Rigidbody rb;
     private MagazineSystem magazineSystem;
     public Gun gun;
-    public Socket socket;
     public LinearMapping mapping;
 
     public GameObject round;
     public GameObject cartridge;
     public GameObject ejectBullet;
-    //private Quaternion originRotation;
-    //private Vector3 originPosition;
-    //public float startPositionValue;
-    public float impulsePower;
-    //public int jointValue;
+
+    private float recoilPower;
+    public float maxRecoil;
+    public float minRecoil;
+
     public bool redyToShot;
     private bool boltRetraction;
 
@@ -31,10 +29,6 @@ public class TestBolt : MonoBehaviour
 
     private void Awake()
     {
-        interactable = GetComponent<Interactable>();
-        //originPosition = transform.localPosition;
-        //joint = GetComponent<SpringJoint>();
-        //originRotation = transform.localRotation;
         Initialize(spawnPrefabAmount);
     }
 
@@ -47,21 +41,24 @@ public class TestBolt : MonoBehaviour
     {
         while (true)
         {
-            if (socket.IsMagazine)
+            if (interactable.attachedToHand != null)
+                recoilPower = minRecoil;
+            else
+                recoilPower = maxRecoil;
+
+            if (gun.socket.IsMagazine)
                 magazineSystem = gun.magazineSystem;
             else
                 magazineSystem = null;
+
             if (mapping.value == 1)
             {
                 if (cartridge.activeInHierarchy == true)
-                {
                     GetObject();
-                }
                 cartridge.SetActive(false);
+
                 if (magazineSystem != null && magazineSystem.BulletCount > 0)
-                {
                     boltRetraction = true;
-                }
                 else
                 {
                     round.SetActive(false);
@@ -82,7 +79,8 @@ public class TestBolt : MonoBehaviour
     }
     public void Shot()
     {
-        rb.AddRelativeForce(Vector3.back * impulsePower, ForceMode.Impulse);
+        rb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * recoilPower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
         boltRetraction = false;

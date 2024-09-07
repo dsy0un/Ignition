@@ -6,22 +6,20 @@ using Valve.VR;
 
 public class Bolt : MonoBehaviour
 {
-    private Interactable interactable;
-    private SpringJoint joint;
-    private Rigidbody rb;
+    public Interactable interactable;
+    public Rigidbody rb;
     private MagazineSystem magazineSystem;
     public Gun gun;
-    public Socket socket;
+    public LinearMapping mapping;
 
     public GameObject round;
     public GameObject cartridge;
     public GameObject ejectBullet;
-    private Vector3 originPosition;
-    private Quaternion originRotation;
-    public float endPositionValue;
-    public float startPositionValue;
-    public float impulsePower;
-    public int jointValue;
+
+    private float recoilPower;
+    public float maxRecoil;
+    public float minRecoil;
+
     public bool redyToShot;
     private bool boltRetraction;
 
@@ -32,11 +30,6 @@ public class Bolt : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        interactable = GetComponent<Interactable>();
-        joint = GetComponent<SpringJoint>();
-        originPosition = transform.localPosition;
-        originRotation = transform.localRotation;
         Initialize(spawnPrefabAmount);
     }
 
@@ -49,38 +42,24 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            if (socket.IsMagazine)
+            if (interactable.attachedToHand != null)
+                recoilPower = minRecoil;
+            else
+                recoilPower = maxRecoil;
+
+            if (gun.socket.IsMagazine)
                 magazineSystem = gun.magazineSystem;
             else
                 magazineSystem = null;
-            // 노리쇠의 로컬 회전 방향 = 초기 회전 방향
-            transform.localRotation = originRotation;
-            // 노리쇠의 로컬 위치 = x,y는 초기 위치, z는 본인의 로컬 위치
-            transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
-            joint.spring = jointValue; // 스프링 조인트 작동
-            if (interactable.attachedToHand != null || !gun.isGrab) // 노리쇠를 잡고 있거나 총을 잡고 있지 않을 때
+
+            if (mapping.value == 1)
             {
-                joint.spring = 0; // 스프링 조인트 끄기
-                redyToShot = false;
-            }
-            if (transform.localPosition.z >= originPosition.z - startPositionValue) // 노리쇠의 로컬 위치가 초기 위치 이상일 때
-            {
-                transform.localPosition = originPosition; // 노리쇠 로컬 위치 = 초기 위치
-                if (boltRetraction)
-                {
-                    redyToShot = true;
-                }
-            }
-                
-            if (transform.localPosition.z <= originPosition.z - endPositionValue)
-            {
-                transform.localPosition = new Vector3
-                    (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
+                if (cartridge.activeInHierarchy == true)
+                    GetObject();
                 cartridge.SetActive(false);
+
                 if (magazineSystem != null && magazineSystem.BulletCount > 0)
-                {
                     boltRetraction = true;
-                }
                 else
                 {
                     round.SetActive(false);
@@ -89,17 +68,22 @@ public class Bolt : MonoBehaviour
             }
             if (boltRetraction)
             {
-                round.SetActive(true);
+                if (mapping.value < 1)
+                    round.SetActive(true);
+                if (mapping.value == 0)
+                    redyToShot = true;
+                else
+                    redyToShot = false;
             }
             yield return null;
         }
     }
     public void Shot()
     {
-        rb.AddRelativeForce(Vector3.back * impulsePower, ForceMode.Impulse);
+        rb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * recoilPower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
-        GetObject();
         boltRetraction = false;
         redyToShot = false;
     }
