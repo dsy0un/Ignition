@@ -51,8 +51,9 @@ public class LookOut : MonoBehaviour
             yield return null;
         }
     }
+
     void Shake(float time)
     {
-        StartCoroutine(GameManager.Instance.PlayerShake(time));
+        StartCoroutine(GameManager.Instance.PlayerShake(time, GameManager.Instance.ShakeAmount));
     }
 }
