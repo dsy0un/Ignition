@@ -33,10 +33,13 @@ public class LookOut : MonoBehaviour
     {
         Egen.StartSpawn();
     }
-
+    /// <summary>
+    /// 쿨다운 보여주기 전 목표 시간까지 숫자가 차오르는 함수
+    /// </summary>
+    /// <returns></returns>
     IEnumerator CoolUpCO()
     {
-        cool = !cool;
+        cool = !cool; //함수 끄고 켜기
         float time = 0;
         float count = 0;
         while (cool)
