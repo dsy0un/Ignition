@@ -20,6 +20,7 @@ public class FadeInOut : MonoBehaviour
         {
             onStartEvent.Invoke();
         }
+
     }
     public void StartFadeIn()
     {

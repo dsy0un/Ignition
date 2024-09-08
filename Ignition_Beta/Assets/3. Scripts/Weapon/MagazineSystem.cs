@@ -20,32 +20,52 @@ public class MagazineSystem : MonoBehaviour
     private Transform magazinePoint;
     private bool isLoad;
     public Image[] bulletImage;
+    public float followerY;
+    public GameObject rounds;
+    public GameObject follower;
 
-    private void Start()
+    private Vector3 magScale;
+
+    private void Awake()
     {
+        magScale = transform.localScale;
         bulletCount = maxBullet;
         interactable = GetComponent<Interactable>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (isLoad)
+        StartCoroutine("MagazineWork");
+    }
+
+    IEnumerator MagazineWork()
+    {
+        while (true)
         {
-            rb.useGravity = false;
-            transform.localPosition = 
-                new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
-            transform.localEulerAngles = 
-                new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
-            if (interactable.attachedToHand != null)
-                interactable.attachedToHand.DetachObject(gameObject);
-        }
-        else if (!isLoad)
-            rb.useGravity = true;
-        foreach (Image i in bulletImage)
-        {
-            i.fillAmount = bulletCount / maxBullet;
+            if (isLoad)
+            {
+                rb.useGravity = false;
+                transform.localPosition =
+                    new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
+                transform.localEulerAngles =
+                    new Vector3(magazinePoint.localEulerAngles.x, magazinePoint.localEulerAngles.y, magazinePoint.localEulerAngles.z);
+                if (interactable.attachedToHand != null)
+                    interactable.attachedToHand.DetachObject(gameObject);
+            }
+            else if (!isLoad)
+                rb.useGravity = true;
+            if (bulletCount <= 0)
+            {
+                rounds.SetActive(false);
+                follower.transform.localPosition = new Vector3(0, followerY, 0);
+            }
+            foreach (Image i in bulletImage)
+            {
+                i.fillAmount = bulletCount / maxBullet;
+            }
+            yield return null;
         }
     }
 
@@ -55,8 +75,9 @@ public class MagazineSystem : MonoBehaviour
         {
             if (other.tag == "Socket" && !isLoad && other.GetComponent<Socket>().IsMagazine == false)
             {
-                rb.useGravity = false;
                 magazinePoint = other.transform.GetChild(0);
+                if (gameObject.tag != magazinePoint.gameObject.tag) return;
+                rb.useGravity = false;
                 isLoad = true;
                 col.isTrigger = true;
                 other.GetComponent<Socket>().IsMagazine = true;
@@ -80,7 +101,7 @@ public class MagazineSystem : MonoBehaviour
             isLoad = false;
             col.isTrigger = false;
             rb.AddForce(-transform.up * 100);
-            transform.localScale = Vector3.one;
+            transform.localScale = magScale;
         }
     }
 }
