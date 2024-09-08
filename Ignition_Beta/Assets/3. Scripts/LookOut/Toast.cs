@@ -15,7 +15,7 @@ public class Toast : MonoBehaviour
 
     bool interrupt;
 
-    public Camera mainCamera;
+    Camera mainCamera;
 
     private static Toast instance;
     public static Toast Instance
@@ -43,7 +43,8 @@ public class Toast : MonoBehaviour
 
     private void Start()
     {
-        // Show("¾È³çÇÏ¼¼¿ä!", 10.0f, new Color(0.56f, 1, 0.43f));
+        mainCamera = GameManager.Instance.mainCamera;
+        // Show("ì•ˆë…•í•˜ì„¸ìš”!", 10.0f, new Color(0.56f, 1, 0.43f));
     }
 
     private void Update()
@@ -52,7 +53,7 @@ public class Toast : MonoBehaviour
     }
 
     /// <summary>
-    /// UI°¡ Ä«¸Ş¶ó¸¦ µû¶ó°¡±â À§ÇÑ ÇÔ¼ö
+    /// UIê°€ ì¹´ë©”ë¼ë¥¼ ë”°ë¼ê°€ê¸° ìœ„í•œ í•¨ìˆ˜
     /// </summary>
     /// <returns>Null</returns>
     void FollowCamera()
@@ -78,11 +79,11 @@ public class Toast : MonoBehaviour
     bool isPopUp;
 
     /// <summary>
-    /// Toast ¸Ş½ÃÁö¸¦ º¸¿©ÁÖ±â À§ÇÑ ÇÔ¼ö (ÀÌ°É·Î ¸Ş½ÃÁö ½ÇÇà)
+    /// Toast ë©”ì‹œì§€ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•œ í•¨ìˆ˜ (ì´ê±¸ë¡œ ë©”ì‹œì§€ ì‹¤í–‰)
     /// </summary>
-    /// <param name="msg">¸Ş½ÃÁö ³»¿ë</param>
-    /// <param name="durationTime">º¸¿©ÁÖ´Â ½Ã°£</param>
-    /// <param name="color">¸Ş½ÃÁö »ö±ò</param>
+    /// <param name="msg">ë©”ì‹œì§€ ë‚´ìš©</param>
+    /// <param name="durationTime">ë³´ì—¬ì£¼ëŠ” ì‹œê°„</param>
+    /// <param name="color">ë©”ì‹œì§€ ìƒ‰ê¹”</param>
     public void Show(string msg, float durationTime, Color? color = null)
     {
         TOAST toast;
@@ -96,7 +97,7 @@ public class Toast : MonoBehaviour
     }
 
     /// <summary>
-    /// Toast ¸Ş½ÃÁö¸¦ º¸¿©ÁÖ±â À§ÇÑ Å¥ ÄÚ·çÆ¾ ÇÔ¼ö
+    /// Toast ë©”ì‹œì§€ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•œ í ì½”ë£¨í‹´ í•¨ìˆ˜
     /// </summary>
     /// <returns>Coroutine</returns>
     IEnumerator ShowToastQueue()
@@ -111,11 +112,11 @@ public class Toast : MonoBehaviour
     }
 
     /// <summary>
-    /// Toast ¸Ş½ÃÁö¸¦ º¸¿©ÁÖ±â À§ÇÔ ÄÚ·çÆ¾ ÇÔ¼ö
+    /// Toast ë©”ì‹œì§€ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•¨ ì½”ë£¨í‹´ í•¨ìˆ˜
     /// </summary>
-    /// <param name="msg">¸Ş½ÃÁö ³»¿ë</param>
-    /// <param name="durationTime">º¸¿©ÁÖ´Â ½Ã°£</param>
-    /// <param name="color">¸Ş½ÃÁö »ö±ò</param>
+    /// <param name="msg">ë©”ì‹œì§€ ë‚´ìš©</param>
+    /// <param name="durationTime">ë³´ì—¬ì£¼ëŠ” ì‹œê°„</param>
+    /// <param name="color">ë©”ì‹œì§€ ìƒ‰ê¹”</param>
     /// <returns></returns>
     IEnumerator ShowMessageCoroutine(string msg, float durationTime, Color color)
     {
@@ -139,11 +140,11 @@ public class Toast : MonoBehaviour
     }
 
     /// <summary>
-    /// ±Û¾¾ ÃµÃµÈ÷ »ç¶óÁö°í »ı±â°Ô ÇÏ±â
+    /// ê¸€ì”¨ ì²œì²œíˆ ì‚¬ë¼ì§€ê³  ìƒê¸°ê²Œ í•˜ê¸°
     /// </summary>
-    /// <param name="target">±Û¾¾</param>
-    /// <param name="durationTime">»ç¶óÁö°í »ı±â´Â ½Ã°£(ÃÊ)</param>
-    /// <param name="color">±Û¾¾ »ö±ò</param>
+    /// <param name="target">ê¸€ì”¨</param>
+    /// <param name="durationTime">ì‚¬ë¼ì§€ê³  ìƒê¸°ëŠ” ì‹œê°„(ì´ˆ)</param>
+    /// <param name="color">ê¸€ì”¨ ìƒ‰ê¹”</param>
     /// <param name="inOut">true = in -> out</param>
     /// <returns>Null</returns>
     IEnumerator FadeInOut(TextMeshProUGUI target, float durationTime, Color color, bool inOut) 
@@ -174,7 +175,7 @@ public class Toast : MonoBehaviour
     }
 
     /// <summary>
-    /// Toast ¸Ş½ÃÁö ¹Ù·Î ¸ØÃß°í ½ÍÀ» ¶§ ¾²´Â ÇÔ¼ö
+    /// Toast ë©”ì‹œì§€ ë°”ë¡œ ë©ˆì¶”ê³  ì‹¶ì„ ë•Œ ì“°ëŠ” í•¨ìˆ˜
     /// </summary>
     public void InterruptMessage()
     {
