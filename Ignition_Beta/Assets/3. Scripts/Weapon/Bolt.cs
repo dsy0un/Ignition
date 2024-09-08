@@ -6,30 +6,44 @@ using Valve.VR;
 
 public class Bolt : MonoBehaviour
 {
-    public Interactable interactable;
-    public Rigidbody rb;
-    private MagazineSystem magazineSystem;
+    [HideInInspector]
+    public MagazineSystem magazineSystem;
+
+    private Interactable interactable;
+    public Interactable secondInteractable;
+    public Rigidbody gunRb;
     public Gun gun;
     public LinearMapping mapping;
 
     public GameObject round;
     public GameObject cartridge;
-    public GameObject ejectBullet;
 
-    private float recoilPower;
+    [Header("Bolt")]
+    public bool autoBolt;
+    public float moveTime;
+    private LinearDrive linearDrive;
+    private bool boltMoving = false;
+    private float time = 0f;
+
+    [Header("Recoil")]
     public float maxRecoil;
     public float minRecoil;
+    private float recoilPower;
 
+    [HideInInspector]
     public bool redyToShot;
     private bool boltRetraction;
 
-    Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
-    public GameObject ejectPoint;
+    [Header("Eject Cartridge")]
     public int spawnPrefabAmount;
-
+    public GameObject ejectPoint;
+    public GameObject ejectBullet;
+    Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
 
     private void Awake()
     {
+        linearDrive = GetComponent<LinearDrive>();
+        interactable = GetComponent<Interactable>();
         Initialize(spawnPrefabAmount);
     }
 
@@ -42,21 +56,18 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            if (interactable.attachedToHand != null)
+            time += Time.deltaTime;
+            if (secondInteractable.attachedToHand != null)
                 recoilPower = minRecoil;
             else
                 recoilPower = maxRecoil;
-
-            if (gun.socket.IsMagazine)
-                magazineSystem = gun.magazineSystem;
-            else
-                magazineSystem = null;
 
             if (mapping.value == 1)
             {
                 if (cartridge.activeInHierarchy == true)
                     GetObject();
                 cartridge.SetActive(false);
+                boltMoving = false;
 
                 if (magazineSystem != null && magazineSystem.BulletCount > 0)
                     boltRetraction = true;
@@ -66,6 +77,7 @@ public class Bolt : MonoBehaviour
                     cartridge.SetActive(false);
                 }
             }
+
             if (boltRetraction)
             {
                 if (mapping.value < 1)
@@ -75,17 +87,40 @@ public class Bolt : MonoBehaviour
                 else
                     redyToShot = false;
             }
+
+            if (!boltMoving && interactable.attachedToHand == null && autoBolt)
+            {
+                transform.position = Vector3.Lerp
+                (linearDrive.endPosition.position, linearDrive.startPosition.position, time / moveTime);
+                mapping.value = Mathf.Lerp(1, 0, time / moveTime);
+            }
             yield return null;
         }
     }
     public void Shot()
     {
-        rb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
-        rb.AddForce(Vector3.up * recoilPower, ForceMode.Impulse);
+        gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
+        gunRb.AddForce(Vector3.up * recoilPower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
         boltRetraction = false;
         redyToShot = false;
+        if (autoBolt && interactable.attachedToHand == null)
+        {
+            StartCoroutine("AutoMove");
+            boltMoving = true;
+        }
+    }
+
+    IEnumerator AutoMove()
+    {
+        while (true)
+        {
+            transform.position = Vector3.Lerp
+            (linearDrive.startPosition.position, linearDrive.endPosition.position, time / moveTime);
+            mapping.value = Mathf.Lerp(0, 1, time / moveTime);
+            yield return null;
+        }
     }
 
     private void Initialize(int initCount)

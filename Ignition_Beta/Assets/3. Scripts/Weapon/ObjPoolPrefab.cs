@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ObjPoolPrefab : MonoBehaviour
 {
-    private TestBolt bolt;
+    private Bolt bolt;
     public Rigidbody rb;
     public float ejectPower;
     private void Awake()
     {
-        bolt = GetComponentInParent<TestBolt>();
+        bolt = GetComponentInParent<Bolt>();
     }
     void OnEnable()
     {
@@ -26,5 +26,6 @@ public class ObjPoolPrefab : MonoBehaviour
         yield return new WaitForSeconds(4);
         transform.rotation = Quaternion.Euler(Vector3.zero);
         bolt.ReturnObject(this.gameObject);
+        yield break;
     }
 }

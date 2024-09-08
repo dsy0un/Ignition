@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour
     private int fireMode = 1;
 
     public Interactable interactable;
-    public MagazineSystem magazineSystem;
+    private MagazineSystem magazineSystem;
     public Socket socket;
     public Bolt bolt;
 
@@ -68,6 +68,8 @@ public class Gun : MonoBehaviour
                 magazineSystem = GetComponentInChildren<MagazineSystem>();
             else // 아닌경우 스크립트 NULL
                 magazineSystem = null;
+            bolt.magazineSystem = magazineSystem;
+
             isGrab = true;
             if (currentTime <= fireTime && fireMode == 3) // 연사 모드일때 발사 지연시간 작동
                 currentTime += Time.deltaTime;
