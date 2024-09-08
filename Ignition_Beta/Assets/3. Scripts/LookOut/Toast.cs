@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
-using Unity.VisualScripting;
 
 public class Toast : MonoBehaviour
 {
-    Vector3 offset = new Vector3(0, 0, 10);
-    Camera mainCamera = Camera.main;
+    [SerializeField]
+    Vector3 offset;
 
     [SerializeField]
     TextMeshProUGUI toastMsg;
     [SerializeField]
     float fadeTime = 0.3f;
 
-    Color color;
-
     bool interrupt;
+
+    public Camera mainCamera;
 
     private static Toast instance;
     public static Toast Instance
@@ -45,23 +43,28 @@ public class Toast : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FollowCamera());
-        Show("안녕하세요!", 10.0f, new Color(0.56f, 1, 0.43f));
+        // Show("안녕하세요!", 10.0f, new Color(0.56f, 1, 0.43f));
     }
 
-    IEnumerator FollowCamera()
+    private void Update()
     {
-        while (true)
-        {
-            transform.position = mainCamera.transform.position 
-                + mainCamera.transform.forward * offset.z
-                + mainCamera.transform.up * offset.y
-                + mainCamera.transform.right * offset.x;
+        FollowCamera();
+    }
 
-            transform.LookAt(mainCamera.transform);
+    /// <summary>
+    /// UI가 카메라를 따라가기 위한 함수
+    /// </summary>
+    /// <returns>Null</returns>
+    void FollowCamera()
+    {
+        transform.position = Vector3.Lerp(transform.position, mainCamera.transform.position 
+            + mainCamera.transform.forward * offset.z 
+            + mainCamera.transform.up * offset.y 
+            + mainCamera.transform.right * offset.x, 
+            3 * Time.deltaTime);
 
-            yield return null;
-        }
+        Vector3 l_vector = mainCamera.transform.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(-l_vector).normalized;
     }
 
     struct TOAST
@@ -74,6 +77,12 @@ public class Toast : MonoBehaviour
     Queue<TOAST> queue = new();
     bool isPopUp;
 
+    /// <summary>
+    /// Toast 메시지를 보여주기 위한 함수 (이걸로 메시지 실행)
+    /// </summary>
+    /// <param name="msg">메시지 내용</param>
+    /// <param name="durationTime">보여주는 시간</param>
+    /// <param name="color">메시지 색깔</param>
     public void Show(string msg, float durationTime, Color? color = null)
     {
         TOAST toast;
@@ -86,6 +95,10 @@ public class Toast : MonoBehaviour
         if (!isPopUp) StartCoroutine(ShowToastQueue());
     }
 
+    /// <summary>
+    /// Toast 메시지를 보여주기 위한 큐 코루틴 함수
+    /// </summary>
+    /// <returns>Coroutine</returns>
     IEnumerator ShowToastQueue()
     {
         isPopUp = true;
@@ -97,6 +110,13 @@ public class Toast : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Toast 메시지를 보여주기 위함 코루틴 함수
+    /// </summary>
+    /// <param name="msg">메시지 내용</param>
+    /// <param name="durationTime">보여주는 시간</param>
+    /// <param name="color">메시지 색깔</param>
+    /// <returns></returns>
     IEnumerator ShowMessageCoroutine(string msg, float durationTime, Color color)
     {
         toastMsg.text = msg;
@@ -118,6 +138,14 @@ public class Toast : MonoBehaviour
         toastMsg.enabled = false;
     }
 
+    /// <summary>
+    /// 글씨 천천히 사라지고 생기게 하기
+    /// </summary>
+    /// <param name="target">글씨</param>
+    /// <param name="durationTime">사라지고 생기는 시간(초)</param>
+    /// <param name="color">글씨 색깔</param>
+    /// <param name="inOut">true = in -> out</param>
+    /// <returns>Null</returns>
     IEnumerator FadeInOut(TextMeshProUGUI target, float durationTime, Color color, bool inOut) 
     {
         float start, end;
@@ -145,7 +173,10 @@ public class Toast : MonoBehaviour
         }
     }
 
-    public void InterruptMessage() /* 필요한 곳에서 호출 */
+    /// <summary>
+    /// Toast 메시지 바로 멈추고 싶을 때 쓰는 함수
+    /// </summary>
+    public void InterruptMessage()
     {
         interrupt = true;
     }

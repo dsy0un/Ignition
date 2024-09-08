@@ -1,7 +1,6 @@
 using Michsky.UI.Shift;
 using System.Collections;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
-using UnityEditorInternal;
+using UnityEditor;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
@@ -19,12 +18,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject gameManagerPrefab; // ê²Œì„ ë§¤ë‹ˆì € í”„ë¦¬íŒ¹
+
     public Barrier barrier;
     public Player player;
+    public AudioListener playerHead;
     public EnemyGenerate enemyGenerate;
     public LookOut lookOut;
     public Drone drone;
     public ModalWindowManager window;
+    public EnemyMove enemyMove;
 
     public SteamVR_Action_Vibration hapticAction;
     [SerializeField]
@@ -56,11 +59,14 @@ public class GameManager : MonoBehaviour
     public void ReGetCom()
     {
         player = FindObjectOfType<Player>();
+        playerHead = FindObjectOfType<AudioListener>();
         barrier = FindObjectOfType<Barrier>();
         lookOut = FindObjectOfType<LookOut>();
         enemyGenerate = FindObjectOfType<EnemyGenerate>();
         drone = FindObjectOfType<Drone>();
         window = FindObjectOfType<ModalWindowManager>(true);
+        enemyMove = FindObjectOfType<EnemyMove>();
+        
     }
 
     public void ClearEnemy()
@@ -69,7 +75,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹æ¾î ½ÇÆĞ ÀÌº¥Æ® ÇÔ¼ö
+    /// ë°©ì–´ ì‹¤íŒ¨ ì´ë²¤íŠ¸ í•¨ìˆ˜
     /// </summary>
     public void DefFailureEvent()
     {
@@ -78,7 +84,7 @@ public class GameManager : MonoBehaviour
     }
     
     /// <summary>
-    /// ¹æ¾î ½ÇÆĞ ÈÄ µ¹¾Æ°¡´Â ÀÌº¥Æ® ÇÔ¼ö
+    /// ë°©ì–´ ì‹¤íŒ¨ í›„ ëŒì•„ê°€ëŠ” ì´ë²¤íŠ¸ í•¨ìˆ˜
     /// </summary>
     public void DefEscapeEvent()
     {
@@ -88,7 +94,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// µğÆæ½º ¼º°ø ÀÌº¥Æ®
+    /// ë””íœìŠ¤ ì„±ê³µ ì´ë²¤íŠ¸
     /// </summary>
     public void DefSuccessEvent()
     {
@@ -97,7 +103,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î Áøµ¿ÁÖ±â (ÄÁÆ®·Ñ·¯ Æ÷ÇÔ)
+    /// í”Œë ˆì´ì–´ ì§„ë™ì£¼ê¸° (ì»¨íŠ¸ë¡¤ëŸ¬ í¬í•¨)
     /// </summary>
     /// <returns>Null</returns>
     public IEnumerator PlayerShake(float time, float amount)
@@ -120,12 +126,12 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÄÁÆ®·Ñ·¯ Áøµ¿
+    /// ì»¨íŠ¸ë¡¤ëŸ¬ ì§„ë™
     /// </summary>
-    /// <param name="duration">Áö¼Ó½Ã°£</param>
-    /// <param name="frequency">Hz (°ª ¹Ù²ãµµ Å« º¯È­ ¾øÀ½)</param>
-    /// <param name="amplitude">Áøµ¿ °­µµ</param>
-    /// <param name="source">ÄÁÆ®·Ñ·¯ Á¾·ù</param>
+    /// <param name="duration">ì§€ì†ì‹œê°„</param>
+    /// <param name="frequency">Hz (ê°’ ë°”ê¿”ë„ í° ë³€í™” ì—†ìŒ)</param>
+    /// <param name="amplitude">ì§„ë™ ê°•ë„</param>
+    /// <param name="source">ì»¨íŠ¸ë¡¤ëŸ¬ ì¢…ë¥˜</param>
     private void Pulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
     {
         hapticAction.Execute(0, duration, frequency, amplitude, source);
