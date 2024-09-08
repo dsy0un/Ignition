@@ -27,8 +27,6 @@ public class TakeItem : MonoBehaviour
         Debug.Log(1);
         if (other.CompareTag("Hand"))
         {
-            Debug.Log(144234);
-
             if (leftHand.currentAttachedObject == null && rightHand.currentAttachedObject == null) return; // 양손 다 들고 있지 않을 때
             if (leftHand.currentAttachedObject != null && rightHand.currentAttachedObject != null) return; // 양손 다 들고 있을 때
 
