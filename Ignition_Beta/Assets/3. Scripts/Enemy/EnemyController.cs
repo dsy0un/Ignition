@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IHitAble
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private float maxHP = 100;
+    [SerializeField]
+    private float dmg = 10;
 
-    // Update is called once per frame
-    void Update()
+    private float currentHP;
+
+    private EnemyAnimation enemyAnim;
+
+    public void Hit(float dmg, string coliName)
     {
-        
+
+    }
+    public void Die()
+    {
+
+    }
+    public void Respawn()
+    {
+
     }
 }
