@@ -23,7 +23,6 @@ public class Bolt : MonoBehaviour
     public float moveTime;
     private LinearDrive linearDrive;
     private bool boltMoving = false;
-    private float time = 0f;
 
     [Header("Recoil")]
     public float maxRecoil;
@@ -56,7 +55,6 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            time += Time.deltaTime;
             if (secondInteractable.attachedToHand != null)
                 recoilPower = minRecoil;
             else
@@ -67,7 +65,6 @@ public class Bolt : MonoBehaviour
                 if (cartridge.activeInHierarchy == true)
                     GetObject();
                 cartridge.SetActive(false);
-                boltMoving = false;
 
                 if (magazineSystem != null && magazineSystem.BulletCount > 0)
                     boltRetraction = true;
@@ -88,11 +85,9 @@ public class Bolt : MonoBehaviour
                     redyToShot = false;
             }
 
-            if (!boltMoving && interactable.attachedToHand == null && autoBolt)
+            if (boltMoving == false && interactable.attachedToHand == null && autoBolt && mapping.value != 0)
             {
-                transform.position = Vector3.Lerp
-                (linearDrive.endPosition.position, linearDrive.startPosition.position, time / moveTime);
-                mapping.value = Mathf.Lerp(1, 0, time / moveTime);
+                StartCoroutine("AutoMoveFront");
             }
             yield return null;
         }
@@ -107,18 +102,42 @@ public class Bolt : MonoBehaviour
         redyToShot = false;
         if (autoBolt && interactable.attachedToHand == null)
         {
-            StartCoroutine("AutoMove");
+            StartCoroutine("AutoMoveBack");
             boltMoving = true;
         }
     }
 
-    IEnumerator AutoMove()
+    IEnumerator AutoMoveBack()
     {
+        float time = 0f;
         while (true)
         {
+            time += Time.deltaTime;
             transform.position = Vector3.Lerp
             (linearDrive.startPosition.position, linearDrive.endPosition.position, time / moveTime);
             mapping.value = Mathf.Lerp(0, 1, time / moveTime);
+            if (mapping.value == 1)
+            {
+                boltMoving = false;
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator AutoMoveFront()
+    {
+        float time = 0f;
+        while (true)
+        {
+            time += Time.deltaTime;
+            transform.position = Vector3.Lerp
+                (transform.position, linearDrive.startPosition.position, time / moveTime);
+            mapping.value = Mathf.Lerp(1, 0, time / moveTime);
+            if (mapping.value == 0)
+            {
+                yield break;
+            }
             yield return null;
         }
     }
