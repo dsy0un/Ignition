@@ -44,7 +44,7 @@ public class EnemyMove : MonoBehaviour
                     StopMove();
                 if (curStunTime >= stunTime || curAtkTime >= atkTime && !enemyState.InDistance)
                     StartMove();
-                //nma.SetDestination(target.transform.position);
+                nma.SetDestination(target.transform.position);
                 speedtovelo = new Vector3(nma.velocity.x, 0, nma.velocity.z);
                 rb.velocity = speedtovelo;
             }
