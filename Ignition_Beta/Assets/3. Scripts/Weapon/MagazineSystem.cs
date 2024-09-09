@@ -8,12 +8,11 @@ using UnityEngine.UI;
 public class MagazineSystem : MonoBehaviour
 {
     [SerializeField] private float maxBullet = 20;
-    private float bulletCount;
-    public float BulletCount
+    float MaxBullet
     {
-        get => bulletCount;
-        set => bulletCount = value;
+        get => maxBullet;
     }
+    public float bulletCount;
     private Interactable interactable;
     private Rigidbody rb;
     private Collider col;

@@ -66,7 +66,7 @@ public class Bolt : MonoBehaviour
                     GetObject();
                 cartridge.SetActive(false);
 
-                if (magazineSystem != null && magazineSystem.BulletCount > 0)
+                if (magazineSystem != null && magazineSystem.bulletCount > 0)
                     boltRetraction = true;
                 else
                 {
@@ -85,7 +85,7 @@ public class Bolt : MonoBehaviour
                     redyToShot = false;
             }
 
-            if (boltMoving == false && interactable.attachedToHand == null && autoBolt && mapping.value != 0)
+            if (boltMoving == false && interactable.attachedToHand == null && autoBolt)
             {
                 StartCoroutine("AutoMoveFront");
             }
@@ -133,7 +133,7 @@ public class Bolt : MonoBehaviour
             time += Time.deltaTime;
             transform.position = Vector3.Lerp
                 (transform.position, linearDrive.startPosition.position, time / moveTime);
-            mapping.value = Mathf.Lerp(1, 0, time / moveTime);
+            mapping.value = Mathf.Lerp(mapping.value, 0, time / moveTime);
             if (mapping.value == 0)
             {
                 yield break;
