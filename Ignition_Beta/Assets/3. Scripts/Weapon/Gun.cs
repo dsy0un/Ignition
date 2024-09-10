@@ -92,13 +92,16 @@ public class Gun : MonoBehaviour
             }
             else
             {
-                Rigidbody bulletrb = Instantiate
-                    (bulletPref, muzzelFlash.transform.position, 
+                for (int i = 0; i < 25; i++)
+                {
+                    Rigidbody bulletrb = Instantiate
+                    (bulletPref, muzzelFlash.transform.position,
                     Quaternion.Euler(new Vector3(
-                            muzzelFlash.transform.rotation.x + Random.Range(-20, 20), 
-                            muzzelFlash.transform.rotation.y + Random.Range(-20, 20), 
+                            muzzelFlash.transform.rotation.x + Random.Range(-20, 20),
+                            muzzelFlash.transform.rotation.y + Random.Range(-20, 20),
                             muzzelFlash.transform.rotation.z))).GetComponent<Rigidbody>();
-                bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+                    bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+                }
             }
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
