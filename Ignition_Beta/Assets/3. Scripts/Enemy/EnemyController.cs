@@ -37,21 +37,22 @@ public class EnemyController : MonoBehaviour, IHitAble
         while (true)
         {
             yield return null;
-            Debug.Log(32);
-            nma.SetDestination(target.position);
+            if(target != null )
+                nma.SetDestination(target.position);
 
         }
     }
 
-    public void ListenFollow(int sVolume, Transform sTarget)
+    public void ListenFollow(int sVolume, Transform sTarget) // 소리가 들리면 쫒아가게 설정하는 함수
     {
         target = sTarget;
         volume = sVolume;
     }
-    public void ListenReset()
+    public void ListenReset() // 소리 범위 밖에 나갔을때 초기화
     {
         nma.ResetPath();
         volume = 0;
+        target = null;
     }
 
     public void Hit(float dmg, string coliName)

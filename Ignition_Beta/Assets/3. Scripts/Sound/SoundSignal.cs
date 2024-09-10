@@ -64,7 +64,7 @@ public class SoundSignal : MonoBehaviour
         // 현재 감지된 객체들을 리스트에 추가
         foreach (Collider collider in colliders)
         {
-            currentObjects.Add(collider.gameObject);
+            currentObjects.Add(collider.transform.root.gameObject);
         }
 
         // 이전 프레임에 감지되었으나, 이번 프레임에 감지되지 않은 객체를 감지 (즉, 범위 밖으로 나간 객체)
@@ -84,8 +84,13 @@ public class SoundSignal : MonoBehaviour
     // 객체가 범위를 벗어났을 때 실행할 함수
     void OnObjectExitRange(GameObject obj)
     {
-        Debug.Log(obj.name + "가 감지 범위를 벗어났습니다.");
+        if (obj.TryGetComponent<EnemyController>(out var enemyController))
+        {
+            Debug.Log(obj.name + "가 감지 범위를 벗어났습니다.");
+            enemyController.ListenReset();
+        }
         // 범위를 벗어났을 때 원하는 이벤트 처리
+
     }
 }
 
