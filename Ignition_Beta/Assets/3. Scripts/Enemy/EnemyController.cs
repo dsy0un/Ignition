@@ -154,6 +154,8 @@ public class EnemyController : MonoBehaviour, IHitAble
         transform.GetChild(0).gameObject.SetActive(true);
         currentHP = maxHP;
         gameObject.SetActive(true);
+        isAttack = false;
+        StartCoroutine(CoolTime(3.0f, isAttack, (result) => { isAttack = result; }));
         StartCoroutine(CoroutineUpdate());
     }
 }

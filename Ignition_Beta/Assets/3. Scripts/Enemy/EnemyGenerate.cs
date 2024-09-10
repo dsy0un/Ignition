@@ -28,7 +28,7 @@ public class EnemyGenerate : MonoBehaviour
         for (int i = 0; i < genMaxCount; i++)
         {
             GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity);
-            //spawn.GetComponent<EnemyMove>().target = target;
+            //spawn.GetComponent<EnemyController>().target = target;
             spawn.GetComponent<EnemyController>().nms = nms;
             spawn.SetActive(false);
             pools.Add(spawn);
