@@ -9,7 +9,7 @@ public class SoundSignal : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField, Tooltip("Pivot Transform")]
     private Transform followObject;
-    [SerializeField, Tooltip("소리 크기 (적이 인식하는 우선순위)")]
+    [SerializeField, Min(1), Tooltip("소리 크기 (적이 인식하는 우선순위)")]
     private int soundVolume;
 
     [SerializeField]
