@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAnimation : MonoBehaviour
 {
     Rigidbody rb;
     Animator anim;
-    public float zVel = 0.7f; // °³Ã¼ÀÇ ¾Õ,µÚ ¼Óµµ ÃøÁ¤½Ã ÃÖ¼Ò ¼Óµµ
-    public float xVel = 0.7f; // °³Ã¼ÀÇ ¿ŞÂÊ,¿À¸¥ÂÊ ¼Óµµ ÃøÁ¤½Ã ÃÖ¼Ò ¼Óµµ
+    private NavMeshAgent nma;
+    public float zVel = 0.7f; // ê°œì²´ì˜ ì•,ë’¤ ì†ë„ ì¸¡ì •ì‹œ ìµœì†Œ ì†ë„
+    public float xVel = 0.7f; // ê°œì²´ì˜ ì™¼ìª½,ì˜¤ë¥¸ìª½ ì†ë„ ì¸¡ì •ì‹œ ìµœì†Œ ì†ë„
     private bool isDead;
 
     // Start is called before the first frame update
     void Start()
     {
+        nma = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         isDead = false;
@@ -22,8 +25,8 @@ public class EnemyAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // °´Ã¼ÀÇ ¸®Áöµå¹Ùµğ ¼Óµµ(±Û·Î¹ú Vector3 ÇüÅÂ)¸¦ ±¸ÇÑ ÈÄ ·ÎÄÃ ÇüÅÂ·Î º¯È¯
-        Vector3 velocity = transform.InverseTransformDirection(rb.velocity);
+        // ê°ì²´ì˜ ë¦¬ì§€ë“œë°”ë”” ì†ë„(ê¸€ë¡œë²Œ Vector3 í˜•íƒœ)ë¥¼ êµ¬í•œ í›„ ë¡œì»¬ í˜•íƒœë¡œ ë³€í™˜
+        Vector3 velocity = transform.InverseTransformDirection(nma.velocity);
 
         if (isDead)
         {
@@ -31,7 +34,7 @@ public class EnemyAnimation : MonoBehaviour
         }
         else
         {
-            // ¼Óµµ ÃøÁ¤ °ªÀÌ ÃÖ¼Ú°ªº¸´Ù ÀÛÀ¸¸é ¾Ö´Ï¸ŞÀÌ¼Ç ¸ØÃã
+            // ì†ë„ ì¸¡ì • ê°’ì´ ìµœì†Ÿê°’ë³´ë‹¤ ì‘ìœ¼ë©´ ì• ë‹ˆë©”ì´ì…˜ ë©ˆì¶¤
             if (velocity.z > zVel || velocity.z < -zVel || velocity.x > xVel || velocity.x < -xVel)
             {
                 anim.SetBool("isMove", true);
