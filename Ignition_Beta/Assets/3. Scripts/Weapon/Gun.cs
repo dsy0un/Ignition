@@ -91,7 +91,7 @@ public class Gun : MonoBehaviour
                 muzzelFlash.Play(); // ÃÑ±¸ È­¿° ÀÌÆåÆ® Àç»ý
                 audioSource.PlayOneShot(shotSound); // ¹ß»ç »ç¿îµå Àç»ý
                 gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
-                gunRb.AddForce(Vector3.up * recoilPower, ForceMode.Impulse);
+                gunRb.AddTorque(Vector3.up * recoilPower, ForceMode.Impulse);
                 magazineSystem.bulletCount -= 1; // ÃÑ ¹ß»ç½Ã ÅºÃ¢ÀÇ ÃÑ ÃÑ¾Ë °³¼ö -1
                 bolt.Shot();
                 muzzleLight.SetActive(true); // ÃÑ±¸ È­¿° ¶óÀÌÆ® ÄÑ±â
