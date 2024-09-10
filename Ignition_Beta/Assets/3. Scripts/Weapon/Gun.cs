@@ -21,9 +21,10 @@ public class Gun : MonoBehaviour
     public GameObject bulletPref;
 
     public Interactable interactable;
-    private MagazineSystem magazineSystem;
     public Socket socket;
     public Bolt bolt;
+    private MagazineSystem magazineSystem;
+    private Hand currentHand = null;
 
     [Header("Recoil")]
     public float maxRecoil;
@@ -91,7 +92,7 @@ public class Gun : MonoBehaviour
                 muzzelFlash.Play(); // 총구 화염 이펙트 재생
                 audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
                 gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
-                gunRb.AddForce(Vector3.up * recoilPower, ForceMode.Impulse);
+                gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Impulse);
                 magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
                 bolt.Shot();
                 muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
@@ -130,5 +131,33 @@ public class Gun : MonoBehaviour
     void HideLight()
     {
         muzzleLight.SetActive(false);
+    }
+
+    private void HandHoverUpdate(Hand hand)
+    {
+        // 현재 손이 물체를 잡고 있는지 확인
+        if (interactable.attachedToHand != null)
+        {
+            // 다른 손이 잡으려 하면, 잡지 못하게 막음
+            if (currentHand != null && currentHand != hand)
+            {
+                hand.DetachObject(gameObject); // 다른 손으로 잡지 못하게 물체 분리
+            }
+        }
+    }
+
+    private void OnAttachedToHand(Hand hand)
+    {
+        // 물체가 손에 잡히면, 해당 손을 기록
+        currentHand = hand;
+    }
+
+    private void OnDetachedFromHand(Hand hand)
+    {
+        // 물체가 손에서 떨어지면, 현재 손 기록을 초기화
+        if (currentHand == hand)
+        {
+            currentHand = null;
+        }
     }
 }
