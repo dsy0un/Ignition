@@ -89,19 +89,25 @@ public class Gun : MonoBehaviour
                 Rigidbody bulletrb = Instantiate
                     (bulletPref, muzzelFlash.transform.position, muzzelFlash.transform.rotation).GetComponent<Rigidbody>();
                 bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // ÃÑ¾ËÀÇ ¹ß»ç ¹æÇâ ¹× ¼Óµµ
-                muzzelFlash.Play(); // ÃÑ±¸ È­¿° ÀÌÆåÆ® Àç»ý
-                audioSource.PlayOneShot(shotSound); // ¹ß»ç »ç¿îµå Àç»ý
-                gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
-                gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Impulse);
-                magazineSystem.bulletCount -= 1; // ÃÑ ¹ß»ç½Ã ÅºÃ¢ÀÇ ÃÑ ÃÑ¾Ë °³¼ö -1
-                bolt.Shot();
-                muzzleLight.SetActive(true); // ÃÑ±¸ È­¿° ¶óÀÌÆ® ÄÑ±â
-                Invoke("HideLight", 0.1f); // 0.1ÃÊ ÈÄ ÃÑ±¸ È­¿° ¶óÀÌÆ® ²ô±â
             }
             else
             {
-
+                Rigidbody bulletrb = Instantiate
+                    (bulletPref, muzzelFlash.transform.position, 
+                    Quaternion.Euler(new Vector3(
+                            muzzelFlash.transform.rotation.x + Random.Range(-20, 20), 
+                            muzzelFlash.transform.rotation.y + Random.Range(-20, 20), 
+                            muzzelFlash.transform.rotation.z))).GetComponent<Rigidbody>();
+                bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed;
             }
+            muzzelFlash.Play(); // ÃÑ±¸ È­¿° ÀÌÆåÆ® Àç»ý
+            audioSource.PlayOneShot(shotSound); // ¹ß»ç »ç¿îµå Àç»ý
+            gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Force);
+            gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Force);
+            magazineSystem.bulletCount -= 1; // ÃÑ ¹ß»ç½Ã ÅºÃ¢ÀÇ ÃÑ ÃÑ¾Ë °³¼ö -1
+            bolt.Shot();
+            muzzleLight.SetActive(true); // ÃÑ±¸ È­¿° ¶óÀÌÆ® ÄÑ±â
+            Invoke("HideLight", 0.1f); // 0.1ÃÊ ÈÄ ÃÑ±¸ È­¿° ¶óÀÌÆ® ²ô±â
             canFire = false; // ¹ß»ç ºÒ°¡´É
         }
     }
