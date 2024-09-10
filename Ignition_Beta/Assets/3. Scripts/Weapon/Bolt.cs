@@ -10,8 +10,6 @@ public class Bolt : MonoBehaviour
     public MagazineSystem magazineSystem;
 
     private Interactable interactable;
-    public Interactable secondInteractable;
-    public Rigidbody gunRb;
     public Gun gun;
     public LinearMapping mapping;
 
@@ -23,11 +21,6 @@ public class Bolt : MonoBehaviour
     public float moveTime;
     private LinearDrive linearDrive;
     private bool boltMoving = false;
-
-    [Header("Recoil")]
-    public float maxRecoil;
-    public float minRecoil;
-    private float recoilPower;
 
     [HideInInspector]
     public bool redyToShot;
@@ -55,11 +48,6 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            if (secondInteractable.attachedToHand != null)
-                recoilPower = minRecoil;
-            else
-                recoilPower = maxRecoil;
-
             if (mapping.value == 1)
             {
                 if (cartridge.activeInHierarchy == true)
@@ -94,8 +82,6 @@ public class Bolt : MonoBehaviour
     }
     public void Shot()
     {
-        gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
-        gunRb.AddForce(Vector3.up * recoilPower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
         boltRetraction = false;

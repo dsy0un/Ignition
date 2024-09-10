@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 8662703704551895357}
   - component: {fileID: 6538102158308728790}
   - component: {fileID: 8353268341594803541}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Magazine.003
   m_TagString: Pistol
   m_Icon: {fileID: 0}
@@ -512,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979246493248524044}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.0435, y: 0.96210515, z: -8.604542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -585,6 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBullet: 10
+  bulletCount: 0
   bulletImage: []
   followerY: 0
   rounds: {fileID: 5092042036597732224}
@@ -1036,7 +1037,7 @@ GameObject:
   - component: {fileID: 6106330331465832498}
   - component: {fileID: 721090018449314148}
   - component: {fileID: 288811789132738352}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Decal.058
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1631,7 +1632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8093931233064915079}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Rounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1821,7 +1822,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3424945944019061577}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: follower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

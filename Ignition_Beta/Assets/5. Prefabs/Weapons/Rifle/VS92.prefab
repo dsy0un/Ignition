@@ -1051,16 +1051,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazineSystem: {fileID: 0}
-  secondInteractable: {fileID: 4956609622899147042}
-  gunRb: {fileID: 3473466397313071371}
   gun: {fileID: 2491603061933699169}
   mapping: {fileID: 4405067200158449344}
   round: {fileID: 1582442662057542635}
   cartridge: {fileID: 6818331227826373900}
   autoBolt: 1
-  moveTime: 2
-  maxRecoil: 15
-  minRecoil: 5
+  moveTime: 0.05
   redyToShot: 0
   spawnPrefabAmount: 30
   ejectPoint: {fileID: 8150992856198423060}
@@ -1391,6 +1387,16 @@ MonoBehaviour:
   emptyShotSound: {fileID: 8300000, guid: 471aaee17329ef24993dd8c553133d26, type: 3}
   fireTime: 0.1
   ableAutomaticFire: 1
+  isShotgun: 0
+  shootingSpeed: 700
+  bulletPref: {fileID: 2393519899685930901, guid: 92e93f0ed86ca6c40ac831733d78f65e,
+    type: 3}
+  interactable: {fileID: 6603838679473170727}
+  socket: {fileID: 3421449207985673403}
+  bolt: {fileID: 6909667098348990358}
+  maxRecoil: 15
+  minRecoil: 7
+  secondInteractable: {fileID: 4956609622899147042}
   fireAction:
     actionPath: /actions/gun/in/GunFire
     needsReinit: 0
@@ -1400,13 +1406,6 @@ MonoBehaviour:
   changeFireMode:
     actionPath: /actions/gun/in/ChangeFireMode
     needsReinit: 0
-  bulletPref: {fileID: 2393519899685930901, guid: 92e93f0ed86ca6c40ac831733d78f65e,
-    type: 3}
-  shootingSpeed: 700
-  recoil: 5
-  interactable: {fileID: 6603838679473170727}
-  socket: {fileID: 3421449207985673403}
-  bolt: {fileID: 6909667098348990358}
   isGrab: 0
 --- !u!82 &3425432427547668211
 AudioSource:
@@ -2032,6 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c19b2a88556054ab6850ebba36848b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMagazine: 0
 --- !u!1 &6732366932231517688
 GameObject:
   m_ObjectHideFlags: 0
