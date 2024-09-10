@@ -14,9 +14,9 @@ public class EnemyGenerate : MonoBehaviour
     [SerializeField]
     private int genMaxCount; // Enemy Max Generate
     [SerializeField]
-    private GameObject enemyPrefab; // Enemy Prefab, NO UNPACK ENEMY GAMEOBJECT ø÷ øµæÓ∑Œ æ∏?
-    [SerializeField]
-    private GameObject target;
+    private GameObject enemyPrefab; // Enemy Prefab, NO UNPACK ENEMY GAMEOBJECT Ïôú ÏòÅÏñ¥Î°ú ÏîÄ?
+    //[SerializeField]
+    //private GameObject target;
     [SerializeField]
     private NavMeshSurface nms;
 
@@ -28,8 +28,8 @@ public class EnemyGenerate : MonoBehaviour
         for (int i = 0; i < genMaxCount; i++)
         {
             GameObject spawn = Instantiate(enemyPrefab, GenEnemy(), Quaternion.identity);
-            spawn.GetComponent<EnemyMove>().target = target;
-            spawn.GetComponent<EnemyMove>().nms = nms;
+            //spawn.GetComponent<EnemyMove>().target = target;
+            spawn.GetComponent<EnemyController>().nms = nms;
             spawn.SetActive(false);
             pools.Add(spawn);
         }

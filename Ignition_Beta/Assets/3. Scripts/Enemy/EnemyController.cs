@@ -6,20 +6,22 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour, IHitAble
 {
     [SerializeField]
-    private float maxHP = 100;
+    private float maxHP = 100; // 적 최대 체력
     [SerializeField]
-    private float dmg = 10; 
+    private float dmg = 10; // 적 공격 데미지
     [SerializeField]
-    private float attackCoolTime = 1.7f;
+    private float attackCoolTime = 1.7f; // 공격 딜레이
     [SerializeField]
-    private float hitDelay = 1.2f;
+    private float hitDelay = 1.2f; // hit시 경직 시간
+    [SerializeField]
+    private float reSpawnDelay = 4f; // 리스폰 딜레이
     public NavMeshSurface nms;
 
 
-    private float currentHP;
+    private float currentHP; // 적 현재 체력
     private int volume; // 적이 쫒아 가는 우선순위
     private Vector3 target; // 쫒아갈 목표
-    private Transform targetTrans;
+    private Transform targetTrans; // "
     bool isMove = false; // 움직일 수 있는가
     bool isAttack = true; // 공격할 수 있는가
     bool isStiffen = false; // 경직 되었는가
@@ -142,13 +144,17 @@ public class EnemyController : MonoBehaviour, IHitAble
         enemyAnim.isDie(true);
         transform.GetChild(0).gameObject.SetActive(false);
         StopCoroutine(CoolTime(0,true, (re) => { }));
-
-        //gameObject.SetActive(false);
+        Invoke("Respawn", reSpawnDelay);
     }
     public void Respawn()
     {
+        gameObject.SetActive(false);
         if (!GameManager.Instance.enemyGenerate.canSpawn) return;
         isStiffen = false;
         transform.GetChild(0).gameObject.SetActive(true);
+        transform.position = GameManager.Instance.enemyGenerate.GenEnemy();
+        gameObject.SetActive(true);
+        StartCoroutine(CoroutineUpdate());
+        currentHP = maxHP;
     }
 }
