@@ -64,13 +64,11 @@ public class EnemyController : MonoBehaviour, IHitAble
                     if (targetTrans.TryGetComponent<IHitAble>(out var h) && isAttack && playerLayer == targetTrans.gameObject.layer)
                     {
                         enemyAnim.SetTrigger("Bite");
-                        Debug.Log(12);
                         h.Hit(dmg, "");
                         StartCoroutine(CoolTime(attackCoolTime, isAttack, (result) => { isAttack = result; }));
                     }
                     else if (targetTrans.TryGetComponent<IHitAble>(out var h2) && isAttack && barrierLayer == targetTrans.gameObject.layer)
                     {
-                        Debug.Log(2);
                         enemyAnim.SetTrigger("stinger");
                         h2.Hit(dmg, "");
                         StartCoroutine(CoolTime(attackCoolTime, isAttack, (result) => { isAttack = result; }));
@@ -150,11 +148,12 @@ public class EnemyController : MonoBehaviour, IHitAble
     {
         gameObject.SetActive(false);
         if (!GameManager.Instance.enemyGenerate.canSpawn) return;
-        isStiffen = false;
-        transform.GetChild(0).gameObject.SetActive(true);
         transform.position = GameManager.Instance.enemyGenerate.GenEnemy();
+        isStiffen = false;
+        enemyAnim.isDie(false);
+        transform.GetChild(0).gameObject.SetActive(true);
+        currentHP = maxHP;
         gameObject.SetActive(true);
         StartCoroutine(CoroutineUpdate());
-        currentHP = maxHP;
     }
 }
