@@ -17,7 +17,6 @@ public class EnemyAnimation : MonoBehaviour
     void Start()
     {
         nma = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         isDead = false;
     }
