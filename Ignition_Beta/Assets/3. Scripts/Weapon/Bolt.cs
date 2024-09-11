@@ -22,7 +22,7 @@ public class Bolt : MonoBehaviour
     private LinearDrive linearDrive;
     private bool boltMoving = false;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool redyToShot;
     private bool boltRetraction;
 
