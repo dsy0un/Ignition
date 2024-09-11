@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using Valve.VR;
@@ -14,6 +15,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private float fireTime;
     [SerializeField] private bool ableAutomaticFire;
     public bool isShotgun;
+    public int spawnPrefabAmount;
+    Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
     private bool canFire;
 
     public float shootingSpeed = 1f;
@@ -44,6 +47,7 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         gunRb = GetComponent<Rigidbody>();
+        Initialize(spawnPrefabAmount);
     }
 
     private void Start()
@@ -74,6 +78,7 @@ public class Gun : MonoBehaviour
 
             else // 잡고 있지 않을 경우
                 isGrab = false;
+
             yield return null;
         }
     }
@@ -89,19 +94,28 @@ public class Gun : MonoBehaviour
                 Rigidbody bulletrb = Instantiate
                     (bulletPref, muzzelFlash.transform.position, muzzelFlash.transform.rotation).GetComponent<Rigidbody>();
                 bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // 총알의 발사 방향 및 속도
-                muzzelFlash.Play(); // 총구 화염 이펙트 재생
-                audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
-                gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Impulse);
-                gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Impulse);
-                magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
-                bolt.Shot();
-                muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
-                Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
             }
             else
             {
-
+                for (int i = 0; i < 25; i++)
+                {
+                    Rigidbody bulletrb = Instantiate
+                    (bulletPref, muzzelFlash.transform.position,
+                    Quaternion.Euler(new Vector3(
+                            muzzelFlash.transform.rotation.x + Random.Range(-20, 20),
+                            muzzelFlash.transform.rotation.y + Random.Range(-20, 20),
+                            muzzelFlash.transform.rotation.z))).GetComponent<Rigidbody>();
+                    bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+                }
             }
+            muzzelFlash.Play(); // 총구 화염 이펙트 재생
+            audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
+            gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Force);
+            gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Force);
+            magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
+            bolt.Shot();
+            muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
+            Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
             canFire = false; // 발사 불가능
         }
     }
@@ -159,5 +173,44 @@ public class Gun : MonoBehaviour
         {
             currentHand = null;
         }
+    }
+
+    private void Initialize(int initCount)
+    {
+        for (int i = 0; i < initCount; i++)
+        {
+            poolingObjectQueue.Enqueue(CreateNewObject());
+        }
+    }
+
+    private GameObject CreateNewObject()
+    {
+        var newObj = Instantiate(bulletPref);
+        newObj.gameObject.SetActive(false);
+        newObj.transform.SetParent(transform);
+        return newObj;
+    }
+
+    public void GetObject()
+    {
+        if (poolingObjectQueue.Count > 0)
+        {
+            var obj = poolingObjectQueue.Dequeue();
+            obj.transform.position = muzzelFlash.transform.position;
+            obj.SetActive(true);
+        }
+        else
+        {
+            var newObj = CreateNewObject();
+            newObj.transform.position = muzzelFlash.transform.position;
+            newObj.SetActive(true);
+        }
+    }
+
+    public void ReturnObject(GameObject obj)
+    {
+        obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
+        poolingObjectQueue.Enqueue(obj);
     }
 }
