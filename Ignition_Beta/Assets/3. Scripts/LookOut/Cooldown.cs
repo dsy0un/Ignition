@@ -19,13 +19,13 @@ public class Cooldown : MonoBehaviour
 
     private void Awake()
     {
-        currentTime = cooltime;
+        playerHead = GameManager.Instance.playerHead.gameObject;
     }
 
     private void Start()
     {
+        currentTime = cooltime;
         StartCoroutine(CoolDown());
-            Debug.Log(1);
     }
 
     private void Update()
@@ -53,5 +53,6 @@ public class Cooldown : MonoBehaviour
 
             yield return null;
         }
+        GameManager.Instance.DefSuccessEvent();
     }
 }

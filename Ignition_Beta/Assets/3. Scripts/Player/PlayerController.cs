@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, IHitAble
         characterController = GetComponent<CharacterController>();
         int layer = LayerMask.NameToLayer("Player");
 
-        ChangeLayerRecursively(gameObject, layer);
+        //ChangeLayerRecursively(gameObject, layer); 안써도 돌아가긴함 ㅇㅇㅇㅇ
     }
     void Update()
     {

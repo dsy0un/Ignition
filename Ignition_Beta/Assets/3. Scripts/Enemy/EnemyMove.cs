@@ -20,32 +20,44 @@ public class EnemyMove : MonoBehaviour
     private float curAtkTime;
     private float hideBody = 4;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         nma = GetComponent<NavMeshAgent>();
         enemyState = GetComponent<EnemyState>();
 
+    }
+    void Start()
+    {
         curStunTime = 0;
         curAtkTime = 0;
+        StartCoroutine(CoroutineUpdate());
     }
 
-    void Update()
+    IEnumerator CoroutineUpdate()
     {
-        if (!enemyState.IsDead)
+        while (true)
         {
-            if (enemyState.IsStuned || enemyState.IsAttack || enemyState.InDistance)
-                StopMove();
-            if (curStunTime >= stunTime || curAtkTime >= atkTime && !enemyState.InDistance)
-                StartMove();
-            nma.SetDestination(target.transform.position);
-            speedtovelo = new Vector3(nma.velocity.x, 0, nma.velocity.z);
-            rb.velocity = speedtovelo;
+            if (!enemyState.IsDead)
+            {
+                if (enemyState.IsStuned || enemyState.IsAttack || enemyState.InDistance)
+                    StopMove();
+                if (curStunTime >= stunTime || curAtkTime >= atkTime && !enemyState.InDistance)
+                    StartMove();
+                nma.SetDestination(target.transform.position);
+                speedtovelo = new Vector3(nma.velocity.x, 0, nma.velocity.z);
+                rb.velocity = speedtovelo;
+            }
+            else
+            {
+                StartCoroutine(Die());
+            }
+            yield return null;
         }
-        else
-        {
-            StartCoroutine(Die());
-        }
+    }
+    public void Change(int Volume, Transform starget)
+    {
+        nma.SetDestination(starget.position);
     }
 
     private void StopMove()
@@ -81,5 +93,14 @@ public class EnemyMove : MonoBehaviour
         gameObject.SetActive(false);
         rb.constraints = RigidbodyConstraints.None;
         enemyState.Respawn();
+    }
+    public IEnumerator BackMove(Vector3 dir)
+    {
+        Debug.Log(1);
+        StopMove();
+        yield return new WaitForSeconds(0.2f);
+        rb.AddRelativeForce(dir * 100f, ForceMode.Acceleration);
+        yield return new WaitForSeconds(1f);
+        StartMove();
     }
 }

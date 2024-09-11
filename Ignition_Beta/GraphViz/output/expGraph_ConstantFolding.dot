@@ -1,0 +1,101 @@
+digraph G {
+node0 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_a
+_vfx_enabled_b
+_vfx_enabled_a
+_vfx_enabled_b
+_vfx_enabled_c
+_vfx_enabled_d
+_vfx_enabled_e
+_vfx_enabled_a
+Alive_a
+_vfx_enabled_b
+_vfx_enabled_c
+_vfx_enabled_d
+_vfx_enabled_a
+_vfx_enabled_b
+_vfx_enabled_c
+_vfx_enabled_d
+_vfx_enabled_a
+_vfx_enabled_b
+_vfx_enabled_c
+_vfx_enabled_a"]
+node1 [shape="box" color="cyan" style="filled" label="VFXExpressionMax Float
+Rate_a"]
+node2 [shape="box" label="VFXValue`1 Float (30)"]
+node3 [shape="box" color="lightslategray" style="filled" label="VFXValue`1 Float (0)"]
+node4 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float3 ((-0.09, 0.39, 0.19))
+bounds_center"]
+node5 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float3 ((3.69, 3.05, 2.48))
+bounds_size"]
+node6 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float3 ((0.00, 0.00, 0.00))
+boundsPadding
+boundsPadding"]
+node7 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float3 ((-0.08, 0.37, 0.20))
+bounds_center"]
+node8 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float3 ((3.71, 3.10, 2.55))
+bounds_size"]
+node9 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float3 ((1.00, 1.00, 1.00))
+Color_a"]
+node10 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float (1)
+A_b
+Drag_a
+frequency_a
+Drag_a
+frequency_a"]
+node11 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float (3)
+B_b
+Lifetime_d"]
+node12 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Matrix4x4 (3.33333	0.00000	0.00000	0.00000
+0.00000	3.33333	0.00000	0.00000
+0.00000	0.00000	3.33333	0.00000
+0.00000	0.00000	0.00000	1.00000
+)
+InvFieldTransform_a
+InvFieldTransform_a"]
+node13 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Matrix4x4 (0.30000	0.00000	0.00000	0.00000
+0.00000	0.30000	0.00000	0.00000
+0.00000	0.00000	0.30000	0.00000
+0.00000	0.00000	0.00000	1.00000
+)
+FieldTransform_a
+FieldTransform_a"]
+node14 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float (5)
+Intensity_a"]
+node15 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Int32 (3)
+octaves_a"]
+node16 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float (0.8348661)
+roughness_a
+roughness_a"]
+node17 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float (2)
+lacunarity_a
+lacunarity_a"]
+node18 [shape="box" color="cyan" style="filled" label="VFXBuiltInExpression Float (DeltaTime)
+deltaTime_a
+deltaTime_b
+deltaTime_c
+deltaTime_d
+deltaTime_a
+deltaTime_b
+deltaTime_c"]
+node19 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float (30)
+Rate_b"]
+node20 [shape="box" color="orange" style="filled" label="VFXAttributeExpression Float3 (position)
+Value_b"]
+node21 [shape="box" color="orange" style="filled" label="VFXAttributeExpression Float3 (color)
+Value_c"]
+node22 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Float (0.1)
+Intensity_a"]
+node23 [shape="box" color="steelblue" style="filled" label="VFXValue`1 Int32 (1)
+octaves_a"]
+node24 [shape="box" color="orange" style="filled" label="VFXExpressionStripTangent Float3
+stripTangent_a"]
+node25 [shape="box" color="cyan" style="filled" label="VFXExpressionBakeCurve Float4
+Size_b"]
+node26 [shape="box" color="lightslategray" style="filled" label="VFXValue`1 Curve (UnityEngine.AnimationCurve)"]
+node27 [shape="box" color="cyan" style="filled" label="VFXTexture2DValue Texture2D (1314)
+mainTexture"]
+node2 -> node1 [headlabel="0"]
+node3 -> node1 [headlabel="1"]
+node26 -> node25 
+}
