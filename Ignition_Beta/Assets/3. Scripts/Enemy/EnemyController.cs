@@ -48,8 +48,10 @@ public class EnemyController : MonoBehaviour, IHitAble
 
     IEnumerator CoroutineUpdate()
     {
+        StartCoroutine(CoolTime(3.0f, isAttack, (result) => { isAttack = result; }));
         while (true)
         {
+            Debug.Log(nma.remainingDistance);
             yield return null;
             if (!isStiffen)
             {
@@ -58,22 +60,26 @@ public class EnemyController : MonoBehaviour, IHitAble
                     nma.SetDestination(target);
                 }
                 //목표와 가까우면 실행
-                if (targetTrans != null && nma.pathStatus == NavMeshPathStatus.PathComplete && nma.remainingDistance - nma.stoppingDistance < 0.1f)
+                if (targetTrans != null 
+                    && isAttack 
+                    && nma.remainingDistance != 0 
+                    && nma.pathStatus == NavMeshPathStatus.PathComplete 
+                    && nma.remainingDistance - nma.stoppingDistance < 0.1f)
                 {
                     isMove = false;
-                    if (targetTrans.TryGetComponent<IHitAble>(out var h) && isAttack && playerLayer == targetTrans.gameObject.layer)
+                    if (targetTrans.TryGetComponent<IHitAble>(out var h) && playerLayer == targetTrans.gameObject.layer)
                     {
                         enemyAnim.SetTrigger("Bite");
                         h.Hit(dmg, "");
                         StartCoroutine(CoolTime(attackCoolTime, isAttack, (result) => { isAttack = result; }));
                     }
-                    else if (targetTrans.TryGetComponent<IHitAble>(out var h2) && isAttack && barrierLayer == targetTrans.gameObject.layer)
+                    else if (targetTrans.TryGetComponent<IHitAble>(out var h2) && barrierLayer == targetTrans.gameObject.layer)
                     {
                         enemyAnim.SetTrigger("stinger");
                         h2.Hit(dmg, "");
                         StartCoroutine(CoolTime(attackCoolTime, isAttack, (result) => { isAttack = result; }));
                     }
-                    else if (isAttack)
+                    else
                     {
                         enemyAnim.SetTrigger("Bite");
                         StartCoroutine(CoolTime(attackCoolTime, isAttack, (result) => { isAttack = result; }));
@@ -129,7 +135,6 @@ public class EnemyController : MonoBehaviour, IHitAble
             enemyAnim.SetTrigger("getHit");
             
         }
-        StartCoroutine(CoolTime(hitDelay, isStiffen, (result) => { isStiffen = result; }));
         currentHP -= dmg;
         if (currentHP <= 0)
         {
@@ -155,7 +160,6 @@ public class EnemyController : MonoBehaviour, IHitAble
         currentHP = maxHP;
         gameObject.SetActive(true);
         isAttack = false;
-        StartCoroutine(CoolTime(3.0f, isAttack, (result) => { isAttack = result; }));
         StartCoroutine(CoroutineUpdate());
     }
 }
