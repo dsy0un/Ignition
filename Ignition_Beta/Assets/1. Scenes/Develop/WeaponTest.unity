@@ -7304,16 +7304,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VS92Magazine (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1224392160379842811, guid: 899c9ae641bea3c4bab527731b4bd567,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2999346080647347616, guid: 899c9ae641bea3c4bab527731b4bd567,
-        type: 3}
-      propertyPath: maxBullet
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3502901255965114965, guid: 899c9ae641bea3c4bab527731b4bd567,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13571,16 +13561,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VS92Magazine (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224392160379842811, guid: 899c9ae641bea3c4bab527731b4bd567,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2999346080647347616, guid: 899c9ae641bea3c4bab527731b4bd567,
-        type: 3}
-      propertyPath: maxBullet
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3502901255965114965, guid: 899c9ae641bea3c4bab527731b4bd567,
         type: 3}
@@ -20766,16 +20746,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2491603061933699169, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
-        type: 3}
-      propertyPath: maxRecoil
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 2491603061933699169, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
-        type: 3}
-      propertyPath: minRecoil
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 5171825828786510011, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
         type: 3}
       propertyPath: m_Name
@@ -22779,6 +22749,7 @@ MonoBehaviour:
   fireTime: 0
   ableAutomaticFire: 0
   isShotgun: 1
+  spawnPrefabAmount: 0
   shootingSpeed: 100
   bulletPref: {fileID: 2718682117778658829, guid: ecc01e653b76a10458587701144abf39,
     type: 3}
@@ -25169,6 +25140,7 @@ MonoBehaviour:
   fireTime: 0.1
   ableAutomaticFire: 0
   isShotgun: 0
+  spawnPrefabAmount: 0
   shootingSpeed: 700
   bulletPref: {fileID: 8979164261761044410, guid: 714c6690bf20f6941a767c8665924fb6,
     type: 3}
@@ -26519,16 +26491,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1725959796507504952, guid: 80ab8c7e404eac340b0c28b08c8ccdf5,
-        type: 3}
-      propertyPath: maxRecoil
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1725959796507504952, guid: 80ab8c7e404eac340b0c28b08c8ccdf5,
-        type: 3}
-      propertyPath: minRecoil
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 3622559276513988815, guid: 80ab8c7e404eac340b0c28b08c8ccdf5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30380,11 +30342,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VS92Magazine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2999346080647347616, guid: 899c9ae641bea3c4bab527731b4bd567,
-        type: 3}
-      propertyPath: maxBullet
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3502901255965114965, guid: 899c9ae641bea3c4bab527731b4bd567,
         type: 3}

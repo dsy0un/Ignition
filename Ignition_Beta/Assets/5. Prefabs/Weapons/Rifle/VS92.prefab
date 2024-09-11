@@ -1388,14 +1388,15 @@ MonoBehaviour:
   fireTime: 0.1
   ableAutomaticFire: 1
   isShotgun: 0
+  spawnPrefabAmount: 0
   shootingSpeed: 400
   bulletPref: {fileID: 2393519899685930901, guid: 92e93f0ed86ca6c40ac831733d78f65e,
     type: 3}
   interactable: {fileID: 6603838679473170727}
   socket: {fileID: 3421449207985673403}
   bolt: {fileID: 6909667098348990358}
-  maxRecoil: 15
-  minRecoil: 7
+  maxRecoil: 150
+  minRecoil: 80
   secondInteractable: {fileID: 4956609622899147042}
   fireAction:
     actionPath: /actions/gun/in/GunFire
