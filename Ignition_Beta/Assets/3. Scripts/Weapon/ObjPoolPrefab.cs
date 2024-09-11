@@ -26,5 +26,6 @@ public class ObjPoolPrefab : MonoBehaviour
         yield return new WaitForSeconds(4);
         transform.rotation = Quaternion.Euler(Vector3.zero);
         bolt.ReturnObject(this.gameObject);
+        yield break;
     }
 }

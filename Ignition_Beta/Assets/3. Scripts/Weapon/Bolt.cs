@@ -6,37 +6,36 @@ using Valve.VR;
 
 public class Bolt : MonoBehaviour
 {
+    [HideInInspector]
+    public MagazineSystem magazineSystem;
+
     private Interactable interactable;
-    private SpringJoint joint;
-    private Rigidbody rb;
-    private MagazineSystem magazineSystem;
     public Gun gun;
-    public Socket socket;
+    public LinearMapping mapping;
 
     public GameObject round;
     public GameObject cartridge;
-    public GameObject ejectBullet;
-    private Vector3 originPosition;
-    private Quaternion originRotation;
-    public float endPositionValue;
-    public float startPositionValue;
-    public float impulsePower;
-    public int jointValue;
+
+    [Header("Bolt")]
+    public bool autoBolt;
+    public float moveTime;
+    private LinearDrive linearDrive;
+    private bool boltMoving = false;
+
+    [HideInInspector]
     public bool redyToShot;
     private bool boltRetraction;
 
-    Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
-    public GameObject ejectPoint;
+    [Header("Eject Cartridge")]
     public int spawnPrefabAmount;
-
+    public GameObject ejectPoint;
+    public GameObject ejectBullet;
+    Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        linearDrive = GetComponent<LinearDrive>();
         interactable = GetComponent<Interactable>();
-        joint = GetComponent<SpringJoint>();
-        originPosition = transform.localPosition;
-        originRotation = transform.localRotation;
         Initialize(spawnPrefabAmount);
     }
 
@@ -49,59 +48,84 @@ public class Bolt : MonoBehaviour
     {
         while (true)
         {
-            if (socket.IsMagazine)
-                magazineSystem = gun.magazineSystem;
-            else
-                magazineSystem = null;
-            // 노리쇠의 로컬 회전 방향 = 초기 회전 방향
-            transform.localRotation = originRotation;
-            // 노리쇠의 로컬 위치 = x,y는 초기 위치, z는 본인의 로컬 위치
-            transform.localPosition = new Vector3(originPosition.x, originPosition.y, transform.localPosition.z);
-            joint.spring = jointValue; // 스프링 조인트 작동
-            if (interactable.attachedToHand != null || !gun.isGrab) // 노리쇠를 잡고 있거나 총을 잡고 있지 않을 때
+            if (mapping.value == 1)
             {
-                joint.spring = 0; // 스프링 조인트 끄기
-                redyToShot = false;
-            }
-            if (transform.localPosition.z >= originPosition.z - startPositionValue) // 노리쇠의 로컬 위치가 초기 위치 이상일 때
-            {
-                transform.localPosition = originPosition; // 노리쇠 로컬 위치 = 초기 위치
-                if (boltRetraction)
-                {
-                    redyToShot = true;
-                }
-            }
-                
-            if (transform.localPosition.z <= originPosition.z - endPositionValue)
-            {
-                transform.localPosition = new Vector3
-                    (originPosition.x, originPosition.y, originPosition.z - endPositionValue);
+                if (cartridge.activeInHierarchy == true)
+                    GetObject();
                 cartridge.SetActive(false);
-                if (magazineSystem != null && magazineSystem.BulletCount > 0)
-                {
+
+                if (magazineSystem != null && magazineSystem.bulletCount > 0)
                     boltRetraction = true;
-                }
                 else
                 {
                     round.SetActive(false);
                     cartridge.SetActive(false);
                 }
             }
+
             if (boltRetraction)
             {
-                round.SetActive(true);
+                if (mapping.value < 1)
+                    round.SetActive(true);
+                if (mapping.value == 0)
+                    redyToShot = true;
+                else
+                    redyToShot = false;
+            }
+
+            if (boltMoving == false && interactable.attachedToHand == null && autoBolt)
+            {
+                StartCoroutine("AutoMoveFront");
             }
             yield return null;
         }
     }
     public void Shot()
     {
-        rb.AddRelativeForce(Vector3.back * impulsePower, ForceMode.Impulse);
         round.SetActive(false);
         cartridge.SetActive(true);
-        GetObject();
         boltRetraction = false;
         redyToShot = false;
+        if (autoBolt && interactable.attachedToHand == null)
+        {
+            StartCoroutine("AutoMoveBack");
+            boltMoving = true;
+        }
+    }
+
+    IEnumerator AutoMoveBack()
+    {
+        float time = 0f;
+        while (true)
+        {
+            time += Time.deltaTime;
+            transform.position = Vector3.Lerp
+            (linearDrive.startPosition.position, linearDrive.endPosition.position, time / moveTime);
+            mapping.value = Mathf.Lerp(0, 1, time / moveTime);
+            if (mapping.value == 1)
+            {
+                boltMoving = false;
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator AutoMoveFront()
+    {
+        float time = 0f;
+        while (true)
+        {
+            time += Time.deltaTime;
+            transform.position = Vector3.Lerp
+                (transform.position, linearDrive.startPosition.position, time / moveTime);
+            mapping.value = Mathf.Lerp(mapping.value, 0, time / moveTime);
+            if (mapping.value == 0)
+            {
+                yield break;
+            }
+            yield return null;
+        }
     }
 
     private void Initialize(int initCount)

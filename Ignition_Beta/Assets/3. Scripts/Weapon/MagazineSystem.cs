@@ -8,12 +8,11 @@ using UnityEngine.UI;
 public class MagazineSystem : MonoBehaviour
 {
     [SerializeField] private float maxBullet = 20;
-    private float bulletCount;
-    public float BulletCount
+    float MaxBullet
     {
-        get => bulletCount;
-        set => bulletCount = value;
+        get => maxBullet;
     }
+    public float bulletCount;
     private Interactable interactable;
     private Rigidbody rb;
     private Collider col;
@@ -73,14 +72,14 @@ public class MagazineSystem : MonoBehaviour
     {
         if (interactable.attachedToHand != null)
         {
-            if (other.tag == "Socket" && !isLoad && other.GetComponent<Socket>().IsMagazine == false)
+            if (other.tag == "Socket" && !isLoad && other.GetComponent<Socket>().isMagazine == false)
             {
                 magazinePoint = other.transform.GetChild(0);
                 if (gameObject.tag != magazinePoint.gameObject.tag) return;
                 rb.useGravity = false;
                 isLoad = true;
                 col.isTrigger = true;
-                other.GetComponent<Socket>().IsMagazine = true;
+                other.GetComponent<Socket>().isMagazine = true;
                 transform.parent = magazinePoint;
                 transform.localPosition = 
                     new Vector3(magazinePoint.localPosition.x, magazinePoint.localPosition.y, magazinePoint.localPosition.z);
@@ -96,7 +95,7 @@ public class MagazineSystem : MonoBehaviour
         {
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.None;
-            transform.GetComponentInParent<Socket>().IsMagazine = false;
+            transform.GetComponentInParent<Socket>().isMagazine = false;
             transform.parent = null;
             isLoad = false;
             col.isTrigger = false;
