@@ -9,6 +9,7 @@ public class Barrier : MonoBehaviour, IHitAble
     Image image;
     [SerializeField]
     float maxHP = 100;
+    [SerializeField]
     float currentHP;
     [SerializeField]
     float breakTime;
@@ -42,13 +43,13 @@ public class Barrier : MonoBehaviour, IHitAble
                 switch (currentTime)
                 {
                     case float n when (n <= 30f && n >= 10f):
-                        GameManager.Instance.window.windowTimer.text = $"ºØ±«±îÁö ³²Àº ½Ã°£ : <color=orange>{min:D2}:{currentTime:00.00}</color>";
+                        GameManager.Instance.window.windowTimer.text = $"ë¶•ê´´ê¹Œì§€ ë‚¨ì€ ì‹œê°„ : <color=orange>{min:D2}:{currentTime:00.00}</color>";
                         break;
                     case float n when (n <= 10f):
-                        GameManager.Instance.window.windowTimer.text = $"ºØ±«±îÁö ³²Àº ½Ã°£ : <color=red>{min:D2}:{currentTime:00.00}</color>";
+                        GameManager.Instance.window.windowTimer.text = $"ë¶•ê´´ê¹Œì§€ ë‚¨ì€ ì‹œê°„ : <color=red>{min:D2}:{currentTime:00.00}</color>";
                         break;
                     default:
-                        GameManager.Instance.window.windowTimer.text = $"ºØ±«±îÁö ³²Àº ½Ã°£ : <color=white>{min:D2}:{currentTime:00.00}</color>";
+                        GameManager.Instance.window.windowTimer.text = $"ë¶•ê´´ê¹Œì§€ ë‚¨ì€ ì‹œê°„ : <color=white>{min:D2}:{currentTime:00.00}</color>";
                         break;
                 }
             }
