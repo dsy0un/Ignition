@@ -163,7 +163,6 @@ public class Bolt : MonoBehaviour
     public void ReturnObject(GameObject obj)
     {
         obj.gameObject.SetActive(false);
-        obj.transform.SetParent(transform);
         poolingObjectQueue.Enqueue(obj);
     }
 }
