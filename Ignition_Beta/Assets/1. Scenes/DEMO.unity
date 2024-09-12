@@ -257,7 +257,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   toastMsg: {fileID: 925063036}
   fadeTime: 0.3
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 6260561400979552126}
 --- !u!4 &21378910
 Transform:
   m_ObjectHideFlags: 0
@@ -490,13 +490,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123442657}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3535534, y: -0.61237246, z: -0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: 18.7, y: 0.9, z: 5.66}
+  m_LocalRotation: {x: -0.27059805, y: -0.6532815, z: -0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 13, y: 0.9, z: 5.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -60, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: -90, z: 0}
 --- !u!1 &141818829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1455,7 @@ MonoBehaviour:
   - {fileID: 123442658}
   - {fileID: 2010143745}
   disk: {fileID: 4525118042806634547, guid: 67a53579a5db3b44f8e84cf65b4a4d1e, type: 3}
+  throwPower: 40000
 --- !u!4 &545484412
 Transform:
   m_ObjectHideFlags: 0
@@ -3343,13 +3344,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010143744}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3535534, y: 0.61237246, z: 0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: -17.8, y: 0.9, z: 12.45}
+  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: -13, y: 0.9, z: 12.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -60, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: 90, z: 0}
 --- !u!1 &2039623552
 GameObject:
   m_ObjectHideFlags: 0
@@ -8392,6 +8393,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4047583662503280835, guid: 87de5b2961db37b44a4feca619759b35,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4423580232214112069, guid: 87de5b2961db37b44a4feca619759b35,
         type: 3}
       propertyPath: m_Layer
@@ -8606,6 +8612,12 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!20 &6260561400979552126 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3436323061353801550, guid: 87de5b2961db37b44a4feca619759b35,
+    type: 3}
+  m_PrefabInstance: {fileID: 6260561400979552120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6272788419023747641
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class Disk : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Destroy(gameObject, 6);
     }
 
     //private void Update()
