@@ -20,7 +20,7 @@ public class DiskGenerator : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(2f, 4f));
             Rigidbody diskRb = Instantiate(disk, i.position, i.rotation).GetComponent<Rigidbody>();
-            diskRb.AddRelativeForce(Vector3.forward * throwPower * Time.deltaTime, ForceMode.Acceleration);
+            diskRb.AddRelativeForce(Vector3.forward * throwPower, ForceMode.VelocityChange);
         }
     }
 }

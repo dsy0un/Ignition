@@ -257,7 +257,6 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   toastMsg: {fileID: 925063036}
   fadeTime: 0.3
-  mainCamera: {fileID: 6260561400979552126}
 --- !u!4 &21378910
 Transform:
   m_ObjectHideFlags: 0
@@ -491,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 123442657}
   serializedVersion: 2
   m_LocalRotation: {x: -0.27059805, y: -0.6532815, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 13, y: 0.9, z: 5.66}
+  m_LocalPosition: {x: 16, y: 1, z: 5.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1455,7 +1454,7 @@ MonoBehaviour:
   - {fileID: 123442658}
   - {fileID: 2010143745}
   disk: {fileID: 4525118042806634547, guid: 67a53579a5db3b44f8e84cf65b4a4d1e, type: 3}
-  throwPower: 40000
+  throwPower: 17
 --- !u!4 &545484412
 Transform:
   m_ObjectHideFlags: 0
@@ -3345,7 +3344,7 @@ Transform:
   m_GameObject: {fileID: 2010143744}
   serializedVersion: 2
   m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: -13, y: 0.9, z: 12.45}
+  m_LocalPosition: {x: -16, y: 1, z: 12.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8612,12 +8611,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!20 &6260561400979552126 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3436323061353801550, guid: 87de5b2961db37b44a4feca619759b35,
-    type: 3}
-  m_PrefabInstance: {fileID: 6260561400979552120}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6272788419023747641
 GameObject:
   m_ObjectHideFlags: 0
