@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public Drone drone;
     public ModalWindowManager window;
     public EnemyMove enemyMove;
+    public Camera mainCamera;
 
     public SteamVR_Action_Vibration hapticAction;
     [SerializeField]
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
         drone = FindObjectOfType<Drone>();
         window = FindObjectOfType<ModalWindowManager>(true);
         enemyMove = FindObjectOfType<EnemyMove>();
-        
+        mainCamera = Camera.main;
     }
 
     public void ClearEnemy()

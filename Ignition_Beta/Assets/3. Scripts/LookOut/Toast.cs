@@ -15,7 +15,7 @@ public class Toast : MonoBehaviour
 
     bool interrupt;
 
-    public Camera mainCamera;
+    Camera mainCamera;
 
     private static Toast instance;
     public static Toast Instance
@@ -43,6 +43,8 @@ public class Toast : MonoBehaviour
 
     private void Start()
     {
+        mainCamera = GameManager.Instance.mainCamera;
+
         Show("방어하세요!", 10.0f, new Color(0.56f, 1, 0.43f));
     }
     
