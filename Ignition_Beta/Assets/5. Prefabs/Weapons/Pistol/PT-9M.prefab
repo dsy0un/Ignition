@@ -1129,6 +1129,7 @@ Transform:
   - {fileID: 5663479496330772122}
   - {fileID: 1210074422955871514}
   - {fileID: 1049554810666735113}
+  - {fileID: 249590831784173302}
   m_Father: {fileID: 3622559276513988815}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1616280044094714655
@@ -1642,7 +1643,6 @@ Transform:
   m_Children:
   - {fileID: 3440501668843433003}
   - {fileID: 2975933806380397124}
-  - {fileID: 249590831784173302}
   - {fileID: 1223351807539801971}
   - {fileID: 6035996649596202562}
   - {fileID: 6200314624732361787}
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   fireTime: 0.1
   ableAutomaticFire: 0
   isShotgun: 0
-  spawnPrefabAmount: 0
+  spawnPrefabAmount: 20
   shootingSpeed: 200
   bulletPref: {fileID: 3214479009315664067, guid: d907a5a969e2c9149b83a656a1cfaf6d,
     type: 3}
@@ -2527,15 +2527,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7656141458130942395}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00014483668, y: 0.032286566, z: 0.064}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00014483929, y: 0.056188814, z: 0.0753715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7889159673577412289}
   - {fileID: 1673177319420586154}
   - {fileID: 8329443190788036009}
-  m_Father: {fileID: 3622559276513988815}
+  m_Father: {fileID: 2975933806380397124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7582604076600130118
 MeshFilter:

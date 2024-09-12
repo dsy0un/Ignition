@@ -6,14 +6,16 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float destructionDelay = 30f;
     [SerializeField] private float damage;
+    private Gun gun;
 
-    private void Start()
+    private void Awake()
     {
-        Destroy(this.gameObject, destructionDelay);
+        gun = GetComponentInParent<Gun>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        print(gun.gameObject.name);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Gun") || 
             collision.gameObject.layer == LayerMask.NameToLayer("Player")) return;
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -25,6 +27,6 @@ public class Bullet : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        else Destroy(this.gameObject);
+        else gun.ReturnObject(gameObject);
     }
 }
