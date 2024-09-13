@@ -100,11 +100,17 @@ public class Gun : MonoBehaviour
                 buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
             }
             else
-            {
-                GameObject bullet = GetObject();
-                Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
-                bullet.transform.position = muzzelFlash.transform.position;
-                buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+            { 
+                for (int i = 0; i < 21; i++)
+                {
+                    GameObject bullet = GetObject();
+                    Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
+                    bullet.transform.position = muzzelFlash.transform.position;
+                    bullet.transform.rotation = Quaternion.Euler
+                        (new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0));
+                    buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+                    print(i);
+                }
             }
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생

@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print(gun.gameObject.name);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Gun") || 
             collision.gameObject.layer == LayerMask.NameToLayer("Player")) return;
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
