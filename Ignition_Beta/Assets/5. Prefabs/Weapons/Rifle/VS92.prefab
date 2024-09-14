@@ -1385,7 +1385,6 @@ MonoBehaviour:
   muzzleLight: {fileID: 119388039642728358}
   shotSound: {fileID: 8300000, guid: df2163a1ce64cad46b7fb628176c0908, type: 3}
   emptyShotSound: {fileID: 8300000, guid: 471aaee17329ef24993dd8c553133d26, type: 3}
-  fireTime: 0.1
   ableAutomaticFire: 1
   isShotgun: 0
   spawnPrefabAmount: 60
@@ -1419,7 +1418,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

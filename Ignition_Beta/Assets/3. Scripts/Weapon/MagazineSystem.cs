@@ -95,11 +95,11 @@ public class MagazineSystem : MonoBehaviour
         {
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.None;
+            rb.AddRelativeForce(Vector3.down * 100);
             transform.GetComponentInParent<Socket>().isMagazine = false;
             transform.parent = null;
             isLoad = false;
             col.isTrigger = false;
-            rb.AddForce(-transform.up * 100);
             transform.localScale = magScale;
         }
     }
