@@ -13,7 +13,8 @@ public class Drone : MonoBehaviour
         get { return animator; }
     }
 
-    float speed = 1000f;
+    [SerializeField]
+    float speed = 5000f;
 
     private void Awake()
     {

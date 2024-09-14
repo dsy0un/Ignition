@@ -10,13 +10,15 @@ public class LoadingSceneManager : MonoBehaviour
 
     public string defultScene = "Base";
 
-    public bool test; // Å×½ºÆ® ¿ë trueÀÏ °æ¿ì ¹«ÇÑ ·Îµù
+    public bool test; // í…ŒìŠ¤íŠ¸ ìš© trueì¼ ê²½ìš° ë¬´í•œ ë¡œë”©
 
     public GameObject LoadingText;
     public TextMeshProUGUI text;
     public Image progressBar;
-    [SerializeField, Tooltip("·ÎµùµÇ´Â ½Ã°£(½ÇÁ¦ ·Îµù°ú´Â º°°³ÀÇ ½Ã°£ÀÓ ÃÖ¼Ò 10ÃÊ)"), Min(10f)]
+    [SerializeField, Tooltip("ë¡œë”©ë˜ëŠ” ì‹œê°„(ì‹¤ì œ ë¡œë”©ê³¼ëŠ” ë³„ê°œì˜ ì‹œê°„ì„ ìµœì†Œ 10ì´ˆ)"), Min(10f)]
     private float loadingDuration;
+    [SerializeField]
+    private bool dron;
 
     private void Start()
     {
@@ -24,7 +26,8 @@ public class LoadingSceneManager : MonoBehaviour
         {
             nextScene = defultScene;
         }
-        StartCoroutine(LoadScene());
+        if (dron) StartCoroutine(LoadSceneDron());
+        else StartCoroutine(LoadScenePort());
     }
 
     public static void LoadScene(string sceneName)
@@ -33,7 +36,7 @@ public class LoadingSceneManager : MonoBehaviour
         SceneManager.LoadScene("Loading");
     }
 
-    IEnumerator LoadScene()
+    IEnumerator LoadScenePort()
     {
         yield return null;
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
@@ -50,38 +53,38 @@ public class LoadingSceneManager : MonoBehaviour
                 case float n when (n >= 1.5f && n <= 9f):
                     timer2 += Time.deltaTime;
                     progressBar.fillAmount = Mathf.Lerp(0 , 1, timer2 / 7.5f);
-                    text.text = $"¸ñÇ¥±îÁö ³²Àº°Å¸®";
+                    text.text = $"ëª©í‘œê¹Œì§€ ë‚¨ì€ê±°ë¦¬";
                     break;
                 case float n when (n >= 9.5f):
                     progressBar.gameObject.SetActive(false);
-                    if (op.progress < 0.9f || timer < loadingDuration) // ½ÇÁ¦ ·Îµù Ã¼Å©
+                    if (op.progress < 0.9f || timer < loadingDuration) // ì‹¤ì œ ë¡œë”© ì²´í¬
                     {
                         text.gameObject.SetActive(false);
                         LoadingText.gameObject.SetActive(true);
                         if (op.progress > 0.9)
-                            Debug.Log("½ÇÁ¦ ·Îµù");
+                            Debug.Log("ì‹¤ì œ ë¡œë”©");
                     }
-                    else if (timer > loadingDuration + 3f && !test) // ·Îµù ¿Ï·á½Ã ¾À ÀüÈ¯
+                    else if (timer > loadingDuration + 3f && !test) // ë¡œë”© ì™„ë£Œì‹œ ì”¬ ì „í™˜
                     {
-                        text.text = $"<color=red>Âø·ú!</color>";
+                        text.text = $"<color=red>ì°©ë¥™!</color>";
                         op.allowSceneActivation = true;
                         yield break;
                     }
-                    else if (timer > loadingDuration + 2f) // ÀÚ¿¬½º·¯¿î ·Îµù ÅØ½ºÆ® 
+                    else if (timer > loadingDuration + 2f) // ìì—°ìŠ¤ëŸ¬ìš´ ë¡œë”© í…ìŠ¤íŠ¸ 
                     {
-                        text.text = $"Âø·ú Áß...";
+                        text.text = $"ì°©ë¥™ ì¤‘...";
                     }
                     else if (timer > loadingDuration + 1.5f)
                     {
-                        text.text = $"Âø·ú Áß..";
+                        text.text = $"ì°©ë¥™ ì¤‘..";
                     }
                     else if (timer > loadingDuration + 1f)
                     {
-                        text.text = $"Âø·ú Áß.";
+                        text.text = $"ì°©ë¥™ ì¤‘.";
                     }
                     else if (timer > loadingDuration) 
                     {
-                        text.text = $"Âø·ú ÁöÁ¡ È®º¸!";
+                        text.text = $"ì°©ë¥™ ì§€ì  í™•ë³´!";
                         text.gameObject.SetActive(true);
                         LoadingText.gameObject.SetActive(false);
                     }
@@ -99,6 +102,30 @@ public class LoadingSceneManager : MonoBehaviour
             //        yield break;
             //    }
             //}
+        }
+    }
+    IEnumerator LoadSceneDron()
+    {
+        yield return null;
+        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
+        op.allowSceneActivation = false;
+        float timer = 0.0f;
+        while (!op.isDone)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+            if (op.progress < 0.9f)
+            {
+
+            }
+            else
+            {
+                if (timer > loadingDuration && !test)
+                {
+                    op.allowSceneActivation = true;
+                    yield break;
+                }
+            }
         }
     }
 }
