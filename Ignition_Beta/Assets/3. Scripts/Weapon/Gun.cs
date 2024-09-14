@@ -107,10 +107,8 @@ public class Gun : MonoBehaviour
                     GameObject bullet = GetObject();
                     Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
                     bullet.transform.position = muzzelFlash.transform.position;
-                    bullet.transform.rotation = muzzelFlash.transform.rotation;
-                    bullet.transform.rotation = Quaternion.Euler
-                        (new Vector3(Random.Range(-40, 40), Random.Range(-40, 40), 0));
-                    buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+                    buletRb.velocity = (muzzelFlash.transform.forward + 
+                        new Vector3(Random.Range(-40, 40), 0, 0)) * shootingSpeed;
                 }
             }
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
