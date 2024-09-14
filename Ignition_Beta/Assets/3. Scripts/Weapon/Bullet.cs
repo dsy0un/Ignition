@@ -7,10 +7,18 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float destructionDelay = 30f;
     [SerializeField] private float damage;
     private Gun gun;
+    private float time;
 
     private void Awake()
     {
         gun = GetComponentInParent<Gun>();
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+        if (time >= destructionDelay)
+            gun.ReturnObject(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

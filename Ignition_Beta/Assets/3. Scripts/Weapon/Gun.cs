@@ -97,6 +97,7 @@ public class Gun : MonoBehaviour
                 GameObject bullet = GetObject();
                 Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
                 bullet.transform.position = muzzelFlash.transform.position;
+                bullet.transform.rotation = muzzelFlash.transform.rotation;
                 buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
             }
             else
@@ -106,10 +107,10 @@ public class Gun : MonoBehaviour
                     GameObject bullet = GetObject();
                     Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
                     bullet.transform.position = muzzelFlash.transform.position;
+                    bullet.transform.rotation = muzzelFlash.transform.rotation;
                     bullet.transform.rotation = Quaternion.Euler
-                        (new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0));
+                        (new Vector3(Random.Range(-40, 40), Random.Range(-40, 40), 0));
                     buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
-                    print(i);
                 }
             }
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
