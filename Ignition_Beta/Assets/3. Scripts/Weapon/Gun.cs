@@ -12,7 +12,6 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject muzzleLight;
     [SerializeField] private AudioClip shotSound;
     [SerializeField] private AudioClip emptyShotSound;
-    [SerializeField] private float fireTime;
     [SerializeField] private bool ableAutomaticFire;
     public bool isShotgun;
     public int spawnPrefabAmount;
@@ -108,7 +107,7 @@ public class Gun : MonoBehaviour
                     Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
                     bullet.transform.position = muzzelFlash.transform.position;
                     buletRb.velocity = (muzzelFlash.transform.forward + 
-                        new Vector3(Random.Range(-40, 40), 0, 0)) * shootingSpeed;
+                        new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0)) * shootingSpeed;
                 }
             }
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
