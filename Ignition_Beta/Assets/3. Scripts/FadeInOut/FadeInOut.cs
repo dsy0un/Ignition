@@ -10,7 +10,7 @@ public class FadeInOut : MonoBehaviour
     public float _fadeTime = 1.5f;
     public AnimationCurve _fadeCurve;
 
-    [Tooltip ("½ºÅ©¸³Æ® µé¾îÀÖ´Â ¿ÀºêÁ§Æ® Ãß°¡ÈÄ StartFadeIn || StartFadeOut ¼±ÅÃ")]
+    [Tooltip ("ìŠ¤í¬ë¦½íŠ¸ ë“¤ì–´ìˆëŠ” ì˜¤ë¸Œì íŠ¸ ì¶”ê°€í›„ StartFadeIn || StartFadeOut ì„ íƒ")]
     [SerializeField]
     private UnityEvent onStartEvent;
 
@@ -24,15 +24,25 @@ public class FadeInOut : MonoBehaviour
     }
     public void StartFadeIn()
     {
-        StartCoroutine(Fade(1, 0));
+        StartCoroutine(Fade(1, 0, _fadeTime, _fadeCurve));
     }
-        
     public void StartFadeOut()
     {
-        StartCoroutine(Fade(0, 1));
+        StartCoroutine(Fade(0, 1, _fadeTime, _fadeCurve));
+    }
+    /// <summary>
+    /// í”Œë ˆì´ì–´ í˜ì´ë“œ In, Out ê¸°ëŠ¥
+    /// </summary>
+    /// <param name="start">FadeIn = 1, FadeOut = 0</param>
+    /// <param name="end">FadeIn = 0, FadeOut = 1</param>
+    /// <param name="fadeTime">ì§€ì† ì‹œê°„</param>
+    /// <param name="fadeCurve">ìì—°ìŠ¤ëŸ¬ìš´ í˜ì´ë“œ ì¡°ì ˆ</param>
+    public void StartFade(float start, float end, float fadeTime, AnimationCurve fadeCurve)
+    {
+        StartCoroutine(Fade(start, end, fadeTime, fadeCurve));
     }
 
-    private IEnumerator Fade(float start, float end)
+    private IEnumerator Fade(float start, float end, float fadeTime, AnimationCurve fadeCurve)
     {
         float currentTime = 0.0f;
         float percent = 0.0f;
@@ -40,9 +50,9 @@ public class FadeInOut : MonoBehaviour
         while (percent < 1)
         {
             currentTime += Time.deltaTime;
-            percent = currentTime / _fadeTime;
+            percent = currentTime / fadeTime;
             Color color = _image.color;
-            color.a = Mathf.Lerp(start, end, _fadeCurve.Evaluate(percent));
+            color.a = Mathf.Lerp(start, end, fadeCurve.Evaluate(percent));
             _image.color = color;
             yield return null;
         }
