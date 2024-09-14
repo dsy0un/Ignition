@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using Valve.VR;
@@ -13,46 +14,174 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioClip emptyShotSound;
     [SerializeField] private float fireTime;
     [SerializeField] private bool ableAutomaticFire;
+    public bool isShotgun;
+    public int spawnPrefabAmount;
+    Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
+    private bool redyToFire;
 
+    public float shootingSpeed = 1f;
+    private int fireMode = 1;
+    public GameObject bulletPref;
+
+    public Interactable interactable;
+    public Socket socket;
+    public Bolt bolt;
+    private MagazineSystem magazineSystem;
+    private Hand currentHand = null;
+
+    [Header("Recoil")]
+    public float maxRecoil;
+    public float minRecoil;
+    public Interactable secondInteractable;
+    private Rigidbody gunRb;
+    private float recoilPower;
+
+    [Header("Action Button")]
     public SteamVR_Action_Boolean fireAction;
     public SteamVR_Action_Boolean ejectMagazine;
     public SteamVR_Action_Boolean changeFireMode;
-    public GameObject bulletPref;
 
-    public float shootingSpeed = 1f;
-    public float recoil = 5;
-    private float currentTime;
-    private int fireMode = 1;
-
-    public Interactable interactable;
-    public MagazineSystem magazineSystem;
-    public Socket socket;
-    public Bolt bolt;
-
+    [HideInInspector]
     public bool isGrab;
+
+    private void Awake()
+    {
+        gunRb = GetComponent<Rigidbody>();
+        Initialize(spawnPrefabAmount);
+    }
 
     private void Start()
     {
         StartCoroutine("GunWork");
-        currentTime = fireTime; // ¹ß»ç Áö¿¬½Ã°£ ÃÊ±âÈ­
     }
+
+    IEnumerator GunWork()
+    {
+        while (true)
+        {
+            if (socket.isMagazine) // íƒ„ì°½ì´ ìˆì„ ê²½ìš° ìŠ¤í¬ë¦½íŠ¸ ê°€ì ¸ì˜¤ê¸°
+                magazineSystem = GetComponentInChildren<MagazineSystem>();
+            else // ì•„ë‹Œê²½ìš° ìŠ¤í¬ë¦½íŠ¸ NULL
+                magazineSystem = null;
+            bolt.magazineSystem = magazineSystem;
+
+            if (secondInteractable.attachedToHand != null) // ë‹¤ë¥¸ ì†ë„ ì´ì„ ì¡ê³  ìˆë‹¤ë©´ ë°˜ë™ ì¤„ì´ê¸°
+                recoilPower = minRecoil;
+            else // ì•„ë‹ˆë¼ë©´ ìµœëŒ€ ë°˜ë™
+                recoilPower = maxRecoil;
+
+            if (fireMode == 3) // ì—°ì‚¬ ëª¨ë“œì¼ ë•Œ í•­ìƒ ë°œì‚¬ ê°€ëŠ¥
+                redyToFire = true;
+            
+            if (interactable.attachedToHand != null) // ì´ì„ ì¡ê³  ìˆì„ ë•Œ ì‹¤í–‰
+                CanFire();
+
+            else // ì¡ê³  ìˆì§€ ì•Šì„ ê²½ìš°
+                isGrab = false;
+
+            yield return null;
+        }
+    }
+
     void Fire()
     {
-        // ¹ß»ç Áö¿¬½Ã°£
-        if (currentTime >= fireTime)
+        // ë°œì‚¬ ì§€ì—°ì‹œê°„
+        if (redyToFire)
         {
-            // ÃÑ¾Ë »ı¼º
-            Rigidbody bulletrb = Instantiate
-                (bulletPref, muzzelFlash.transform.position, muzzelFlash.transform.rotation).GetComponent<Rigidbody>();
-            bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // ÃÑ¾ËÀÇ ¹ß»ç ¹æÇâ ¹× ¼Óµµ
-            muzzelFlash.Play(); // ÃÑ±¸ È­¿° ÀÌÆåÆ® Àç»ı
-            audioSource.PlayOneShot(shotSound); // ¹ß»ç »ç¿îµå Àç»ı
-            magazineSystem.BulletCount -= 1; // ÃÑ ¹ß»ç½Ã ÅºÃ¢ÀÇ ÃÑ ÃÑ¾Ë °³¼ö -1
+            if (!isShotgun)
+            {
+                // ì´ì•Œ ìƒì„±
+                //Rigidbody bulletrb = Instantiate
+                //    (bulletPref, muzzelFlash.transform.position, muzzelFlash.transform.rotation).GetComponent<Rigidbody>();
+                //bulletrb.velocity = muzzelFlash.transform.forward * shootingSpeed; // ì´ì•Œì˜ ë°œì‚¬ ë°©í–¥ ë° ì†ë„
+                GameObject bullet = GetObject();
+                Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
+                bullet.transform.position = muzzelFlash.transform.position;
+                buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+            }
+            else
+            { 
+                for (int i = 0; i < 21; i++)
+                {
+                    GameObject bullet = GetObject();
+                    Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
+                    bullet.transform.position = muzzelFlash.transform.position;
+                    bullet.transform.rotation = Quaternion.Euler
+                        (new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0));
+                    buletRb.velocity = muzzelFlash.transform.forward * shootingSpeed;
+                    print(i);
+                }
+            }
+            muzzelFlash.Play(); // ì´êµ¬ í™”ì—¼ ì´í™íŠ¸ ì¬ìƒ
+            audioSource.PlayOneShot(shotSound); // ë°œì‚¬ ì‚¬ìš´ë“œ ì¬ìƒ
+            gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Force);
+            gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Force);
+            magazineSystem.bulletCount -= 1; // ì´ ë°œì‚¬ì‹œ íƒ„ì°½ì˜ ì´ ì´ì•Œ ê°œìˆ˜ -1
             bolt.Shot();
-            muzzleLight.SetActive(true); // ÃÑ±¸ È­¿° ¶óÀÌÆ® ÄÑ±â
-            Invoke("HideLight", 0.1f); // 0.1ÃÊ ÈÄ ÃÑ±¸ È­¿° ¶óÀÌÆ® ²ô±â
-            currentTime = 0; // ¹ß»ç Áö¿¬½Ã°£ ÃÊ±âÈ­
+            muzzleLight.SetActive(true); // ì´êµ¬ í™”ì—¼ ë¼ì´íŠ¸ ì¼œê¸°
+            Invoke("HideLight", 0.1f); // 0.1ì´ˆ í›„ ì´êµ¬ í™”ì—¼ ë¼ì´íŠ¸ ë„ê¸°
+            redyToFire = false; // ë°œì‚¬ ë¶ˆê°€ëŠ¥
         }
+    }
+
+    private void CanFire()
+    {
+        SteamVR_Input_Sources source = interactable.attachedToHand.handType;
+
+        isGrab = true;
+        // ë°œì‚¬ ëª¨ë“œ ë³€ê²½
+        if (changeFireMode[source].stateDown && ableAutomaticFire) // ì—°ì‚¬,ë‹¨ë°œ ë³€ê²½
+            fireMode = 4 - fireMode;
+        if (ejectMagazine[source].stateDown && magazineSystem != null) // íƒ„ì°½ ë¶„ë¦¬
+            magazineSystem.ChangeMagazine();
+
+        if (bolt.redyToShot) // ë…¸ë¦¬ì‡ ê°€ ì¤€ë¹„ ë˜ì—ˆì„ ë•Œ
+        {
+            if (fireAction[source].lastState != fireAction[source].stateDown) // íŠ¸ë¦¬ê±°ë¥¼ ëˆŒë €ì„ ë•Œ ì‘ë™
+                Fire();
+            else // íŠ¸ë¦¬ê±°ê°€ ëˆŒë ¤ìˆì§€ ì•Šì„ ê²½ìš° ë°œì‚¬ ê°€ëŠ¥
+                redyToFire = true;
+        }
+        else if (fireAction[source].stateDown) // ì¤€ë¹„ë˜ì§€ ì•Šì•˜ë‹¤ë©´ ì†Œë¦¬ ì¬ìƒ
+            audioSource.PlayOneShot(emptyShotSound);
+    }
+
+    private void Initialize(int initCount)
+    {
+        for (int i = 0; i < initCount; i++)
+        {
+            poolingObjectQueue.Enqueue(CreateNewObject());
+        }
+    }
+
+    private GameObject CreateNewObject()
+    {
+        var newObj = Instantiate(bulletPref);
+        newObj.gameObject.SetActive(false);
+        newObj.transform.SetParent(transform);
+        return newObj;
+    }
+
+    public GameObject GetObject()
+    {
+        if (poolingObjectQueue.Count > 0)
+        {
+            var obj = poolingObjectQueue.Dequeue();
+            obj.SetActive(true);
+            return obj;
+        }
+        else
+        {
+            var newObj = CreateNewObject();
+            newObj.SetActive(true);
+            return newObj;
+        }
+    }
+
+    public void ReturnObject(GameObject obj)
+    {
+        obj.gameObject.SetActive(false);
+        poolingObjectQueue.Enqueue(obj);
     }
 
     void HideLight()
@@ -60,45 +189,31 @@ public class Gun : MonoBehaviour
         muzzleLight.SetActive(false);
     }
 
-    IEnumerator GunWork()
+    private void HandHoverUpdate(Hand hand)
     {
-        while (true)
+        // í˜„ì¬ ì†ì´ ë¬¼ì²´ë¥¼ ì¡ê³  ìˆëŠ”ì§€ í™•ì¸
+        if (interactable.attachedToHand != null)
         {
-            if (socket.IsMagazine) // ÅºÃ¢ÀÌ ÀÖÀ» °æ¿ì ½ºÅ©¸³Æ® °¡Á®¿À±â
-                magazineSystem = GetComponentInChildren<MagazineSystem>();
-            else // ¾Æ´Ñ°æ¿ì ½ºÅ©¸³Æ® NULL
-                magazineSystem = null;
-            isGrab = true;
-            if (currentTime <= fireTime && fireMode == 3) // ¿¬»ç ¸ğµåÀÏ¶§ ¹ß»ç Áö¿¬½Ã°£ ÀÛµ¿
-                currentTime += Time.deltaTime;
-            // ÃÑÀ» Àâ°í ÀÖÀ» ¶§ ½ÇÇà
-            if (interactable.attachedToHand != null)
+            // ë‹¤ë¥¸ ì†ì´ ì¡ìœ¼ë ¤ í•˜ë©´, ì¡ì§€ ëª»í•˜ê²Œ ë§‰ìŒ
+            if (currentHand != null && currentHand != hand)
             {
-                SteamVR_Input_Sources source = interactable.attachedToHand.handType;
-
-                // ¹ß»ç ¸ğµå º¯°æ
-                if (changeFireMode[source].stateDown && ableAutomaticFire) // ¿¬»ç,´Ü¹ß º¯°æ
-                    fireMode = 4 - fireMode;
-                if (ejectMagazine[source].stateDown) // ÅºÃ¢ ºĞ¸®
-                    magazineSystem.ChangeMagazine();
-
-                if (bolt.redyToShot) // ³ë¸®¼è°¡ ÁØºñ µÇ¾úÀ» ¶§
-                {
-                    if (fireAction[source].lastState != fireAction[source].stateDown) // Æ®¸®°Å¸¦ ´­·¶À» ¶§ ÀÛµ¿
-                    {
-                        Fire();
-                    }
-                    else // Æ®¸®°Å°¡ ´­·ÁÀÖÁö ¾ÊÀ» °æ¿ì ¹ß»ç Áö¿¬½Ã°£ ÃÊ±âÈ­
-                        currentTime = fireTime;
-                }
-                else if (fireAction[source].stateDown) // ÁØºñµÇÁö ¾Ê¾Ò´Ù¸é ¼Ò¸® Àç»ı
-                    audioSource.PlayOneShot(emptyShotSound);
+                hand.DetachObject(gameObject); // ë‹¤ë¥¸ ì†ìœ¼ë¡œ ì¡ì§€ ëª»í•˜ê²Œ ë¬¼ì²´ ë¶„ë¦¬
             }
-            else
-            {
-                isGrab = false;
-            }
-            yield return null;
+        }
+    }
+
+    private void OnAttachedToHand(Hand hand)
+    {
+        // ë¬¼ì²´ê°€ ì†ì— ì¡íˆë©´, í•´ë‹¹ ì†ì„ ê¸°ë¡
+        currentHand = hand;
+    }
+
+    private void OnDetachedFromHand(Hand hand)
+    {
+        // ë¬¼ì²´ê°€ ì†ì—ì„œ ë–¨ì–´ì§€ë©´, í˜„ì¬ ì† ê¸°ë¡ì„ ì´ˆê¸°í™”
+        if (currentHand == hand)
+        {
+            currentHand = null;
         }
     }
 }

@@ -24,7 +24,7 @@ public class ObjPoolPrefab : MonoBehaviour
         rb.AddForce(Vector3.up * Random.Range(ejectPower * 0.2f, ejectPower * 0.3f), ForceMode.Impulse);
         rb.AddRelativeTorque(Vector3.right * 10, ForceMode.Impulse);
         yield return new WaitForSeconds(4);
-        transform.rotation = Quaternion.Euler(Vector3.zero);
         bolt.ReturnObject(this.gameObject);
+        yield break;
     }
 }

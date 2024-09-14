@@ -44,9 +44,10 @@ public class Toast : MonoBehaviour
     private void Start()
     {
         mainCamera = GameManager.Instance.mainCamera;
-        // Show("안녕하세요!", 10.0f, new Color(0.56f, 1, 0.43f));
-    }
 
+        Show("방어하세요!", 10.0f, new Color(0.56f, 1, 0.43f));
+    }
+    
     private void Update()
     {
         FollowCamera();
