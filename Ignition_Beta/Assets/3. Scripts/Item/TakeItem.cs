@@ -9,42 +9,41 @@ public class TakeItem : MonoBehaviour
     GameObject[] itemPrefab; // 0: Pistol, 1: Rifle, 2: Shotgun
 
     [SerializeField]
-    Hand leftHand, rightHand; // ÇÃ·¹ÀÌ¾î ¿Ş¼Õ, ¿À¸¥¼Õ 
+    Hand leftHand, rightHand; // í”Œë ˆì´ì–´ ì™¼ì†, ì˜¤ë¥¸ì† 
 
-    GameObject currentObject; // ÇöÀç µé°í ÀÖ´Â ¿ÀºêÁ§Æ®
+    GameObject currentObject; // í˜„ì¬ ë“¤ê³  ìˆëŠ” ì˜¤ë¸Œì íŠ¸
 
-    GameObject spawn; // ¼ÒÈ¯µÈ ¾ÆÀÌÅÛ
+    GameObject spawn; // ì†Œí™˜ëœ ì•„ì´í…œ
 
     //[SerializeField]
     //int itemCount = 15;
 
     /// <summary>
-    /// µé°í ÀÖ´Â ÃÑ¿¡ ¾Ë¸ÂÀº ¾ÆÀÌÅÛ ¼ÒÈ¯
+    /// ë“¤ê³  ìˆëŠ” ì´ì— ì•Œë§ì€ ì•„ì´í…œ ì†Œí™˜
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(1);
         if (other.CompareTag("Hand"))
         {
-            if (leftHand.currentAttachedObject == null && rightHand.currentAttachedObject == null) return; // ¾ç¼Õ ´Ù µé°í ÀÖÁö ¾ÊÀ» ¶§
-            if (leftHand.currentAttachedObject != null && rightHand.currentAttachedObject != null) return; // ¾ç¼Õ ´Ù µé°í ÀÖÀ» ¶§
+            if (leftHand.currentAttachedObject == null && rightHand.currentAttachedObject == null) return; // ì–‘ì† ë‹¤ ë“¤ê³  ìˆì§€ ì•Šì„ ë•Œ
+            if (leftHand.currentAttachedObject != null && rightHand.currentAttachedObject != null) return; // ì–‘ì† ë‹¤ ë“¤ê³  ìˆì„ ë•Œ
 
-            if (leftHand.currentAttachedObject != null) // ¿Ş¼Õ¿¡ µé°í ÀÖ´Â ¿ÀºêÁ§Æ®°¡ ÀÖÀ» ¶§
-                currentObject = leftHand.currentAttachedObject; // currentObject¿¡ µé°í ÀÖ´Â ¿ÀºêÁ§Æ® Ãß°¡
+            if (leftHand.currentAttachedObject != null) // ì™¼ì†ì— ë“¤ê³  ìˆëŠ” ì˜¤ë¸Œì íŠ¸ê°€ ìˆì„ ë•Œ
+                currentObject = leftHand.currentAttachedObject; // currentObjectì— ë“¤ê³  ìˆëŠ” ì˜¤ë¸Œì íŠ¸ ì¶”ê°€
                 
-            else if (rightHand.currentAttachedObject != null) // ¿À¸¥¼Õ¿¡ µé°í ÀÖ´Â ¿ÀºêÁ§Æ®°¡ ÀÖÀ» ¶§
-                currentObject = rightHand.currentAttachedObject; // currentObject¿¡ µé°í ÀÖ´Â ¿ÀºêÁ§Æ® Ãß°¡
+            else if (rightHand.currentAttachedObject != null) // ì˜¤ë¥¸ì†ì— ë“¤ê³  ìˆëŠ” ì˜¤ë¸Œì íŠ¸ê°€ ìˆì„ ë•Œ
+                currentObject = rightHand.currentAttachedObject; // currentObjectì— ë“¤ê³  ìˆëŠ” ì˜¤ë¸Œì íŠ¸ ì¶”ê°€
 
-            switch (currentObject.tag) // µé°í ÀÖ´Â ¿ÀºêÁ§Æ®ÀÇ ÅÂ±×¸¦ switch ¹®À¸·Î Ç®±â
+            switch (currentObject.tag) // ë“¤ê³  ìˆëŠ” ì˜¤ë¸Œì íŠ¸ì˜ íƒœê·¸ë¥¼ switch ë¬¸ìœ¼ë¡œ í’€ê¸°
             {
-                case "Pistol": // ±ÇÃÑÀÏ ¶§
+                case "Pistol": // ê¶Œì´ì¼ ë•Œ
                     break;
-                case "Rifle": // ¼ÒÃÑÀÏ ¶§
-                    // ÅºÃ¢ ¼ÒÈ¯ ÈÄ spawn¿¡ Ãß°¡
+                case "Rifle": // ì†Œì´ì¼ ë•Œ
+                    // íƒ„ì°½ ì†Œí™˜ í›„ spawnì— ì¶”ê°€
                     spawn = Instantiate(itemPrefab[1], other.transform.position, Quaternion.identity, other.transform);
                     break;
-                case "Shotgun": // ¼¦°ÇÀÏ ¶§
+                case "Shotgun": // ìƒ·ê±´ì¼ ë•Œ
                     break;
                 default: 
                     break;
@@ -53,32 +52,32 @@ public class TakeItem : MonoBehaviour
                 mesh.enabled = false;
             foreach (var canvas in spawn.GetComponentsInChildren<Canvas>())
                 canvas.enabled = false;
-            spawn.GetComponent<Rigidbody>().isKinematic = true; // spawnÀÇ Rigidbody¸¦ °¨Áö ÈÄ isKenematic ÄÑ±â
+            spawn.GetComponent<Rigidbody>().isKinematic = true; // spawnì˜ Rigidbodyë¥¼ ê°ì§€ í›„ isKenematic ì¼œê¸°
         }
     }
 
     /// <summary>
-    /// »óÀÚ¿¡¼­ ¼ÕÀ» »°À» ¶§ ½ÇÇà
+    /// ìƒìì—ì„œ ì†ì„ ëºì„ ë•Œ ì‹¤í–‰
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (currentObject != null && other.CompareTag("Hand"))
         {
-            if (leftHand.currentAttachedObject != null && rightHand.currentAttachedObject != null) // ¾ç¼Õ ´Ù µé°í ÀÖÀ» ¶§
+            if (leftHand.currentAttachedObject != null && rightHand.currentAttachedObject != null) // ì–‘ì† ë‹¤ ë“¤ê³  ìˆì„ ë•Œ
             {
                 foreach (var mesh in spawn.GetComponentsInChildren<MeshRenderer>())
                     mesh.enabled = true;
                 foreach (var canvas in spawn.GetComponentsInChildren<Canvas>())
                     canvas.enabled = true;
-                spawn.GetComponent<Rigidbody>().isKinematic = false; // isKenematic ²ô±â
-                spawn.transform.SetParent(null); // spawnÀÇ ºÎ¸ğ Á¦°Å
+                spawn.GetComponent<Rigidbody>().isKinematic = false; // isKenematic ë„ê¸°
+                spawn.transform.SetParent(null); // spawnì˜ ë¶€ëª¨ ì œê±°
             }
-            else Destroy(spawn); // ¾Æ´Ï¸é Destroy
+            else Destroy(spawn); // ì•„ë‹ˆë©´ Destroy
         }
     }
 
-    //private void HandHoverUpdate(Hand hand) ÀÌ°Å ´ëÃ¼ÇßÀ½
+    //private void HandHoverUpdate(Hand hand) ì´ê±° ëŒ€ì²´í–ˆìŒ
     //{
     //    GrabTypes grab = hand.GetGrabStarting();
     //    bool isgrab = hand.IsGrabEnding(spawn);
