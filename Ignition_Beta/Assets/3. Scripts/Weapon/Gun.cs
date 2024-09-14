@@ -17,6 +17,7 @@ public class Gun : MonoBehaviour
     public int spawnPrefabAmount;
     Queue<GameObject> poolingObjectQueue = new Queue<GameObject>();
     private bool redyToFire;
+    private Vector3 prevVector = Vector3.zero;
 
     public float shootingSpeed = 1f;
     private int fireMode = 1;
@@ -106,8 +107,12 @@ public class Gun : MonoBehaviour
                     GameObject bullet = GetObject();
                     Rigidbody buletRb = bullet.GetComponent<Rigidbody>();
                     bullet.transform.position = muzzelFlash.transform.position;
-                    buletRb.velocity = (muzzelFlash.transform.forward + 
-                        new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0)) * shootingSpeed;
+                    Vector3 curVector = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+                    if (prevVector != curVector)
+                    {
+                        prevVector = curVector;
+                        buletRb.velocity = (muzzelFlash.transform.forward + curVector) * shootingSpeed;
+                    }
                 }
             }
             muzzelFlash.Play(); // 총구 화염 이펙트 재생
