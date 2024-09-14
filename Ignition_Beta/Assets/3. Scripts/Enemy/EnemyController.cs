@@ -51,7 +51,6 @@ public class EnemyController : MonoBehaviour, IHitAble
         StartCoroutine(CoolTime(3.0f, isAttack, (result) => { isAttack = result; }));
         while (true)
         {
-            Debug.Log(nma.remainingDistance);
             yield return null;
             if (!isStiffen)
             {
