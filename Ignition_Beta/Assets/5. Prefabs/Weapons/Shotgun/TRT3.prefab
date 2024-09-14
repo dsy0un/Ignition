@@ -1537,11 +1537,10 @@ MonoBehaviour:
   muzzleLight: {fileID: 5370764704979036017}
   shotSound: {fileID: 8300000, guid: df2163a1ce64cad46b7fb628176c0908, type: 3}
   emptyShotSound: {fileID: 8300000, guid: 471aaee17329ef24993dd8c553133d26, type: 3}
-  fireTime: 0
   ableAutomaticFire: 0
   isShotgun: 1
   spawnPrefabAmount: 48
-  shootingSpeed: 100
+  shootingSpeed: 150
   bulletPref: {fileID: 2718682117778658829, guid: ae9eb77e1cfaf6a449712dd1152c1b7a,
     type: 3}
   interactable: {fileID: 8026411704966776619}
@@ -1571,7 +1570,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1818,7 +1817,30 @@ MonoBehaviour:
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 1
-  blendingBehaviours: []
+  blendingBehaviours:
+  - name: New Behaviour
+    enabled: 1
+    influence: 1
+    pose: 1
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/gun/in/GunFire
+      needsReinit: 0
+    smoothingSpeed: 30
+    type: 2
+    useMask: 1
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!1 &3426361901252099652
 GameObject:
