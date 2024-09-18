@@ -18,7 +18,10 @@ public class Bullet : MonoBehaviour
     {
         time += Time.deltaTime;
         if (time >= destructionDelay)
+        {
             gun.ReturnObject(gameObject);
+            time = 0;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -130,13 +130,17 @@ public class Gun : MonoBehaviour
     private void CanFire()
     {
         SteamVR_Input_Sources source = interactable.attachedToHand.handType;
+        print(source.GetType());
 
         isGrab = true;
         // 발사 모드 변경
         if (changeFireMode[source].stateDown && ableAutomaticFire) // 연사,단발 변경
             fireMode = 4 - fireMode;
         if (ejectMagazine[source].stateDown && magazineSystem != null) // 탄창 분리
+        {
             magazineSystem.ChangeMagazine();
+            bolt.ejectMagazine = true;
+        }
 
         if (bolt.redyToShot) // 노리쇠가 준비 되었을 때
         {
