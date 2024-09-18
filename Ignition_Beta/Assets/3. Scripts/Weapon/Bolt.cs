@@ -61,14 +61,13 @@ public class Bolt : MonoBehaviour
                     boltRetraction = true;
                 else
                 {
-                    round.SetActive(false);
                     cartridge.SetActive(false);
                 }
             }
 
             if (boltRetraction)
             {
-                if (mapping.value < 1)
+                if (mapping.value < 1 && magazineSystem != null)
                     round.SetActive(true);
                 if (mapping.value == 0)
                     redyToShot = true;

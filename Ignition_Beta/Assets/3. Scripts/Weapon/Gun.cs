@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour
         {
             if (socket.isMagazine) // 탄창이 있을 경우 스크립트 가져오기
                 magazineSystem = GetComponentInChildren<MagazineSystem>();
-            else // 아닌경우 스크립트 NULL
+            else if(!bolt.redyToShot) // 아닌경우 스크립트 NULL
                 magazineSystem = null;
             bolt.magazineSystem = magazineSystem;
 
@@ -85,7 +85,6 @@ public class Gun : MonoBehaviour
 
     void Fire()
     {
-        // 발사 지연시간
         if (redyToFire)
         {
             if (!isShotgun)
@@ -119,7 +118,7 @@ public class Gun : MonoBehaviour
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
             gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Force);
             gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Force);
-            if (magazineSystem != null) magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
+            magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
             bolt.Shot();
             muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
             Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
@@ -130,7 +129,7 @@ public class Gun : MonoBehaviour
     private void CanFire()
     {
         SteamVR_Input_Sources source = interactable.attachedToHand.handType;
-        print(source.GetType());
+        print(interactable.attachedToHand.handType.GetType());
 
         isGrab = true;
         // 발사 모드 변경
