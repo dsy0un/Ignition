@@ -29,19 +29,19 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         void FixedUpdate()
 		{
-			float distanceFromFloor = Vector3.Dot(head.localPosition, Vector3.up);
-            //cc.height = Mathf.Max(cc.radius, distanceFromFloor);
-            //cc.height = Mathf.Clamp(cc.height, 0, cc.height);
-            transform.localPosition = head.localPosition - distanceFromFloor * Vector3.up;
-            // transform.localPosition = new Vector3(transform.position.x, 1.5f, transform.position.z);
+            Quaternion targetRotation = head.localRotation;
+            if (targetRotation.eulerAngles.x <= 45f)
+            {
+                float distanceFromFloor = Vector3.Dot(head.localPosition, Vector3.up);
+                //cc.height = Mathf.Max(cc.radius, distanceFromFloor);
+                //cc.height = Mathf.Clamp(cc.height, 0, cc.height);
+                transform.localPosition = head.localPosition - distanceFromFloor * Vector3.up;
+                // transform.localPosition = new Vector3(transform.position.x, 1.5f, transform.position.z);
 
-            Vector3 vector = head.position - transform.position;
-
-            Quaternion currentRotation = transform.rotation;
-            Quaternion targetRotation = Quaternion.LookRotation(vector);
-            Quaternion bodyY = Quaternion.Euler(currentRotation.eulerAngles.x, targetRotation.eulerAngles.y, currentRotation.eulerAngles.z);
-            // Quaternion bodyY = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, bodyY, 3 * Time.deltaTime);
+                Quaternion bodyY = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+                // Quaternion bodyY = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, bodyY, 3 * Time.deltaTime);
+            }
         }
 	}
 }
