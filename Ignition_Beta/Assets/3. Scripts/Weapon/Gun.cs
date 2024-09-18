@@ -119,7 +119,7 @@ public class Gun : MonoBehaviour
             audioSource.PlayOneShot(shotSound); // 발사 사운드 재생
             gunRb.AddRelativeForce(Vector3.back * recoilPower, ForceMode.Force);
             gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Force);
-            magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
+            if (magazineSystem != null) magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
             bolt.Shot();
             muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
             Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
