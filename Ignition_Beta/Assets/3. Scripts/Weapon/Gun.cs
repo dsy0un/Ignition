@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour
         {
             if (socket.isMagazine) // 탄창이 있을 경우 스크립트 가져오기
                 magazineSystem = GetComponentInChildren<MagazineSystem>();
-            else // 아닌경우 스크립트 NULL
+            else if(!bolt.redyToShot) // 아닌경우 스크립트 NULL
                 magazineSystem = null;
             bolt.magazineSystem = magazineSystem;
 
@@ -85,7 +85,6 @@ public class Gun : MonoBehaviour
 
     void Fire()
     {
-        // 발사 지연시간
         if (redyToFire)
         {
             if (!isShotgun)
@@ -130,13 +129,17 @@ public class Gun : MonoBehaviour
     private void CanFire()
     {
         SteamVR_Input_Sources source = interactable.attachedToHand.handType;
+        print(interactable.attachedToHand.handType.GetType());
 
         isGrab = true;
         // 발사 모드 변경
         if (changeFireMode[source].stateDown && ableAutomaticFire) // 연사,단발 변경
             fireMode = 4 - fireMode;
         if (ejectMagazine[source].stateDown && magazineSystem != null) // 탄창 분리
+        {
             magazineSystem.ChangeMagazine();
+            bolt.ejectMagazine = true;
+        }
 
         if (bolt.redyToShot) // 노리쇠가 준비 되었을 때
         {
