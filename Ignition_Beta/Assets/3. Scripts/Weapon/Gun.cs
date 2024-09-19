@@ -128,8 +128,7 @@ public class Gun : MonoBehaviour
 
     private void CanFire()
     {
-        SteamVR_Input_Sources source = interactable.attachedToHand.handType;
-        print(interactable.attachedToHand.handType.GetType());
+        SteamVR_Input_Sources source = interactable.attachedToHand.handType;    
 
         isGrab = true;
         // 발사 모드 변경
@@ -203,7 +202,7 @@ public class Gun : MonoBehaviour
             // 다른 손이 잡으려 하면, 잡지 못하게 막음
             if (currentHand != null && currentHand != hand)
             {
-                hand.DetachObject(gameObject); // 다른 손으로 잡지 못하게 물체 분리
+                
             }
         }
     }
