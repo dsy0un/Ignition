@@ -686,7 +686,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.141, y: 1.0102, z: -8.627}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8677898866594007983}
@@ -1504,6 +1504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazineSystem: {fileID: 0}
+  ejectMagazine: 0
   gun: {fileID: 4725606491274451604}
   mapping: {fileID: 6244148849782798495}
   round: {fileID: 222420145579770606}
@@ -1513,7 +1514,7 @@ MonoBehaviour:
   redyToShot: 0
   spawnPrefabAmount: 24
   ejectPoint: {fileID: 8970750102006501338}
-  ejectBullet: {fileID: 3262576269280462584, guid: 69a82a18e58f8864fa4e0c65cc9a0585,
+  ejectBullet: {fileID: 1816222550931493717, guid: 69a82a18e58f8864fa4e0c65cc9a0585,
     type: 3}
 --- !u!114 &4159491427817283616
 MonoBehaviour:
