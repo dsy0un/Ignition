@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour, IHitAble
     {
         StartCoroutine(CoolTime(3.0f, isAttack, (result) => { isAttack = result; }));
         while (true)
-        {
+        {   
             yield return null;
             if (!isStiffen)
             {

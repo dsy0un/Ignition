@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public ModalWindowManager window;
     public EnemyMove enemyMove;
     public Camera mainCamera;
+    public FadeInOut fadeInOut;
 
     public SteamVR_Action_Vibration hapticAction;
     [SerializeField]
@@ -68,6 +69,11 @@ public class GameManager : MonoBehaviour
         window = FindObjectOfType<ModalWindowManager>(true);
         enemyMove = FindObjectOfType<EnemyMove>();
         mainCamera = Camera.main;
+
+        if (player != null)
+        {
+            fadeInOut = player.GetComponentInChildren<FadeInOut>();
+        }
     }
 
     public void ClearEnemy()

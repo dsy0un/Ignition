@@ -6,6 +6,10 @@ using Valve.VR.InteractionSystem;
 public class Rope : MonoBehaviour
 {
     Interactable interactable;
+    [SerializeField]
+    AnimationCurve curve;
+    [SerializeField]
+    float fadeTime;
 
     bool isGrab = false;
 
@@ -26,6 +30,7 @@ public class Rope : MonoBehaviour
             StopCoroutine(GameManager.Instance.barrier.Escape());
             StartCoroutine(GameManager.Instance.barrier.Escape(0.1f));
             isGrab = true;
+            GameManager.Instance.fadeInOut.StartFade(0, 1, fadeTime, curve);
         }
     }
 }
