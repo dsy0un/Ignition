@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR.Extras;
+using Valve.VR.InteractionSystem;
 
 public class LaserPointer : MonoBehaviour
 {
@@ -11,22 +12,40 @@ public class LaserPointer : MonoBehaviour
 
     private void Awake()
     {
-        foreach (SteamVR_LaserPointer laser in FindObjectsOfType<SteamVR_LaserPointer>())
-        {
-            laserPointer = laser;
-        }
-        laserPointer.PointerClick += PointerClick;
-
         anim = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        //foreach (SteamVR_LaserPointer laser in FindObjectsOfType<SteamVR_LaserPointer>())
+        //{
+        //    laserPointer = laser;
+        //}
+
+        laserPointer = GameObject.Find("RightHand").GetComponent<SteamVR_LaserPointer>();
+        laserPointer.PointerIn += PointerInside;
+        laserPointer.PointerOut += PointerOutside;
+        laserPointer.PointerClick += PointerClick;
+    }
+
+    public static void PointerInside(object sender, PointerEventArgs e)
+    {
+        laserPointer.color = Color.yellow;
+    }
+
+    public static void PointerOutside(object sender, PointerEventArgs e)
+    {
+        laserPointer.color = Color.black;
     }
 
     public static void PointerClick(object sender, PointerEventArgs e)
     {
-        Debug.Log(e.target.name);
         switch (e.target.name)
         {
-            default:
+            case "SetGeneral":
                 anim.Play("SwapStart");
+                break;
+            default:
                 break;
         }
     }
