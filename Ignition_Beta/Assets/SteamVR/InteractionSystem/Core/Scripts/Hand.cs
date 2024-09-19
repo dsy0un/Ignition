@@ -1,4 +1,4 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: The hands used by the player in the vr interaction system
 //
@@ -20,13 +20,13 @@ namespace Valve.VR.InteractionSystem
     //-------------------------------------------------------------------------
     public class Hand : MonoBehaviour
     {
-        Vector3 initialHandPosition1; // first hand position
-        Vector3 initialHandPosition2; // second hand position
-        Quaternion initialObjectRotation; // grabbed object rotation
-        // Vector3 initialObjectScale; // grabbed object scale
-        Vector3 initialObjectDirection; // direction of object to midpoint of both hands
-        AttachmentFlags initialAttachmentFlags; // initial AttachmentFlags 
-        public bool twoHandGrab = false; // bool, so you know when grabbed with 2 hands
+        //Vector3 initialHandPosition1; // first hand position
+        //Vector3 initialHandPosition2; // second hand position
+        //Quaternion initialObjectRotation; // grabbed object rotation
+        //// Vector3 initialObjectScale; // grabbed object scale
+        //Vector3 initialObjectDirection; // direction of object to midpoint of both hands
+        //AttachmentFlags initialAttachmentFlags; // initial AttachmentFlags 
+        //public bool twoHandGrab = false; // bool, so you know when grabbed with 2 hands
 
         // The flags used to determine how an object is attached to the hand.
         [Flags]
@@ -358,57 +358,57 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        protected virtual void TwoHandGrabbingUpdate(SteamVR_Behaviour_Pose updatedPose, SteamVR_Input_Sources updatedSource)
-        {
+        //protected virtual void TwoHandGrabbingUpdate(SteamVR_Behaviour_Pose updatedPose, SteamVR_Input_Sources updatedSource)
+        //{
 
-            GameObject attachedObject = currentAttachedObject;
+        //    GameObject attachedObject = currentAttachedObject;
 
-            if (attachedObject != null && twoHandGrab)
-            {
+        //    if (attachedObject != null && twoHandGrab)
+        //    {
 
-                Vector3 currentHandPosition1 = trackedObject.transform.position; // current first hand position
-                Vector3 currentHandPosition2 = otherHand.trackedObject.transform.position; // current second hand position
+        //        Vector3 currentHandPosition1 = trackedObject.transform.position; // current first hand position
+        //        Vector3 currentHandPosition2 = otherHand.trackedObject.transform.position; // current second hand position
 
-                Vector3 handDir1 = (initialHandPosition1 - initialHandPosition2).normalized; // direction vector of initial first and second hand position
-                Vector3 handDir2 = (currentHandPosition1 - currentHandPosition2).normalized; // direction vector of current first and second hand position 
+        //        Vector3 handDir1 = (initialHandPosition1 - initialHandPosition2).normalized; // direction vector of initial first and second hand position
+        //        Vector3 handDir2 = (currentHandPosition1 - currentHandPosition2).normalized; // direction vector of current first and second hand position 
 
-                Quaternion handRot = Quaternion.FromToRotation(handDir1, handDir2); // calculate rotation based on those two direction vectors
-
-
-                float currentGrabDistance = Vector3.Distance(currentHandPosition1, currentHandPosition2);
-                float initialGrabDistance = Vector3.Distance(initialHandPosition1, initialHandPosition2);
-                float p = (currentGrabDistance / initialGrabDistance); // percentage based on the distance of the initial positions and the new positions
+        //        Quaternion handRot = Quaternion.FromToRotation(handDir1, handDir2); // calculate rotation based on those two direction vectors
 
 
-                // Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y, p * initialObjectScale.z); // calculate new object scale with p
+        //        float currentGrabDistance = Vector3.Distance(currentHandPosition1, currentHandPosition2);
+        //        float initialGrabDistance = Vector3.Distance(initialHandPosition1, initialHandPosition2);
+        //        float p = (currentGrabDistance / initialGrabDistance); // percentage based on the distance of the initial positions and the new positions
 
-                attachedObject.transform.rotation = handRot * initialObjectRotation; // add rotation
-                // attachedObject.transform.localScale = newScale; // set new scale
-                                                                // set the position of the object to the center of both hands based on the original object direction relative to the new scale and rotation
-                attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) + (handRot * (initialObjectDirection * p));
 
-            }
+        //        // Vector3 newScale = new Vector3(p * initialObjectScale.x, p * initialObjectScale.y, p * initialObjectScale.z); // calculate new object scale with p
 
-        }
+        //        attachedObject.transform.rotation = handRot * initialObjectRotation; // add rotation
+        //        // attachedObject.transform.localScale = newScale; // set new scale
+        //                                                        // set the position of the object to the center of both hands based on the original object direction relative to the new scale and rotation
+        //        attachedObject.transform.position = (0.5f * (currentHandPosition1 + currentHandPosition2)) + (handRot * (initialObjectDirection * p));
 
-        public AttachedObject getAttachedObjectInfo(GameObject obj)
-        {
-            int index = attachedObjects.FindIndex(l => l.attachedObject == obj);
-            if (index > -1)
-            {
-                return attachedObjects[index];
-            }
-            return new AttachedObject();
-        }
+        //    }
 
-        public void replaceAttachedObjectInfo(AttachedObject objInfo, GameObject obj)
-        {
-            int index = attachedObjects.FindIndex(l => l.attachedObject == obj);
-            if (index > -1)
-            {
-                attachedObjects[index] = objInfo;
-            }
-        }
+        //}
+
+        //public AttachedObject getAttachedObjectInfo(GameObject obj)
+        //{
+        //    int index = attachedObjects.FindIndex(l => l.attachedObject == obj);
+        //    if (index > -1)
+        //    {
+        //        return attachedObjects[index];
+        //    }
+        //    return new AttachedObject();
+        //}
+
+        //public void replaceAttachedObjectInfo(AttachedObject objInfo, GameObject obj)
+        //{
+        //    int index = attachedObjects.FindIndex(l => l.attachedObject == obj);
+        //    if (index > -1)
+        //    {
+        //        attachedObjects[index] = objInfo;
+        //    }
+        //}
 
 
         //-------------------------------------------------
@@ -425,30 +425,30 @@ namespace Valve.VR.InteractionSystem
             attachedObject.attachedOffsetTransform = attachmentOffset;
             attachedObject.attachTime = Time.time;
 
-            if (otherHand.ObjectIsAttached(objectToAttach))
-            {
+            //if (otherHand.ObjectIsAttached(objectToAttach))
+            //{
 
-                initialHandPosition1 = trackedObject.transform.position;
-                initialHandPosition2 = otherHand.trackedObject.transform.position;
-                initialObjectRotation = objectToAttach.transform.rotation;
-                // initialObjectScale = objectToAttach.transform.localScale;
-                initialAttachmentFlags = attachedObject.attachmentFlags;
-                initialObjectDirection = objectToAttach.transform.position - (initialHandPosition1 + initialHandPosition2) * 0.5f;
+            //    initialHandPosition1 = trackedObject.transform.position;
+            //    initialHandPosition2 = otherHand.trackedObject.transform.position;
+            //    initialObjectRotation = objectToAttach.transform.rotation;
+            //    // initialObjectScale = objectToAttach.transform.localScale;
+            //    initialAttachmentFlags = attachedObject.attachmentFlags;
+            //    initialObjectDirection = objectToAttach.transform.position - (initialHandPosition1 + initialHandPosition2) * 0.5f;
 
-                otherHand.currentAttachedObject.transform.parent = null; // unset parent (the first hand), so it's moving freely
-                AttachedObject objInfo = otherHand.getAttachedObjectInfo(objectToAttach); // get first hand object attachInfo
+            //    otherHand.currentAttachedObject.transform.parent = null; // unset parent (the first hand), so it's moving freely
+            //    AttachedObject objInfo = otherHand.getAttachedObjectInfo(objectToAttach); // get first hand object attachInfo
 
-                if (objInfo.attachedObject != null)
-                {
-                    objInfo.attachmentFlags &= ~AttachmentFlags.ParentToHand; // negate the ParentToHand flag
-                    objInfo.isParentedToHand = false; // set parentToHand variable false
-                    otherHand.replaceAttachedObjectInfo(objInfo, objectToAttach);  // replace object attachInfo
-                }
+            //    if (objInfo.attachedObject != null)
+            //    {
+            //        objInfo.attachmentFlags &= ~AttachmentFlags.ParentToHand; // negate the ParentToHand flag
+            //        objInfo.isParentedToHand = false; // set parentToHand variable false
+            //        otherHand.replaceAttachedObjectInfo(objInfo, objectToAttach);  // replace object attachInfo
+            //    }
 
-                attachedObject.attachmentFlags &= ~(AttachmentFlags.ParentToHand | AttachmentFlags.SnapOnAttach | AttachmentFlags.DetachFromOtherHand); // negate the ParentToHand, SnapOnAttach and DetachFromOtherHand flags
+            //    attachedObject.attachmentFlags &= ~(AttachmentFlags.ParentToHand | AttachmentFlags.SnapOnAttach | AttachmentFlags.DetachFromOtherHand); // negate the ParentToHand, SnapOnAttach and DetachFromOtherHand flags
 
-                twoHandGrab = true; // bool, so you know grabbed with 2 hands
-            }
+            //    twoHandGrab = true; // bool, so you know grabbed with 2 hands
+            //}
 
             if (flags == 0)
             {
@@ -760,17 +760,17 @@ namespace Valve.VR.InteractionSystem
 
                 CleanUpAttachedObjectStack();
 
-                if (otherHand.twoHandGrab)
-                {
-                    otherHand.twoHandGrab = false;
-                    otherHand.AttachObject(otherHand.currentAttachedObject, otherHand.GetBestGrabbingType(GrabTypes.None), otherHand.initialAttachmentFlags);
-                }
+                //if (otherHand.twoHandGrab)
+                //{
+                //    otherHand.twoHandGrab = false;
+                //    otherHand.AttachObject(otherHand.currentAttachedObject, otherHand.GetBestGrabbingType(GrabTypes.None), otherHand.initialAttachmentFlags);
+                //}
 
-                if (twoHandGrab)
-                {
-                    twoHandGrab = false;
-                    otherHand.AttachObject(prevTopObject, otherHand.GetBestGrabbingType(GrabTypes.None), initialAttachmentFlags);
-                }
+                //if (twoHandGrab)
+                //{
+                //    twoHandGrab = false;
+                //    otherHand.AttachObject(prevTopObject, otherHand.GetBestGrabbingType(GrabTypes.None), initialAttachmentFlags);
+                //}
 
                 GameObject newTopObject = currentAttachedObject;
 
@@ -890,7 +890,7 @@ namespace Valve.VR.InteractionSystem
                 if (trackedObject != null)
                 {
                     trackedObject.onTransformUpdatedEvent += OnTransformUpdated;
-                    trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
+                    //trackedObject.onTransformUpdatedEvent += TwoHandGrabbingUpdate;
                 }
 
             }
@@ -901,7 +901,7 @@ namespace Valve.VR.InteractionSystem
             if (trackedObject != null)
             {
                 trackedObject.onTransformUpdatedEvent -= OnTransformUpdated;
-                trackedObject.onTransformUpdatedEvent -= TwoHandGrabbingUpdate;
+                //trackedObject.onTransformUpdatedEvent -= TwoHandGrabbingUpdate;
             }
         }
 
