@@ -8,6 +8,9 @@ public class Bolt : MonoBehaviour
 {
     [HideInInspector]
     public MagazineSystem magazineSystem;
+    [HideInInspector]
+    public bool ejectMagazine;
+    private bool boltFront;
 
     private Interactable interactable;
     public Gun gun;
@@ -58,14 +61,13 @@ public class Bolt : MonoBehaviour
                     boltRetraction = true;
                 else
                 {
-                    round.SetActive(false);
                     cartridge.SetActive(false);
                 }
             }
 
             if (boltRetraction)
             {
-                if (mapping.value < 1)
+                if (mapping.value < 1 && magazineSystem != null)
                     round.SetActive(true);
                 if (mapping.value == 0)
                     redyToShot = true;
@@ -73,7 +75,15 @@ public class Bolt : MonoBehaviour
                     redyToShot = false;
             }
 
-            if (boltMoving == false && interactable.attachedToHand == null && autoBolt)
+            if (magazineSystem != null && magazineSystem.bulletCount == 0)
+            {
+                boltFront = false;
+            }
+            if (!boltFront && interactable.attachedToHand != null)
+            {
+                boltFront = true;
+            }
+            if (boltMoving == false && interactable.attachedToHand == null && autoBolt && boltFront)
             {
                 StartCoroutine("AutoMoveFront");
             }
