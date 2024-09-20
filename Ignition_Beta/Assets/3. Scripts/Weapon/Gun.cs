@@ -128,7 +128,7 @@ public class Gun : MonoBehaviour
 
     private void CanFire()
     {
-        SteamVR_Input_Sources source = interactable.attachedToHand.handType;    
+        SteamVR_Input_Sources source = interactable.attachedToHand.handType;
 
         isGrab = true;
         // 발사 모드 변경

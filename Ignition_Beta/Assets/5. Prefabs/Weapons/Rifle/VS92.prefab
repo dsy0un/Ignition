@@ -2978,7 +2978,7 @@ GameObject:
   - component: {fileID: 1119515637288812564}
   - component: {fileID: 452586124939109148}
   - component: {fileID: 3332196205635016786}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StandardScope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3072,8 +3072,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.03
-  m_Height: 0.18
+  m_Radius: 0.025
+  m_Height: 0.17
   m_Direction: 2
   m_Center: {x: 0.0022783354, y: 0.029729407, z: 0.00020570308}
 --- !u!1 &8150992856198423060
@@ -3117,7 +3117,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4791062983109928759}
   - component: {fileID: 6499907807700336056}
-  - component: {fileID: 2783809994446220364}
   - component: {fileID: 2960976159351849286}
   m_Layer: 0
   m_Name: Camera
@@ -3192,14 +3191,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2783809994446220364
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8242022948358645125}
-  m_Enabled: 1
 --- !u!114 &2960976159351849286
 MonoBehaviour:
   m_ObjectHideFlags: 0
