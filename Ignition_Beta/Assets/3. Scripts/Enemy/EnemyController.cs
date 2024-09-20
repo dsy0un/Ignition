@@ -134,6 +134,7 @@ public class EnemyController : MonoBehaviour, IHitAble
             enemyAnim.SetTrigger("getHit");
             
         }
+        StartCoroutine(CoolTime(hitDelay, isStiffen, (result) => { isStiffen = result; }));
         currentHP -= dmg;
         if (currentHP <= 0)
         {
