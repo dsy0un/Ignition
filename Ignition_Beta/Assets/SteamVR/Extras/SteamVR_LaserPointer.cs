@@ -1,4 +1,4 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 using UnityEngine;
 using System.Collections;
 using Valve.VR.InteractionSystem;
@@ -97,7 +97,7 @@ namespace Valve.VR.Extras
             {
                 isActive = !isActive;
 
-                holder.SetActive(isActive);
+                // holder.SetActive(isActive);
                 if (!isActive && previousContact != null)
                 {
                     previousContact.gameObject.SendMessage("OnHandHoverEnd", hand, SendMessageOptions.DontRequireReceiver);
@@ -133,15 +133,15 @@ namespace Valve.VR.Extras
                     {
                         previousContact.gameObject.SendMessage("HandHoverUpdate", hand, SendMessageOptions.DontRequireReceiver);
                     }
-                    else
-                    {
-                        Interactable interactable = previousContact.gameObject.GetComponent<Interactable>();
+                    //else
+                    //{
+                    //    Interactable interactable = previousContact.gameObject.GetComponent<Interactable>();
 
-                        hand.AttachObject(previousContact.gameObject, hand.GetBestGrabbingType(GrabTypes.None), defaultAttachmentFlags);
-                        hand.objectAttachmentPoint = hit.transform;
+                    //    hand.AttachObject(previousContact.gameObject, hand.GetBestGrabbingType(GrabTypes.None), defaultAttachmentFlags);
+                    //    hand.objectAttachmentPoint = hit.transform;
 
-                        interactable.onDetachedFromHand += OnDetachedFromHand;
-                    }
+                    //    interactable.onDetachedFromHand += OnDetachedFromHand;
+                    //}
                     if (previousContact == otherHandLaser.previousContact)
                     {
                         previousContact.gameObject.SendMessage("OnHandHoverEnd", hand, SendMessageOptions.DontRequireReceiver);

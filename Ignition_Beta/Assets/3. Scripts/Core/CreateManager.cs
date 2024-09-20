@@ -121,6 +121,19 @@ public class CreateManager : MonoBehaviour
         Selection.activeObject = inGame;
     }
 
+    [MenuItem("GameObject/CreateManager/Players/InGame+")]
+    static void CreateInGamePlusPlayer(MenuCommand menuCommand)
+    {
+        GameObject inGame = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Player/Player(InGame)+.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+        inGame.name = inGame.name.Replace("(Clone)", "").Trim();
+
+        // 3. 생성된 오브젝트를 Undo 시스템에 등록한다.
+        Undo.RegisterCreatedObjectUndo(inGame, "Create" + inGame.name);
+
+        // 4. 생성한 오브젝트를 선택한다.
+        Selection.activeObject = inGame;
+    }
+
     [MenuItem("GameObject/CreateManager/Players/Default")]
     static void CreateDefaultPlayer(MenuCommand menuCommand)
     {

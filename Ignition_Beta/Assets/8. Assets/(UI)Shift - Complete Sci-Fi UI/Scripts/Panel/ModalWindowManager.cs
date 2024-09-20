@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -30,12 +30,13 @@ namespace Michsky.UI.Shift
             {
                 windowTitle.text = titleText;
                 windowDescription.text = descriptionText;
-                windowTimer.text = timerText;
+                if (windowTimer)
+                    windowTimer.text = timerText;
             }
 
             gameObject.SetActive(false);
 
-            ModalWindowIn();
+            // ModalWindowIn();
         }
 
         public void ModalWindowIn()

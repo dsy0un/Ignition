@@ -63,6 +63,8 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_gun_ChangeFireMode;
         
+        private static SteamVR_Action_Boolean p_ui_SystemBtn;
+        
         public static SteamVR_Action_Boolean default_InteractUI
         {
             get
@@ -247,6 +249,14 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean ui_SystemBtn
+        {
+            get
+            {
+                return SteamVR_Actions.p_ui_SystemBtn.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
@@ -272,7 +282,8 @@ namespace Valve.VR
                     SteamVR_Actions.mixedreality_ExternalCamera,
                     SteamVR_Actions.gun_GunFire,
                     SteamVR_Actions.gun_EjectMagazine,
-                    SteamVR_Actions.gun_ChangeFireMode};
+                    SteamVR_Actions.gun_ChangeFireMode,
+                    SteamVR_Actions.ui_SystemBtn};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_InteractUI,
                     SteamVR_Actions.default_Teleport,
@@ -295,7 +306,8 @@ namespace Valve.VR
                     SteamVR_Actions.mixedreality_ExternalCamera,
                     SteamVR_Actions.gun_GunFire,
                     SteamVR_Actions.gun_EjectMagazine,
-                    SteamVR_Actions.gun_ChangeFireMode};
+                    SteamVR_Actions.gun_ChangeFireMode,
+                    SteamVR_Actions.ui_SystemBtn};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
@@ -316,7 +328,8 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.gun_GunFire,
                     SteamVR_Actions.gun_EjectMagazine,
-                    SteamVR_Actions.gun_ChangeFireMode};
+                    SteamVR_Actions.gun_ChangeFireMode,
+                    SteamVR_Actions.ui_SystemBtn};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     SteamVR_Actions.default_Squeeze,
                     SteamVR_Actions.buggy_Throttle};
@@ -346,7 +359,8 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.gun_GunFire,
                     SteamVR_Actions.gun_EjectMagazine,
-                    SteamVR_Actions.gun_ChangeFireMode};
+                    SteamVR_Actions.gun_ChangeFireMode,
+                    SteamVR_Actions.ui_SystemBtn};
         }
         
         private static void PreInitActions()
@@ -374,6 +388,7 @@ namespace Valve.VR
             SteamVR_Actions.p_gun_GunFire = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/gun/in/GunFire")));
             SteamVR_Actions.p_gun_EjectMagazine = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/gun/in/EjectMagazine")));
             SteamVR_Actions.p_gun_ChangeFireMode = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/gun/in/ChangeFireMode")));
+            SteamVR_Actions.p_ui_SystemBtn = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/ui/in/SystemBtn")));
         }
     }
 }

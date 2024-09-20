@@ -97,6 +97,10 @@
     {
       "name": "/actions/gun/in/ChangeFireMode",
       "type": "boolean"
+    },
+    {
+      "name": "/actions/ui/in/SystemBtn",
+      "type": "boolean"
     }
   ],
   "action_sets": [
@@ -119,6 +123,10 @@
     {
       "name": "/actions/gun",
       "usage": "leftright"
+    },
+    {
+      "name": "/actions/ui",
+      "usage": "single"
     }
   ],
   "default_bindings": [
@@ -193,7 +201,8 @@
       "/actions/gun/in/GunFire": "gunFire",
       "/actions/gun/in/EjectMagazine": "ejectMagazine",
       "/actions/gun/in/ChangeFireMode": "changeFireMode",
-      "/actions/default/in/TouchPad": "TouchPad"
+      "/actions/default/in/TouchPad": "TouchPad",
+      "/actions/ui/in/SystemBtn": "systemBtn"
     }
   ]
 }
