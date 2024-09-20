@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     public void DefFailureEvent()
     {
         drone.Animator.Play("DefenceFailure");
-        window.gameObject.SetActive(true);
+        window.ModalWindowIn();
     }
     
     /// <summary>
