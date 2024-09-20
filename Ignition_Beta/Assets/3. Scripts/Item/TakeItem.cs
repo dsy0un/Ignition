@@ -50,6 +50,7 @@ public class TakeItem : MonoBehaviour
                 default: 
                     break;
             }
+            spawn.GetComponent<Collider>().isTrigger = true;
             foreach (var mesh in spawn.GetComponentsInChildren<MeshRenderer>())
                 mesh.enabled = false;
             foreach (var canvas in spawn.GetComponentsInChildren<Canvas>())
@@ -73,6 +74,7 @@ public class TakeItem : MonoBehaviour
                 foreach (var canvas in spawn.GetComponentsInChildren<Canvas>())
                     canvas.enabled = true;
                 spawn.GetComponent<Rigidbody>().isKinematic = false; // isKenematic 끄기
+                spawn.GetComponent<Collider>().isTrigger = false;
                 spawn.transform.SetParent(null); // spawn의 부모 제거
             }
             else Destroy(spawn); // 아니면 Destroy

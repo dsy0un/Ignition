@@ -130,8 +130,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: -0.2, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6790315449913479873}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
@@ -869,7 +869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandGrab: 0
   otherHand: {fileID: 0}
   handType: 0
   trackedObject: {fileID: 0}
@@ -1007,8 +1006,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0.2, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7946469352620849249}
   m_Father: {fileID: 6790315449913479873}
@@ -1237,7 +1236,7 @@ GameObject:
   - component: {fileID: 6807757484861041400}
   - component: {fileID: 4968901028643868822}
   - component: {fileID: 5659480108721770991}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player(InGame)+
   m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -1265,7 +1264,7 @@ Transform:
   - {fileID: 1023175143085977764}
   - {fileID: 7293941151139026041}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6807757484861041400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,7 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandGrab: 0
   otherHand: {fileID: 2845271466286076163}
   handType: 1
   trackedObject: {fileID: 0}
@@ -3226,7 +3224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandGrab: 0
   otherHand: {fileID: 326913579440338363}
   handType: 2
   trackedObject: {fileID: 0}
@@ -3517,17 +3514,17 @@ PrefabInstance:
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.2222223
+      value: 2.666667
       objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.2222223
+      value: 2.6666667
       objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.2222223
+      value: 2.6666667
       objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
@@ -3552,17 +3549,17 @@ PrefabInstance:
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
