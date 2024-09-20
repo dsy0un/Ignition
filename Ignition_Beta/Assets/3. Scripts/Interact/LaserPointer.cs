@@ -10,10 +10,14 @@ using Valve.VR.InteractionSystem;
 public class LaserPointer : MonoBehaviour
 {
 
-    static SteamVR_LaserPointer[] laserPointers = null;
+    static SteamVR_LaserPointer laserPointer = null;
     static Animator anim;
     static ModalWindowManager window;
     public SteamVR_Action_Boolean menuBtn;
+
+    bool isMenu;
+    float currentTime;
+    float openTime = 3f;
 
     private void Awake()
     {
@@ -28,40 +32,44 @@ public class LaserPointer : MonoBehaviour
         //    laserPointer = laser;
         //}
 
-        laserPointers = FindObjectsOfType<SteamVR_LaserPointer>();
-        foreach (SteamVR_LaserPointer pointer in laserPointers)
-        {
-            pointer.PointerIn += PointerInside;
-            pointer.PointerOut += PointerOutside;
-            pointer.PointerClick += PointerClick;
-        }
+        laserPointer = GameObject.Find("RightHand").GetComponent<SteamVR_LaserPointer>();
+        laserPointer.PointerIn += PointerInside;
+        laserPointer.PointerOut += PointerOutside;
+        laserPointer.PointerClick += PointerClick;
     }
 
     private void Update()
     {
-        if (menuBtn.GetStateDown(SteamVR_Input_Sources.LeftHand))
+        if (menuBtn.GetState(SteamVR_Input_Sources.LeftHand))
         {
-            Debug.Log(1);
-            window.ModalWindowIn();
-            Time.timeScale = 0f;
+            if (!isMenu)
+            {
+                currentTime += Time.deltaTime;
+                if (currentTime >= openTime)
+                {
+                    window.ModalWindowIn();
+                    Time.timeScale = 0f;
+                    isMenu = true;
+                    currentTime = 0;
+                }
+            }
+            else
+            {
+                window.ModalWindowOut();
+                Time.timeScale = 1f;
+                isMenu = false;
+            }
         }
-        //else
-        //{
-        //    window.ModalWindowOut();
-        //    Time.timeScale = 1f;
-        //}
     }
 
     public static void PointerInside(object sender, PointerEventArgs e)
     {
-        foreach (SteamVR_LaserPointer pointer in laserPointers)
-            pointer.color = Color.yellow;
+        laserPointer.color = Color.yellow;
     }
 
     public static void PointerOutside(object sender, PointerEventArgs e)
     {
-        foreach (SteamVR_LaserPointer pointer in laserPointers)
-            pointer.color = Color.black;
+        laserPointer.color = Color.black;
     }
 
     public static void PointerClick(object sender, PointerEventArgs e)
@@ -76,7 +84,7 @@ public class LaserPointer : MonoBehaviour
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
 #else
-                Application.Quit();
+            Application.Quit();
 #endif
                 break;
             default:

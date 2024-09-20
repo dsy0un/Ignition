@@ -54,6 +54,10 @@
       "type": "vector2"
     },
     {
+      "name": "/actions/default/in/Menu",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -97,10 +101,6 @@
     {
       "name": "/actions/gun/in/ChangeFireMode",
       "type": "boolean"
-    },
-    {
-      "name": "/actions/ui/in/MenuBtn",
-      "type": "boolean"
     }
   ],
   "action_sets": [
@@ -122,10 +122,6 @@
     },
     {
       "name": "/actions/gun",
-      "usage": "leftright"
-    },
-    {
-      "name": "/actions/ui",
       "usage": "leftright"
     }
   ],
@@ -202,7 +198,7 @@
       "/actions/gun/in/EjectMagazine": "ejectMagazine",
       "/actions/gun/in/ChangeFireMode": "changeFireMode",
       "/actions/default/in/TouchPad": "TouchPad",
-      "/actions/ui/in/MenuBtn": "menuBtn"
+      "/actions/default/in/Menu": "menu"
     }
   ]
 }
