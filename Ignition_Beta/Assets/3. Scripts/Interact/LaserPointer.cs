@@ -9,7 +9,6 @@ using Valve.VR.InteractionSystem;
 
 public class LaserPointer : MonoBehaviour
 {
-
     static SteamVR_LaserPointer laserPointer = null;
     static Animator anim;
     static ModalWindowManager window;

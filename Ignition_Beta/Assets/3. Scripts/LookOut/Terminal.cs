@@ -1,23 +1,23 @@
+using Michsky.UI.Shift;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
 public class Terminal : MonoBehaviour
 {
-    [SerializeField]
-    Animator monitorAnim;
-    // Start is called before the first frame update
-    void Awake()
+    ModalWindowManager window;
+    Interactable openWindow;
+    Animator runMonitor;
+
+    private void Awake()
     {
-        
+        runMonitor = transform.parent.GetComponent<Animator>();
+        window = GetComponentInChildren<ModalWindowManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void HandHoverUpdate(Hand hand)
     {
-        monitorAnim.SetBool("IsOn", true);
+        runMonitor.SetBool("IsOn", true);
+        if (runMonitor.GetBool("IsOn") && runMonitor.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            window.ModalWindowIn();
     }
 }
