@@ -500,6 +500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShotgunMagazine (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6392074993882654657, guid: 33a2d75b7f5e89e408c18cb01b71d520,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -743,6 +748,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARK9Magazine (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5210474895277631417, guid: b9f047433cc778842b6fd90f143c4afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8185236168906982200, guid: b9f047433cc778842b6fd90f143c4afc,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -960,6 +970,12 @@ Transform:
   - {fileID: 1082051445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &318070827 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 987338959518794416, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 473902016319769482}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &321834870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,6 +1658,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602310496}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &673404709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673404710}
+  - component: {fileID: 673404711}
+  m_Layer: 9
+  m_Name: GripPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &673404710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673404709}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.005, z: 0.34276772}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 318070827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &673404711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673404709}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7545bae2e28798a4a9dbf1988d12cfd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grip: {fileID: 473902016319769483}
 --- !u!1001 &687018586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1742,6 +1803,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ARK9Magazine (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210474895277631417, guid: b9f047433cc778842b6fd90f143c4afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8086890280539806512, guid: b9f047433cc778842b6fd90f143c4afc,
         type: 3}
@@ -1905,6 +1971,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShotgunMagazine (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392074993882654657, guid: 33a2d75b7f5e89e408c18cb01b71d520,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2953,6 +3024,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARK9Magazine (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5210474895277631417, guid: b9f047433cc778842b6fd90f143c4afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8185236168906982200, guid: b9f047433cc778842b6fd90f143c4afc,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3896,6 +3972,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARK9Magazine (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5210474895277631417, guid: b9f047433cc778842b6fd90f143c4afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8185236168906982200, guid: b9f047433cc778842b6fd90f143c4afc,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4162,6 +4243,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShotgunMagazine (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6392074993882654657, guid: 33a2d75b7f5e89e408c18cb01b71d520,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4359,6 +4445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ARK9Magazine (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210474895277631417, guid: b9f047433cc778842b6fd90f143c4afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8185236168906982200, guid: b9f047433cc778842b6fd90f143c4afc,
         type: 3}
@@ -4770,16 +4861,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4956609622899147042, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+        type: 3}
+      propertyPath: attachEaseIn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4956609622899147042, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+        type: 3}
+      propertyPath: handFollowTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4956609622899147042, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+        type: 3}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5171825828786510011, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
         type: 3}
       propertyPath: m_Name
       value: VS92
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5392230534546594916, guid: 82ebf95ecba8a9548961c7d4718ae3e6, type: 3}
+    - {fileID: 842231447958836111, guid: 82ebf95ecba8a9548961c7d4718ae3e6, type: 3}
+    - {fileID: 552647011995178836, guid: 82ebf95ecba8a9548961c7d4718ae3e6, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 987338959518794416, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 673404710}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7616669197444813698, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 473902016319769484}
   m_SourcePrefab: {fileID: 100100000, guid: 82ebf95ecba8a9548961c7d4718ae3e6, type: 3}
+--- !u!1 &473902016319769483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7616669197444813698, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 473902016319769482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &473902016319769484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473902016319769483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcddc7ee33cb2624f9a8433c34cf4e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originPos: {fileID: 673404709}
 --- !u!1 &540874035338313856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,6 +5014,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TRT3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3273147174098811349, guid: 508ecf61c710c0c4a97126b9181d6b66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7646014331312812577, guid: 508ecf61c710c0c4a97126b9181d6b66,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5571,6 +5717,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARK9
       objectReference: {fileID: 0}
+    - target: {fileID: 2975994828680573183, guid: daa505336c158ce4a93bb07ab5a3e173,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5619,6 +5770,11 @@ PrefabInstance:
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158586772983550921, guid: daa505336c158ce4a93bb07ab5a3e173,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6574,6 +6730,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ARK9Magazine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210474895277631417, guid: b9f047433cc778842b6fd90f143c4afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8185236168906982200, guid: b9f047433cc778842b6fd90f143c4afc,
         type: 3}
@@ -10680,6 +10841,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShotgunMagazine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392074993882654657, guid: 33a2d75b7f5e89e408c18cb01b71d520,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
