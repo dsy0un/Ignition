@@ -99,7 +99,7 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/ui/in/SystemBtn",
+      "name": "/actions/ui/in/MenuBtn",
       "type": "boolean"
     }
   ],
@@ -126,7 +126,7 @@
     },
     {
       "name": "/actions/ui",
-      "usage": "single"
+      "usage": "leftright"
     }
   ],
   "default_bindings": [
@@ -202,7 +202,7 @@
       "/actions/gun/in/EjectMagazine": "ejectMagazine",
       "/actions/gun/in/ChangeFireMode": "changeFireMode",
       "/actions/default/in/TouchPad": "TouchPad",
-      "/actions/ui/in/SystemBtn": "systemBtn"
+      "/actions/ui/in/MenuBtn": "menuBtn"
     }
   ]
 }

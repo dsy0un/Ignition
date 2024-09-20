@@ -17,11 +17,11 @@ namespace Valve.VR
     public class SteamVR_Input_ActionSet_ui : Valve.VR.SteamVR_ActionSet
     {
         
-        public virtual SteamVR_Action_Boolean SystemBtn
+        public virtual SteamVR_Action_Boolean MenuBtn
         {
             get
             {
-                return SteamVR_Actions.ui_SystemBtn;
+                return SteamVR_Actions.ui_MenuBtn;
             }
         }
     }

@@ -9,7 +9,8 @@ using Valve.VR.InteractionSystem;
 
 public class LaserPointer : MonoBehaviour
 {
-    static SteamVR_LaserPointer laserPointer = null;
+
+    static SteamVR_LaserPointer[] laserPointers = null;
     static Animator anim;
     static ModalWindowManager window;
     public SteamVR_Action_Boolean menuBtn;
@@ -20,35 +21,47 @@ public class LaserPointer : MonoBehaviour
         window = GetComponentInChildren<ModalWindowManager>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         //foreach (SteamVR_LaserPointer laser in FindObjectsOfType<SteamVR_LaserPointer>())
         //{
         //    laserPointer = laser;
         //}
 
-        laserPointer = GameObject.Find("RightHand").GetComponent<SteamVR_LaserPointer>();
-        laserPointer.PointerIn += PointerInside;
-        laserPointer.PointerOut += PointerOutside;
-        laserPointer.PointerClick += PointerClick;
+        laserPointers = FindObjectsOfType<SteamVR_LaserPointer>();
+        foreach (SteamVR_LaserPointer pointer in laserPointers)
+        {
+            pointer.PointerIn += PointerInside;
+            pointer.PointerOut += PointerOutside;
+            pointer.PointerClick += PointerClick;
+        }
     }
 
     private void Update()
     {
         if (menuBtn.GetStateDown(SteamVR_Input_Sources.LeftHand))
         {
+            Debug.Log(1);
             window.ModalWindowIn();
+            Time.timeScale = 0f;
         }
+        //else
+        //{
+        //    window.ModalWindowOut();
+        //    Time.timeScale = 1f;
+        //}
     }
 
     public static void PointerInside(object sender, PointerEventArgs e)
     {
-        laserPointer.color = Color.yellow;
+        foreach (SteamVR_LaserPointer pointer in laserPointers)
+            pointer.color = Color.yellow;
     }
 
     public static void PointerOutside(object sender, PointerEventArgs e)
     {
-        laserPointer.color = Color.black;
+        foreach (SteamVR_LaserPointer pointer in laserPointers)
+            pointer.color = Color.black;
     }
 
     public static void PointerClick(object sender, PointerEventArgs e)
