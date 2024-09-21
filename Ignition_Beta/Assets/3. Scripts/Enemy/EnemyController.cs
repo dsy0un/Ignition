@@ -124,6 +124,11 @@ public class EnemyController : MonoBehaviour, IHitAble
 
     public void Hit(float dmg, string coliName)
     {
+        currentHP -= dmg;
+        if (currentHP <= 0)
+        {
+            Die();
+        }
         if (coliName == "WeakPoint")
         {
             dmg = 100;
@@ -132,13 +137,7 @@ public class EnemyController : MonoBehaviour, IHitAble
         else
         {
             enemyAnim.SetTrigger("getHit");
-            
-        }
-        StartCoroutine(CoolTime(hitDelay, isStiffen, (result) => { isStiffen = result; }));
-        currentHP -= dmg;
-        if (currentHP <= 0)
-        {
-            Die();
+            StartCoroutine(CoolTime(hitDelay, isStiffen, (result) => { isStiffen = result; }));
         }
     }
     public void Die()
