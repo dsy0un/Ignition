@@ -20,7 +20,7 @@ public class SimpleAttach : MonoBehaviour
     private void Update()
     {
         transform.localPosition = originPos;
-        transform.localRotation = originRot;
+        transform.localRotation = Quaternion.Euler(new Vector3(originRot.x, transform.localRotation.y, originRot.z));
     }
 
     //private void HandHoverUpdate(Hand hand)

@@ -161,18 +161,21 @@ public class Bolt : MonoBehaviour
             var obj = poolingObjectQueue.Dequeue();
             obj.transform.position = ejectPoint.transform.position;
             obj.SetActive(true);
+            obj.transform.SetParent(null);
         }
         else
         {
             var newObj = CreateNewObject();
             newObj.transform.position = ejectPoint.transform.position;
             newObj.SetActive(true);
+            newObj.transform.SetParent(null);
         }
     }
 
     public void ReturnObject(GameObject obj)
     {
         obj.gameObject.SetActive(false);
+        obj.transform.SetParent(transform);
         poolingObjectQueue.Enqueue(obj);
     }
 }
