@@ -10,7 +10,7 @@ public class SoundSignal : MonoBehaviour
     [SerializeField, Tooltip("Pivot Transform \nCollider가 존재해야 하며 그 오브젝트에 Ihitable이 존재해야함")]
     private Transform followObject;
     [SerializeField, Min(1), Tooltip("소리 크기 (적이 인식하는 우선순위)")]
-    private int soundVolume;
+    private int soundVolume = 1;
 
     [SerializeField]
     private LayerMask layer;

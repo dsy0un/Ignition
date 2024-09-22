@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject.transform.root);
         }
         else
         {
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     public void DefFailureEvent()
     {
         drone.Animator.Play("DefenceFailure");
-        window.gameObject.SetActive(true);
+        window.ModalWindowIn();
     }
     
     /// <summary>

@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1055465823205409163}
+  - component: {fileID: -6560133536118282182}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -78,6 +79,18 @@ Transform:
   - {fileID: 8141506772644315379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6560133536118282182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3130570258008155431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b16b019d391e3f47bf0e56659419af5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4318968462557662395
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +279,8 @@ MonoBehaviour:
   drone: {fileID: 0}
   window: {fileID: 0}
   enemyMove: {fileID: 0}
+  mainCamera: {fileID: 0}
+  fadeInOut: {fileID: 0}
   hapticAction:
     actionPath: 
     needsReinit: 0
@@ -422,4 +437,3 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   toastMsg: {fileID: 3706744096746124908}
   fadeTime: 0.3
-  mainCamera: {fileID: 0}
