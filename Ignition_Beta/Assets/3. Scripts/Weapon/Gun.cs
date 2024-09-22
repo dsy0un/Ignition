@@ -79,6 +79,8 @@ public class Gun : MonoBehaviour
             else // 잡고 있지 않을 경우
                 isGrab = false;
 
+            transform.rotation = secondInteractable.gameObject.transform.rotation;
+
             yield return null;
         }
     }
