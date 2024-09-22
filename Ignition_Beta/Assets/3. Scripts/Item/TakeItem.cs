@@ -38,16 +38,19 @@ public class TakeItem : MonoBehaviour
             switch (currentObject.tag) // 들고 있는 오브젝트의 태그를 switch 문으로 풀기
             {
                 case "Pistol": // 권총일 때
+                    spawn = Instantiate(itemPrefab[0], other.transform.position, Quaternion.identity, other.transform);
                     break;
                 case "Rifle": // 소총일 때
                     // 탄창 소환 후 spawn에 추가
                     spawn = Instantiate(itemPrefab[1], other.transform.position, Quaternion.identity, other.transform);
                     break;
                 case "Shotgun": // 샷건일 때
+                    spawn = Instantiate(itemPrefab[2], other.transform.position, Quaternion.identity, other.transform);
                     break;
                 default: 
                     break;
             }
+            spawn.GetComponent<Collider>().isTrigger = true;
             foreach (var mesh in spawn.GetComponentsInChildren<MeshRenderer>())
                 mesh.enabled = false;
             foreach (var canvas in spawn.GetComponentsInChildren<Canvas>())
@@ -71,6 +74,7 @@ public class TakeItem : MonoBehaviour
                 foreach (var canvas in spawn.GetComponentsInChildren<Canvas>())
                     canvas.enabled = true;
                 spawn.GetComponent<Rigidbody>().isKinematic = false; // isKenematic 끄기
+                spawn.GetComponent<Collider>().isTrigger = false;
                 spawn.transform.SetParent(null); // spawn의 부모 제거
             }
             else Destroy(spawn); // 아니면 Destroy
