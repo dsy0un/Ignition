@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour, IHitAble
     [SerializeField]
     private float attackCoolTime = 1.7f; // 공격 딜레이
     [SerializeField]
-    private float hitDelay = 1.2f; // hit시 경직 시간
+    private float hitDelay = 0.5f; // hit시 경직 시간
     [SerializeField]
     private float reSpawnDelay = 4f; // 리스폰 딜레이
     public NavMeshSurface nms;
@@ -124,6 +124,7 @@ public class EnemyController : MonoBehaviour, IHitAble
 
     public void Hit(float dmg, string coliName)
     {
+        if (isStiffen) return;
         currentHP -= dmg;
         if (currentHP <= 0)
         {
