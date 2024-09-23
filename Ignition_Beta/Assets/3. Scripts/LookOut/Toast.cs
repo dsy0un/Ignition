@@ -136,6 +136,7 @@ public class Toast : MonoBehaviour
 
         yield return FadeInOut(toastMsg, fadeTime, color, false);
 
+        isPopUp = false;
         interrupt = false;
         toastMsg.enabled = false;
     }

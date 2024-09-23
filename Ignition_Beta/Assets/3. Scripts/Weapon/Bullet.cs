@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float damage;
     private Gun gun;
     private float time;
+
+    bool isUpgrade = false;
 
     private void Awake()
     {
@@ -21,6 +24,11 @@ public class Bullet : MonoBehaviour
         {
             gun.ReturnObject(gameObject);
             time = 0;
+        }
+        if (!isUpgrade && GameManager.Instance.isBulletUpgrade)
+        {
+            isUpgrade = true;
+            damage *= 1.5f;
         }
     }
 

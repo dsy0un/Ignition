@@ -25,8 +25,15 @@ public class MagazineSystem : MonoBehaviour
 
     private Vector3 magScale;
 
+    bool isUpgrade = false;
+
     private void Awake()
     {
+        if (!isUpgrade && GameManager.Instance.isMagUpgrade)
+        {
+            isUpgrade = true;
+            maxBullet = (int)(maxBullet * 1.5f);
+        }
         magScale = transform.localScale;
         bulletCount = maxBullet;
         interactable = GetComponent<Interactable>();

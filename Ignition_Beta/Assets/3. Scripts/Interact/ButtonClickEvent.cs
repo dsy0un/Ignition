@@ -9,15 +9,14 @@ using UnityEngine.UI;
 public class ButtonClickEvent : MonoBehaviour
 {
     [SerializeField]
-    UnityEvent onTriggerEvent;
+    UnityEvent onCollisionEvent;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("interact"))
         {
-            Debug.Log(1);
             // ExecuteEvents.Execute(gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.submitHandler);
-            onTriggerEvent?.Invoke();
+            onCollisionEvent?.Invoke();
         }
     }
 }
