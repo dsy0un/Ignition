@@ -20,13 +20,14 @@ public class SoundSignal : MonoBehaviour
     private List<GameObject> objectsWithinRange = new List<GameObject>(); // 이전 프레임 감지 객체 리스트
     private List<GameObject> currentObjects = new List<GameObject>(); // 현재 프레임 감지 객체 리스트
 
+    public bool stopSound;
+
     private void Awake()
     {
     }
 
     void Start()
     {
-        audioMaxDistance = audioSource.maxDistance;
         StartCoroutine(SoundSignalToTheEnemy());
     }
 
@@ -35,20 +36,27 @@ public class SoundSignal : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-            if (!audioSource.isPlaying) yield break;
-
-            DetectObjectsInRange();
-
-            // 오디오 소리에 반응하는 적 감지
-            if (colliders.Length > 0)
+            if (audioSource.isPlaying && !stopSound)
             {
-                foreach (Collider col in colliders)
+                audioMaxDistance = audioSource.maxDistance;
+                DetectObjectsInRange();
+
+                // 오디오 소리에 반응하는 적 감지
+                if (colliders.Length > 0)
                 {
-                    if (col.transform.root.TryGetComponent<EnemyController>(out var enemyController))
+                    foreach (Collider col in colliders)
                     {
-                        enemyController.ListenFollow(soundVolume, followObject); // 적이 소리를 감지했을 때 행동
+                        if (col.transform.root.TryGetComponent<EnemyController>(out var enemyController))
+                        {
+                            enemyController.ListenFollow(soundVolume, followObject); // 적이 소리를 감지했을 때 행동
+                        }
                     }
                 }
+            }
+            else if(stopSound)
+            {
+                audioMaxDistance = 0f;
+                DetectObjectsInRange();
             }
         }
     }

@@ -9,7 +9,9 @@ public class GrenadeSafeDv : MonoBehaviour
     private LinearMapping mapping;
     private Interactable interactable;
     public GameObject EndPos;
-    public int topBotton;
+    public int topBottom;
+    [HideInInspector]
+    public bool isReady;
 
     private void Awake()
     {
@@ -30,7 +32,8 @@ public class GrenadeSafeDv : MonoBehaviour
             if (mapping.value == 1)
             {
                 interactable.attachedToHand.DetachObject(gameObject);
-                grenade.isReady[topBotton] = true;
+                grenade.safeDv[topBottom] = GetComponent<GrenadeSafeDv>();
+                isReady = true;
                 EndPos.SetActive(true);
                 gameObject.SetActive(false);
             }

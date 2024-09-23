@@ -40,6 +40,7 @@ public class Gun : MonoBehaviour
     public SteamVR_Action_Boolean fireAction;
     public SteamVR_Action_Boolean ejectMagazine;
     public SteamVR_Action_Boolean changeFireMode;
+    public SteamVR_Action_Vibration haptic;
 
     [HideInInspector]
     public bool isGrab;
@@ -122,6 +123,9 @@ public class Gun : MonoBehaviour
             gunRb.AddRelativeTorque(Vector3.left * recoilPower, ForceMode.Force);
             magazineSystem.bulletCount -= 1; // 총 발사시 탄창의 총 총알 개수 -1
             bolt.Shot();
+            haptic.Execute(0, 0.1f, 0, 1, interactable.attachedToHand.handType);
+            if (secondInteractable.attachedToHand != null)
+                haptic.Execute(0, 0.1f, 0, 1, secondInteractable.attachedToHand.handType);
             muzzleLight.SetActive(true); // 총구 화염 라이트 켜기
             Invoke("HideLight", 0.1f); // 0.1초 후 총구 화염 라이트 끄기
             redyToFire = false; // 발사 불가능
