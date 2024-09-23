@@ -1,48 +1,90 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Michsky.UI.Shift;
 using UnityEngine;
-using UnityEngine.UI;
+using Valve.VR.InteractionSystem;
+using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEditor.Experimental.GraphView;
 
 public class Port : MonoBehaviour
 {
-    
-    private enum mapState
-    {
-        None,
-        Stage1,
-        Stage2,
-        Stage3,
-        Stage4
-    }
+    [SerializeField]
+    private GameObject lever;
 
-    mapState mapName = mapState.None;
+    private ModalWindowManager mwm;
+    private LinearMapping linear;
+    private CircularDrive circular;
+    private Interactable interactable;
+    private string mapName;
+
+    float time;
+    float mapping;
+    float zF;
+    Vector3 zV;
+    AsyncOperation op;
+
+    private void Awake()
+    {
+        mwm = GetComponent<ModalWindowManager>();
+        linear = lever.GetComponent<LinearMapping>();
+        circular = lever.GetComponent<CircularDrive>();
+        interactable = lever.GetComponent<Interactable>();
+    }
+    private void Start()
+    {
+        op = SceneManager.LoadSceneAsync("Loading");
+        op.allowSceneActivation = false;
+    }
     private void Update()
     {
-        switch (mapName)
+        if (linear.value == 0)
         {
-            case mapState.Stage1:
-                break;
-            case mapState.Stage2:
-                break;
-            case mapState.Stage3:
-                break;
-            case mapState.Stage4:
-                break;
+            time = 0f;
+            zV = Vector3.zero;
+        }
+
+        else if (linear.value != 1)
+        {
+            if (interactable.attachedToHand != null)
+            {
+                //SceneManager.LoadSceneAsync("Loading");
+                zF = lever.transform.rotation.z;
+                mapping = linear.value;
+            }
+            else if (interactable.attachedToHand == null)
+            {
+                time += Time.deltaTime;
+                zV = new Vector3(0f, 0f, Mathf.Lerp(zF, circular.minAngle, time / 0.3f));
+                linear.value = Mathf.Lerp(mapping, 0, time / 0.3f);
+                circular.outAngle = circular.minAngle;
+                lever.transform.rotation = Quaternion.Euler(zV);
+            }
+            return;
+        }
+        else if (linear.value == 1 && mapName != null)
+        {
+            if (op.progress < 0.9f)
+            {
+            }
+            else
+            {
+                LoadingSceneManager.LoadScene(mapName);
+                op.allowSceneActivation = true;
+            }
         }
     }
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnters()
     {
-        if (other.CompareTag("Hand"))
+        mwm.ModalWindowOut();
+    }
+    public void OnTriggerExits()
+    {
+        if (interactable.attachedToHand == null)
         {
-
+            mwm.ModalWindowIn();
         }
     }
-    private void OnTriggerExit(Collider other)
+    public void stageSelect(string name)
     {
-        if (other.CompareTag("Hand"))
-        {
-
-        }
+        mapName = name;
     }
 }
