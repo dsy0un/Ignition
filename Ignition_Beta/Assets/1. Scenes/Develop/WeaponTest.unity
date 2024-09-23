@@ -3118,6 +3118,70 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471389487}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1529014716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1529014718}
+  - component: {fileID: 1529014717}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1529014717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529014716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47abb25c8e9feff44aadfb4af2b78641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManagerPrefab: {fileID: 0}
+  barrier: {fileID: 0}
+  player: {fileID: 0}
+  playerHead: {fileID: 0}
+  enemyGenerate: {fileID: 0}
+  lookOut: {fileID: 0}
+  drone: {fileID: 0}
+  window: {fileID: 0}
+  enemyMove: {fileID: 0}
+  mainCamera: {fileID: 0}
+  fadeInOut: {fileID: 0}
+  hapticAction:
+    actionPath: 
+    needsReinit: 0
+  shakeAmount: 0.2
+  shakeSpeed: 1
+  vibrate: 0.1
+  isBulletUpgrade: 0
+  isMagUpgrade: 0
+  isBarrierUpgrade: 0
+--- !u!4 &1529014718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529014716}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1551870277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4987,10 +5051,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1149278041494009661, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+    - target: {fileID: 5076661381889142437, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
         type: 3}
-      propertyPath: previewRightInstance
-      value: 
+      propertyPath: m_Volume
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5171825828786510011, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
         type: 3}
@@ -5138,10 +5202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2137329293335733978, guid: 508ecf61c710c0c4a97126b9181d6b66,
+    - target: {fileID: 3208746165988386438, guid: 508ecf61c710c0c4a97126b9181d6b66,
         type: 3}
-      propertyPath: haptic.actionPath
-      value: /actions/default/out/Haptic
+      propertyPath: m_Volume
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3273147174098811349, guid: 508ecf61c710c0c4a97126b9181d6b66,
         type: 3}
@@ -6244,11 +6308,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARK9
       objectReference: {fileID: 0}
-    - target: {fileID: 4725606491274451604, guid: daa505336c158ce4a93bb07ab5a3e173,
-        type: 3}
-      propertyPath: haptic.actionPath
-      value: /actions/default/out/Haptic
-      objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6298,6 +6357,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322014642490955384, guid: daa505336c158ce4a93bb07ab5a3e173,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13036,6 +13100,8 @@ MonoBehaviour:
   mapping: {fileID: 464663866753420502}
   round: {fileID: 3361610717969658365}
   cartridge: {fileID: 7335436031923877658}
+  reloadBack: {fileID: 0}
+  reloadFront: {fileID: 0}
   autoBolt: 1
   moveTime: 0.05
   redyToShot: 0
@@ -15502,3 +15568,4 @@ SceneRoots:
   - {fileID: 1145414909}
   - {fileID: 7805216365287213828}
   - {fileID: 3874072097234135242}
+  - {fileID: 1529014718}

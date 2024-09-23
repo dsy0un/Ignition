@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 using Valve.VR;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class Bolt : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class Bolt : MonoBehaviour
 
     public GameObject round;
     public GameObject cartridge;
+
+    [Header("Sound")]
+    public AudioClip reloadBack;
+    public AudioClip reloadFront;
+    private AudioSource audioSource;
+    private int playCount;
 
     [Header("Bolt")]
     public bool autoBolt;
@@ -39,6 +46,7 @@ public class Bolt : MonoBehaviour
     {
         linearDrive = GetComponent<LinearDrive>();
         interactable = GetComponent<Interactable>();
+        audioSource = GetComponent<AudioSource>();
         Initialize(spawnPrefabAmount);
     }
 
@@ -53,6 +61,7 @@ public class Bolt : MonoBehaviour
         {
             if (mapping.value == 1)
             {
+                ReloadBack();
                 if (cartridge.activeInHierarchy == true)
                     GetObject();
                 cartridge.SetActive(false);
@@ -132,6 +141,27 @@ public class Bolt : MonoBehaviour
             mapping.value = Mathf.Lerp(mapping.value, 0, time / moveTime);
             if (mapping.value == 0)
             {
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+    void ReloadBack()
+    {
+        if (playCount >= 1) return;
+        audioSource.PlayOneShot(reloadBack);
+        StartCoroutine("ReloadFront");
+        playCount++;
+    }
+    IEnumerator ReloadFront()
+    {
+        while (true)
+        {
+            if (mapping.value == 0)
+            {
+                audioSource.PlayOneShot(reloadFront);
+                playCount = 0;
                 yield break;
             }
             yield return null;
