@@ -5407,35 +5407,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2960976159351849286, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+    - target: {fileID: 1149278041494009661, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
         type: 3}
-      propertyPath: m_RequiresDepthTextureOption
-      value: 0
+      propertyPath: previewLeftInstance
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2960976159351849286, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
+    - target: {fileID: 1149278041494009661, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
         type: 3}
-      propertyPath: m_RequiresOpaqueTextureOption
-      value: 0
+      propertyPath: previewRightInstance
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5171825828786510011, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
         type: 3}
       propertyPath: m_Name
       value: VS92
-      objectReference: {fileID: 0}
-    - target: {fileID: 6499907807700336056, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
-        type: 3}
-      propertyPath: far clip plane
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6499907807700336056, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 6499907807700336056, guid: 82ebf95ecba8a9548961c7d4718ae3e6,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 224417
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15363,6 +15348,7 @@ GameObject:
   - component: {fileID: 8331210407128594516}
   - component: {fileID: 8331210407128594515}
   - component: {fileID: 8331210407128594520}
+  - component: {fileID: 8331210407128594521}
   m_Layer: 18
   m_Name: GrenadeTop
   m_TagString: Untagged
@@ -15488,6 +15474,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndPos: {fileID: 1742022483}
   topBotton: 0
+--- !u!114 &8331210407128594521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331210407128594510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 1
+  poseNames:
+  - PullGrenadeSafeDv (MAIN)
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+    type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
+    type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: acdb99324f930d1428e7297f8ab6bfb1, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours: []
+  scale: 1
 --- !u!1 &8331210407896355846
 GameObject:
   m_ObjectHideFlags: 0
@@ -15504,6 +15519,7 @@ GameObject:
   - component: {fileID: 8331210407896355852}
   - component: {fileID: 8331210407896355851}
   - component: {fileID: 8331210407896355854}
+  - component: {fileID: 8331210407896355855}
   m_Layer: 18
   m_Name: GrenadeBottom
   m_TagString: Untagged
@@ -15629,6 +15645,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndPos: {fileID: 500759857}
   topBotton: 1
+--- !u!114 &8331210407896355855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331210407896355846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 1
+  poseNames:
+  - PullGrenadeSafeDv (MAIN)
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+    type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
+    type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: acdb99324f930d1428e7297f8ab6bfb1, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours: []
+  scale: 1
 --- !u!23 &8334423413325262109
 MeshRenderer:
   m_ObjectHideFlags: 0
