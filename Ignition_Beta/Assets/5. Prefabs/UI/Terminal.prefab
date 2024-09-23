@@ -2566,7 +2566,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004870039175240985}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -6140,7 +6140,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 0
-    m_Bottom: 2
+    m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 100
   m_ChildForceExpandWidth: 0
@@ -14294,9 +14294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82af888339897d43908230e1728b810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drone: {fileID: 0}
   sharpAnimations: 1
   leftTime: {fileID: 9072886556104103014}
   arriveTime: 30
+  coolTime: 300
 --- !u!1 &6630886003609379277
 GameObject:
   m_ObjectHideFlags: 0
