@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float vibrate = 0.1f;
 
+    public bool isBulletUpgrade = false;
+    public bool isMagUpgrade = false;
+    public bool isBarrierUpgrade = false;
+
     private void Awake()
     {
         if (instance == null)

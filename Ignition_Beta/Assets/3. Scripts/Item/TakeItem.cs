@@ -15,8 +15,25 @@ public class TakeItem : MonoBehaviour
 
     GameObject spawn; // 소환된 아이템
 
-    //[SerializeField]
-    //int itemCount = 15;
+    [SerializeField]
+    int maxItemCount = 15;
+    int currentItemCount;
+
+    bool isUpgrade = false;
+
+    private void Start()
+    {
+        currentItemCount = maxItemCount;
+    }
+
+    private void Update()
+    {
+        if (!isUpgrade && GameManager.Instance.isMagUpgrade)
+        {
+            isUpgrade = true;
+            currentItemCount = maxItemCount * 2;
+        }
+    }
 
     /// <summary>
     /// 들고 있는 총에 알맞은 아이템 소환
@@ -24,7 +41,7 @@ public class TakeItem : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hand"))
+        if (currentItemCount >= 1 && other.CompareTag("Hand"))
         {
             if (leftHand.currentAttachedObject == null && rightHand.currentAttachedObject == null) return; // 양손 다 들고 있지 않을 때
             if (leftHand.currentAttachedObject != null && rightHand.currentAttachedObject != null) return; // 양손 다 들고 있을 때
@@ -76,6 +93,7 @@ public class TakeItem : MonoBehaviour
                 spawn.GetComponent<Rigidbody>().isKinematic = false; // isKenematic 끄기
                 spawn.GetComponent<Collider>().isTrigger = false;
                 spawn.transform.SetParent(null); // spawn의 부모 제거
+                currentItemCount--;
             }
             else Destroy(spawn); // 아니면 Destroy
         }

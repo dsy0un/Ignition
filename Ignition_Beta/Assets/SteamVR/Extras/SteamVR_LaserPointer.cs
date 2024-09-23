@@ -142,10 +142,10 @@ namespace Valve.VR.Extras
 
                     //    interactable.onDetachedFromHand += OnDetachedFromHand;
                     //}
-                    if (previousContact == otherHandLaser.previousContact)
-                    {
-                        previousContact.gameObject.SendMessage("OnHandHoverEnd", hand, SendMessageOptions.DontRequireReceiver);
-                    }
+                    //if (previousContact == otherHandLaser.previousContact)
+                    //{
+                    //    previousContact.gameObject.SendMessage("OnHandHoverEnd", hand, SendMessageOptions.DontRequireReceiver);
+                    //}
                 }
             }
         }

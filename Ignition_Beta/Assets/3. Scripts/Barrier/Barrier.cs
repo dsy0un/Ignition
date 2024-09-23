@@ -17,6 +17,8 @@ public class Barrier : MonoBehaviour, IHitAble
 
     bool isEscape;
 
+    bool isUpgrade = false;
+
     void Awake()
     {
 
@@ -34,6 +36,12 @@ public class Barrier : MonoBehaviour, IHitAble
     {
         while (true)
         {
+            if (!isUpgrade && GameManager.Instance.isBarrierUpgrade)
+            {
+                isUpgrade = true;
+                currentHP *= 1.5f;
+                maxHP *= 1.5f;
+            }
             image.fillAmount = currentHP / maxHP;
 
             if (isEscape)

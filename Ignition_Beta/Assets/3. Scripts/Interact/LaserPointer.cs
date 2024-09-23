@@ -14,13 +14,17 @@ public class LaserPointer : MonoBehaviour
     static ModalWindowManager window;
     public SteamVR_Action_Boolean menuBtn;
 
+    bool isMenu;
+    float currentTime;
+    float openTime = 3f;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
         window = GetComponentInChildren<ModalWindowManager>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         //foreach (SteamVR_LaserPointer laser in FindObjectsOfType<SteamVR_LaserPointer>())
         //{
@@ -35,9 +39,25 @@ public class LaserPointer : MonoBehaviour
 
     private void Update()
     {
-        if (menuBtn.GetStateDown(SteamVR_Input_Sources.LeftHand))
+        if (menuBtn.GetState(SteamVR_Input_Sources.LeftHand))
         {
-            window.ModalWindowIn();
+            if (!isMenu)
+            {
+                currentTime += Time.deltaTime;
+                if (currentTime >= openTime)
+                {
+                    window.ModalWindowIn();
+                    Time.timeScale = 0f;
+                    isMenu = true;
+                    currentTime = 0;
+                }
+            }
+            else
+            {
+                window.ModalWindowOut();
+                Time.timeScale = 1f;
+                isMenu = false;
+            }
         }
     }
 
@@ -63,7 +83,7 @@ public class LaserPointer : MonoBehaviour
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
 #else
-                Application.Quit();
+            Application.Quit();
 #endif
                 break;
             default:
