@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 326913579440338363}
   rightHand: {fileID: 2845271466286076163}
+  isRespawn: 0
 --- !u!1 &419796936467987323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 326913579440338363}
   rightHand: {fileID: 2845271466286076163}
+  isRespawn: 0
 --- !u!1 &2689320202823781021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,7 +1724,7 @@ GameObject:
   - component: {fileID: 524328067834108515}
   - component: {fileID: 5595298746336013279}
   - component: {fileID: 4193116469883888593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2062,7 +2064,7 @@ GameObject:
   - component: {fileID: 1395806010823670513}
   - component: {fileID: 449764118252805334}
   - component: {fileID: 4730760820581649233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2612,7 +2614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5235027273748901230}
   - component: {fileID: 4132140437190742166}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3555,7 +3557,7 @@ PrefabInstance:
     - target: {fileID: 2975994828680573183, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
       propertyPath: m_Name
-      value: ARK9
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 4808379994517260476, guid: daa505336c158ce4a93bb07ab5a3e173,
         type: 3}
