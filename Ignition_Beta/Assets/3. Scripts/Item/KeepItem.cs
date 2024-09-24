@@ -10,14 +10,55 @@ public class KeepItem : MonoBehaviour
     Hand leftHand, rightHand; // 플레이어 왼손, 오른손
 
     GameObject currentObject;
+    GameObject containObject;
+
+    float time;
 
     bool isExit, isStay;
-
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (isStay && other.transform.root.CompareTag("Pistol"))
+        if (transform.childCount == 0) return; // 오브젝트를 자식으로 추가 안하면 사용 불가
+        containObject = transform.GetChild(0).gameObject;
+        StartCoroutine(CoroutineUpdate());
+    }
+    IEnumerator CoroutineUpdate()
+    {
+        while (true)
         {
-            Debug.Log(13123);
+            yield return null;
+                Debug.Log(isStay);
+            if (containObject.GetComponent<Interactable>().attachedToHand != null)
+            {
+                if (leftHand.currentAttachedObject != null &&
+                        leftHand.currentAttachedObject.CompareTag(containObject.tag)) // 왼손에 들고 있는 오브젝트가 있을 때
+                {
+                    currentObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+                    currentObject.transform.SetParent(null);
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                }
+                else if (rightHand.currentAttachedObject != null
+                        && rightHand.currentAttachedObject.CompareTag(containObject.tag)) // 오른손에 들고 있는 오브젝트가 있을 때
+                {
+                    currentObject = rightHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+                    currentObject.transform.SetParent(null);
+                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                }
+                StartCoroutine(Stay());
+            }
+            else
+            {
+                StopCoroutine(Stay());
+                isStay = false;
+                isExit = false;
+                time = 0f;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) // keepitem
+    {
+        if(isStay && other.transform.root.CompareTag(containObject.tag)) //if (isStay && other.transform.root.CompareTag("Pistol"))
+        {
             if (leftHand.currentAttachedObject != null) // 왼손에 들고 있는 오브젝트가 있을 때
             {
                 currentObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
@@ -34,43 +75,73 @@ public class KeepItem : MonoBehaviour
                 currentObject.GetComponent<Rigidbody>().isKinematic = true;
                 currentObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
             }
-            isExit = false;
-            isStay = false;
+            isStay = false; 
+            time = 0f;
+            StopCoroutine(Stay());
         }
     }
-
-    private void OnTriggerStay(Collider other)
+    IEnumerator Stay()
     {
-        if (isExit && other.transform.root.CompareTag("Pistol"))
+        if (isExit)
         {
-            isStay = true;
-        }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.root.CompareTag("Pistol"))
+        }
+        else
         {
             isExit = true;
-        }
-        if (other.CompareTag("Hand") && transform.childCount > 0)
-        {
-            if (leftHand.currentAttachedObject != null) // 왼손에 들고 있는 오브젝트가 있을 때
+            while (true)
             {
-                currentObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
-                if (!currentObject.CompareTag("Pistol")) return;
-                currentObject.transform.SetParent(null);
-                currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                yield return null;
+                time += Time.deltaTime;
+                if (time > 1)
+                {
+                    isStay = true;
+                    StopCoroutine(Stay());
+                }
             }
-            else if (rightHand.currentAttachedObject != null) // 오른손에 들고 있는 오브젝트가 있을 때
-            {
-                currentObject = rightHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
-                if (!currentObject.CompareTag("Pistol")) return;
-                currentObject.transform.SetParent(null);
-                currentObject.GetComponent<Rigidbody>().isKinematic = false;
-            }
-            
         }
     }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (isExit && other.transform.root.CompareTag("Pistol"))
+    //    {
+    //        time += Time.deltaTime;
+    //        Debug.Log(time);
+    //        if (time > 1f)
+    //        {
+    //            isStay = true;
+    //        }
+    //    }
+    //}
+    
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.transform.root.CompareTag("Pistol"))
+    //    {
+    //        Debug.Log(other.transform.root.name);  
+    //        isExit = true;
+    //        time = 0f;
+    //        StartCoroutine(Stay());
+    //    }
+    //    if (other.CompareTag("Hand"))
+    //    {
+    //        if (leftHand.currentAttachedObject != null) // 왼손에 들고 있는 오브젝트가 있을 때
+    //        {
+    //            currentObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+    //            if (!currentObject.CompareTag("Pistol")) return;
+    //            currentObject.transform.SetParent(null);
+    //            currentObject.GetComponent<Rigidbody>().isKinematic = false;
+    //        }
+    //        else if (rightHand.currentAttachedObject != null) // 오른손에 들고 있는 오브젝트가 있을 때
+    //        {
+    //            currentObject = rightHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+    //            if (!currentObject.CompareTag("Pistol")) return;
+    //            currentObject.transform.SetParent(null);
+    //            currentObject.GetComponent<Rigidbody>().isKinematic = false;
+    //        }
+    //    }
+    //}
+
 }
 
