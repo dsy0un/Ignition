@@ -7237,6 +7237,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -278.9
       objectReference: {fileID: 0}
+    - target: {fileID: 7243278067440679129, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+        type: 3}
+      propertyPath: drone
+      value: 
+      objectReference: {fileID: 1445749114}
     - target: {fileID: 8796465020994532598, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7302,6 +7307,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db9d48c841fb654dbcc54dc410fbf4a, type: 3}
+--- !u!95 &1445749114 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2190680318536379789, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1445749113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1456630072
 GameObject:
   m_ObjectHideFlags: 0
