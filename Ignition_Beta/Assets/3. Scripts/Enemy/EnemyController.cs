@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour, IHitAble
                     }
                 }
             }
-            else 
+            else
                 nma.ResetPath();
         }
     }

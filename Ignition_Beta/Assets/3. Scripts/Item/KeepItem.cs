@@ -8,6 +8,8 @@ public class KeepItem : MonoBehaviour
 {
     [SerializeField]
     Hand leftHand, rightHand; // 플레이어 왼손, 오른손
+    [SerializeField]
+    bool isRespawn;
 
     GameObject currentObject;
     GameObject containObject;
@@ -101,6 +103,10 @@ public class KeepItem : MonoBehaviour
             }
         }
     }
+    public void ReSpawnItem()
+    {
+
+    }
     //private void OnTriggerStay(Collider other)
     //{
     //    if (isExit && other.transform.root.CompareTag("Pistol"))
@@ -113,7 +119,7 @@ public class KeepItem : MonoBehaviour
     //        }
     //    }
     //}
-    
+
 
     //private void OnTriggerExit(Collider other)
     //{
