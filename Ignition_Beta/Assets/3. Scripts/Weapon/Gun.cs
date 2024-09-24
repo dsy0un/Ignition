@@ -179,12 +179,14 @@ public class Gun : MonoBehaviour
         {
             var obj = poolingObjectQueue.Dequeue();
             obj.SetActive(true);
+            obj.transform.SetParent(null);
             return obj;
         }
         else
         {
             var newObj = CreateNewObject();
             newObj.SetActive(true);
+            newObj.transform.SetParent(null);
             return newObj;
         }
     }
