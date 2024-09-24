@@ -12,7 +12,8 @@ public class SelectStages : MonoBehaviour
     {
         GrabTypes grab = hand.GetGrabStarting();
         bool isgrab = hand.IsGrabEnding(gameObject);
-        if (grab == GrabTypes.Pinch)
+        if (grab == GrabTypes.Grip
+    )
         {
             name = transform.name;
             LoadingSceneManager.LoadScene(name);

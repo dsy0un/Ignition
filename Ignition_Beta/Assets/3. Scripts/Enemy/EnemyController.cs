@@ -98,7 +98,6 @@ public class EnemyController : MonoBehaviour, IHitAble
             targetTrans = sTarget;
             volume = sVolume;
             isMove = true;
-            Debug.Log(targetTrans.name);
         }
     }
     public void ListenReset() // 소리 범위 밖에 나갔을때 초기화 함수
