@@ -14,6 +14,7 @@ public class LoadingSceneManager : MonoBehaviour
 
     public GameObject LoadingText;
     public TextMeshProUGUI text;
+    public TextMeshProUGUI text2;
     public Image progressBar;
     [SerializeField, Tooltip("로딩되는 시간(실제 로딩과는 별개의 시간임 최소 10초)"), Min(10f)]
     private float loadingDuration;
@@ -28,12 +29,28 @@ public class LoadingSceneManager : MonoBehaviour
         }
         if (dron) StartCoroutine(LoadSceneDron());
         else StartCoroutine(LoadScenePort());
+        switch (nextScene) // 동적으로 바꾸기
+        {
+            case "Stage1":
+                text2.text = "목적지 : 협곡";
+                break;
+            case "Stage2":
+                text2.text = "목적지 : 돌 산";
+                break;
+            case "Stage3":
+                text2.text = "목적지 : 사막";
+                break;
+            case "Stage4":
+                text2.text = "목적지 : 오염된 숲";
+                break;
+
+        }
     }
 
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
-        SceneManager.LoadScene("Loading");
+        //SceneManager.LoadScene("Loading");
     }
 
     IEnumerator LoadScenePort()

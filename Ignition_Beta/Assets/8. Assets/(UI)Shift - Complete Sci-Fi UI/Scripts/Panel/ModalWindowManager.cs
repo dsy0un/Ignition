@@ -67,7 +67,7 @@ namespace Michsky.UI.Shift
                 isOn = false;
             }
 
-            StartCoroutine("DisableWindow");
+            //StartCoroutine("DisableWindow");
         }
 
         IEnumerator DisableWindow()
