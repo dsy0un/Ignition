@@ -147,25 +147,30 @@ public class CreateManager : MonoBehaviour
         Selection.activeObject = def;
     }
 
-    [MenuItem("GameObject/CreateManager/Guns/All")]
-    static void CreateAllGuns(MenuCommand menuCommand)
+    [MenuItem("GameObject/CreateManager/Weapons/All")]
+    static void CreateAllWeapons(MenuCommand menuCommand)
     {
         GameObject pistol = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Pistol/Pistol.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
         GameObject rifle = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Rifle/Rifle.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
         GameObject shotgun = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Shotgun/Shotgun.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+        GameObject grenade = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Grenade/Grenade.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
         pistol.name = pistol.name.Replace("(Clone)", "").Trim();
         rifle.name = rifle.name.Replace("(Clone)", "").Trim();
         shotgun.name = shotgun.name.Replace("(Clone)", "").Trim();
+        grenade.name = grenade.name.Replace("(Clone)", "").Trim();
 
         // 3. 생성된 오브젝트를 Undo 시스템에 등록한다.
-        Undo.RegisterCreatedObjectUndo(pistol, "Create Guns");
+        Undo.RegisterCreatedObjectUndo(pistol, "Create" + pistol.name);
+        Undo.RegisterCreatedObjectUndo(rifle, "Create" + rifle.name);
+        Undo.RegisterCreatedObjectUndo(shotgun, "Create" + shotgun.name);
+        Undo.RegisterCreatedObjectUndo(grenade, "Create" + grenade.name);
 
         // 4. 생성한 오브젝트를 선택한다.
-        Selection.activeObject = rifle;
+        Selection.activeObject = grenade;
     }
 
-    [MenuItem("GameObject/CreateManager/Guns/Pistol")]
-    static void CreatePistolGuns(MenuCommand menuCommand)
+    [MenuItem("GameObject/CreateManager/Weapons/Pistol")]
+    static void CreatePistolWeapons(MenuCommand menuCommand)
     {
         GameObject pistol = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Pistol/Pistol.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
         pistol.name = pistol.name.Replace("(Clone)", "").Trim();
@@ -177,8 +182,8 @@ public class CreateManager : MonoBehaviour
         Selection.activeObject = pistol;
     }
 
-    [MenuItem("GameObject/CreateManager/Guns/Rifle")]
-    static void CreateRifleGuns(MenuCommand menuCommand)
+    [MenuItem("GameObject/CreateManager/Weapons/Rifle")]
+    static void CreateRifleWeapons(MenuCommand menuCommand)
     {
         GameObject rifle = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Rifle/Rifle.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
         rifle.name = rifle.name.Replace("(Clone)", "").Trim();
@@ -190,8 +195,8 @@ public class CreateManager : MonoBehaviour
         Selection.activeObject = rifle;
     }
 
-    [MenuItem("GameObject/CreateManager/Guns/Shotgun")]
-    static void CreateShotgunGuns(MenuCommand menuCommand)
+    [MenuItem("GameObject/CreateManager/Weapons/Shotgun")]
+    static void CreateShotgunWeapons(MenuCommand menuCommand)
     {
         GameObject shotgun = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Shotgun/Shotgun.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
         shotgun.name = shotgun.name.Replace("(Clone)", "").Trim();
@@ -201,5 +206,18 @@ public class CreateManager : MonoBehaviour
 
         // 4. 생성한 오브젝트를 선택한다.
         Selection.activeObject = shotgun;
+    }
+
+    [MenuItem("GameObject/CreateManager/Weapons/Grenade")]
+    static void CreateGrenadeWeapons(MenuCommand menuCommand)
+    {
+        GameObject grenade = Instantiate(AssetDatabase.LoadAssetAtPath("Assets/5. Prefabs/Weapons/Grenade/Grenade.prefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+        grenade.name = grenade.name.Replace("(Clone)", "").Trim();
+
+        // 3. 생성된 오브젝트를 Undo 시스템에 등록한다.
+        Undo.RegisterCreatedObjectUndo(grenade, "Create" + grenade.name);
+
+        // 4. 생성한 오브젝트를 선택한다.
+        Selection.activeObject = grenade;
     }
 }
