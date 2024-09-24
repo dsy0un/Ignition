@@ -28,7 +28,6 @@ public class KeepItem : MonoBehaviour
         while (true)
         {
             yield return null;
-                Debug.Log(isStay);
             if (containObject.GetComponent<Interactable>().attachedToHand != null)
             {
                 if (leftHand.currentAttachedObject != null &&
@@ -105,7 +104,10 @@ public class KeepItem : MonoBehaviour
     }
     public void ReSpawnItem()
     {
-
+        containObject.GetComponent<Interactable>().attachedToHand.DetachObject(currentObject);
+        containObject.transform.SetParent(transform);
+        containObject.GetComponent<Rigidbody>().isKinematic = true;
+        containObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
     //private void OnTriggerStay(Collider other)
     //{
