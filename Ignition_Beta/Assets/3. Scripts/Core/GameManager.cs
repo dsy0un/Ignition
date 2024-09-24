@@ -47,6 +47,15 @@ public class GameManager : MonoBehaviour
     public bool isMagUpgrade = false;
     public bool isBarrierUpgrade = false;
 
+    [SerializeField]
+    GameObject[] weapons;
+    [SerializeField]
+    Vector3[] weaponsInitPos;
+    [SerializeField]
+    Vector3[] weaponsInitRot;
+
+    int level = 0;
+
     private void Awake()
     {
         if (instance == null)
@@ -60,6 +69,22 @@ public class GameManager : MonoBehaviour
         }
         ReGetCom();
         // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
+    }
+
+    private void OnEnable()
+    {
+        if (level > 0)
+        {
+            for (int i = 0; i < level; i++)
+            {
+                weapons[i].SetActive(true);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        level = Mathf.Clamp(level, 0, 4);
     }
 
     public void ReGetCom()
@@ -102,6 +127,7 @@ public class GameManager : MonoBehaviour
         window.ModalWindowOut();
         drone.Animator.Play("DefenceEscape");
         StartCoroutine(PlayerShake(10, 0));
+        level--;
     }
 
     /// <summary>
@@ -111,6 +137,7 @@ public class GameManager : MonoBehaviour
     {
         lookOut.DefSuccessAnimation();
         enemyGenerate.canSpawn = false;
+        level++;
     }
 
     /// <summary>

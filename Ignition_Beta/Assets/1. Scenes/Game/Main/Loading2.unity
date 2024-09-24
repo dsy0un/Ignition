@@ -353,67 +353,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &456058657
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 456058659}
-  - component: {fileID: 456058658}
-  m_Layer: 0
-  m_Name: GmaeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &456058658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456058657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47abb25c8e9feff44aadfb4af2b78641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManagerPrefab: {fileID: 0}
-  barrier: {fileID: 0}
-  player: {fileID: 0}
-  playerHead: {fileID: 0}
-  enemyGenerate: {fileID: 0}
-  lookOut: {fileID: 0}
-  drone: {fileID: 0}
-  window: {fileID: 0}
-  enemyMove: {fileID: 0}
-  mainCamera: {fileID: 0}
-  fadeInOut: {fileID: 0}
-  hapticAction:
-    actionPath: 
-    needsReinit: 0
-  shakeAmount: 0.2
-  shakeSpeed: 1
-  vibrate: 0.1
---- !u!4 &456058659
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456058657}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 128.2228, y: -10.7207365, z: 425.254}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &562159530
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +813,7 @@ MonoBehaviour:
   test: 0
   LoadingText: {fileID: 0}
   text: {fileID: 0}
+  text2: {fileID: 0}
   progressBar: {fileID: 0}
   loadingDuration: 14
   dron: 1
@@ -3120,7 +3060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandGrab: 0
   otherHand: {fileID: 4561618004316139602}
   handType: 1
   trackedObject: {fileID: 0}
@@ -3607,7 +3546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandGrab: 0
   otherHand: {fileID: 3655232414255449709}
   handType: 2
   trackedObject: {fileID: 0}
@@ -5157,7 +5095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandGrab: 0
   otherHand: {fileID: 0}
   handType: 0
   trackedObject: {fileID: 0}
@@ -5718,7 +5655,6 @@ SceneRoots:
   - {fileID: 178578793}
   - {fileID: 884042100}
   - {fileID: 2069552149}
-  - {fileID: 456058659}
   - {fileID: 1004257904}
   - {fileID: 7586829622849362920}
   - {fileID: 261272108}
