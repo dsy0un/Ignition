@@ -34,9 +34,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Gun") || 
-            collision.gameObject.layer == LayerMask.NameToLayer("Player")) return;
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             string coliName = collision.gameObject.name;
             if (collision.transform.root.TryGetComponent<IHitAble>(out var h))
