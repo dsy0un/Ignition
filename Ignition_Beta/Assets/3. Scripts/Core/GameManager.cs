@@ -127,7 +127,8 @@ public class GameManager : MonoBehaviour
         window.ModalWindowOut();
         drone.Animator.Play("DefenceEscape");
         StartCoroutine(PlayerShake(10, 0));
-        level--;
+        if (!enemyGenerate.canSpawn) level++;
+        else level--;
     }
 
     /// <summary>
@@ -136,8 +137,8 @@ public class GameManager : MonoBehaviour
     public void DefSuccessEvent()
     {
         lookOut.DefSuccessAnimation();
+        Toast.Instance.Show("적을 전부 소탕하였습니다.\n터미널에서 드론을 호출하여 기지로 이동하십시오", 30f, new Color(0, 1, 0));
         enemyGenerate.canSpawn = false;
-        level++;
     }
 
     /// <summary>
