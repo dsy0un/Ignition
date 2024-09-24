@@ -14,6 +14,10 @@ public class Barrier : MonoBehaviour, IHitAble
     [SerializeField]
     float breakTime;
     float currentTime;
+    [SerializeField]
+    Vector3 offset;
+    Canvas canvas;
+    Camera mainCamera;
 
     bool isEscape;
 
@@ -21,15 +25,37 @@ public class Barrier : MonoBehaviour, IHitAble
 
     void Awake()
     {
-
+        canvas = GetComponentInChildren<Canvas>();
     }
 
     private void Start()
     {
+        mainCamera = GameManager.Instance.mainCamera;
         isEscape = false;
         currentHP = maxHP;
         currentTime = breakTime;
         StartCoroutine(CoroutineUpdate());
+    }
+
+    private void Update()
+    {
+        FollowCamera();
+    }
+
+    /// <summary>
+    /// UI가 카메라를 따라가기 위한 함수
+    /// </summary>
+    /// <returns>Null</returns>
+    void FollowCamera()
+    {
+        transform.position = Vector3.Lerp(canvas.transform.position, mainCamera.transform.position
+            + mainCamera.transform.forward * offset.z
+            + mainCamera.transform.up * offset.y
+            + mainCamera.transform.right * offset.x,
+            3 * Time.deltaTime);
+
+        Vector3 l_vector = mainCamera.transform.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(-l_vector).normalized;
     }
 
     IEnumerator CoroutineUpdate()
