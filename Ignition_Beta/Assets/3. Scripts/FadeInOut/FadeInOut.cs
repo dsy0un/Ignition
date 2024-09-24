@@ -29,6 +29,7 @@ public class FadeInOut : MonoBehaviour
     public void StartFadeOut()
     {
         StartCoroutine(Fade(0, 1, _fadeTime, _fadeCurve));
+        _image.color = Color.white;
     }
     /// <summary>
     /// 플레이어 페이드 In, Out 기능

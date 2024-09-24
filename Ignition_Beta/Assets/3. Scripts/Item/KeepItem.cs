@@ -28,6 +28,7 @@ public class KeepItem : MonoBehaviour
         while (true)
         {
             yield return null;
+            if (isRespawn) ReSpawnItem();
             if (containObject.GetComponent<Interactable>().attachedToHand != null)
             {
                 if (leftHand.currentAttachedObject != null &&
@@ -104,6 +105,7 @@ public class KeepItem : MonoBehaviour
     }
     public void ReSpawnItem()
     {
+        isRespawn = false;
         containObject.GetComponent<Interactable>().attachedToHand.DetachObject(currentObject);
         containObject.transform.SetParent(transform);
         containObject.GetComponent<Rigidbody>().isKinematic = true;
