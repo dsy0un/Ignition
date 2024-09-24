@@ -17,6 +17,7 @@ public class KeepItem : MonoBehaviour
     {
         if (isStay && other.transform.root.CompareTag("Pistol"))
         {
+            Debug.Log(13123);
             if (leftHand.currentAttachedObject != null) // 왼손에 들고 있는 오브젝트가 있을 때
             {
                 currentObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
