@@ -48,14 +48,14 @@ public class Barrier : MonoBehaviour, IHitAble
     /// <returns>Null</returns>
     void FollowCamera()
     {
-        transform.position = Vector3.Lerp(canvas.transform.position, mainCamera.transform.position
+        canvas.transform.position = Vector3.Lerp(canvas.transform.position, mainCamera.transform.position
             + mainCamera.transform.forward * offset.z
             + mainCamera.transform.up * offset.y
             + mainCamera.transform.right * offset.x,
             3 * Time.deltaTime);
 
-        Vector3 l_vector = mainCamera.transform.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(-l_vector).normalized;
+        Vector3 l_vector = mainCamera.transform.position - canvas.transform.position;
+        canvas.transform.rotation = Quaternion.LookRotation(-l_vector).normalized;
     }
 
     IEnumerator CoroutineUpdate()
