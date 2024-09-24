@@ -11306,6 +11306,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player(InGame)+
       objectReference: {fileID: 0}
+    - target: {fileID: 4132140437190742166, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
+        type: 3}
+      propertyPath: onStartEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartFadeOut
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235027273748901230, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5386476366811154600, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13208,12 +13218,6 @@ PrefabInstance:
       propertyPath: rightHand
       value: 
       objectReference: {fileID: 1226075242}
-    - target: {fileID: 458211263948094390, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
-        type: 3}
-      propertyPath: itemPrefab.Array.data[2]
-      value: 
-      objectReference: {fileID: 6392074993882654657, guid: 33a2d75b7f5e89e408c18cb01b71d520,
-        type: 3}
     - target: {fileID: 867726526534553988, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
       propertyPath: m_LocalPosition.x
