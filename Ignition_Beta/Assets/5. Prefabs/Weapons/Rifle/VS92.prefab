@@ -1130,7 +1130,6 @@ GameObject:
   - component: {fileID: 1267588332907696418}
   - component: {fileID: 1149278041494009661}
   - component: {fileID: 707973438453208974}
-  - component: {fileID: 5403337925860492426}
   - component: {fileID: 5076661381889142437}
   m_Layer: 9
   m_Name: ScifiAssaultRifleVS92Bolt
@@ -1366,33 +1365,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.042397022, y: 0.017216086, z: 0.018576622}
   m_Center: {x: -0.038411856, y: 0.0027158847, z: 0.04576631}
---- !u!54 &5403337925860492426
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4720506689742044967}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!82 &5076661381889142437
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1405,7 +1377,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
