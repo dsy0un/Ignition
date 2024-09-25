@@ -1479,6 +1479,7 @@ MonoBehaviour:
   interactable: {fileID: 254363387}
   socket: {fileID: 1663361301}
   bolt: {fileID: 613108355}
+  blendTreeName: 
   maxRecoil: 300
   minRecoil: 150
   secondInteractable: {fileID: 613108346}
@@ -2115,6 +2116,7 @@ MonoBehaviour:
   interactable: {fileID: 341273181}
   socket: {fileID: 1270587034}
   bolt: {fileID: 2045797450}
+  blendTreeName: 
   maxRecoil: 150
   minRecoil: 80
   secondInteractable: {fileID: 1889958880}
@@ -2410,6 +2412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerPrefab: {fileID: 0}
+  volume: {fileID: 0}
+  bloom: {fileID: 0}
   barrier: {fileID: 0}
   player: {fileID: 0}
   playerHead: {fileID: 0}
@@ -4384,6 +4388,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1558305643201515149, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
         type: 3}
+      propertyPath: m_HDR
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558305643201515149, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
+        type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 64
       objectReference: {fileID: 0}
@@ -4446,6 +4455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148676073759840700, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
+        type: 3}
+      propertyPath: m_HDR
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9148676073759840700, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
         type: 3}
