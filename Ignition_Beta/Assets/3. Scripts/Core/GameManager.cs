@@ -126,6 +126,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine("ChangeIntensityValue");
     }
 
+    public void LowHPEvent()
+    {
+        window.ModalWindowIn();
+    }
+
     /// <summary>
     /// 방어 실패 후 돌아가는 이벤트 함수
     /// </summary>

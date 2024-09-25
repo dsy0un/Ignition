@@ -85,7 +85,7 @@ public class Barrier : MonoBehaviour, IHitAble
         }
         else if (currentHP <= maxHP * 0.3f && !isWarning)
         {
-
+            GameManager.Instance.LowHPEvent();
             isWarning = true;
         }
     }
