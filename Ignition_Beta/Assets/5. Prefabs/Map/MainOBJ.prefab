@@ -28087,7 +28087,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.26666668
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 260bb2e0d9a806b4ab4b8c2aa26c4f20, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9deca938310b7a94488676d15566b03f, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5186151094517999227
 GameObject:
@@ -40653,7 +40653,7 @@ MonoBehaviour:
   image: {fileID: 6954649713266104679}
   maxHP: 1000
   currentHP: 0
-  breakTime: 60
+  breakTime: 30
   offset: {x: 0, y: 1.5, z: 10}
 --- !u!64 &8467433795587494965
 MeshCollider:
@@ -49460,6 +49460,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terminal
       objectReference: {fileID: 0}
+    - target: {fileID: 7153298456714388039, guid: 3bb3a1cb65a75be498851b423fb07ae7,
+        type: 3}
+      propertyPath: drone
+      value: 
+      objectReference: {fileID: 2190680318536379789}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49824,6 +49829,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3be1e8a049b93bb42ae5a83ba874e2eb, type: 3}
+--- !u!95 &2190680318536379789 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5339040921628421568, guid: 3be1e8a049b93bb42ae5a83ba874e2eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6088525069609549901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4411025227420621278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7586829621276055955, guid: 3be1e8a049b93bb42ae5a83ba874e2eb,

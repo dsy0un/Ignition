@@ -53,6 +53,12 @@ public class LoadingSceneManager : MonoBehaviour
         //SceneManager.LoadScene("Loading");
     }
 
+    public static void Load(string sceneName)
+    {
+        nextScene = sceneName;
+        SceneManager.LoadScene("Loading2");
+    }
+
     IEnumerator LoadScenePort()
     {
         yield return null;

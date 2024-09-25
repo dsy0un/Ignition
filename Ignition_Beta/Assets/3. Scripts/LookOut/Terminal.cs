@@ -74,7 +74,6 @@ public class Terminal : MonoBehaviour
         }
         if (isAnimState == IsAnimState.Sure)
         {
-            Debug.Log(isDrone);
             if (currentArriveTime == arriveTime) isDrone = true;
             if (isDrone)
             {

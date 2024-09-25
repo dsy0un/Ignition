@@ -47,14 +47,11 @@ public class GameManager : MonoBehaviour
     public bool isMagUpgrade = false;
     public bool isBarrierUpgrade = false;
 
-    [SerializeField]
-    GameObject[] weapons;
-    [SerializeField]
-    Vector3[] weaponsInitPos;
-    [SerializeField]
-    Vector3[] weaponsInitRot;
-
     int level = 0;
+    public int Level
+    {
+        get { return level; }
+    }
 
     private void Awake()
     {
@@ -71,20 +68,13 @@ public class GameManager : MonoBehaviour
         // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
     }
 
-    private void OnEnable()
-    {
-        if (level > 0)
-        {
-            for (int i = 0; i < level; i++)
-            {
-                weapons[i].SetActive(true);
-            }
-        }
-    }
-
     private void Update()
     {
         level = Mathf.Clamp(level, 0, 4);
+        if (drone.Animator.GetCurrentAnimatorStateInfo(0).IsName("DefenceEscape"))
+        {
+            if (drone.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) LoadingSceneManager.Load("Base");
+        }
     }
 
     public void ReGetCom()
@@ -137,7 +127,7 @@ public class GameManager : MonoBehaviour
     public void DefSuccessEvent()
     {
         lookOut.DefSuccessAnimation();
-        Toast.Instance.Show("적을 전부 소탕하였습니다.\n터미널에서 드론을 호출하여 기지로 이동하십시오", 30f, new Color(0, 1, 0));
+        Toast.Instance.Show("<size=20>적을 전부 소탕했습니다.\n터미널에서 드론을 호출하여 기지로 이동하십시오</size>", 30f, new Color(0, 1, 0));
         enemyGenerate.canSpawn = false;
     }
 
