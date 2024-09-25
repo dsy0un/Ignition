@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
             if (collision.transform.root.TryGetComponent<IHitAble>(out var h))
             {
                 h.Hit(damage, coliName);
-                Destroy(this.gameObject);
+                gun.ReturnObject(gameObject);
             }
         }
         else gun.ReturnObject(gameObject);
