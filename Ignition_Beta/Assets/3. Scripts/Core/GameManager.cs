@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
     public void DefFailureEvent()
     {
         fadeInOut._image.color = Color.white;
+        fadeInOut.StartFadeOut();
         StartCoroutine("ChangeIntensityValue");
     }
 
