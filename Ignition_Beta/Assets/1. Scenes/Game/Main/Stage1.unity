@@ -4691,6 +4691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerPrefab: {fileID: 0}
+  volume: {fileID: 0}
+  bloom: {fileID: 0}
   barrier: {fileID: 0}
   player: {fileID: 0}
   playerHead: {fileID: 0}
@@ -13208,6 +13210,11 @@ PrefabInstance:
       propertyPath: rightHand
       value: 
       objectReference: {fileID: 1226075242}
+    - target: {fileID: 458211263948094390, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+        type: 3}
+      propertyPath: maxItemCount
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 867726526534553988, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13332,6 +13339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainOBJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477037113253597089, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+        type: 3}
+      propertyPath: cooltime
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 3477498064086107675, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
@@ -15034,6 +15046,7 @@ MonoBehaviour:
   interactable: {fileID: 1595386203}
   socket: {fileID: 1031676284}
   bolt: {fileID: 964695300}
+  blendTreeName: 
   maxRecoil: 150
   minRecoil: 80
   secondInteractable: {fileID: 1230678829}
@@ -18028,6 +18041,7 @@ MonoBehaviour:
   interactable: {fileID: 1941591180}
   socket: {fileID: 1033450515}
   bolt: {fileID: 499300191}
+  blendTreeName: 
   maxRecoil: 300
   minRecoil: 150
   secondInteractable: {fileID: 499300182}
