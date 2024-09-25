@@ -58,6 +58,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/GunShot",
+      "type": "vector1"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -198,7 +202,8 @@
       "/actions/gun/in/EjectMagazine": "ejectMagazine",
       "/actions/gun/in/ChangeFireMode": "changeFireMode",
       "/actions/default/in/TouchPad": "TouchPad",
-      "/actions/default/in/Menu": "menu"
+      "/actions/default/in/Menu": "menu",
+      "/actions/default/in/GunShot": "gunshot"
     }
   ]
 }

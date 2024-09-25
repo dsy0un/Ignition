@@ -1495,6 +1495,7 @@ GameObject:
   - component: {fileID: 7609889237624960737}
   - component: {fileID: 2842855820222807508}
   - component: {fileID: 5164483552621747015}
+  - component: {fileID: 5402813621489474314}
   m_Layer: 9
   m_Name: Shotgun
   m_TagString: Shotgun
@@ -1546,6 +1547,7 @@ MonoBehaviour:
   interactable: {fileID: 8026411704966776619}
   socket: {fileID: 9122150887929787910}
   bolt: {fileID: 6766545418659999483}
+  blendTreeName: ShotgunTrigger
   maxRecoil: 300
   minRecoil: 150
   secondInteractable: {fileID: 7982364623559674375}
@@ -1821,7 +1823,7 @@ MonoBehaviour:
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 1
   blendingBehaviours:
-  - name: New Behaviour
+  - name: Trigger
     enabled: 1
     influence: 1
     pose: 1
@@ -1833,7 +1835,7 @@ MonoBehaviour:
       actionPath: /actions/gun/in/GunFire
       needsReinit: 0
     smoothingSpeed: 30
-    type: 2
+    type: 0
     useMask: 1
     mask:
       palm: 1
@@ -1845,6 +1847,27 @@ MonoBehaviour:
       values: 010101010101
     previewEnabled: 1
   scale: 1
+--- !u!95 &5402813621489474314
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3273147174098811349}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 908f7a27ff2e6c147860db56ae92ea85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3426361901252099652
 GameObject:
   m_ObjectHideFlags: 0
