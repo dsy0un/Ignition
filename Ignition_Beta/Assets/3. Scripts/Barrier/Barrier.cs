@@ -18,6 +18,7 @@ public class Barrier : MonoBehaviour, IHitAble
     Vector3 offset;
     Canvas canvas;
     Camera mainCamera;
+    Animator animator;
 
     bool isDie;
     bool isWarning;
@@ -27,6 +28,7 @@ public class Barrier : MonoBehaviour, IHitAble
     void Awake()
     {
         canvas = GetComponentInChildren<Canvas>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -69,6 +71,7 @@ public class Barrier : MonoBehaviour, IHitAble
                 isUpgrade = true;
                 currentHP *= 1.5f;
                 maxHP *= 1.5f;
+                //animator.Play("Barrier");
             }
             image.fillAmount = currentHP / maxHP;
 

@@ -4691,6 +4691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerPrefab: {fileID: 0}
+  volume: {fileID: 0}
+  bloom: {fileID: 0}
   barrier: {fileID: 0}
   player: {fileID: 0}
   playerHead: {fileID: 0}
@@ -11294,11 +11296,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player(InGame)+
       objectReference: {fileID: 0}
-    - target: {fileID: 4132140437190742166, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
-        type: 3}
-      propertyPath: onStartEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartFadeIn
-      objectReference: {fileID: 0}
     - target: {fileID: 5386476366811154600, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13195,6 +13192,11 @@ PrefabInstance:
       propertyPath: rightHand
       value: 
       objectReference: {fileID: 1226075242}
+    - target: {fileID: 458211263948094390, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+        type: 3}
+      propertyPath: maxItemCount
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 734887147044816775, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
       propertyPath: m_IsActive
@@ -13353,7 +13355,7 @@ PrefabInstance:
     - target: {fileID: 3477037113253597089, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
       propertyPath: cooltime
-      value: 10
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 3477498064086107675, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
@@ -13425,6 +13427,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.8235294
       objectReference: {fileID: 0}
+    - target: {fileID: 7243278067440679129, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+        type: 3}
+      propertyPath: coolTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8566761498770387786, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
         type: 3}
       propertyPath: m_Color.b
@@ -13463,8 +13470,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7468915198824187093, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1445749115}
   m_SourcePrefab: {fileID: 100100000, guid: 1db9d48c841fb654dbcc54dc410fbf4a, type: 3}
+--- !u!1 &1445749114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7468915198824187093, guid: 1db9d48c841fb654dbcc54dc410fbf4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1445749113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1445749115
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445749114}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 54e42cb6c576a5444b78cc8d1cc7dcd4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1448736294
 GameObject:
   m_ObjectHideFlags: 0
@@ -15075,6 +15113,7 @@ MonoBehaviour:
   interactable: {fileID: 1595386203}
   socket: {fileID: 1031676284}
   bolt: {fileID: 964695300}
+  blendTreeName: 
   maxRecoil: 150
   minRecoil: 80
   secondInteractable: {fileID: 1230678829}
@@ -18122,6 +18161,7 @@ MonoBehaviour:
   interactable: {fileID: 1941591180}
   socket: {fileID: 1033450515}
   bolt: {fileID: 499300191}
+  blendTreeName: 
   maxRecoil: 300
   minRecoil: 150
   secondInteractable: {fileID: 499300182}
