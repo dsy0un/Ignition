@@ -143,6 +143,7 @@ public class Gun : MonoBehaviour
     {
         SteamVR_Input_Sources source = interactable.attachedToHand.handType;
         trigger = SteamVR_Actions.default_GunShot.GetAxis(source) * 4;
+        Debug.Log(trigger);
         poser.SetBlendingBehaviourValue("Trigger", trigger);
         anim.SetFloat(blendTreeName, trigger);
 
