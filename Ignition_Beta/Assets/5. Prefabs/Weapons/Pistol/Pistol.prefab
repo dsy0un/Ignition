@@ -669,6 +669,7 @@ GameObject:
   - component: {fileID: 5249083571535482516}
   - component: {fileID: 3417777462403142986}
   - component: {fileID: 7268458957077848136}
+  - component: {fileID: 2356725889317659968}
   m_Layer: 9
   m_Name: Pistol
   m_TagString: Pistol
@@ -721,6 +722,7 @@ MonoBehaviour:
   interactable: {fileID: 2630347765064766565}
   socket: {fileID: 7044747197027403971}
   bolt: {fileID: 875507354745901899}
+  blendTreeName: PistolTrigger
   maxRecoil: 50
   minRecoil: 50
   secondInteractable: {fileID: 7454987605023312788}
@@ -996,7 +998,7 @@ MonoBehaviour:
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 1
   blendingBehaviours:
-  - name: New Behaviour
+  - name: Trigger
     enabled: 1
     influence: 1
     pose: 1
@@ -1008,7 +1010,7 @@ MonoBehaviour:
       actionPath: /actions/gun/in/GunFire
       needsReinit: 0
     smoothingSpeed: 30
-    type: 2
+    type: 0
     useMask: 1
     mask:
       palm: 1
@@ -1020,6 +1022,27 @@ MonoBehaviour:
       values: 010101010101
     previewEnabled: 1
   scale: 1
+--- !u!95 &2356725889317659968
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975994828680573183}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6733b878afa261448ec328d91b7bb0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3210840456663056149
 GameObject:
   m_ObjectHideFlags: 0

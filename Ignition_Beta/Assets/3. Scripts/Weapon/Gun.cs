@@ -29,6 +29,11 @@ public class Gun : MonoBehaviour
     private MagazineSystem magazineSystem;
     private Hand currentHand = null;
 
+    public string blendTreeName;
+    private SteamVR_Skeleton_Poser poser;
+    private float trigger;
+    private Animator anim;
+
     [Header("Recoil")]
     public float maxRecoil;
     public float minRecoil;
@@ -48,6 +53,8 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         gunRb = GetComponent<Rigidbody>();
+        poser = GetComponent<SteamVR_Skeleton_Poser>();
+        anim = GetComponent<Animator>();
         Initialize(spawnPrefabAmount);
     }
 
@@ -135,6 +142,9 @@ public class Gun : MonoBehaviour
     private void CanFire()
     {
         SteamVR_Input_Sources source = interactable.attachedToHand.handType;
+        trigger = SteamVR_Actions.default_GunShot.GetAxis(source) * 4;
+        poser.SetBlendingBehaviourValue("Trigger", trigger);
+        anim.SetFloat(blendTreeName, trigger);
 
         isGrab = true;
         // 발사 모드 변경

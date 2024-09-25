@@ -1581,6 +1581,7 @@ GameObject:
   - component: {fileID: 3473466397313071371}
   - component: {fileID: 624308741085712349}
   - component: {fileID: 1687260224811640955}
+  - component: {fileID: 7017806055244374659}
   m_Layer: 9
   m_Name: Rifle
   m_TagString: Rifle
@@ -1633,6 +1634,7 @@ MonoBehaviour:
   interactable: {fileID: 6603838679473170727}
   socket: {fileID: 3421449207985673403}
   bolt: {fileID: 6909667098348990358}
+  blendTreeName: RifleTrigger
   maxRecoil: 150
   minRecoil: 80
   secondInteractable: {fileID: 4956609622899147042}
@@ -1908,7 +1910,7 @@ MonoBehaviour:
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 0
   blendingBehaviours:
-  - name: New Behaviour
+  - name: Trigger
     enabled: 1
     influence: 1
     pose: 1
@@ -1932,6 +1934,27 @@ MonoBehaviour:
       values: 010101010101
     previewEnabled: 1
   scale: 1
+--- !u!95 &7017806055244374659
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5171825828786510011}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c30a9d06260646f4a81e5a854abe889d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5221940529902092892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2472,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 987338959518794416}
-  - component: {fileID: 6955588084783602739}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -2482,27 +2504,6 @@ Transform:
   - {fileID: 430236795421573685}
   m_Father: {fileID: 1049435604770855644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6955588084783602739
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6921579599626089218}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c30a9d06260646f4a81e5a854abe889d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7502834103266679765
 GameObject:
   m_ObjectHideFlags: 0
