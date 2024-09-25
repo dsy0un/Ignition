@@ -9,6 +9,7 @@ public class FadeInOut : MonoBehaviour
     public Image _image;
     public float _fadeTime = 1.5f;
     public AnimationCurve _fadeCurve;
+    public AnimationCurve _fadeOoutCurve;
 
     [Tooltip ("스크립트 들어있는 오브젝트 추가후 StartFadeIn || StartFadeOut 선택")]
     [SerializeField]
@@ -28,7 +29,7 @@ public class FadeInOut : MonoBehaviour
     }
     public void StartFadeOut()
     {
-        StartCoroutine(Fade(0, 1, _fadeTime, _fadeCurve));
+        StartCoroutine(Fade(0, 1, _fadeTime, _fadeOoutCurve));
     }
     /// <summary>
     /// 플레이어 페이드 In, Out 기능

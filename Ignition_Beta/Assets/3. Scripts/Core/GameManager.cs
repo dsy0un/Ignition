@@ -2,6 +2,8 @@ using Michsky.UI.Shift;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameManagerPrefab; // 게임 매니저 프리팹
 
+    public Volume volume;
+    public Bloom bloom;
     public Barrier barrier;
     public Player player;
     public AudioListener playerHead;
@@ -72,6 +76,8 @@ public class GameManager : MonoBehaviour
         drone = FindObjectOfType<Drone>();
         window = FindObjectOfType<ModalWindowManager>(true);
         enemyMove = FindObjectOfType<EnemyMove>();
+        volume = FindObjectOfType<Volume>();
+        volume.profile.TryGet(out bloom);
         mainCamera = Camera.main;
 
         if (player != null)
@@ -90,10 +96,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void DefFailureEvent()
     {
-        drone.Animator.Play("DefenceFailure");
-        window.ModalWindowIn();
+        fadeInOut._image.color = Color.white;
+        StartCoroutine("ChangeIntensityValue");
     }
-    
+
     /// <summary>
     /// 방어 실패 후 돌아가는 이벤트 함수
     /// </summary>
@@ -111,6 +117,23 @@ public class GameManager : MonoBehaviour
     {
         lookOut.DefSuccessAnimation();
         enemyGenerate.canSpawn = false;
+    }
+
+    public IEnumerator ChangeIntensityValue()
+    {
+        float time = 0;
+        fadeInOut.StartFadeOut();
+        while (true)
+        {
+            time += Time.deltaTime;
+            bloom.intensity.value = Mathf.Lerp(1, 100, time/2f);
+            if (bloom.intensity.value >= 100)
+            {
+                
+                yield break;
+            }
+            yield return null;
+        }
     }
 
     /// <summary>
