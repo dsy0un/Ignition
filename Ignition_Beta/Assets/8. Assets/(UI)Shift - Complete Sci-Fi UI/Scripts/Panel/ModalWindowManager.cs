@@ -20,10 +20,12 @@ namespace Michsky.UI.Shift
         public string timerText = "00:00.00";
 
         Animator mWindowAnimator;
+        AudioSource audioSource;
         bool isOn = false;
 
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             mWindowAnimator = gameObject.GetComponent<Animator>();
 
             if (useCustomTexts == false)
@@ -52,6 +54,7 @@ namespace Michsky.UI.Shift
                     mWindowAnimator.Play("Window In");
 
                 isOn = true;
+                audioSource.Play();
             }
         }
 
@@ -65,6 +68,7 @@ namespace Michsky.UI.Shift
                     mWindowAnimator.Play("Window Out");
 
                 isOn = false;
+                audioSource.Stop();
             }
 
             //StartCoroutine("DisableWindow");
