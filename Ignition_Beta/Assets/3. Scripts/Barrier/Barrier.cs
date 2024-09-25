@@ -19,7 +19,8 @@ public class Barrier : MonoBehaviour, IHitAble
     Canvas canvas;
     Camera mainCamera;
 
-    bool isEscape;
+    bool isDie;
+    bool isWarning;
 
     bool isUpgrade = false;
 
@@ -31,7 +32,8 @@ public class Barrier : MonoBehaviour, IHitAble
     private void Start()
     {
         mainCamera = GameManager.Instance.mainCamera;
-        isEscape = false;
+        isDie = false;
+        isWarning = false;
         currentHP = maxHP;
         currentTime = breakTime;
         StartCoroutine(CoroutineUpdate());
@@ -70,24 +72,6 @@ public class Barrier : MonoBehaviour, IHitAble
             }
             image.fillAmount = currentHP / maxHP;
 
-            //if (isEscape)
-            //{
-            //    currentTime -= Time.deltaTime;
-            //    int min = (int)currentTime / 60 % 60;
-            //    switch (currentTime)
-            //    {
-            //        case float n when (n <= 30f && n >= 10f):
-            //            GameManager.Instance.window.windowTimer.text = $"붕괴까지 남은 시간 : <color=orange>{min:D2}:{currentTime:00.00}</color>";
-            //            break;
-            //        case float n when (n <= 10f):
-            //            GameManager.Instance.window.windowTimer.text = $"붕괴까지 남은 시간 : <color=red>{min:D2}:{currentTime:00.00}</color>";
-            //            break;
-            //        default:
-            //            GameManager.Instance.window.windowTimer.text = $"붕괴까지 남은 시간 : <color=white>{min:D2}:{currentTime:00.00}</color>";
-            //            break;
-            //    }
-            //}
-
             yield return null;
         }
     }
@@ -95,9 +79,14 @@ public class Barrier : MonoBehaviour, IHitAble
     public void Hit(float dmg, string coliName)
     {
         currentHP -= dmg;
-        if (currentHP <= 0 && !isEscape)
+        if (currentHP <= 0 && !isDie)
         {
             Die();
+        }
+        else if (currentHP <= maxHP * 0.3f && !isWarning)
+        {
+
+            isWarning = true;
         }
     }
 
@@ -106,7 +95,7 @@ public class Barrier : MonoBehaviour, IHitAble
         GameManager.Instance.DefFailureEvent();
         gameObject.SetActive(false);
         //StartCoroutine(Escape(breakTime));
-        isEscape = true;
+        isDie = true;
     }
 
     public IEnumerator Escape(float time = 0)
