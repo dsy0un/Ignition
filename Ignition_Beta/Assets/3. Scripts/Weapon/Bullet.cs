@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float destructionDelay = 30f;
     [SerializeField] private float damage;
     public GameObject hit; //삭제 필
+    public GameObject hit2; //삭제 필
     private Gun gun;
     private float time;
     private Rigidbody rb; // 삭제 필요
@@ -48,7 +49,7 @@ public class Bullet : MonoBehaviour
             if (collision.transform.root.TryGetComponent<IHitAble>(out var h))
             {
                 h.Hit(damage, coliName);
-                Instantiate(hit, transform.position , Quaternion.Euler(Vector3.back));
+                Instantiate(hit2, transform.position , Quaternion.Euler(Vector3.back));
                 Destroy(this.gameObject);
             }
         }

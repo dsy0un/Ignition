@@ -810,7 +810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defultScene: Base
-  test: 0
+  test: 1
   LoadingText: {fileID: 0}
   text: {fileID: 0}
   text2: {fileID: 0}
@@ -1546,12 +1546,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069552148}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -21.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7586829622849362920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2069552150
 AudioSource:
@@ -1576,7 +1576,7 @@ AudioSource:
   MinDistance: 3.9484148
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2562,8 +2562,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328741008310511441}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.348999, y: -1.08, z: 0}
+  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 5.4560547, y: -1.0800018, z: 0.107055016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2575,7 +2575,7 @@ Transform:
   - {fileID: 7821989098819822891}
   - {fileID: 8851020173200556914}
   m_Father: {fileID: 7586829622849362920}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &2751153789869239631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3344,6 +3344,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _fadeOoutCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -4992,6 +4998,7 @@ Transform:
   m_Children:
   - {fileID: 7384504901329867845}
   - {fileID: 2603879543707586941}
+  - {fileID: 2069552149}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7629857234669893291
@@ -5654,7 +5661,6 @@ SceneRoots:
   - {fileID: 562159531}
   - {fileID: 178578793}
   - {fileID: 884042100}
-  - {fileID: 2069552149}
   - {fileID: 1004257904}
   - {fileID: 7586829622849362920}
   - {fileID: 261272108}
