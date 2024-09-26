@@ -47,11 +47,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float vibrate = 0.1f;
 
+    [SerializeField]
+    int level = 0;
+
     public bool isBulletUpgrade = false;
     public bool isMagUpgrade = false;
     public bool isBarrierUpgrade = false;
 
-    int level = 0;
     public int Level
     {
         get { return level; }
