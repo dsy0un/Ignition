@@ -124,7 +124,7 @@ public class EnemyController : MonoBehaviour, IHitAble
 
     public void Hit(float dmg, string coliName)
     {
-        if (isStiffen) return;
+        // if (isStiffen) return;
         currentHP -= dmg;
         if (currentHP <= 0)
         {

@@ -32,18 +32,18 @@ public class KeepItem : MonoBehaviour
             if (containObject.GetComponent<Interactable>().attachedToHand != null)
             {
                 if (leftHand.currentAttachedObject != null &&
-                        leftHand.currentAttachedObject.CompareTag(containObject.tag)) // 왼손에 들고 있는 오브젝트가 있을 때
+                        leftHand.currentAttachedObject == containObject) // 왼손에 들고 있는 오브젝트가 있을 때
                 {
-                    currentObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
-                    currentObject.transform.SetParent(null);
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    // containObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+                    containObject.transform.SetParent(null);
+                    containObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
-                else if (rightHand.currentAttachedObject != null
-                        && rightHand.currentAttachedObject.CompareTag(containObject.tag)) // 오른손에 들고 있는 오브젝트가 있을 때
+                if (rightHand.currentAttachedObject != null
+                        && rightHand.currentAttachedObject == containObject) // 오른손에 들고 있는 오브젝트가 있을 때
                 {
-                    currentObject = rightHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
-                    currentObject.transform.SetParent(null);
-                    currentObject.GetComponent<Rigidbody>().isKinematic = false;
+                    // containObject = rightHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+                    containObject.transform.SetParent(null);
+                    containObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
                 StartCoroutine(Stay());
             }
@@ -59,23 +59,26 @@ public class KeepItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) // keepitem
     {
-        if(isStay && other.transform.root.CompareTag(containObject.tag)) //if (isStay && other.transform.root.CompareTag("Pistol"))
+        if(isStay && other.transform.root.gameObject == containObject) //if (isStay && other.transform.root.CompareTag("Pistol"))
         {
+            Debug.Log(containObject);
+            Debug.Log(other.transform.root.gameObject);
+
             if (leftHand.currentAttachedObject != null) // 왼손에 들고 있는 오브젝트가 있을 때
             {
-                currentObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
-                currentObject.GetComponent<Interactable>().attachedToHand.DetachObject(currentObject);
-                currentObject.transform.SetParent(transform);
-                currentObject.GetComponent<Rigidbody>().isKinematic = true;
-                currentObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                // containObject = leftHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+                containObject.GetComponent<Interactable>().attachedToHand.DetachObject(containObject);
+                containObject.transform.SetParent(transform);
+                containObject.GetComponent<Rigidbody>().isKinematic = true;
+                containObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
             }
-            else if (rightHand.currentAttachedObject != null) // 오른손에 들고 있는 오브젝트가 있을 때
+            if (rightHand.currentAttachedObject != null) // 오른손에 들고 있는 오브젝트가 있을 때
             {
-                currentObject = rightHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
-                currentObject.GetComponent<Interactable>().attachedToHand.DetachObject(currentObject);
-                currentObject.transform.SetParent(transform);
-                currentObject.GetComponent<Rigidbody>().isKinematic = true;
-                currentObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                // containObject = rightHand.currentAttachedObject; // currentObject에 들고 있는 오브젝트 추가
+                containObject.GetComponent<Interactable>().attachedToHand.DetachObject(containObject);
+                containObject.transform.SetParent(transform);
+                containObject.GetComponent<Rigidbody>().isKinematic = true;
+                containObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
             }
             isStay = false; 
             time = 0f;
@@ -106,10 +109,16 @@ public class KeepItem : MonoBehaviour
     public void ReSpawnItem()
     {
         isRespawn = false;
-        containObject.GetComponent<Interactable>().attachedToHand.DetachObject(currentObject);
+        if (containObject.GetComponent<Interactable>().attachedToHand)
+            containObject.GetComponent<Interactable>().attachedToHand.DetachObject(containObject);
+        containObject.transform.SetParent(null);
         containObject.transform.SetParent(transform);
         containObject.GetComponent<Rigidbody>().isKinematic = true;
         containObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        StopCoroutine(Stay());
+        isStay = false;
+        isExit = false;
+        time = 0f;
     }
     //private void OnTriggerStay(Collider other)
     //{
