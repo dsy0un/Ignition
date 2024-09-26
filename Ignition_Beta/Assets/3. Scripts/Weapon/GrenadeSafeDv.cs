@@ -23,10 +23,10 @@ public class GrenadeSafeDv : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine("UnSetSafe");
         transform.position = drive.startPosition.position;
         mapping.value = 0;
         drive.endPosition.gameObject.SetActive(false);
+        StartCoroutine("UnSetSafe");
     }
 
     IEnumerator UnSetSafe()
@@ -36,7 +36,7 @@ public class GrenadeSafeDv : MonoBehaviour
             if (mapping.value == 1)
             {
                 Debug.Log("아아아아");
-                if (interactable.attachedToHand.currentAttachedObject)
+                if (interactable.attachedToHand)
                     interactable.attachedToHand.DetachObject(gameObject);
                 grenade.safeDv[topBottom] = GetComponent<GrenadeSafeDv>();
                 isReady = true;

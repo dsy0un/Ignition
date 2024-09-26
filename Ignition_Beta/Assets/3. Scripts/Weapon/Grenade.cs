@@ -39,6 +39,7 @@ public class Grenade : MonoBehaviour
                 time += Time.deltaTime;
                 if (time > destroyTime)
                 {
+                    Debug.Log("Explosion");
                     sound.Stop();
                     signal.stopSound = true;
                     isActivate = false;
@@ -53,19 +54,16 @@ public class Grenade : MonoBehaviour
     IEnumerator Respawn()
     {
         float time = 0;
-        while (true)
+        while (time <= respawnTime)
         {
             time += Time.deltaTime;
-            if (time > respawnTime) 
-            {
-                Debug.Log("respawn");
-                safeDv[0].gameObject.SetActive(true);
-                safeDv[1].gameObject.SetActive(true);
-                keepItem.ReSpawnItem();
-                StopCoroutine(Respawn());
-            }
             yield return null;
         }
+        Debug.Log("respawn");
+        safeDv[0].gameObject.SetActive(true);
+        safeDv[1].gameObject.SetActive(true);
+        keepItem.ReSpawnItem();
+        StopCoroutine(Respawn());
     }
 
     private void OnCollisionEnter(Collision collision)
