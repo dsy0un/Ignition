@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
@@ -116,6 +117,12 @@ public class GameManager : MonoBehaviour
         fadeInOut._image.color = Color.white;
         fadeInOut.StartFadeOut();
         StartCoroutine("ChangeIntensityValue");
+        Invoke("ChangeScene", fadeInOut._fadeTime);
+    }
+
+    void ChangeScene()
+    {
+        SceneManager.LoadScene("Base");
     }
 
     public void LowHPEvent()
