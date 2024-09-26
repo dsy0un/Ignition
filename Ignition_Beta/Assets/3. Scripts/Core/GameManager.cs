@@ -1,6 +1,5 @@
 using Michsky.UI.Shift;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;

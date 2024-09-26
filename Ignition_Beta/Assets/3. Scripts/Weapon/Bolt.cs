@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
-using Valve.VR;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-using System;
 
 public class Bolt : MonoBehaviour
 {

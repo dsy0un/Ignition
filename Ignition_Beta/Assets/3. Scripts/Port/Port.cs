@@ -1,9 +1,7 @@
 using Michsky.UI.Shift;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEditor.Experimental.GraphView;
+using Valve.VR.InteractionSystem;
 
 public class Port : MonoBehaviour
 {

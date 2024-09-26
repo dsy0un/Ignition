@@ -869,12 +869,10 @@ MonoBehaviour:
   shakeAmount: 0.2
   shakeSpeed: 1
   vibrate: 0.1
+  level: 0
   isBulletUpgrade: 0
   isMagUpgrade: 0
   isBarrierUpgrade: 0
-  weapons: []
-  weaponsInitPos: []
-  weaponsInitRot: []
 --- !u!4 &70153007
 Transform:
   m_ObjectHideFlags: 0
@@ -39820,12 +39818,10 @@ MonoBehaviour:
   shakeAmount: 0.2
   shakeSpeed: 1
   vibrate: 0.1
+  level: 0
   isBulletUpgrade: 0
   isMagUpgrade: 0
   isBarrierUpgrade: 0
-  weapons: []
-  weaponsInitPos: []
-  weaponsInitRot: []
 --- !u!1 &2120217689
 GameObject:
   m_ObjectHideFlags: 0
@@ -47794,7 +47790,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dfd9b0fa043e3fc43821c159432a045c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.042
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -52894,7 +52890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74be570b98e659f4985b81b545e9c8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndPos: {fileID: 6091877814675491196}
   topBottom: 1
   isReady: 0
 --- !u!4 &817784214969938219
@@ -68039,7 +68034,7 @@ MonoBehaviour:
   currentHP: 0
   breakTime: 60
   offset: {x: 0, y: 1.5, z: 10}
-  showText: 
+  hdrColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!33 &2508881083245000560
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -90263,6 +90258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 10
+  respawnTime: 0
   safeDv:
   - {fileID: 0}
   - {fileID: 0}
@@ -121552,7 +121548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74be570b98e659f4985b81b545e9c8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndPos: {fileID: 8517932706254812282}
   topBottom: 0
   isReady: 0
 --- !u!23 &8489181594743775132

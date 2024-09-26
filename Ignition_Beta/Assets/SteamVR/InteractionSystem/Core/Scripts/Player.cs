@@ -1,21 +1,19 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Player interface used to query HMD transforms and VR hands
 //
 //=============================================================================
 
-using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace Valve.VR.InteractionSystem
 {
-	//-------------------------------------------------------------------------
-	// Singleton representing the local VR player/user, with methods for getting
-	// the player's hands, head, tracking origin, and guesses for various properties.
-	//-------------------------------------------------------------------------
-	public class Player : MonoBehaviour
+    //-------------------------------------------------------------------------
+    // Singleton representing the local VR player/user, with methods for getting
+    // the player's hands, head, tracking origin, and guesses for various properties.
+    //-------------------------------------------------------------------------
+    public class Player : MonoBehaviour
 	{
 		[Tooltip( "Virtual transform corresponding to the meatspace tracking origin. Devices are tracked relative to this." )]
 		public Transform trackingOriginTransform;
