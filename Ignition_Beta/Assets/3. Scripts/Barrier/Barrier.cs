@@ -19,6 +19,11 @@ public class Barrier : MonoBehaviour, IHitAble
     Canvas canvas;
     Camera mainCamera;
     Animator animator;
+    Renderer material;
+
+    [ColorUsage(true, true)]
+    public Color hdrColor;
+    private Color defaultHdrColor;
 
     bool isDie;
     bool isWarning;
@@ -29,6 +34,7 @@ public class Barrier : MonoBehaviour, IHitAble
     {
         canvas = GetComponentInChildren<Canvas>();
         animator = GetComponent<Animator>();
+        material = GetComponent<Renderer>();
     }
 
     private void Start()
@@ -39,6 +45,8 @@ public class Barrier : MonoBehaviour, IHitAble
         currentHP = maxHP;
         currentTime = breakTime;
         StartCoroutine(CoroutineUpdate());
+        // material.material.color = hdrColor;
+        defaultHdrColor = material.material.color;
     }
 
     private void Update()
@@ -71,11 +79,23 @@ public class Barrier : MonoBehaviour, IHitAble
                 isUpgrade = true;
                 currentHP *= 1.5f;
                 maxHP *= 1.5f;
+                StartCoroutine(ColorCoroutine());
+                // material.material.color = hdrColor;
                 //animator.Play("Barrier");
             }
             image.fillAmount = currentHP / maxHP;
 
             yield return null;
+        }
+    }
+    IEnumerator ColorCoroutine()
+    {
+        float time = 0;
+        while (true)
+        {
+            yield return null;
+            time += Time.deltaTime;
+            material.material.color = Color.Lerp(defaultHdrColor, hdrColor, time * 0.7f);
         }
     }
 
