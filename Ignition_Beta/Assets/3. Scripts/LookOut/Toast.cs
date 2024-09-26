@@ -44,8 +44,6 @@ public class Toast : MonoBehaviour
     private void Start()
     {
         mainCamera = GameManager.Instance.mainCamera;
-
-        Show("방어하세요!", 10.0f, new Color(0.56f, 1, 0.43f));
     }
     
     private void Update()
@@ -69,14 +67,14 @@ public class Toast : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(-l_vector).normalized;
     }
 
-    struct TOAST
+    public struct TOAST
     {
         public string msg;
         public float durationTime;
         public Color color;
     }
 
-    Queue<TOAST> queue = new();
+    public Queue<TOAST> queue = new();
     bool isPopUp;
 
     /// <summary>
