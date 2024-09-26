@@ -18,6 +18,8 @@ public class Barrier : MonoBehaviour, IHitAble
     Vector3 offset;
     Canvas canvas;
     Camera mainCamera;
+    [SerializeField]
+    string showText;
 
     bool isDie;
     bool isWarning;
@@ -32,6 +34,7 @@ public class Barrier : MonoBehaviour, IHitAble
     private void Start()
     {
         mainCamera = GameManager.Instance.mainCamera;
+        Toast.Instance.Show(showText, 10.0f, new Color(0.56f, 1, 0.43f));
         isDie = false;
         isWarning = false;
         currentHP = maxHP;
@@ -72,6 +75,16 @@ public class Barrier : MonoBehaviour, IHitAble
             }
             image.fillAmount = currentHP / maxHP;
 
+            if (currentHP <= 0 && !isDie)
+            {
+                Die();
+            }
+            else if (currentHP <= maxHP * 0.3f && !isWarning)
+            {
+                GameManager.Instance.LowHPEvent();
+                isWarning = true;
+            }
+
             yield return null;
         }
     }
@@ -79,15 +92,6 @@ public class Barrier : MonoBehaviour, IHitAble
     public void Hit(float dmg, string coliName)
     {
         currentHP -= dmg;
-        if (currentHP <= 0 && !isDie)
-        {
-            Die();
-        }
-        else if (currentHP <= maxHP * 0.3f && !isWarning)
-        {
-            GameManager.Instance.LowHPEvent();
-            isWarning = true;
-        }
     }
 
     public void Die()
