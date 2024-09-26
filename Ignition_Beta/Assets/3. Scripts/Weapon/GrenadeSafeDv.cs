@@ -7,8 +7,8 @@ public class GrenadeSafeDv : MonoBehaviour
 {
     private Grenade grenade;
     private LinearMapping mapping;
+    private LinearDrive drive;
     private Interactable interactable;
-    public GameObject EndPos;
     public int topBottom;
     [HideInInspector]
     public bool isReady;
@@ -17,12 +17,16 @@ public class GrenadeSafeDv : MonoBehaviour
     {
         grenade = GetComponentInParent<Grenade>();
         mapping = GetComponent<LinearMapping>();
+        drive = GetComponent<LinearDrive>();
         interactable = GetComponent<Interactable>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine("UnSetSafe");
+        transform.position = drive.startPosition.position;
+        mapping.value = 0;
+        drive.endPosition.gameObject.SetActive(false);
     }
 
     IEnumerator UnSetSafe()
@@ -31,10 +35,12 @@ public class GrenadeSafeDv : MonoBehaviour
         {
             if (mapping.value == 1)
             {
-                interactable.attachedToHand.DetachObject(gameObject);
+                Debug.Log("아아아아");
+                if (interactable.attachedToHand.currentAttachedObject)
+                    interactable.attachedToHand.DetachObject(gameObject);
                 grenade.safeDv[topBottom] = GetComponent<GrenadeSafeDv>();
                 isReady = true;
-                EndPos.SetActive(true);
+                drive.endPosition.gameObject.SetActive(true);
                 gameObject.SetActive(false);
             }
             yield return null;

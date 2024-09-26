@@ -7,11 +7,13 @@ using UnityEngine;
 public class Grenade : MonoBehaviour
 {
     [SerializeField] private float destroyTime;
+    [SerializeField] private float respawnTime;
     private bool isActivate;
     //[HideInInspector]
     public GrenadeSafeDv[] safeDv = new GrenadeSafeDv[2];
     private AudioSource sound;
     private SoundSignal signal;
+    private KeepItem keepItem;
 
     private void Awake()
     {
@@ -21,7 +23,10 @@ public class Grenade : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("Explosion");
+        if (transform.parent.gameObject)
+        {
+            keepItem = transform.parent.GetComponent<KeepItem>();
+        }
     }
 
     IEnumerator Explosion()
@@ -32,12 +37,32 @@ public class Grenade : MonoBehaviour
             if (isActivate)
             {
                 time += Time.deltaTime;
-                if (time > destroyTime) 
+                if (time > destroyTime)
                 {
                     sound.Stop();
                     signal.stopSound = true;
-                    //gameObject.SetActive(false);
+                    isActivate = false;
+                    StartCoroutine(Respawn());
+                    StopCoroutine(Explosion());
                 }
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator Respawn()
+    {
+        float time = 0;
+        while (true)
+        {
+            time += Time.deltaTime;
+            if (time > respawnTime) 
+            {
+                Debug.Log("respawn");
+                safeDv[0].gameObject.SetActive(true);
+                safeDv[1].gameObject.SetActive(true);
+                keepItem.ReSpawnItem();
+                StopCoroutine(Respawn());
             }
             yield return null;
         }
@@ -50,9 +75,10 @@ public class Grenade : MonoBehaviour
             if (safeDv[0].isReady && safeDv[1].isReady)
             {
                 sound.Play();
-                isActivate = true;
                 safeDv[0].isReady = false;
                 safeDv[1].isReady = false;
+                isActivate = true;
+                StartCoroutine(Explosion());
             }
         }
     }
