@@ -196,13 +196,13 @@ public class Terminal : MonoBehaviour
             if (!GameManager.Instance.isBulletUpgrade)
             {
                 GameManager.Instance.isBulletUpgrade = true;
-                Toast.Instance.Show("[System] 총알 피해량이 증가했습니다.", 5.0f, new Color(1, 1, 0));
+                Toast.Instance.Show("<size=20>[System] 총알 피해량이 증가했습니다.</size>", 5.0f, new Color(1, 1, 0));
             }
         }
         else
         {
-            if (min >= 1) Toast.Instance.Show($"[System] 다음 시간 후 업그레이드가 가능합니다. {min:00}:{sec:00}", 5.0f, new Color(1, 1, 0));
-            else Toast.Instance.Show($"[System] 다음 시간 후 업그레이드가 가능합니다. {min:00}:{currentCoolTime:00.00}", 5.0f, new Color(1, 1, 0));
+            if (min >= 1) Toast.Instance.Show($"<size=20>[System] 다음 시간 후 업그레이드가 가능합니다. {min:00}:{sec:00}</size>", 5.0f, new Color(1, 1, 0));
+            else Toast.Instance.Show($"<size=20>[System] 다음 시간 후 업그레이드가 가능합니다. {min:00}:{currentCoolTime:00.00}</size>", 5.0f, new Color(1, 1, 0));
         }
     }
 
@@ -216,13 +216,13 @@ public class Terminal : MonoBehaviour
             if (!GameManager.Instance.isMagUpgrade)
             {
                 GameManager.Instance.isMagUpgrade = true;
-                Toast.Instance.Show("[System] 탄창의 총알 수와 꺼낼 수 있는 탄창의 수가 증가했습니다.", 5.0f, new Color(1, 1, 0));
+                Toast.Instance.Show("<size=20>[System] 탄창의 총알 수와 꺼낼 수 있는 탄창의 수가 증가했습니다.</size>", 5.0f, new Color(1, 1, 0));
             }
         }
         else
         {
-            if (min >= 1) Toast.Instance.Show($"[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{sec}", 5.0f, new Color(1, 1, 0));
-            else Toast.Instance.Show($"[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{currentCoolTime:00.00}", 5.0f, new Color(1, 1, 0));
+            if (min >= 1) Toast.Instance.Show($"<size=20>[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{sec}</size>", 5.0f, new Color(1, 1, 0));
+            else Toast.Instance.Show($"<size=20>[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{currentCoolTime:00.00}</size>", 5.0f, new Color(1, 1, 0));
         }
     }
 
@@ -236,13 +236,13 @@ public class Terminal : MonoBehaviour
             if (!GameManager.Instance.isBarrierUpgrade)
             {
                 GameManager.Instance.isBarrierUpgrade = true;
-                Toast.Instance.Show("[System] 베리어의 체력이 증가했습니다.", 5.0f, new Color(1, 1, 0));
+                Toast.Instance.Show("<size=20>[System] 베리어의 체력이 증가했습니다.", 5.0f, new Color(1, 1, 0));
             }
         }
         else
         {
-            if (min >= 1) Toast.Instance.Show($"[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{sec}", 5.0f, new Color(1, 1, 0));
-            else Toast.Instance.Show($"[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{currentCoolTime:00.00}", 5.0f, new Color(1, 1, 0));
+            if (min >= 1) Toast.Instance.Show($"<size=20>[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{sec}</size>", 5.0f, new Color(1, 1, 0));
+            else Toast.Instance.Show($"<size=20>[System] 다음 시간 후 업그레이드가 가능합니다. {min}:{currentCoolTime:00.00}</size>", 5.0f, new Color(1, 1, 0));
         }
     }
 

@@ -35,7 +35,6 @@ public class GrenadeSafeDv : MonoBehaviour
         {
             if (mapping.value == 1)
             {
-                Debug.Log("아아아아");
                 if (interactable.attachedToHand)
                     interactable.attachedToHand.DetachObject(gameObject);
                 grenade.safeDv[topBottom] = GetComponent<GrenadeSafeDv>();

@@ -11763,7 +11763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.29803923, g: 0.6666667, b: 0.7490196, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18782,7 +18782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   img: {fileID: 4030484431390946119}
   text: {fileID: 2062362859749033288}
-  cooltime: 600
+  cooltime: 360
   playerHead: {fileID: 0}
 --- !u!1 &3395391110541886823
 GameObject:
@@ -27805,7 +27805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29803923, g: 0.6666667, b: 0.7490196, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -27817,9 +27817,9 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &8081225613802997795
@@ -49495,6 +49495,11 @@ PrefabInstance:
       propertyPath: drone
       value: 
       objectReference: {fileID: 2190680318536379789}
+    - target: {fileID: 7153298456714388039, guid: 3bb3a1cb65a75be498851b423fb07ae7,
+        type: 3}
+      propertyPath: coolTime
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 8152522739082717652, guid: 3bb3a1cb65a75be498851b423fb07ae7,
         type: 3}
       propertyPath: m_Color.b
@@ -49745,8 +49750,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8622395305624809994, guid: 3ab0cd9b97194e6438534117f9c30b3f,
+        type: 3}
+      propertyPath: windowTimer
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2265443150719888600, guid: 3ab0cd9b97194e6438534117f9c30b3f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ab0cd9b97194e6438534117f9c30b3f, type: 3}
@@ -49822,7 +49833,7 @@ PrefabInstance:
     - target: {fileID: 7586829621276055955, guid: 3be1e8a049b93bb42ae5a83ba874e2eb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.6500092
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 7586829621276055955, guid: 3be1e8a049b93bb42ae5a83ba874e2eb,
         type: 3}
@@ -50032,6 +50043,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129762429319919997, guid: 6698f96c6529d4b4c99797a25fd0d04d,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8257983760809747672, guid: 6698f96c6529d4b4c99797a25fd0d04d,
         type: 3}
