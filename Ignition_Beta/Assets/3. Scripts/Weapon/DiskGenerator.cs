@@ -44,7 +44,9 @@ public class DiskGenerator : MonoBehaviour
         {
             score = 0;
             currentTime = time;
-            text2.text = $"남은시간 : 00:00:00";
+            isTimer = false;
+            text2.text = $"남은시간 : 00:00";
+            StopCoroutine("DiskSpawn");
 
         }
         if (isTimer)
@@ -64,9 +66,10 @@ public class DiskGenerator : MonoBehaviour
                 text2.text = $"<color=red>종료!</color>";
             }
         }
-        if (bScore < score)
+        if (bScore <= score)
         {
-            best.text = $"Best Score\n{score}";
+            bScore = score;
+            best.text = $"Best Score\n{bScore}";
         }
         text.text = $"Score : {score}";
         Vector3 l_vector = playerHead.transform.position - bestScore.transform.position;
