@@ -14,6 +14,8 @@ public class DiskGenerator : MonoBehaviour
     public float throwPower;
     public int score;
     public float time;
+    public float currentTime;
+    private bool isTimer;
     [SerializeField]
     GameObject playerHead;
 
@@ -25,20 +27,46 @@ public class DiskGenerator : MonoBehaviour
     }
     private void Start()
     {
+        currentTime = time;
+        isTimer = false;
         score = 0;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isTimer = true;
+            StopCoroutine("DiskSpawn");
             StartCoroutine("DiskSpawn");
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            
+            score = 0;
+            currentTime = time;
+            text2.text = $"남은시간 : 00:00:00";
+
+        }
+        if (isTimer)
+        {
+            currentTime -= Time.deltaTime;
+
+            int sec = (int)currentTime % 60;
+            int min = (int)currentTime / 60 % 60;
+
+            if (currentTime >= 3600) text2.text = $"남은시간 : {min:D2}:{sec:D2}";
+            else if (currentTime >= 60) text2.text = $"남은시간 : {min:D2}:{sec:D2}";
+            else text2.text = $"남은시간 : {min:D2}:{currentTime:00.00}";
+            if (currentTime <= 0)
+            {
+                StopCoroutine("DiskSpawn");
+                isTimer = false;
+                text2.text = $"<color=red>종료!</color>";
+            }
         }
         if (bScore < score)
         {
-            best.text = $"Best Score\n{bScore}";
+            best.text = $"Best Score\n{score}";
         }
         text.text = $"Score : {score}";
         Vector3 l_vector = playerHead.transform.position - bestScore.transform.position;
@@ -47,11 +75,15 @@ public class DiskGenerator : MonoBehaviour
 
     IEnumerator DiskSpawn()
     {
-        foreach (Transform i in spawnPos)
+        while (true)
         {
-            yield return new WaitForSeconds(Random.Range(2f, 4f));
-            Rigidbody diskRb = Instantiate(disk, i.position, i.rotation, gameObject.transform).GetComponent<Rigidbody>();
-            diskRb.AddRelativeForce(Vector3.forward * throwPower, ForceMode.VelocityChange);
+            foreach (Transform i in spawnPos)
+            {
+                yield return new WaitForSeconds(Random.Range(2f, 4f));
+                Rigidbody diskRb = Instantiate(disk, i.position, i.rotation, gameObject.transform).GetComponent<Rigidbody>();
+                diskRb.AddRelativeForce(Vector3.forward * throwPower, ForceMode.VelocityChange);
+            }
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
     }
 }

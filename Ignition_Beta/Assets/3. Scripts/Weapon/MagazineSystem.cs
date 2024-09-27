@@ -29,11 +29,6 @@ public class MagazineSystem : MonoBehaviour
 
     private void Awake()
     {
-        if (!isUpgrade && GameManager.Instance.isMagUpgrade)
-        {
-            isUpgrade = true;
-            maxBullet = (int)(maxBullet * 1.5f);
-        }
         magScale = transform.localScale;
         bulletCount = maxBullet;
         interactable = GetComponent<Interactable>();
@@ -43,6 +38,11 @@ public class MagazineSystem : MonoBehaviour
 
     private void Start()
     {
+        if (!isUpgrade && GameManager.Instance.isMagUpgrade)
+        {
+            isUpgrade = true;
+            maxBullet = (int)(maxBullet * 1.5f);
+        }
         StartCoroutine("MagazineWork");
     }
 
