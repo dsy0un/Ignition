@@ -27432,7 +27432,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9158904729729302000}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -44039,7 +44039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb6277b92a43b44288ec339b0f762ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBullet: 30
+  maxBullet: 10000
   bulletCount: 0
   bulletImage:
   - {fileID: 1967926046219084001}
@@ -50744,6 +50744,8 @@ MonoBehaviour:
   interactable: {fileID: 5551992067137783637}
   socket: {fileID: 4166466244858641097}
   bolt: {fileID: 5281946696899150308}
+  magazineSystem: {fileID: 2999346080647347616, guid: 899c9ae641bea3c4bab527731b4bd567,
+    type: 3}
   blendTreeName: RifleTrigger
   maxRecoil: 150
   minRecoil: 80
@@ -55806,6 +55808,7 @@ MonoBehaviour:
   interactable: {fileID: 5323249185161252213}
   socket: {fileID: 6351223243892341848}
   bolt: {fileID: 8888954682991387813}
+  magazineSystem: {fileID: 0}
   blendTreeName: ShotgunTrigger
   maxRecoil: 300
   minRecoil: 150
@@ -64816,7 +64819,7 @@ MonoBehaviour:
   reloadFront: {fileID: 8300000, guid: 62f3c633293397545a3cd161f1fde233, type: 3}
   autoBolt: 1
   moveTime: 0.05
-  redyToShot: 0
+  redyToShot: 1
   spawnPrefabAmount: 30
   ejectPoint: {fileID: 7473455051642981478}
   ejectBullet: {fileID: 8169469404808126409, guid: c71822f76b915cc4aaa6ccd244f1a9e1,
@@ -81787,6 +81790,7 @@ MonoBehaviour:
   interactable: {fileID: 11871166484428253}
   socket: {fileID: 5001541884486445435}
   bolt: {fileID: 2921884894125437683}
+  magazineSystem: {fileID: 0}
   blendTreeName: PistolTrigger
   maxRecoil: 50
   minRecoil: 50
