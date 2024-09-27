@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
     public Interactable interactable;
     public Socket socket;
     public Bolt bolt;
-    [SerializeField] private MagazineSystem magazineSystem;
+    private MagazineSystem magazineSystem;
     private Hand currentHand = null;
 
     public string blendTreeName;
