@@ -48,7 +48,7 @@ public class DiskGenerator : MonoBehaviour
             isTimer = false;
             text2.text = $"남은시간 : 00:00";
             StopCoroutine("DiskSpawn");
-            SceneManager.LoadScene("ShootingRange");
+            //SceneManager.LoadScene("ShootingRange");
 
         }
         if (isTimer)
