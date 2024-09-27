@@ -1530,6 +1530,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130403703}
   m_Mesh: {fileID: 4300006, guid: abc00000000007711130677353005724, type: 3}
+--- !u!65 &137141239
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094774486}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6860874, y: 1.8321128, z: 6.752595}
+  m_Center: {x: -0.34304368, y: 0.4160564, z: -0.027324263}
 --- !u!1 &138109281
 GameObject:
   m_ObjectHideFlags: 0
@@ -10304,7 +10325,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1492027059}
   - component: {fileID: 1492027060}
-  - component: {fileID: 1492027061}
   - component: {fileID: 1704848243}
   m_Layer: 0
   m_Name: SM_RoofConnector_4_Merged (2)
@@ -10363,28 +10383,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1492027044}
   m_Enabled: 1
---- !u!64 &1492027061
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492027058}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: abc00000000012913898587335087628, type: 3}
 --- !u!1 &1492027062
 GameObject:
   m_ObjectHideFlags: 0
@@ -14205,28 +14203,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2094774464}
   m_Enabled: 1
---- !u!64 &2094774481
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094774486}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: abc00000000012913898587335087628, type: 3}
 --- !u!1 &2094774482
 GameObject:
   m_ObjectHideFlags: 0
@@ -14270,7 +14246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2094774487}
   - component: {fileID: 2094774480}
-  - component: {fileID: 2094774481}
+  - component: {fileID: 137141239}
   m_Layer: 0
   m_Name: SM_RoofConnector_4_Merged (1)
   m_TagString: Untagged
