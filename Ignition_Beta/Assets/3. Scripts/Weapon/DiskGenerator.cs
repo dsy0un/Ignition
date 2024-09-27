@@ -6,10 +6,12 @@ using TMPro;
 public class DiskGenerator : MonoBehaviour
 {
     public TextMeshProUGUI text;
+    public TextMeshProUGUI text2;
     public Transform[] spawnPos;
     public GameObject disk;
     public float throwPower;
     public int score;
+    public float time;
 
     private void Start()
     {
