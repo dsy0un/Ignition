@@ -12,6 +12,7 @@ public class DiskGenerator : MonoBehaviour
     public Transform[] spawnPos;
     public GameObject disk;
     public GameObject bestScore;
+    public GameObject gun;
     public float throwPower;
     public int score;
     public float time;
@@ -20,6 +21,7 @@ public class DiskGenerator : MonoBehaviour
     [SerializeField]
     GameObject playerHead;
 
+    private Vector3 pos;
     static private int bScore = 0;
 
     private void Awake()
@@ -31,6 +33,7 @@ public class DiskGenerator : MonoBehaviour
         currentTime = time;
         isTimer = false;
         score = 0;
+        pos = gun.transform.position;
     }
 
     private void Update()
@@ -48,6 +51,7 @@ public class DiskGenerator : MonoBehaviour
             isTimer = false;
             text2.text = $"남은시간 : 00:00";
             StopCoroutine("DiskSpawn");
+            //gun.GetComponent<Rigidbody>()
             //SceneManager.LoadScene("ShootingRange");
 
         }

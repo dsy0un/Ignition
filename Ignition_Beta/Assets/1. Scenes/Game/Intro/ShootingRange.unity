@@ -1788,7 +1788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 389.89, y: 8.7}
+  m_AnchoredPosition: {x: 389.89, y: 11}
   m_SizeDelta: {x: 747, y: 420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &149507217
@@ -9595,6 +9595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1338718198}
   - component: {fileID: 1338718197}
+  - component: {fileID: 1338718199}
   m_Layer: 0
   m_Name: DiskManager
   m_TagString: Untagged
@@ -9622,9 +9623,10 @@ MonoBehaviour:
   - {fileID: 808448648}
   disk: {fileID: 4525118042806634547, guid: 67a53579a5db3b44f8e84cf65b4a4d1e, type: 3}
   bestScore: {fileID: 568694109}
+  gun: {fileID: 1338718196}
   throwPower: 30
   score: 0
-  time: 60
+  time: 30
   currentTime: 0
   playerHead: {fileID: 0}
 --- !u!4 &1338718198
@@ -9644,6 +9646,27 @@ Transform:
   - {fileID: 808448648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1338718199
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338718196}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c4a70afd3a16f843800fe28111396c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1348212684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11044,7 +11067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1496875273
 Transform:
   m_ObjectHideFlags: 0
@@ -11252,7 +11275,7 @@ PrefabInstance:
     - target: {fileID: 5386476366811154600, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 444.29
+      value: 443.981
       objectReference: {fileID: 0}
     - target: {fileID: 5386476366811154600, guid: 42f8b20d1c8e5a844a1a8ebce939865b,
         type: 3}
@@ -31861,8 +31884,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5867956274371622601}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 442.77426, y: 3.833, z: 403.97998}
+  m_LocalRotation: {x: -0.49999928, y: -0.50000066, z: 0.49999928, w: 0.5000008}
+  m_LocalPosition: {x: 442.77426, y: 3.742, z: 403.97998}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -31871,7 +31894,7 @@ Transform:
   - {fileID: 1034795962615950918}
   - {fileID: 2396518002858833490}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
 --- !u!23 &1751891257123235252
 MeshRenderer:
   m_ObjectHideFlags: 0
