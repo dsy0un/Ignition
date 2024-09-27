@@ -5,10 +5,12 @@ using UnityEngine;
 public class Disk : MonoBehaviour
 {
     Rigidbody rb;
+    DiskGenerator generator;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        generator = GetComponentInParent<DiskGenerator>();
         Destroy(gameObject, 6);
     }
 
@@ -21,4 +23,12 @@ public class Disk : MonoBehaviour
     //{
     //    rb.AddForce(Vector3.down * 9.8f, ForceMode.Force);
     //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        {
+            generator.score += 10;
+            Destroy(gameObject);
+        }
+    }
 }
