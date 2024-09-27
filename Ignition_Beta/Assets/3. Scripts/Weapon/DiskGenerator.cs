@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class DiskGenerator : MonoBehaviour
@@ -19,7 +20,7 @@ public class DiskGenerator : MonoBehaviour
     [SerializeField]
     GameObject playerHead;
 
-    private int bScore = 0;
+    static private int bScore = 0;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class DiskGenerator : MonoBehaviour
             isTimer = false;
             text2.text = $"남은시간 : 00:00";
             StopCoroutine("DiskSpawn");
+            SceneManager.LoadScene("ShootingRange");
 
         }
         if (isTimer)
