@@ -116,7 +116,7 @@ public class Turret : MonoBehaviour
                     Vector3 forward = turretHeadPivot.forward;
 
                     Debug.DrawRay(points[i].position, forward * maxDistance, Color.black, 1f);
-                    hits = Physics.RaycastAll(points[i].position, forward, maxDistance, layers);
+                    hits = Physics.RaycastAll(points[i].position, points[i].forward, maxDistance, layers);
 
                     Instantiate(turretBullet, points[i].position, points[i].rotation);
 
@@ -138,12 +138,12 @@ public class Turret : MonoBehaviour
         yield return new WaitForSeconds(hitTime);
         if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy") && hit.transform.TryGetComponent<IHitAble>(out var h))
         {
-            //Debug.Log(hitTime + "¾Æ ÀûÀÌ¿ä");
+            //Debug.Log(hitTime + "ì•„ ì ì´ìš”");
             h.Die();
         }
         else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            //Debug.Log(hitTime + "¾Æ ¶¥ÀÌ¿ä");
+            //Debug.Log(hitTime + "ì•„ ë•…ì´ìš”");
             Instantiate(groundEffect, hit.point, Quaternion.identity); 
         }
 
@@ -168,7 +168,7 @@ public class Turret : MonoBehaviour
     //                Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
     //                if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
     //                {
-    //                    Debug.Log("Ãæµ¹");
+    //                    Debug.Log("ì¶©ëŒ");
     //                    points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
     //                    print(hit.transform.gameObject.layer + " " + LayerMask.NameToLayer("EnemyCollision"));
     //                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("EnemyCollision"))
@@ -190,7 +190,7 @@ public class Turret : MonoBehaviour
     //                Debug.DrawRay(points[i].position, forward * maxDistance, Color.red);
     //                if (Physics.Raycast(points[i].position, forward, out hit, maxDistance, layer))
     //                {
-    //                    Debug.Log("Ãæµ¹");
+    //                    Debug.Log("ì¶©ëŒ");
     //                    points[i].GetChild(0).GetComponent<Rigidbody>().AddForce(points[i].forward * shotSpeed * Time.deltaTime);
     //                    // yield return new WaitForSeconds(5f);
     //                }
@@ -200,7 +200,7 @@ public class Turret : MonoBehaviour
     //    }
     //}
 
-    private void OnDrawGizmos() // Å×½ºÆ® ÈÄ Áö¿öµµ µÊ
+    private void OnDrawGizmos() // í…ŒìŠ¤íŠ¸ í›„ ì§€ì›Œë„ ë¨
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
