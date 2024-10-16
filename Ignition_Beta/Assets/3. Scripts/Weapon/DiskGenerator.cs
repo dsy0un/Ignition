@@ -22,7 +22,7 @@ public class DiskGenerator : MonoBehaviour
     GameObject playerHead;
 
     private Vector3 pos;
-    static private int bScore = 0;
+    static int bScore = 0;
 
     private void Awake()
     {
@@ -46,14 +46,14 @@ public class DiskGenerator : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            Debug.Log(1);
             score = 0;
             currentTime = time;
             isTimer = false;
             text2.text = $"남은시간 : 00:00";
             StopCoroutine("DiskSpawn");
-            //gun.GetComponent<Rigidbody>()
+            //gun.GetComponent<Rigidbody>();
             //SceneManager.LoadScene("ShootingRange");
-
         }
         if (isTimer)
         {
@@ -78,7 +78,7 @@ public class DiskGenerator : MonoBehaviour
             best.text = $"Best Score\n{bScore}";
         }
         text.text = $"Score : {score}";
-        Vector3 l_vector = playerHead.transform.position - bestScore.transform.position;
+        Vector3 l_vector = playerHead.transform.position - bestScore.transform.root.position;
         bestScore.transform.rotation = Quaternion.Lerp(bestScore.transform.rotation, Quaternion.LookRotation(-l_vector).normalized, 3 * Time.deltaTime);
     }
 

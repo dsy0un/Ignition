@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject.transform.root);
         }
         else
         {
@@ -74,14 +73,14 @@ public class GameManager : MonoBehaviour
         // gameClearObject = GameObject.Find("Turret").GetComponent<GameObject>();
     }
 
-    private void Update()
-    {
-        level = Mathf.Clamp(level, 0, 4);
-        if (drone.Animator.GetCurrentAnimatorStateInfo(0).IsName("DefenceEscape"))
-        {
-            if (drone.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) LoadingSceneManager.Load("Base");
-        }
-    }
+    //private void Update()
+    //{
+    //    level = Mathf.Clamp(level, 0, 4);
+    //    if (drone.Animator.GetCurrentAnimatorStateInfo(0).IsName("DefenceEscape"))
+    //    {
+    //        if (drone.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) LoadingSceneManager.Load("Base");
+    //    }
+    //}
 
     public void ReGetCom()
     {
