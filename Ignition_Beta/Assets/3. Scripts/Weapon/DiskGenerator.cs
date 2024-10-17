@@ -6,22 +6,26 @@ using TMPro;
 
 public class DiskGenerator : MonoBehaviour
 {
+    [Header("Play Time")]
+    public float time;
+    public float currentTime;
+    [Space(10)]
+    [Header("ETC")]
     public TextMeshProUGUI text;
     public TextMeshProUGUI text2;
     public TextMeshProUGUI best;
     public Transform[] spawnPos;
     public GameObject disk;
     public GameObject bestScore;
-    public GameObject gun;
     public float throwPower;
     public int score;
-    public float time;
-    public float currentTime;
     private bool isTimer;
-    [SerializeField]
     GameObject playerHead;
 
-    private Vector3 pos;
+    public MagazineSystem magazine;
+    public GameObject gun;
+    Vector3 gunOrigniPos;
+
     static int bScore = 0;
 
     private void Awake()
@@ -33,7 +37,7 @@ public class DiskGenerator : MonoBehaviour
         currentTime = time;
         isTimer = false;
         score = 0;
-        pos = gun.transform.position;
+        gunOrigniPos = gun.transform.position;
     }
 
     private void Update()
@@ -46,12 +50,13 @@ public class DiskGenerator : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log(1);
             score = 0;
             currentTime = time;
             isTimer = false;
             text2.text = $"남은시간 : 00:00";
             StopCoroutine("DiskSpawn");
+            magazine.bulletCount = 10000;
+            gun.transform.position = gunOrigniPos;
             //gun.GetComponent<Rigidbody>();
             //SceneManager.LoadScene("ShootingRange");
         }
