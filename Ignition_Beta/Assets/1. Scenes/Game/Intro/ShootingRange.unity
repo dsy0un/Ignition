@@ -9615,6 +9615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da099e9f814d5542b375f08dd33a8a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 30
+  currentTime: 0
   text: {fileID: 1196364077}
   text2: {fileID: 2038446019}
   best: {fileID: 11466306}
@@ -9625,9 +9627,6 @@ MonoBehaviour:
   bestScore: {fileID: 568694109}
   throwPower: 30
   score: 0
-  time: 30
-  currentTime: 0
-  playerHead: {fileID: 0}
   magazine: {fileID: 2999346079282661682}
   gun: {fileID: 5867956274371622601}
 --- !u!4 &1338718198
@@ -42396,6 +42395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magazineSystem: {fileID: 0}
   ejectMagazine: 0
+  boltFront: 0
   gun: {fileID: 7295349301251914540}
   mapping: {fileID: 8218330257997273383}
   round: {fileID: 2863377222836577110}
@@ -62635,6 +62635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magazineSystem: {fileID: 0}
   ejectMagazine: 0
+  boltFront: 1
   gun: {fileID: 3763563278180425235}
   mapping: {fileID: 3137001589925499058}
   round: {fileID: 242306126202170777}
@@ -62643,7 +62644,7 @@ MonoBehaviour:
   reloadFront: {fileID: 8300000, guid: 62f3c633293397545a3cd161f1fde233, type: 3}
   autoBolt: 1
   moveTime: 0.05
-  redyToShot: 0
+  redyToShot: 1
   spawnPrefabAmount: 30
   ejectPoint: {fileID: 7473455051642981478}
   ejectBullet: {fileID: 8169469404808126409, guid: c71822f76b915cc4aaa6ccd244f1a9e1,

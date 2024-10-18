@@ -9,6 +9,7 @@ public class Bolt : MonoBehaviour
     public MagazineSystem magazineSystem;
     [HideInInspector]
     public bool ejectMagazine;
+    public bool alwaysFront;
     private bool boltFront;
 
     private Interactable interactable;
@@ -85,11 +86,11 @@ public class Bolt : MonoBehaviour
                     redyToShot = false;
             }
 
-            if (magazineSystem != null && magazineSystem.bulletCount == 0)
+            if (magazineSystem != null && magazineSystem.bulletCount == 0 && !alwaysFront)
                 boltFront = false;
-            if (!boltFront && interactable.attachedToHand != null)
+            if (!boltFront && interactable.attachedToHand != null || alwaysFront)
                 boltFront = true;
-            if (boltMoving == false && interactable.attachedToHand == null && autoBolt && boltFront)
+            if (!boltMoving && interactable.attachedToHand == null && autoBolt && boltFront)
             {
                 StartCoroutine("AutoMoveFront");
             }
@@ -118,7 +119,7 @@ public class Bolt : MonoBehaviour
             transform.position = Vector3.Lerp
             (linearDrive.startPosition.position, linearDrive.endPosition.position, time / moveTime);
             mapping.value = Mathf.Lerp(0, 1, time / moveTime);
-            if (mapping.value == 1)
+            if (mapping.value >= 1)
             {
                 boltMoving = false;
                 yield break;
@@ -136,7 +137,7 @@ public class Bolt : MonoBehaviour
             transform.position = Vector3.Lerp
                 (transform.position, linearDrive.startPosition.position, time / moveTime);
             mapping.value = Mathf.Lerp(mapping.value, 0, time / moveTime);
-            if (mapping.value == 0)
+            if (mapping.value <= 0)
             {
                 yield break;
             }
@@ -187,6 +188,7 @@ public class Bolt : MonoBehaviour
         {
             var obj = poolingObjectQueue.Dequeue();
             obj.transform.position = ejectPoint.transform.position;
+            obj.transform.rotation = ejectPoint.transform.rotation;
             obj.SetActive(true);
             obj.transform.SetParent(null);
         }
@@ -194,6 +196,7 @@ public class Bolt : MonoBehaviour
         {
             var newObj = CreateNewObject();
             newObj.transform.position = ejectPoint.transform.position;
+            newObj.transform.rotation = ejectPoint.transform.rotation;
             newObj.SetActive(true);
             newObj.transform.SetParent(null);
         }
